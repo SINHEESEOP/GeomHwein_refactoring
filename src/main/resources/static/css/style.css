@@ -99,6 +99,7 @@ h6,
 
 /*** Navbar ***/
 .navbar .navbar-nav .nav-link {
+    height: 10px;
     padding: 30px 15px;
     color: var(--dark);
     font-weight: 500;
@@ -128,6 +129,7 @@ h6,
 .navbar .dropdown-toggle[aria-expanded=true]::after {
     transform: rotate(-180deg);
 }
+
 
 @media (max-width: 991.98px) {
     .navbar .navbar-nav .nav-link  {
@@ -187,13 +189,13 @@ h6,
 @media (max-width: 768px) {
     .header-carousel .owl-carousel-item {
         position: relative;
-        min-height: 500px;
+        min-height: 360px;
     }
     
     .header-carousel .owl-carousel-item img {
         position: absolute;
         width: 100%;
-        height: 100%;
+        height: 360px;
         object-fit: cover;
     }
 
@@ -500,4 +502,9 @@ h6,
     margin-right: 0;
     padding-right: 0;
     border-right: none;
+}
+
+.navbar {
+    width: 80%; /* 또는 특정 px 값 */
+    margin: 0 auto;
 }
