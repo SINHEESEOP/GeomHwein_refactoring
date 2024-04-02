@@ -18,6 +18,6 @@ public class educationGroupVO {
 	private String userId;
 	private int groupUtztnNope;
 	private Timestamp lastCmcrsYmd;
-	private int contsSN;
-	private int groupRankNo;
+	private int contsSn;
+	private int recAge;
 }
