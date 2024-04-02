@@ -8,6 +8,7 @@
   <link rel="stylesheet" href="../../static/css/progressBar.css">
 </head>
 <body>
+  <h2>그룹별 진도 현황</h2>
   <label for="c1">입문반</label>
   <progress id="c1" max="100" value="87"></progress>
 
@@ -18,13 +19,20 @@
   <progress id="c3" max="100" value="32"></progress>
   
   <label for="c4">중급반</label>
-  <progress id="c4" max="100" value="66"></progress>
+  <progress id="c4" max="100" value="49"></progress>
 
   <label for="c5">사활반</label>
-  <progress id="c5" max="100" value="28"></progress>
+  <progress id="c5" max="100" value="68"></progress>
 
   <label for="c6">실전반</label>
-  <progress id="c6" max="100" value="8"></progress>
-  
+  <progress id="c6" max="100" value="28"></progress>
+  <script>
+    $('progress').each(function () {
+    
+    const max = $(this).attr('value');
+    
+    $(this).val(0).animate({ value: max }, 1000);
+});
+  </script>
 </body>
 </html>
