@@ -4,7 +4,7 @@
 <th:block th:replace="~{/include/baseLayout :: setContent( ~{ :: .wrap} ) }">
 
 	<div class="wrap">
-  
+  		
   		<script src="/js/jquery-3.7.1.min.js"></script>
   		<link rel="stylesheet" href="/css/progressBar.css">
   		<h2>그룹별 진도 현황</h2>
@@ -25,7 +25,11 @@
 
   		<label for="c6">실전반</label>
   		<progress id="c6" max="100" value="28"></progress>
+  		<div hidden="hidden" class="progressOption">
+  			<!-- 관리자권한일 경우 div hidden="none" -->
+  		</div>
   	</div>
+  	
 </th:block>
   <script>
     $('progress').each(function () {
@@ -34,6 +38,7 @@
     
     $(this).val(0).animate({ value: max }, 1500);
 	});
+    
   </script>
 
 </html>
