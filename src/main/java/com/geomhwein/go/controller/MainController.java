@@ -11,14 +11,15 @@ public class MainController {
 		return "main";
 	} // 임시로 메인을 billing 으로 함, 메인 완성 시 변경 될 예정.
 
-	@GetMapping("/profile")
-	public String profile() {
-		return "profile";
+	@GetMapping("/sign_in")
+	public String signIn() {
+		return "sign_in";
 	}
 
-	@GetMapping("/billing")
-	public String billing() {
-		return "billing";
+	@GetMapping("/sign_up")
+	public String signUp() {
+		return "sign_up";
 	}
+
 
 }
