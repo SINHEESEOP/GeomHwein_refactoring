@@ -1,0 +1,57 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<link rel="stylesheet" href="/css/comunityList.css">
+<th:block th:replace="~{/include/baseLayout :: setContent( ~{ :: .wrap} ) }">
+	
+	<div class="wrap">
+	<div class="container-fluid py-4">
+      <div class="container-title">Comunity</div>
+      <div class="search-wrap">
+        <ul>
+          <li class="active">최신순</li>
+          <li>조회순</li>
+          <li>댓글순</li>
+        </ul>
+        <div class="search-box">
+          <input type="text"></input><button>검색</button>
+        </div>
+      </div>
+      <table class="comunity-table">
+        <tr class="table-title">
+          <th>글번호</th>
+          <th>글제목</th>
+          <th>작성자</th>
+          <th>작성일</th>
+          <th>조회수</th>
+          <th>댓글수</th>
+        </tr>
+        <tr class="table-content">
+          <td>1</td>
+          <td>커뮤니티 글 작성했어요</td>
+          <td>김바둑</td>
+          <td>2024-04-01</td>
+          <td>1</td>
+          <td>1</td>
+        </tr>
+        <tr class="table-content">
+          <td>1</td>
+          <td>커뮤니티 글 작성했어요</td>
+          <td>김바둑</td>
+          <td>2024-04-01</td>
+          <td>1</td>
+          <td>1</td>
+        </tr>
+      </table>
+      <div class="reg">
+        <button type="button">등록하기</button>
+      </div>
+      <div class="pagenation">
+        <span>prev</span>
+        <span class="active">1</span>
+        <span>2</span>
+        <span>3</span>
+        <span>next</span>
+      </div>
+    </div>
+	</div>
+</th:block>
+</html>
