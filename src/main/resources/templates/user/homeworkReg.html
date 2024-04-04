@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<link rel="stylesheet" href="/css/homeworkReg.css">
+<th:block th:replace="~{/include/baseLayout :: setContent( ~{ :: .wrap} ) }">
+	
+	<div class="wrap">
+	   <div class="container-fluid py-4">
+      <form>
+      <div class="container-title">숙제제출</div>
+      <div class="homework-wrap">
+        <div class="homework-header">
+          <span class="homework-user">학습자:<span>김바둑</span></span>
+          <button type="button">숙제조회</button>
+        </div>
+        <div class="homework-box">
+          <div class="homework-left">
+            <div class="left-title">
+              <span>숙제내용</span>
+            </div>
+            <div class="left-content">
+              <table class="homework-table">
+                <tr>
+                  <td>교육자:</td>
+                  <td>김선생</td>
+                </tr>
+                <tr>
+                  <td>숙제명:</td>
+                  <td>'축'이란 무엇인가</td>
+                </tr>
+                <tr>
+                  <td>숙재내용:</td>
+                  <td>'축'이 성립하는 요건 이해하기</td>
+                </tr>
+                <tr>
+                  <td>숙재난이도:</td>
+                  <td>초급</td>
+                </tr>
+                <tr>
+                  <td>제출기한</td>
+                  <td>2024-01-01</td>
+                </tr>
+              </table>
+            </div>
+          </div>
+          <div class="homework-right">
+            <div class="right-title">
+              <span>제출내용</span>
+            </div>
+            <div class="right-content">
+              <table class="homework-table">
+                <tr>
+                 <td>제출내용:</td>
+                 <td><textarea>축이란 바둑의 수를 계속 두어도 결국 잡히게 되는 상황</textarea></td>
+                </tr>
+              </table>
+            </div>
+          </div>
+        </div>
+        <div class="homeworkBtn"><input type="submit" value="제출하기"></input></div>
+      </div>
+    </form>
+    </div>
+	</div>
+</th:block>
+</html>

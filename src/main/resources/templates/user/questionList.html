@@ -1,0 +1,54 @@
+
+<link rel="stylesheet" href="/css/questionList.css">
+<th:block th:replace="~{/include/baseLayout :: setContent( ~{ :: .wrap} ) }">
+	
+	<div class="wrap">
+	<div class="container-fluid py-4">
+      <div class="container-title">Q&A</div>
+      <div class="search-wrap">
+        <ul>
+          <li class="active">전체보기</li>
+          <li>답변대기</li>
+          <li>답변완료</li>
+        </ul>
+        <div class="search-box">
+          <input type="text"></input><button>검색</button>
+        </div>
+      </div>
+      <table class="comunity-table">
+        <tr class="table-title">
+          <th>질문번호</th>
+          <th>질문</th>
+          <th>질문자</th>
+          <th>질문날짜</th>
+          <th>상태</th>
+        </tr>
+        <tr class="table-content">
+          <td>1</td>
+          <td>질문했어요</td>
+          <td>김바둑</td>
+          <td>2024-01-01</td>
+          <td class><input type="checkbox" disabled>답변대기</td>
+        </tr>
+        <tr class="table-content">
+          <td>1</td>
+          <td>질문했어요</td>
+          <td>김바둑</td>
+          <td>2024-01-01</td>
+          <td class="question-success"><input type="checkbox" class="question-waiting" checked disabled>답변완료</td>
+        </tr>
+      </table>
+      <div class="reg">
+        <button type="button">질문하기</button>
+      </div>
+      <div class="pagenation">
+        <span>prev</span>
+        <span class="active">1</span>
+        <span>2</span>
+        <span>3</span>
+        <span>next</span>
+      </div>
+    </div>
+	</div>
+</th:block>
+</html>
