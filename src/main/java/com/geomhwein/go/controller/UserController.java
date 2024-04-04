@@ -48,4 +48,9 @@ public class UserController {
 		return "user/homeworkList";
 	}
 	
+	@GetMapping("/questionReg")
+	public String questionReg() {
+		return "user/questionReg";
+	}
+	
 }
