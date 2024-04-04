@@ -14,7 +14,7 @@ public class UserController {
 	}
 	
 	@GetMapping("/comunityDetail")
-	public String questionDetail() {
+	public String comunityDetail() {
 		return "user/comunityDetail";
 	}
 	
@@ -31,6 +31,11 @@ public class UserController {
 	@GetMapping("/groupList")
 	public String userGroupList() {
 		return "user/GroupList";
+	}
+	
+	@GetMapping("/groupApplyList")
+	public String groupApplyList() {
+		return "user/groupApplyList";
 	}
 	
 	@GetMapping("/questionList")
@@ -52,5 +57,18 @@ public class UserController {
 	public String questionReg() {
 		return "user/questionReg";
 	}
+	
+	@GetMapping("/questionDetail")
+	public String questionDetail() {
+		return "user/questionDetail";
+	}
+	
+	@GetMapping("/questionModify")
+	public String questionModify() {
+		return "user/questionModify";
+	}
+	
+	
+	
 	
 }

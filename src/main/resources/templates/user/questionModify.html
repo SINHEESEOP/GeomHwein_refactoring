@@ -2,9 +2,9 @@
 <link rel="stylesheet" href="/css/comunityReg.css">
 <th:block th:replace="~{/include/baseLayout :: setContent( ~{ :: .wrap} ) }">
 
-	<div class="wrap">
+<div class="wrap">
 	<div class="container-fluid py-4">
-      <div class="container-title">질문하기</div>
+      <div class="container-title">질문 수정</div>
       <form>
         <div class="reg-wrap">
           <div class="reg-title">
@@ -15,14 +15,17 @@
             <p>내용</p>
             <textarea id="textarea"></textarea>
           </div>
+          <div class="reg-upload">
+            <p>파일등록</p>
+            <input type="file">
+          </div>
           <div class="reg-button"> 
-            <input type="submit" class="regBtn" value="등록하기">
-            <button type="button" class="backBtn">취소
+            <input type="submit" class="regBtn" value="수정하기">
+            <button type="button" class="backBtn">취소</button>
+          </div>
           </div>
       </form>
-
-      </div>
-	</div>
-
+   </div>
+</div>
 </th:block>
 </html>

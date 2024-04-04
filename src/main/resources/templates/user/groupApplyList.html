@@ -1,17 +1,16 @@
-<!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <link rel="stylesheet" href="/css/groupList.css">
 <th:block th:replace="~{/include/baseLayout :: setContent( ~{ :: .wrap} ) }">
-	
-	<div class="wrap">
-	 <div class="container-fluid py-4">
-      <div class="container-title">그룹조회</div>
+
+<div class="wrap">
+ <div class="container-fluid py-4">
+      <div class="container-title">그룹신청내역</div>
       <div class="search-wrap">
-        <span>그룹명</span>      
+        <span>학습컨텐츠</span>      
         <select>
           <option value="">전체</option>
-          <option value="">강남 초급</option>
-          <option value="">강남 중급</option>
+          <option value="">바둑 잘두는 방법</option>
+          <option value="">바둑의 정석</option>
         </select>
       </div>
       <table class="comunity-table">
@@ -22,7 +21,9 @@
           <th>학습콘텐츠명</th>
           <th>학습구독기간</th>
           <th>신청가능인원</th>
+          <th>신청날짜</th>
           <th>상태</th>
+          <th>옵션</th>
         </tr>
         <tr class="table-content">
           <td>1</td>
@@ -31,16 +32,20 @@
           <td>바둑 잘두는 방법</td>
           <td>2024-01-01~2024-12-31</td>
           <td>30</td>
-          <td><button type="button" class="content-apply">신청하기</button></td>
+          <td>2024-04-04</td>
+          <td>Y</td>
+          <td><button type="button">신청취소</button></td>
         </tr>
         <tr class="table-content">
           <td>2</td>
           <td><img src="" alt="이미지"/></td>
-          <td>강남 중급</td>
+           <td>강남 중급</td>
           <td>바둑의 정석</td>
           <td>2024-01-01~2024-12-31</td>
           <td>0</td>
-          <td><button type="button"  class="content-deadline" >마감</button></td>
+   		  <td>2024-04-04</td>
+          <td>N</td>
+          <td><button type="button">신청취소</button></td>
         </tr>
       </table>
       <div class="pagenation">
@@ -51,7 +56,7 @@
         <span>next</span>
       </div>
     </div>
-	
-	</div>
+</div>
+
 </th:block>
 </html>
