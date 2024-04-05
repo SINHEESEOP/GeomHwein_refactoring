@@ -16,10 +16,20 @@ public class MainController {
 		return "sign_in";
 	}
 
+
 	@GetMapping("/sign_up")
 	public String signUp() {
 		return "sign_up";
 	}
 
+	
+	@GetMapping("/mttr")
+	public String mttr() {
+		
+		return "mttr";
+	}
+	
 
 }
+	
+
