@@ -1,6 +1,6 @@
 @charset "UTF-8";
 
-.container-fluid {
+	.container-fluid {
       margin-top: 10px;
     }
     .container-title {
@@ -26,6 +26,12 @@
     .table-content {
       text-align: center;
       height: 50px;
+    }
+    
+    .table-content td > button {
+    	border:1px solid #ced4da;
+    	font-size:14px;
+    	
     }
 
     .search-wrap {
