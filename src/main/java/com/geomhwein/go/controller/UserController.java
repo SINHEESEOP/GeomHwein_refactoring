@@ -1,12 +1,22 @@
 package com.geomhwein.go.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.geomhwein.go.command.comunityVO;
+import com.geomhwein.go.user.service.UserService;
 
 @Controller
 @RequestMapping("/user")
 public class UserController {
+	
+	@Autowired
+	@Qualifier("userService")
+	private UserService userSerivce;
 	
 	@GetMapping("/comunityList")
 	public String userComunityList() {
@@ -66,6 +76,13 @@ public class UserController {
 	@GetMapping("/questionModify")
 	public String questionModify() {
 		return "user/questionModify";
+	}
+	
+	@PostMapping("/comunityForm")
+	public String comunityForm(comunityVO vo) {
+		
+		
+		return "redirect:/user/comunityList";
 	}
 	
 	
