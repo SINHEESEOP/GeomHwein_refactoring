@@ -593,5 +593,9 @@ License - nucleoapp.com/license/
   content: "\ea65";
 }
 
+.addFlex {
+  display: flex;
+  justify-content: space-around;
+}
 
 /* all icon font classes list here */

@@ -18,14 +18,30 @@ import com.geomhwein.go.user.service.UserService;
 @Controller
 @RequestMapping("/user")
 public class UserController {
+
+	@GetMapping("/cart")
+	public String cart() {
+		return "/user/cart";
+	}
+
+	@GetMapping("/billing")
+	public String billing() {
+		return "/user/billing";
+	}
+
+	@GetMapping("/profile")
+	public String profile() {
+		return "/user/profile";
+	}
 	
 	@Autowired
 	@Qualifier("userService")
 	private UserService userSerivce;
 	
+
 	@GetMapping("/comunityList")
 	public String userComunityList() {
-		return "user/ComunityList";
+		return "user/comunityList";
 	}
 	
 	@GetMapping("/comunityDetail")
@@ -45,7 +61,7 @@ public class UserController {
 	
 	@GetMapping("/groupList")
 	public String userGroupList() {
-		return "user/GroupList";
+		return "user/groupList";
 	}
 	
 	@GetMapping("/groupApplyList")
@@ -67,6 +83,7 @@ public class UserController {
 	public String homeworkList() {
 		return "user/homeworkList";
 	}
+
 	@GetMapping("/makeQuestion")
 	public String makeQuestion(@RequestParam("username")String username,Model model){
 		model.addAttribute("username",username);
@@ -102,7 +119,6 @@ public class UserController {
 		return "redirect:/user/comunityList";
 	}
 	
-	
-	
+
 
 }

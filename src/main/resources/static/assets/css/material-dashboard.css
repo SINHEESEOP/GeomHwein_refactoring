@@ -17532,3 +17532,15 @@ pre[class*="language-"] {
     overflow: auto !important; } }
 
 /*# sourceMappingURL=material-dashboard.css.map */
+
+.account_menu {
+  display: none;
+}
+
+.noneStyle {
+  display: none;
+}
+
+.margin-right100 {
+  margin-right: 100px;
+}
