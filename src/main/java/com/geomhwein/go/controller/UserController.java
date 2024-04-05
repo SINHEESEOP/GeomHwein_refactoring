@@ -3,9 +3,14 @@ package com.geomhwein.go.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+
 
 import com.geomhwein.go.command.comunityVO;
 import com.geomhwein.go.user.service.UserService;
@@ -62,7 +67,19 @@ public class UserController {
 	public String homeworkList() {
 		return "user/homeworkList";
 	}
+	@GetMapping("/makeQuestion")
+	public String makeQuestion(@RequestParam("username")String username,Model model){
+		model.addAttribute("username",username);
+		return "user/makeQuestion";
+	}
+	@PostMapping("/registQuestionForm")
+	public String registQuestionForm(@RequestParam("userId")String userId,@RequestParam("questionDate")String questionDate,@RequestParam("questionCn")String questionCn) {
+		
+		
+		return "";
+	}
 	
+
 	@GetMapping("/questionReg")
 	public String questionReg() {
 		return "user/questionReg";
@@ -87,5 +104,5 @@ public class UserController {
 	
 	
 	
-	
+
 }
