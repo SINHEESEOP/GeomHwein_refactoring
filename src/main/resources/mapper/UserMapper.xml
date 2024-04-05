@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTO Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.geomhwein.go.user.service.UserMapper">
+
+	<insert id="comunityForm">
+	insert into COMUNITY(PST_TTL_NM,PST_TTL_CN,USERNAME VALUES(#{PST_TTL_NM},#{PST_TTL_CN},'aaa123')
+	</insert>
+</mapper>
