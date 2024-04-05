@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class makeAnswerVO {
+public class questionVO {
 	
 	private String userId;
 	private String ansCn;

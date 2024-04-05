@@ -22,13 +22,19 @@ public class MainController {
 		return "sign_up";
 	}
 
-	
+
 	@GetMapping("/mttr")
 	public String mttr() {
 		
 		return "mttr";
 	}
 	
+
+	@GetMapping("/payment")
+	public String payment() {
+		return "payment";
+	}
+
 
 }
 	
