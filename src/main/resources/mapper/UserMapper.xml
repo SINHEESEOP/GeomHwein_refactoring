@@ -8,7 +8,7 @@
 	</insert>
 	
 	<select id="getComunityList" resultType="comunityVO">
-	select * from COMUNITY
+	select * from COMUNITY ORDER BY pst_ttl_no DESC;
 	</select>
 	
 	<select id="getComunityDetail" resultType="comunityVO">
@@ -16,6 +16,11 @@
 	</select>
 	
 	<update id="comunityModifyForm">
-	update COMUNITY set pst_ttl_nm = #{pst_ttl_nm} , pst_ttl_cn = #{pst_ttl_nm}
+	update COMUNITY set pst_ttl_nm = #{pst_ttl_nm} , pst_ttl_cn = #{pst_ttl_cn} where pst_ttl_no = #{pst_ttl_no}
 	</update>
+	
+	<delete id="comunityDelete">
+	delete from COMUNITY where pst_ttl_no = #{pst_ttl_no}
+	</delete>
+	
 </mapper>

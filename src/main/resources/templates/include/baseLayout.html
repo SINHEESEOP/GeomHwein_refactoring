@@ -13,7 +13,7 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 -->
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 
 
 <!--    사이드바에 필요한 메뉴는 한번에 박아넣고, if 구문을 통해 권한에 따라 보여줄 수 있게 만들기. -->
@@ -41,7 +41,7 @@
 		<link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
 		<!-- CSS Files -->
 		<link id="pagestyle" href="../assets/css/material-dashboard.css?v=3.0.0" rel="stylesheet"/>
-		<script src="/js/jquery.js"></script>
+		<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 	</head>
 	
 	<body class="g-sidenav-show  bg-gray-200">
@@ -350,56 +350,6 @@
 				</div>
 			</div>
 		</footer>
-
-		<div class="container-fluid py-4">
-			
-			
-			<!--	원하는 디자인을 가지고 오고 싶다면 기존 디자인 태그의 클래스명을 사용해야 합니다. -->
-			<!--	메인 컨텐츠가 들어갈 자리.	-->
-			
-			<th:block th:replace="${content}">
-			</th:block>
-			
-			<!--	메인 컨텐츠 끝.		-->
-			
-			<footer class="footer py-4">
-				<div class="container-fluid">
-					<div class="row align-items-center justify-content-lg-between">
-						<div class="col-lg-6 mb-lg-0 mb-4">
-							<div class="copyright text-center text-sm text-muted text-lg-start">
-								©
-								<script>
-									document.write(new Date().getFullYear())
-								</script>
-								,
-								made with <i class="fa fa-heart"></i> by
-								<a href="https://www.creative-tim.com" class="font-weight-bold" target="_blank">Creative Tim</a>
-								for a better web.
-							</div>
-						</div>
-						<div class="col-lg-6">
-							<ul class="nav nav-footer justify-content-center justify-content-lg-end">
-								<li class="nav-item">
-									<a href="https://www.creative-tim.com" class="nav-link text-muted" target="_blank">Creative Tim</a>
-								</li>
-								<li class="nav-item">
-									<a href="https://www.creative-tim.com/presentation" class="nav-link text-muted" target="_blank">About
-										Us</a>
-								</li>
-								<li class="nav-item">
-									<a href="https://www.creative-tim.com/blog" class="nav-link text-muted" target="_blank">Blog</a>
-								</li>
-								<li class="nav-item">
-									<a href="https://www.creative-tim.com/license" class="nav-link pe-0 text-muted"
-									   target="_blank">License</a>
-								</li>
-							</ul>
-						</div>
-					</div>
-				</div>
-			</footer>
-
-		</div>
 	</main>
 	
 	<!--  main container End  -->
@@ -513,8 +463,10 @@
 	</body>
 	<!--  JS 및 플러그인 끝  -->
 	
+	
 	<script>
-		$(document).ready(function() {
+		
+			$(document).ready(function() {
 			var activeTab = localStorage.getItem('activeTab');
 			if(activeTab){
 				$('.sidenav_click .tab').removeClass('active bg-gradient-primary');
@@ -536,9 +488,5 @@
 		});
 	</script>
 	
-	
 </th:block>
-
-
-
 </html>

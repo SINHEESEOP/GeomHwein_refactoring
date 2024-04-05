@@ -10,4 +10,5 @@ public interface UserService {
 	public List<comunityVO> getComunityList();
 	public comunityVO getComunityDetail(int pst_ttl_no);
 	public int comunityModifyForm(comunityVO vo);
+	public int comunityDelete(int pst_ttl_no);
 }

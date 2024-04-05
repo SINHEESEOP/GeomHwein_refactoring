@@ -21,7 +21,7 @@ public class UserController {
 
 	@GetMapping("/cart")
 	public String cart() {
-		return "/user/cart";
+		return "user/cart";
 	}
 
 	@GetMapping("/billing")
@@ -29,7 +29,7 @@ public class UserController {
 		return "/user/billing";
 	}
 
-	@GetMapping("/profile")
+	@GetMapping("profile")
 	public String profile() {
 		return "/user/profile";
 	}
@@ -40,7 +40,6 @@ public class UserController {
 	
 
 	@GetMapping("/comunityList")
-
 
 	public String userComunityList(Model model) {
 		
@@ -138,9 +137,9 @@ public class UserController {
 		int result = userService.comunityForm(vo);
 		
 		if(result == 1 ) {
-			rec.addFlashAttribute("msg", "성공입니다");
+			rec.addFlashAttribute("msg", "등록성공");
 		}else {
-			rec.addFlashAttribute("msg", "실패했습니다");
+			rec.addFlashAttribute("msg", "등록실패");
 		}
 		
 		return "redirect:/user/comunityList";
@@ -152,14 +151,27 @@ public class UserController {
 		int result = userService.comunityModifyForm(vo);
 		
 		if(result == 1 ) {
-			rec.addFlashAttribute("msg", "성공입니다");
+			rec.addFlashAttribute("msg", "수정성공");
 		}else {
-			rec.addFlashAttribute("msg", "실패했습니다");
+			rec.addFlashAttribute("msg", "수정실패");
 		}
 		
 		return "redirect:/user/comunityList";
 	}
 	
+	@GetMapping("/comunityDelete")
+	public String comunityDelete(@RequestParam("pst_ttl_no") int pst_ttl_no , RedirectAttributes rec) {
+		
+		int result = userService.comunityDelete(pst_ttl_no);
+		
+		if(result == 1 ) {
+			rec.addFlashAttribute("msg", "삭제성공");
+		}else {
+			rec.addFlashAttribute("msg", "삭제실패");
+		}
+		
+		return "redirect:/user/comunityList";
+	}
 
 
 }

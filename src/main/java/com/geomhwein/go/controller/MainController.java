@@ -32,6 +32,7 @@ public class MainController {
 
 	@GetMapping("/payment")
 	public String payment() {
+		
 		return "payment";
 	}
 

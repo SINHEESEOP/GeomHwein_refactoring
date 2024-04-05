@@ -38,4 +38,13 @@ public class UserServiceImpl implements UserService {
 		
 		return userMapper.comunityModifyForm(vo);
 	}
+
+	@Override
+	public int comunityDelete(int pst_ttl_no) {
+		// TODO Auto-generated method stub
+		return userMapper.comunityDelete(pst_ttl_no);
+	}
+
+
+
 }
