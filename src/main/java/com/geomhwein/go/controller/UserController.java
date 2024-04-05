@@ -7,10 +7,25 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping("/user")
 public class UserController {
-	
+
+	@GetMapping("/cart")
+	public String cart() {
+		return "/user/cart";
+	}
+
+	@GetMapping("/billing")
+	public String billing() {
+		return "/user/billing";
+	}
+
+	@GetMapping("/profile")
+	public String profile() {
+		return "/user/profile";
+	}
+
 	@GetMapping("/comunityList")
 	public String userComunityList() {
-		return "user/ComunityList";
+		return "user/comunityList";
 	}
 	
 	@GetMapping("/comunityDetail")
@@ -30,7 +45,7 @@ public class UserController {
 	
 	@GetMapping("/groupList")
 	public String userGroupList() {
-		return "user/GroupList";
+		return "user/groupList";
 	}
 	
 	@GetMapping("/questionList")
@@ -47,5 +62,6 @@ public class UserController {
 	public String homeworkList() {
 		return "user/homeworkList";
 	}
-	
+
+
 }

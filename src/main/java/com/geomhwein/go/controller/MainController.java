@@ -21,5 +21,9 @@ public class MainController {
 		return "sign_up";
 	}
 
+	@GetMapping("/payment")
+	public String payment() {
+		return "payment";
+	}
 
 }
