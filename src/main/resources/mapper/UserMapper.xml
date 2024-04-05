@@ -4,6 +4,18 @@
 <mapper namespace="com.geomhwein.go.user.service.UserMapper">
 
 	<insert id="comunityForm">
-	insert into COMUNITY(PST_TTL_NM,PST_TTL_CN,USERNAME VALUES(#{PST_TTL_NM},#{PST_TTL_CN},'aaa123')
+	insert into COMUNITY(PST_TTL_NM,PST_TTL_CN,INQ_CNT,USERNAME) VALUES(#{pst_ttl_nm},#{pst_ttl_cn},0,'aaa123')
 	</insert>
+	
+	<select id="getComunityList" resultType="comunityVO">
+	select * from COMUNITY
+	</select>
+	
+	<select id="getComunityDetail" resultType="comunityVO">
+	select * from COMUNITY WHERE pst_ttl_no = #{pst_ttl_no}
+	</select>
+	
+	<update id="comunityModifyForm">
+	update COMUNITY set pst_ttl_nm = #{pst_ttl_nm} , pst_ttl_cn = #{pst_ttl_nm}
+	</update>
 </mapper>

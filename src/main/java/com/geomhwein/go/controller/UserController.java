@@ -1,5 +1,7 @@
 package com.geomhwein.go.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -8,9 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.geomhwein.go.command.comunityVO;
 import com.geomhwein.go.user.service.UserService;
@@ -36,16 +36,31 @@ public class UserController {
 	
 	@Autowired
 	@Qualifier("userService")
-	private UserService userSerivce;
+	private UserService userService;
 	
 
 	@GetMapping("/comunityList")
-	public String userComunityList() {
+
+
+	public String userComunityList(Model model) {
+		
+		
+		List<comunityVO> list = userService.getComunityList();
+		
+		model.addAttribute("list" , list);
+		
 		return "user/comunityList";
 	}
 	
 	@GetMapping("/comunityDetail")
-	public String comunityDetail() {
+	public String comunityDetail(@RequestParam("pst_ttl_no") int pst_ttl_no , Model model) {
+		
+	
+		
+		comunityVO vo = userService.getComunityDetail(pst_ttl_no);
+		
+		model.addAttribute("vo",vo);
+		
 		return "user/comunityDetail";
 	}
 	
@@ -55,7 +70,12 @@ public class UserController {
 	}
 	
 	@GetMapping("/comunityModify")
-	public String comunityModify() {
+	public String comunityModify(@RequestParam("pst_ttl_no") int pst_ttl_no , Model model) {
+		
+		comunityVO vo = userService.getComunityDetail(pst_ttl_no);
+		
+		model.addAttribute("vo",vo);
+		
 		return "user/comunityModify";
 	}
 	
@@ -113,8 +133,29 @@ public class UserController {
 	}
 	
 	@PostMapping("/comunityForm")
-	public String comunityForm(comunityVO vo) {
+	public String comunityForm(comunityVO vo , RedirectAttributes rec) {
 		
+		int result = userService.comunityForm(vo);
+		
+		if(result == 1 ) {
+			rec.addFlashAttribute("msg", "성공입니다");
+		}else {
+			rec.addFlashAttribute("msg", "실패했습니다");
+		}
+		
+		return "redirect:/user/comunityList";
+	}
+	
+	@PostMapping("/comunityModifyForm")
+	public String comunityModifyForm(comunityVO vo , RedirectAttributes rec) {
+		
+		int result = userService.comunityModifyForm(vo);
+		
+		if(result == 1 ) {
+			rec.addFlashAttribute("msg", "성공입니다");
+		}else {
+			rec.addFlashAttribute("msg", "실패했습니다");
+		}
 		
 		return "redirect:/user/comunityList";
 	}

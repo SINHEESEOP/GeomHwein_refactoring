@@ -1,5 +1,7 @@
 package com.geomhwein.go.user.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,5 +18,24 @@ public class UserServiceImpl implements UserService {
 		
 		
 		return userMapper.comunityForm(vo);
+	}
+
+	@Override
+	public List<comunityVO> getComunityList() {
+		
+		
+		return userMapper.getComunityList();
+	}
+
+	@Override
+	public comunityVO getComunityDetail(int pst_ttl_no) {
+		
+		return userMapper.getComunityDetail(pst_ttl_no);
+	}
+
+	@Override
+	public int comunityModifyForm(comunityVO vo) {
+		
+		return userMapper.comunityModifyForm(vo);
 	}
 }

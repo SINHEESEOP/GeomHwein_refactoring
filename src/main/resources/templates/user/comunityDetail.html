@@ -10,23 +10,23 @@
         <div class="title-box">
           <span>
             <span class="content-writer">작성자:&nbsp;</span>
-            김바둑
+            [[${vo.userName}]]
           </span>
           <span>
             <span class="content-regdate">작성일:</span>
-            2024-01-01
+          	[[${vo.pst_regdate}]]
           </span>
           <span>
             <span class="content-hit">조회수:</span>
-            1
+            [[${vo.inq_cnt}]]
           </span>
           <span>
             <span class="content-reply">댓글수:</span>
-            1
+            아직 구현 안함
           </span>
         </div>
         <div class="content-box">
-          <textarea name="" id="textarea" cols="30" rows="10" readonly>자유로운 글 여기 표시</textarea>
+          <textarea name="" id="textarea" cols="30" rows="10" readonly>[[${vo.pst_ttl_cn}]]</textarea>
         </div>
       </div>
       <div class="reply-wrap"> 
@@ -84,7 +84,7 @@
       </div>
     </div>
     <div class="button-wrap">
-      <button type="button" id="changeBtn">수정하기</button>
+      <button type="button" id="changeBtn" th:onclick="|location.href='@{comunityModify(pst_ttl_no=${vo.pst_ttl_no})}'|">수정하기</button>
       <button type="button" id="deleteBtn">삭제하기</button>
       <button type="button" id="backBtn">목륵으로</button>
     </div>
