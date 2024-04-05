@@ -93,14 +93,11 @@ public class UserController {
 		return "user/makeQuestion";
 	}
 	@PostMapping("/registQuestionForm")
-	public String registQuestionForm(@RequestParam("userId")String userId,@RequestParam("questionDate")String questionDate,@RequestParam("questionCn")String questionCn,QuestionVO vo) {
+	public void registQuestionForm(@RequestParam("userId")String userId,@RequestParam("questionDate")String questionDate,@RequestParam("questionCn")String questionCn,QuestionVO vo) {
 		vo.setUserId(userId);
 		vo.setQusCn(questionCn);
 		vo.setQusYmd(questionDate);
 		userService.addQuestion(vo);
-		
-		
-		return "";
 	}
 	
 
