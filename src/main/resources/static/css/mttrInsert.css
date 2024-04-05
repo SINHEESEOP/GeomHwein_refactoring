@@ -1,0 +1,39 @@
+@charset "UTF-8";
+
+
+	.mttrTitle {
+		
+		background-image: linear-gradient(195deg, #EC407A 0%, #D81B60 100%);
+		box-shadow: 0 4px 20px 0 rgba(0, 0, 0, 0.14), 0 7px 10px -5px rgba(233, 30, 99, 0.4) !important;
+		padding-bottom: 1rem !important;
+		padding-top: 1.5rem !important;
+		border-radius: 0.5rem;
+	}
+	
+	.mttrTitle > p {
+		font-size:large;
+		margin-top : 10px;
+		width: 1000px;
+	}
+	
+	.mttrTtl >div { 
+		width: 1000px;
+		margin-top : 80px;
+	
+	}
+	
+	.mttrInput input{
+		width: 1000px;
+		margin-bottom : 30px;
+	}
+	.mttrInfo textarea{
+	
+		width: 1000px;
+	}
+	
+	.reg-button {
+		width: 1000px;
+		margin-top: 10px;
+		text-align: right;
+		
+	}
