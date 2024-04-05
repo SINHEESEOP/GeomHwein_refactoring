@@ -20,4 +20,6 @@ public class QuestionVO {
 	private int qstnNo;
 	private String qusCn;
 	private String qusYmd;
+	//질문하기, 답하기,리스트보기 전부다 여기꺼 사용
+	
 }
