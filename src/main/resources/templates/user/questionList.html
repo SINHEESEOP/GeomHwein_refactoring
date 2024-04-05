@@ -1,7 +1,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <link rel="stylesheet" href="/css/questionList.css">
+<script src="/js/jquery-3.7.1.min.js"></script>	
 <th:block th:replace="~{/include/baseLayout :: setContent( ~{ :: .wrap} ) }">
-	
 	<div class="wrap">
 	<div class="container-fluid py-4">
       <div class="container-title">Q&A</div>
@@ -39,7 +39,7 @@
         </tr>
       </table>
       <div class="reg">
-        <button type="button">질문하기</button>
+        <button type="button" class="makeQuestionBtn">질문하기</button>
       </div>
       <div class="pagenation">
         <span>prev</span>
@@ -51,4 +51,13 @@
     </div>
 	</div>
 </th:block>
+<script>
+  $(".makeQuestionBtn").click(function(){
+    var username="aaa123";//임시유저네임
+    var url="makeQuestion?username="+username;
+    var name="질문작성하기";
+    var option="width=830,length=820,top=0,left=0,location=yes";
+    window.open(url,name,option);
+  });
+</script>
 </html>

@@ -1,8 +1,10 @@
 package com.geomhwein.go.controller;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @RequestMapping("/user")
@@ -47,5 +49,12 @@ public class UserController {
 	public String homeworkList() {
 		return "user/homeworkList";
 	}
-	
+	@GetMapping("/makeQuestion")
+	public String makeQuestion(@RequestParam("username")String username,Model model){
+		model.addAttribute("username",username);
+		return "user/makeQuestion";
+	}
+
+
+
 }

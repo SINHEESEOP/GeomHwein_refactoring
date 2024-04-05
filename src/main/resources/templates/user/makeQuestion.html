@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -58,8 +58,9 @@
     Designed By <a class="border-bottom" href="https://htmlcodex.com">HTML Codex</a>
 </div>
 <!-- Appointment End -->
- <script>
- 	
+ <script th:inline="javascript">
+ 	var username=[[${username}]];
+ 	$(".userId").attr("value",username);
  </script>   
 </body>
 </html>
