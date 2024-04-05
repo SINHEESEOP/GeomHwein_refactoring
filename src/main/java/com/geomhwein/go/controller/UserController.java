@@ -8,6 +8,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import com.geomhwein.go.command.QuestionVO;
+
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -90,7 +93,11 @@ public class UserController {
 		return "user/makeQuestion";
 	}
 	@PostMapping("/registQuestionForm")
-	public String registQuestionForm(@RequestParam("userId")String userId,@RequestParam("questionDate")String questionDate,@RequestParam("questionCn")String questionCn) {
+	public String registQuestionForm(@RequestParam("userId")String userId,@RequestParam("questionDate")String questionDate,@RequestParam("questionCn")String questionCn,QuestionVO vo) {
+		vo.setUserId(userId);
+		vo.setQusCn(questionCn);
+		vo.setQusYmd(questionDate);
+		//db 서비스 연결 
 		
 		
 		return "";

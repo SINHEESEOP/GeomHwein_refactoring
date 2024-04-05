@@ -1,5 +1,7 @@
 package com.geomhwein.go.command;
 
+import java.sql.Timestamp;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -9,13 +11,13 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class homeworkVO {
+public class QuestionVO {
 	
 	private String userId;
-	private String asmtGrd;
-	private String asmtNm;
-	private String asmtCn;
-	private int asmtNo;
-	private int asmtScr;
-	
+	private String ansCn;
+	private String ansYmd;
+	private int ansNo;
+	private int qstnNo;
+	private String qusCn;
+	private String qusYmd;
 }
