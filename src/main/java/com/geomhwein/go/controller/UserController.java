@@ -39,7 +39,7 @@ public class UserController {
 	
 	@Autowired
 	@Qualifier("userService")
-	private UserService userSerivce;
+	private UserService userService;
 	
 
 	@GetMapping("/comunityList")
@@ -97,7 +97,7 @@ public class UserController {
 		vo.setUserId(userId);
 		vo.setQusCn(questionCn);
 		vo.setQusYmd(questionDate);
-		//db 서비스 연결 
+		userService.addQuestion(vo);
 		
 		
 		return "";

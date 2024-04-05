@@ -3,6 +3,7 @@ package com.geomhwein.go.user.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.geomhwein.go.command.QuestionVO;
 import com.geomhwein.go.command.comunityVO;
 
 @Service("userService")
@@ -16,5 +17,11 @@ public class UserServiceImpl implements UserService {
 		
 		
 		return userMapper.comunityForm(vo);
+	}
+
+	
+	public void addQuestion(QuestionVO vo) {
+		
+		userMapper.addQuestion(vo);
 	}
 }
