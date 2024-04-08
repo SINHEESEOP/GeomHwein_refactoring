@@ -100,6 +100,12 @@ public class UserController {
 		userService.addQuestion(vo);
 	}
 	
+	@PostMapping("/creatorRegForm")
+	public String creatorRegForm(@RequestParam("userName")String userName,@RequestParam("docsCode")String docsCode,@RequestParam("reason")String reason) {
+		userService.registCreator(userName,docsCode,reason);
+		
+		return "user";//신청버튼 잇던 곳으로 보내주면됨
+	}
 
 	@GetMapping("/questionReg")
 	public String questionReg() {

@@ -9,5 +9,7 @@ public interface UserService {
 
 	public void addQuestion(QuestionVO vo);
 
+	public int registCreator(String userName, String docsCode, String reason);
+
 	
 }

@@ -24,4 +24,11 @@ public class UserServiceImpl implements UserService {
 		
 		userMapper.addQuestion(vo);
 	}
+
+
+	
+	public int registCreator(String userName, String docsCode, String reason) {
+		
+		return userMapper.registCreator(userName,docsCode,reason);
+	}
 }

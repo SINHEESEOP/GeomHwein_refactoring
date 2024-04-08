@@ -14,9 +14,9 @@
 <script>
 	var rng=Math.random().toString(36).substring(2,8).toUpperCase().toString();
 	$(".docsCode").attr("value",rng);
-	var username=localStorage.getItem("username",username);
-  $(".username").attr("value",username);
-
+	var username=localStorage.getItem("username",username);//시큐리티 도입시 로그인된사용자로 대체
+  	$(".username").attr("value",username);
+	
 
 </script>
 </html>
