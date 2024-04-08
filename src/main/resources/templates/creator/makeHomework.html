@@ -32,35 +32,35 @@
                   <div class="col-lg-6 wow fadeIn" data-wow-delay="0.1s">
                       <div class="h-100 d-flex flex-column justify-content-center p-5">
                           <h1 class="mb-4">숙제 등록</h1>
-                          <form action="" method="post">
+                          <form action="registHomeworkForm" method="post">
                               <div class="row g-3">
                                   <div class="col-sm-6">
                                       <div class="form-floating">
-                                          <input type="text" class="form-control border-0 creatorName" placeholder="" readonly="readonly">
+                                          <input type="text" class="form-control border-0 creatorName" placeholder="" readonly="readonly" name="userId">
                                           <label for="gname">선생님 아이디</label>
                                       </div>
                                   </div>
                                   <div class="col-sm-6">
                                       <div class="form-floating">
-                                          <input type="text" class="form-control border-0 homeworkName" placeholder="">
+                                          <input type="text" class="form-control border-0 homeworkName" placeholder="" name="asmtNm">
                                           <label for="gmail">숙제 제목</label>
                                       </div>
                                   </div>
                                   <div class="col-sm-6">
                                       <div class="form-floating">
-                                          <input type="text" class="form-control border-0 homeworkGrade" placeholder="">
+                                          <input type="text" class="form-control border-0 homeworkGrade" placeholder="" name="asmtGrd">
                                           <label for="cname">숙제 난이도</label>
                                       </div>
                                   </div>
                                   <div class="col-sm-6">
                                       <div class="form-floating">
-                                          <input type="number" class="form-control border-0 homeworkScore" placeholder="">
+                                          <input type="number" class="form-control border-0 homeworkScore" placeholder="" name="asmtScr">
                                           <label for="cage">숙제 점수</label>
                                       </div>
                                   </div>
                                   <div class="col-12">
                                       <div class="form-floating">
-                                          <textarea class="form-control border-0 homeworkCn" placeholder="300자내" style="height: 300px"></textarea>
+                                          <textarea class="form-control border-0 homeworkCn" placeholder="300자내" style="height: 300px" name="asmtCn"></textarea>
                                           <label for="message">숙제 내용</label>
                                       </div>
                                   </div>

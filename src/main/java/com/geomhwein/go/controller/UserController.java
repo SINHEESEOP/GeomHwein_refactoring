@@ -1,5 +1,7 @@
 package com.geomhwein.go.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -9,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.geomhwein.go.command.HomeworkVO;
 import com.geomhwein.go.command.QuestionVO;
 
 import org.springframework.web.bind.annotation.PostMapping;
@@ -83,7 +86,9 @@ public class UserController {
 	}
 	
 	@GetMapping("/homeworkList")
-	public String homeworkList() {
+	public String homeworkList(Model model) {
+		List<HomeworkVO> list=userService.getHomeworkList();
+		model.addAttribute("homeworkList",list);
 		return "user/homeworkList";
 	}
 

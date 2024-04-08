@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.geomhwein.go.command.HomeworkVO;
 import com.geomhwein.go.creator.service.CreatorService;
 
 
@@ -29,7 +30,12 @@ public class CreatorController {
 		return "creator/eduGroup";
 	}
 	
-	
+	@PostMapping("/registHomeworkForm")
+	public String registHomeworkForm(HomeworkVO vo) {
+		creatorService.makeHomework(vo);
+		
+		return "user/homeworkList";
+	}
 	
 	
 }
