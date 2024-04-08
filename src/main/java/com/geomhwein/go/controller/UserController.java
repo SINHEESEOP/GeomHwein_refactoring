@@ -85,11 +85,11 @@ public class UserController {
 		return "user/homeworkReg";
 	}
 	
-	@GetMapping("/??")//선생님이 등록한 숙제 리스트
-	public String homeworkList(Model model) {
-		List<HomeworkVO> list=userService.getHomeworkList();
+	@GetMapping("/viewHomework")
+	public String homeworkList(Model model,@RequestParam("userId")String userId) {
+		List<HomeworkVO> list=userService.getHomeworkList(userId);
 		model.addAttribute("homeworkList",list);
-		return "user/??";//등록된 숙제를 볼 페이지 혹은 리스트혹은 버튼이 있던 페이지
+		return "user/HomeworkReg";
 	}
 	@GetMapping("homeworkList")
 	public String homeworkList() {

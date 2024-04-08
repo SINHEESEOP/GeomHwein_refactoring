@@ -14,7 +14,7 @@ public interface UserService {
 
 	public int registCreator(String userName, String docsCode, String reason);
 
-	public List<HomeworkVO> getHomeworkList();
+	public List<HomeworkVO> getHomeworkList(String userId);
 
 	
 }

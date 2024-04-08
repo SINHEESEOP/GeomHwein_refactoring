@@ -7,7 +7,7 @@ import com.geomhwein.go.command.HomeworkVO;
 @Mapper
 public interface CreatorMapper {
 
-	void makeHomework(HomeworkVO vo);
+	public int makeHomework(HomeworkVO vo);
 	//mapper작업 아직 없음
 
 }

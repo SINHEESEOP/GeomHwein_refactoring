@@ -20,7 +20,7 @@ public interface UserMapper {
 	//아직 mapper작업 안함
 	//반환값으로 성공실패여부 확인
 
-	public List<HomeworkVO> getHomeworkList();
+	public List<HomeworkVO> getHomeworkList(String userId);
 	//mapper작업 안함
 	//리스트 받아와서 Homeworklist창으로 가서 타임리프 돌려서 화면에 리스트 뿌려줌
 	

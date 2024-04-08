@@ -37,8 +37,8 @@ public class UserServiceImpl implements UserService {
 
 
 	
-	public List<HomeworkVO> getHomeworkList() {
+	public List<HomeworkVO> getHomeworkList(String userId) {
 		
-		return userMapper.getHomeworkList();
+		return userMapper.getHomeworkList(userId);
 	}
 }

@@ -4,6 +4,6 @@ import com.geomhwein.go.command.HomeworkVO;
 
 public interface CreatorService {
 
-	public void makeHomework(HomeworkVO vo);
+	public int makeHomework(HomeworkVO vo);
 
 }
