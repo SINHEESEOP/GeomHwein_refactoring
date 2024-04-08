@@ -103,9 +103,10 @@
 	
 	$("#searchBtn").click(function(){ 
 		
+		var amount = '[[${pageVO.amount}]]';
 		var search = $(".searchInput").val();
-		
-		location.href='comunityList?searchInput='+search;
+		var pageNum = 1;
+		location.href="comunityList?pageNum="+pageNum+"&amount="+amount+"&searchInput="+search;
 		
 	});
 
