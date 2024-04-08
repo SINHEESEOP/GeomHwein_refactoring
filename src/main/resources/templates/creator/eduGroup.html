@@ -13,9 +13,9 @@
   <title>교육 그룹 선택하기</title>
 </head>
 <body>
-	<pre hidden="hidden">
-		이곳도 또한 팝업입니다.
-	</pre>
+  <script>
+    window.resizeTo(1300,900);
+  </script>
   <div class="container-xxl py-5">
     <div class="container">
         <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 600px;">
@@ -277,7 +277,9 @@
         var groupEndDate=$(".groupEndDate").text();
         var groupRecAge=$(".groupRecAge").text();
         var groupCap=$(".groupCap").text();
-        
+        location.href="/user/groupSelectForm?recAge="+groupRecAge+"&lastCmcrsYmd="+groupEndDate
+        				+"&groupUtztnNope="+groupCap+"&userId="+groupCreatorName
+        				+"&groupNm="+groupName+"&groupCost"+groupCost;
 
         
 

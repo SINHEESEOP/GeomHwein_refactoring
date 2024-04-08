@@ -17,7 +17,8 @@ public class educationGroupVO {
 	private int groupNo;
 	private String userId;
 	private int groupUtztnNope;
-	private Timestamp lastCmcrsYmd;
+	private String lastCmcrsYmd;
 	private int contsSn;
 	private int recAge;
+	private int groupCost;
 }

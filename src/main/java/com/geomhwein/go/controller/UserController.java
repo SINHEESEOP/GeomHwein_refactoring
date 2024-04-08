@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 
 import com.geomhwein.go.command.comunityVO;
+import com.geomhwein.go.command.educationGroupVO;
 import com.geomhwein.go.user.service.UserService;
 
 @Controller
@@ -137,7 +138,25 @@ public class UserController {
 		
 		return "redirect:/user/comunityList";
 	}
-	
+	@GetMapping("/groupSelectForm")
+	public String groupSelectForm(  @RequestParam("groupNm")String groupNm,
+									@RequestParam("userId")String userId,
+									@RequestParam("groupUtztnNope")int groupUtztnNope,
+									@RequestParam("lastCmcrsYmd")String lastCmcrsYmd,
+									@RequestParam("groupCost")int groupCost,
+									@RequestParam("recAge")int recAge,
+									educationGroupVO vo,
+									Model model) {
+		vo.setGroupCost(groupCost);
+		vo.setGroupNm(groupNm);
+		vo.setGroupUtztnNope(groupUtztnNope);
+		vo.setLastCmcrsYmd(lastCmcrsYmd);
+		vo.setRecAge(recAge);
+		vo.setUserId(userId);
+		model.addAttribute(vo);
+		
+		return "user/??";//그룹신청하는폼 또는 화면
+	}
 
 
 }
