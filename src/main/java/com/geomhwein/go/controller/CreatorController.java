@@ -34,7 +34,7 @@ public class CreatorController {
 	public String registHomeworkForm(HomeworkVO vo) {
 		creatorService.makeHomework(vo);
 		
-		return "user/homeworkList";
+		return "user/??";//선생님이 등록한 숙제리스트 조회할 페이지로 감 혹은 버튼이 있는 페이지
 	}
 	
 	
