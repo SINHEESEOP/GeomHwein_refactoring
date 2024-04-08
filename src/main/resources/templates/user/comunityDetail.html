@@ -86,7 +86,7 @@
     <div class="button-wrap">
       <button type="button" id="changeBtn" th:onclick="|location.href='@{comunityModify(pst_ttl_no=${vo.pst_ttl_no})}'|">수정하기</button>
       <button type="button" id="deleteBtn" th:onclick="|location.href='@{comunityDelete(pst_ttl_no=${vo.pst_ttl_no})}'|">삭제하기</button>
-      <button type="button" id="backBtn">목륵으로</button>
+      <button type="button" id="backBtn" th:onclick="|location.href='@{comunityList}'|">목륵으로</button>
     </div>
     </div>
 </th:block>

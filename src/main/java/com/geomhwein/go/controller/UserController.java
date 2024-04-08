@@ -2,6 +2,10 @@ package com.geomhwein.go.controller;
 
 import java.util.List;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -14,6 +18,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.geomhwein.go.command.comunityVO;
 import com.geomhwein.go.user.service.UserService;
+import com.geomhwein.go.util.Criteria;
+import com.geomhwein.go.util.PageVO;
 
 @Controller
 @RequestMapping("/user")
@@ -40,11 +46,15 @@ public class UserController {
 	
 
 	@GetMapping("/comunityList")
-
-	public String userComunityList(Model model) {
+	public String userComunityList(Model model , Criteria cri) {
 		
+		List<comunityVO> list = userService.getComunityList(cri);
 		
-		List<comunityVO> list = userService.getComunityList();
+		int total = userService.comunityTotal(cri);
+		
+		PageVO vo = new PageVO(cri, total);
+		
+		model.addAttribute("pageVO",vo);
 		
 		model.addAttribute("list" , list);
 		
@@ -52,9 +62,29 @@ public class UserController {
 	}
 	
 	@GetMapping("/comunityDetail")
-	public String comunityDetail(@RequestParam("pst_ttl_no") int pst_ttl_no , Model model) {
+	public String comunityDetail(@RequestParam("pst_ttl_no") int pst_ttl_no , Model model, HttpServletRequest request , HttpServletResponse response ) {
 		
-	
+		
+		Cookie[] cookies = request.getCookies();
+		
+		if(cookies != null) {
+			
+			for(Cookie cookie : cookies) {
+				
+				if(!cookie.getValue().contains(request.getParameter("pst_ttl_no"))) {
+					cookie.setValue(cookie.getValue() + "_" + request.getParameter("pst_ttl_no"));
+					cookie.setMaxAge(3600);
+					response.addCookie(cookie);
+					userService.updateHit(pst_ttl_no);
+				}
+			}
+			
+		}else {
+			Cookie newcookie = new Cookie("visit_cookie" , request.getParameter("pst_ttl_no"));
+			newcookie.setMaxAge(3600);
+			response.addCookie(newcookie);
+			userService.updateHit(pst_ttl_no);
+		}
 		
 		comunityVO vo = userService.getComunityDetail(pst_ttl_no);
 		
@@ -172,6 +202,5 @@ public class UserController {
 		
 		return "redirect:/user/comunityList";
 	}
-
-
+	
 }

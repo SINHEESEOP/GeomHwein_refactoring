@@ -1,18 +1,39 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <link rel="stylesheet" href="/css/comunityList.css">
+
 <th:block th:replace="~{/include/baseLayout :: setContent( ~{ :: .wrap} ) }">
 	
 	<div class="wrap">
 	<div class="container-fluid py-4">
       <div class="container-title">커뮤니티</div>
       <div class="search-wrap">
-        <ul>
-          <li class="active">최신순</li> <!-- 온클릭 토글 -->
-          <li>조회순</li>
-          <li>댓글순</li>
+        <ul class="search-filter">
+          <li class="" th:onclick="|location.href='@{comunityList(pageNum=1,amount=${pageVO.amount},searchFilter=new)}'|">
+          <th:block th:if="${pageVO.cri.searchFilter} == new">
+          <span class="active">최신순</span>
+          </th:block>
+          <th:block th:if="${pageVO.cri.searchFilter} != new">
+          <span>최신순</span>
+          </th:block>
+          </li>
+          <li class="" th:onclick="|location.href='@{comunityList(pageNum=1,amount=${pageVO.amount},searchFilter=hit)}'|">
+          <th:block th:if="${pageVO.cri.searchFilter} == hit">
+          <span class="active">조회순</span>
+          </th:block>
+          <th:block th:if="${pageVO.cri.searchFilter} != hit">
+          <span>조회순</span>
+          </th:block></li>
+          <li class="" th:onclick="|location.href='@{comunityList(pageNum=1,amount=${pageVO.amount},searchFilter=reply)}'|">
+          <th:block th:if="${pageVO.cri.searchFilter} == reply">
+          <span class="active">댓글순</span>
+          </th:block>
+          <th:block th:if="${pageVO.cri.searchFilter} != reply">
+          <span>댓글순</span>
+          </th:block>
+          </li>
         </ul>
         <div class="search-box">
-          <input type="text"></input><button>검색</button>
+          <input type="text" value="" class="searchInput"></input><button id="searchBtn">검색</button>
         </div>
       </div>
       <table class="comunity-table">
@@ -39,17 +60,20 @@
         <button type="button" th:onclick="|location.href='@{comunityReg}'|">등록하기</button>
       </div>
       <div class="pagenation">
-        <span>prev</span>
-        <span class="active">1</span>
-        <span>2</span>
-        <span>3</span>
-        <span>next</span>
+      	<th:block th:if="${pageVO.prev} == true">
+      	  <span><a th:href="@{comunityList(pageNum=${pageVO.startPage -1},amount=${pageVO.amount})}">prev</a></span>
+      	</th:block>
+        <th:block th:each="page : ${pageVO.pageList}">
+        <span><a th:href="@{comunityList(pageNum=${page},amount=${pageVO.amount})}">[[${page}]]</a></span>
+        </th:block>
+        <span th:if="${pageVO.next} == true"><a th:href="@{comunityList(pageNum=${pageVO.endPage -1},amount=${pageVO.amount})}">next</a></span>
       </div>
     </div>
 	</div>
 </th:block>
 
 	<script th:inline="javascript">
+	
 	
 	var msg = '[[${msg}]]';
 	msg = JSON.parse(msg);
@@ -64,5 +88,27 @@
 	alert(result);
 	}
 	</script>
+	
+	<script th:inline="javascript">
+	
+	
+	$(".search-filter").click(function(){
+		
+		$(".search-filter span").removeClass("active");
+		
+		$(event.target).toggleClass("active");
+		
+	})
+	
+	
+	$("#searchBtn").click(function(){ 
+		
+		var search = $(".searchInput").val();
+		
+		location.href='comunityList?searchInput='+search;
+		
+	});
 
+	</script>
+	
 </html>

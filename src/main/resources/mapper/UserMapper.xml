@@ -8,7 +8,18 @@
 	</insert>
 	
 	<select id="getComunityList" resultType="comunityVO">
-	select * from COMUNITY ORDER BY pst_ttl_no DESC;
+	select * 
+	from COMUNITY
+	<if test='searchInput != null'>
+		where pst_ttl_nm like concat('%',#{searchInput},'%') OR pst_ttl_cn like concat('%',#{searchInput},'%')
+	</if>
+	<if test="searchFilter == 'new'">
+		ORDER BY pst_ttl_no DESC
+	</if>
+	<if test="searchFilter == 'hit'">
+	ORDER BY INQ_CNT DESC
+	</if>
+	limit #{pageStart},#{amount}
 	</select>
 	
 	<select id="getComunityDetail" resultType="comunityVO">
@@ -23,4 +34,14 @@
 	delete from COMUNITY where pst_ttl_no = #{pst_ttl_no}
 	</delete>
 	
+	<update id="updateHit">
+		update COMUNITY set INQ_CNT = INQ_CNT + 1 where pst_ttl_no = #{pst_ttl_no}
+	</update>
+	
+	<select id="comunityTotal" resultType="int">
+	select count(*) from COMUNITY
+	<if test='searchInput != null'>
+		where pst_ttl_nm like concat('%',#{searchInput},'%') OR pst_ttl_cn like concat('%',#{searchInput},'%')
+	</if>
+	</select>
 </mapper>

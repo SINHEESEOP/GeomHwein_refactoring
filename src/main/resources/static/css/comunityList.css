@@ -56,7 +56,7 @@
       cursor: pointer;
     }
     
-    .search-wrap > ul > .active {
+    .search-wrap > ul .active {
       color: #D81B60;
       font-weight: bold;
     }
@@ -98,7 +98,7 @@
 
       .pagenation > span {
         padding: 10px;
-        cursor: pointer;
+        
       }
 
       .pagenation .active {

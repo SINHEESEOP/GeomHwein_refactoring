@@ -28,6 +28,12 @@ public class CreatorController {
 		return "creator/eduGroup";
 	}
 	
+	@GetMapping("/questionList")
+	public String questionList() {
+		
+		return "creator/questionList";
+	}
+	
 	
 	
 	
