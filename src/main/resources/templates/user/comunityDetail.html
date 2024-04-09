@@ -1,5 +1,6 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <link rel="stylesheet" href="/css/comunityDetail.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 <th:block th:replace="~{/include/baseLayout :: setContent( ~{ :: .wrap} ) }">
 
 <div class="wrap">
@@ -28,6 +29,19 @@
         <div class="content-box">
           <textarea name="" id="textarea" cols="30" rows="10" readonly>[[${vo.pst_ttl_cn}]]</textarea>
         </div>
+      </div>
+      <div class="uploadFile-box">
+      	<h4>업로드 한 파일</h4>
+      	<div class="uploadFile">
+      	<th:block th:each="uploadvo : ${list} ">
+      	
+      	<span th:onclick="|location.href='@{display(filepath=${uploadvo.filepath},uuid=${uploadvo.uuid},filename=${uploadvo.filename})}'|" class="filename">
+      	<span class="material-symbols-outlined">
+		download
+		</span>
+      	[[${uploadvo.filename}]]</span>
+      	</th:block>
+      	</div>
       </div>
       <div class="reply-wrap"> 
         <span>댓글</span>

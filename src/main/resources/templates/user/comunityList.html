@@ -64,7 +64,7 @@
       	  <span><a th:href="@{comunityList(pageNum=${pageVO.startPage -1},amount=${pageVO.amount})}">prev</a></span>
       	</th:block>
         <th:block th:each="page : ${pageVO.pageList}">
-        <span><a th:href="@{comunityList(pageNum=${page},amount=${pageVO.amount})}">[[${page}]]</a></span>
+        <span class="hi" th:onclick="|location.href='@{comunityList(pageNum=${page},amount=${pageVO.amount})}'|">[[${page}]]</span>
         </th:block>
         <span th:if="${pageVO.next} == true"><a th:href="@{comunityList(pageNum=${pageVO.endPage -1},amount=${pageVO.amount})}">next</a></span>
       </div>
@@ -73,7 +73,6 @@
 </th:block>
 
 	<script th:inline="javascript">
-	
 	
 	var msg = '[[${msg}]]';
 	msg = JSON.parse(msg);
@@ -107,9 +106,9 @@
 		var search = $(".searchInput").val();
 		var pageNum = 1;
 		location.href="comunityList?pageNum="+pageNum+"&amount="+amount+"&searchInput="+search;
-		
 	});
-
+	
+	 
 	</script>
 	
 </html>

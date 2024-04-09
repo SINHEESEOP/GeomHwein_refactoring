@@ -11,7 +11,7 @@
 	select * 
 	from COMUNITY
 	<if test='searchInput != null'>
-		where pst_ttl_nm like concat('%',#{searchInput},'%') OR pst_ttl_cn like concat('%',#{searchInput},'%')
+		where pst_ttl_nm like concat('%',#{searchInput},'%') OR username like concat('%',#{searchInput},'%')
 	</if>
 	<if test="searchFilter == 'new'">
 		ORDER BY pst_ttl_no DESC
@@ -43,5 +43,31 @@
 	<if test='searchInput != null'>
 		where pst_ttl_nm like concat('%',#{searchInput},'%') OR pst_ttl_cn like concat('%',#{searchInput},'%')
 	</if>
+	</select>
+	
+	<insert id="registFile">
+		
+		<selectKey resultType="int" keyProperty="pst_ttl_no" order="BEFORE">
+			select max(pst_ttl_no) from COMUNITY where username = 'aaa123'
+		</selectKey>
+		
+	insert into COMUNITY_UPLOAD(
+		filename,
+		filepath,
+		uuid,
+		pst_ttl_no,
+		username
+	)
+	values(
+	#{filename},
+	#{filepath},
+	#{uuid},
+	#{pst_ttl_no},
+	#{username}
+	)
+	</insert>
+	
+	<select id="getFile" resultType="ComunityUploadVO">
+	select * from COMUNITY_UPLOAD WHERE pst_ttl_no = #{pst_ttl_no}
 	</select>
 </mapper>

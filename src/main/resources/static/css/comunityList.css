@@ -88,7 +88,7 @@
       }
       
       .pagenation {
-        width: 300px;
+        width: 100px;
         margin: 0 auto;
         text-align: center;
         margin-top: 100px;
@@ -97,15 +97,11 @@
       }
 
       .pagenation > span {
-        padding: 10px;
-        
+      	width:30px;
+      	height:30px;
+        border: 1px solid #ced4da;
       }
-
-      .pagenation .active {
-        color: #D81B60;
-        font-weight: bold;
-      }
-
+      
       .reg {
         display: flex;
         justify-content: end;

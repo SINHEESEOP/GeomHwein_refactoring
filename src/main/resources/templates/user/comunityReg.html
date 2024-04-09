@@ -5,7 +5,7 @@
 <div class="wrap">
 	<div class="container-fluid py-4">
       <div class="container-title">글등록</div>
-      <form action="comunityForm" method="POST">
+      <form action="comunityForm" method="POST" enctype="multipart/form-data">
         <div class="reg-wrap">
           <div class="reg-title">
             <p>제목</p>
@@ -17,7 +17,10 @@
           </div>
           <div class="reg-upload">
             <p>파일등록</p>
-            <input type="file">
+            <input type="file" name="file" multiple="multiple" id="file-input">
+            <p>업로드한파일</p>
+            <div class="file-view"> 
+            </div>
           </div>
           <div class="reg-button"> 
             <input type="submit" class="regBtn" value="등록하기">
@@ -28,4 +31,29 @@
    </div>
 </div>
 </th:block>
+
+<script>
+	
+	
+	var fileinput = document.querySelector("#file-input");
+	var fileview = document.querySelector(".file-view");
+	
+	fileinput.addEventListener('change', () => {
+		
+		fileview.innerHTML = "";
+		
+		var files = Array.from(fileinput.files);
+		
+		
+		files.forEach(file => {
+			fileview.innerHTML += `<p id="${file.lastModified}">
+            ${file.name}
+            </p>`;
+		})
+	        
+	})
+	
+		
+
+</script>
 </html>

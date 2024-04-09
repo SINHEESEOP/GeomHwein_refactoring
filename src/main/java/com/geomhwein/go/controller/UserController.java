@@ -1,6 +1,11 @@
 package com.geomhwein.go.controller;
 
+import java.io.File;
+import java.net.URLEncoder;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.UUID;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -8,14 +13,21 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.io.FileSystemResource;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.geomhwein.go.command.ComunityUploadVO;
 import com.geomhwein.go.command.comunityVO;
 import com.geomhwein.go.user.service.UserService;
 import com.geomhwein.go.util.Criteria;
@@ -24,7 +36,10 @@ import com.geomhwein.go.util.PageVO;
 @Controller
 @RequestMapping("/user")
 public class UserController {
-
+	
+	@Value("${project.upload.path}")
+	private String uploadPath;
+	
 	@GetMapping("/cart")
 	public String cart() {
 		return "user/cart";
@@ -86,9 +101,12 @@ public class UserController {
 			userService.updateHit(pst_ttl_no);
 		}
 		
+		
 		comunityVO vo = userService.getComunityDetail(pst_ttl_no);
+		List<ComunityUploadVO> list = userService.getFile(pst_ttl_no);
 		
 		model.addAttribute("vo",vo);
+		model.addAttribute("list",list); 
 		
 		return "user/comunityDetail";
 	}
@@ -162,9 +180,14 @@ public class UserController {
 	}
 	
 	@PostMapping("/comunityForm")
-	public String comunityForm(comunityVO vo , RedirectAttributes rec) {
+	public String comunityForm(comunityVO vo , RedirectAttributes rec,
+			MultipartHttpServletRequest part) {
 		
-		int result = userService.comunityForm(vo);
+		
+		List<MultipartFile> list = part.getFiles("file");
+	
+
+		int result = userService.comunityForm(vo , list);
 		
 		if(result == 1 ) {
 			rec.addFlashAttribute("msg", "등록성공");
@@ -202,5 +225,29 @@ public class UserController {
 		
 		return "redirect:/user/comunityList";
 	}
+	
+	@GetMapping("/display")
+	@ResponseBody
+	public FileSystemResource display(@RequestParam("filepath") String filepath , @RequestParam("uuid") String uuid , @RequestParam("filename") String filename ,
+			HttpServletResponse response) {
+		
+		
+		
+		 String savepath = uploadPath + "/" + filepath + "/" + uuid + "_" + filename;
+		
+		 File file = new File(savepath);
+		 response.setContentType("application/download; utf-8");
+		 
+		try {
+			filename = URLEncoder.encode(filename, "UTF-8").replaceAll("\\+", "%20");
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		response.setHeader("Content-Disposition", "attachment; filename="+filename);
+		
+		 return new FileSystemResource(file);
+	}
+	
 	
 }
