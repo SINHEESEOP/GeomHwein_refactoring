@@ -13,7 +13,7 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 -->
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:sec="http://www.w3.org/1999/xhtml">
 
 
 <!--    사이드바에 필요한 메뉴는 한번에 박아넣고, if 구문을 통해 권한에 따라 보여줄 수 있게 만들기. -->
@@ -52,7 +52,7 @@
 		<div class="sidenav-header">
 			<i class="fas fa-times p-3 cursor-pointer text-white opacity-5 position-absolute end-0 top-0 d-none d-xl-none"
 			   aria-hidden="true" id="iconSidenav"></i>
-			<a class="navbar-brand m-0" href=" https://demos.creative-tim.com/material-dashboard/pages/dashboard "
+			<a class="navbar-brand m-0" href="/"
 			   target="_blank">
 				<img src="../assets/img/logo-ct.png" class="navbar-brand-img h-100" alt="main_logo">
 				<span class="ms-1 font-weight-bold text-white">검흰 - 바둑 교육</span>
@@ -87,14 +87,6 @@
 							<i class="material-icons opacity-10">receipt_long</i>
 						</div>
 						<span class="nav-link-text ms-1">결제 정보</span>
-					</a>
-				</li>
-				<li class="nav-item ">
-					<a class="nav-link text-white tab" id="tab7" href="/payment" data-page-name="결제 페이지">
-						<div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-							<i class="material-icons opacity-10">payment</i>
-						</div>
-						<span class="nav-link-text ms-1">결제 페이지</span>
 					</a>
 				</li>
 				
@@ -197,12 +189,29 @@
 						</div>
 					</div>
 					<ul class="navbar-nav  justify-content-end">
-						<li class="nav-item d-flex align-items-center">
+						
+						<!-- 로그인하지 않은 사용자만 보이도록 설정 -->
+						<li class="nav-item d-flex align-items-center" sec:authorize="!isAuthenticated()">
 							<a href="/sign_in" class="nav-link text-body font-weight-bold px-0">
 								<i class="fa fa-user me-sm-1"></i>
-								<span class="d-sm-inline d-none">Sign In</span>
+								<span class="d-sm-inline d-none">로그인</span>
 							</a>
 						</li>
+						
+						<!-- 로그인한 사용자에게만 보이도록 설정 -->
+						<li class="nav-item d-flex align-items-center" sec:authorize="isAuthenticated()" style="margin-right: 10px">
+							<a href="/user/profile" class="nav-link text-body font-weight-bold px-0">
+								<i class="fa fa-user me-sm-1"></i>
+								<span class="d-sm-inline d-none">마이페이지</span>
+							</a>
+						</li>
+						<li class="nav-item d-flex align-items-center" sec:authorize="isAuthenticated()">
+							<a href="/logout" class="nav-link text-body font-weight-bold px-0">
+								<i class="fa fa-sign-out me-sm-1"></i>
+								<span class="d-sm-inline d-none">로그아웃</span>
+							</a>
+						</li>
+						
 						<li class="nav-item d-xl-none ps-3 d-flex align-items-center">
 							<a href="javascript:;" class="nav-link text-body p-0" id="iconNavbarSidenav">
 								<div class="sidenav-toggler-inner">
@@ -212,13 +221,13 @@
 								</div>
 							</a>
 						</li>
-						<li class="nav-item px-3 d-flex align-items-center">
-							<a href="javascript:;" class="nav-link text-body p-0">
-								<i class="fa fa-cog fixed-plugin-button-nav cursor-pointer"></i>
-								<span>설정</span>
-							</a>
-						</li>
-						<li class="nav-item dropdown pe-2 d-flex align-items-center">
+<!--						<li class="nav-item px-3 d-flex align-items-center">-->
+<!--							<a href="javascript:;" class="nav-link text-body p-0">-->
+<!--								<i class="fa fa-cog fixed-plugin-button-nav cursor-pointer"></i>-->
+<!--								<span>설정</span>-->
+<!--							</a>-->
+<!--						</li>-->
+						<li class="nav-item dropdown pe-2 d-flex align-items-center" style="margin-left: 20px">
 							<a href="javascript:;" class="nav-link text-body p-0" id="dropdownMenuButton" data-bs-toggle="dropdown"
 							   aria-expanded="false">
 								<i class="fa fa-bell cursor-pointer"></i>
@@ -303,7 +312,6 @@
 		</nav>
 
 		<!-- End Navbar -->
-		
 		
 		<!-- main container	-->
 

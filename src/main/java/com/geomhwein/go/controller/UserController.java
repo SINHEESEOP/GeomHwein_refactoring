@@ -1,9 +1,13 @@
 package com.geomhwein.go.controller;
 
-import java.util.List;
 
+import java.util.List;
+import com.geomhwein.go.command.UserAuthVO;
+import com.geomhwein.go.securlty.UserAuth;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,16 +32,32 @@ public class UserController {
 
 	@GetMapping("/cart")
 	public String cart() {
-		return "/user/cart";
+		return "user/cart";
 	}
 
 	@GetMapping("/billing")
 	public String billing() {
-		return "/user/billing";
+		return "user/billing";
 	}
 
 	@GetMapping("/profile")
-	public String profile() {
+	public String profile(Authentication authentication, Model model) {
+
+		System.out.println("요청 왔는겨?");
+
+		if (authentication != null) {
+			UserAuth userAuth = (UserAuth)authentication.getPrincipal();
+
+			String userId  = userAuth.getUsername();
+			String userPwHash = userAuth.getPassword();
+			String userRole = userAuth.getRole();
+
+			System.out.println(userId + " " + userPwHash + " " + userRole);
+			System.out.println("213231");
+			model.addAttribute("role", userRole );
+
+		}
+
 		return "/user/profile";
 	}
 	
