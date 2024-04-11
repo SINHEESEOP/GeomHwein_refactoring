@@ -13,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.geomhwein.go.command.ComunityUploadVO;
+import com.geomhwein.go.command.ReplyVO;
 import com.geomhwein.go.command.comunityVO;
 import com.geomhwein.go.util.Criteria;
 
@@ -27,7 +28,7 @@ public class UserServiceImpl implements UserService {
 	
 	//날짜폴더 만드는 함수
 	public String makeFolder() {
-		
+			
 		String filepath = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyyMMdd"));
 		
 		File file = new File(uploadPath + "/" + filepath);
@@ -129,6 +130,14 @@ public class UserServiceImpl implements UserService {
 	public List<ComunityUploadVO> getFile(int pst_ttl_no) {
 	
 		return userMapper.getFile(pst_ttl_no);
+	}
+
+
+	@Override
+	public void replyAdd(ReplyVO vo) {
+		
+		userMapper.replyAdd(vo);
+		
 	}
 
 

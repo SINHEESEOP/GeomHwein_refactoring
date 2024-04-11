@@ -70,4 +70,8 @@
 	<select id="getFile" resultType="ComunityUploadVO">
 	select * from COMUNITY_UPLOAD WHERE pst_ttl_no = #{pst_ttl_no}
 	</select>
+	
+	<insert id="replyAdd">
+	insert into REPLY values(pst_ttl_no = #{pst_ttl_no},reply_cn=#{reply_cn},username=#{username})
+	</insert>
 </mapper>

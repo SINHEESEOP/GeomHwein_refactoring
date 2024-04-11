@@ -15,11 +15,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.FileSystemResource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -28,10 +31,13 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.geomhwein.go.command.ComunityUploadVO;
+import com.geomhwein.go.command.ReplyVO;
 import com.geomhwein.go.command.comunityVO;
 import com.geomhwein.go.user.service.UserService;
 import com.geomhwein.go.util.Criteria;
 import com.geomhwein.go.util.PageVO;
+
+import ch.qos.logback.core.status.Status;
 
 @Controller
 @RequestMapping("/user")
@@ -226,27 +232,43 @@ public class UserController {
 		return "redirect:/user/comunityList";
 	}
 	
-	@GetMapping("/display")
+	@GetMapping("/attachment")
 	@ResponseBody
-	public FileSystemResource display(@RequestParam("filepath") String filepath , @RequestParam("uuid") String uuid , @RequestParam("filename") String filename ,
-			HttpServletResponse response) {
+	public ResponseEntity<File> attachment(@RequestParam("filepath") String filepath , @RequestParam("uuid") String uuid , @RequestParam("filename") String filename
+			) {
 		
 		
-		
+			
 		 String savepath = uploadPath + "/" + filepath + "/" + uuid + "_" + filename;
 		
 		 File file = new File(savepath);
-		 response.setContentType("application/download; utf-8");
+		
+		 ResponseEntity<File> result = null;
 		 
 		try {
-			filename = URLEncoder.encode(filename, "UTF-8").replaceAll("\\+", "%20");
+
+			HttpHeaders header = new HttpHeaders();
+			header.add("Content-Disposition", "attachment; filename=" + filename);
+			
+			//filename = URLEncoder.encode(filename, "UTF-8").replaceAll("\\+", "%20");
+			result = new ResponseEntity<>(file, header,HttpStatus.OK);
 
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		response.setHeader("Content-Disposition", "attachment; filename="+filename);
+//		response.setHeader("Content-Disposition", "attachment; filename="+filename);
 		
-		 return new FileSystemResource(file);
+		 return result;
+	}
+	
+	@PostMapping("/replyAdd")
+	@ResponseBody
+	public String replayAdd(@RequestBody ReplyVO vo) {
+		
+		
+		userService.replyAdd(vo);
+		
+		return "success";
 	}
 	
 	

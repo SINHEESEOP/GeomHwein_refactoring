@@ -35,7 +35,7 @@
       	<div class="uploadFile">
       	<th:block th:each="uploadvo : ${list} ">
       	
-      	<span th:onclick="|location.href='@{display(filepath=${uploadvo.filepath},uuid=${uploadvo.uuid},filename=${uploadvo.filename})}'|" class="filename">
+      	<span th:onclick="|location.href='@{attachment(filepath=${uploadvo.filepath},uuid=${uploadvo.uuid},filename=${uploadvo.filename})}'|" class="filename">
       	<span class="material-symbols-outlined">
 		download
 		</span>
@@ -45,7 +45,6 @@
       </div>
       <div class="reply-wrap"> 
         <span>댓글</span>
-        <form>
           <div class="reply-box">
             <input type="text" class="reply-content">
           </div>
@@ -120,5 +119,35 @@
 
     };
     
+    </script>
+    
+    <script th:inline="javascript">
+   
+    var reply_cn = document.querySelector(".reply-content");
+    
+    
+    
+    $(".reply-reg").click(function(){
+    	
+    const params = {
+            pst_ttl_no : '[[${vo.pst_ttl_no}]]',
+            reply_cn : reply_cn.value,
+            username : '[[${vo.userName}]]'
+        }
+    
+    	$.ajax({
+    		url:"http://localhost:8282/user/replyAdd",
+    		type:"post",
+    		contentType:"application/json",
+    		dataType:"text",
+    		data:JSON.stringify(params),
+    		success : function(response){
+    			console.log(response);
+    		},
+    		error : function(request,status,error){
+    			console.log(error);
+    		}
+    	})
+    })
     </script>
 </html>
