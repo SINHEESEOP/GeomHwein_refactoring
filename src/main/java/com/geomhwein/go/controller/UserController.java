@@ -76,7 +76,9 @@ public class UserController {
 	public String billing() {
 		return "user/billing";
 	}
-
+	
+	
+	
 
 	@GetMapping("/profile")
 	public String profile(Authentication authentication, Model model) {
@@ -181,7 +183,16 @@ public class UserController {
 	}
 	
 	@GetMapping("/questionList")
-	public String questionList() {
+	public String questionList(Model model,Authentication authentication) {
+		if (authentication != null) {
+			UserAuth userAuth = (UserAuth)authentication.getPrincipal();
+
+			String userId  = userAuth.getUsername();
+			model.addAttribute("userName",userId);
+
+		}
+		
+		
 		return "user/questionList";
 	}
 	
@@ -207,7 +218,7 @@ public class UserController {
 	@GetMapping("/makeQuestion")
 	public String makeQuestion(@RequestParam("username")String username,Model model){
 		model.addAttribute("username",username);
-		//질문등록하기 팝업으로 보냄 ,username을 모델에 담아서 화면에서 readonly로 뿌려줌
+		
 		return "user/makeQuestion";
 	}
 	@PostMapping("/registQuestionForm")
@@ -227,10 +238,7 @@ public class UserController {
 		return "user/profile";//신청버튼 잇던 곳으로 보내주면됨
 	}
 
-	@GetMapping("/questionReg")
-	public String questionReg() {
-		return "user/questionReg";
-	}
+	
 	
 	@GetMapping("/questionDetail")
 	public String questionDetail() {
