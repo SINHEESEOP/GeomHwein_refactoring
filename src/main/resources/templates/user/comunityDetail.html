@@ -1,5 +1,6 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <link rel="stylesheet" href="/css/comunityDetail.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 <th:block th:replace="~{/include/baseLayout :: setContent( ~{ :: .wrap} ) }">
 
 <div class="wrap">
@@ -10,28 +11,40 @@
         <div class="title-box">
           <span>
             <span class="content-writer">작성자:&nbsp;</span>
-            김바둑
+            [[${vo.userName}]]
           </span>
           <span>
             <span class="content-regdate">작성일:</span>
-            2024-01-01
+          	[[${vo.pst_regdate}]]
           </span>
           <span>
             <span class="content-hit">조회수:</span>
-            1
+            [[${vo.inq_cnt}]]
           </span>
           <span>
             <span class="content-reply">댓글수:</span>
-            1
+            아직 구현 안함
           </span>
         </div>
         <div class="content-box">
-          <textarea name="" id="textarea" cols="30" rows="10" readonly>자유로운 글 여기 표시</textarea>
+          <textarea name="" id="textarea" cols="30" rows="10" readonly>[[${vo.pst_ttl_cn}]]</textarea>
         </div>
+      </div>
+      <div class="uploadFile-box">
+      	<h4>업로드 한 파일</h4>
+      	<div class="uploadFile">
+      	<th:block th:each="uploadvo : ${list} ">
+      	
+      	<span th:onclick="|location.href='@{attachment(filepath=${uploadvo.filepath},uuid=${uploadvo.uuid},filename=${uploadvo.filename})}'|" class="filename">
+      	<span class="material-symbols-outlined">
+		download
+		</span>
+      	[[${uploadvo.filename}]]</span>
+      	</th:block>
+      	</div>
       </div>
       <div class="reply-wrap"> 
         <span>댓글</span>
-        <form>
           <div class="reply-box">
             <input type="text" class="reply-content">
           </div>
@@ -84,12 +97,11 @@
       </div>
     </div>
     <div class="button-wrap">
-      <button type="button" id="changeBtn">수정하기</button>
-      <button type="button" id="deleteBtn">삭제하기</button>
-      <button type="button" id="backBtn">목륵으로</button>
+      <button type="button" id="changeBtn" th:onclick="|location.href='@{comunityModify(pst_ttl_no=${vo.pst_ttl_no})}'|">수정하기</button>
+      <button type="button" id="deleteBtn" th:onclick="|location.href='@{comunityDelete(pst_ttl_no=${vo.pst_ttl_no})}'|">삭제하기</button>
+      <button type="button" id="backBtn" th:onclick="|location.href='@{comunityList}'|">목륵으로</button>
     </div>
     </div>
-</div>
 </th:block>
 
  <script>
@@ -106,5 +118,36 @@
       $target.style.height = DEFAULT_HEIGHT + $target.scrollHeight + 'px';
 
     };
+    
+    </script>
+    
+    <script th:inline="javascript">
+   
+    var reply_cn = document.querySelector(".reply-content");
+    
+    
+    
+    $(".reply-reg").click(function(){
+    	
+    const params = {
+            pst_ttl_no : '[[${vo.pst_ttl_no}]]',
+            reply_cn : reply_cn.value,
+            username : '[[${vo.userName}]]'
+        }
+    
+    	$.ajax({
+    		url:"http://localhost:8282/user/replyAdd",
+    		type:"post",
+    		contentType:"application/json",
+    		dataType:"text",
+    		data:JSON.stringify(params),
+    		success : function(response){
+    			console.log(response);
+    		},
+    		error : function(request,status,error){
+    			console.log(error);
+    		}
+    	})
+    })
     </script>
 </html>

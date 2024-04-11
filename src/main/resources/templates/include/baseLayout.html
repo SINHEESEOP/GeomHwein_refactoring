@@ -13,7 +13,11 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 -->
 <!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+
 <html lang="en" xmlns:sec="http://www.w3.org/1999/xhtml">
+
 
 
 <!--    사이드바에 필요한 메뉴는 한번에 박아넣고, if 구문을 통해 권한에 따라 보여줄 수 있게 만들기. -->
@@ -41,7 +45,7 @@
 		<link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
 		<!-- CSS Files -->
 		<link id="pagestyle" href="../assets/css/material-dashboard.css?v=3.0.0" rel="stylesheet"/>
-		<script src="/js/jquery.js"></script>
+		<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 	</head>
 	
 	<body class="g-sidenav-show  bg-gray-200">
@@ -471,8 +475,10 @@
 	</body>
 	<!--  JS 및 플러그인 끝  -->
 	
+	
 	<script>
-		$(document).ready(function() {
+		
+			$(document).ready(function() {
 			var activeTab = localStorage.getItem('activeTab');
 			if(activeTab){
 				$('.sidenav_click .tab').removeClass('active bg-gradient-primary');
@@ -494,9 +500,5 @@
 		});
 	</script>
 	
-	
 </th:block>
-
-
-
 </html>

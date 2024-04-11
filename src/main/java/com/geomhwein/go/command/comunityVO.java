@@ -9,11 +9,11 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class comunityVO {
 	
-	private Integer pstTtlNo; //글번호
-	private String pstTtlNm; //글제목
-	private String pstTtlCn; //글내용
-	private Integer inqCnt; //조회수
-	private String pstRegDate; //작성일
+	private Integer pst_ttl_no; //글번호
+	private String pst_ttl_nm; //글제목
+	private String pst_ttl_cn; //글내용
+	private Integer inq_cnt; //조회수
+	private String pst_regdate; //작성일
 	private String userName; //작성자
 	
 }

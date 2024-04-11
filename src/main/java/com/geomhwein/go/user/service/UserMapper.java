@@ -4,15 +4,32 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
+
+import com.geomhwein.go.command.ComunityUploadVO;
+import com.geomhwein.go.command.ReplyVO;
+import com.geomhwein.go.command.comunityVO;
+import com.geomhwein.go.util.Criteria;
+
 import com.geomhwein.go.command.HomeworkVO;
 import com.geomhwein.go.command.QuestionVO;
 import com.geomhwein.go.command.comunityVO;
 import com.geomhwein.go.command.educationGroupVO;
 
+
 @Mapper
 public interface UserMapper {
 	
 	public int comunityForm(comunityVO vo);
+
+	public List<comunityVO> getComunityList(Criteria cri);
+	public comunityVO getComunityDetail(int pst_ttl_no);
+	public int comunityModifyForm(comunityVO vo);
+	public int comunityDelete(int pst_ttl_no);
+	public void updateHit(int pst_ttl_no);
+	public int comunityTotal(Criteria cri);
+	public void registFile(ComunityUploadVO vo);
+	public List<ComunityUploadVO> getFile(int pst_ttl_no);
+	public void replyAdd(ReplyVO vo);
 
 	public void addQuestion(QuestionVO vo);
 	//아직 mapper작업 안햇음
@@ -28,4 +45,5 @@ public interface UserMapper {
 	public educationGroupVO getGroup(int groupNo);
 	//mapper상에서 
 	//group테이블에서 groupNo값으로 불러와야함
+
 }

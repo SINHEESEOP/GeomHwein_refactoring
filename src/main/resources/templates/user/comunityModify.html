@@ -5,15 +5,16 @@
 <div class="wrap">
 	<div class="container-fluid py-4">
       <div class="container-title">글수정</div>
-      <form>
+      <form action="comunityModifyForm" method="POST">
         <div class="reg-wrap">
           <div class="reg-title">
             <p>제목</p>
-            <input type="text">
+            <input type="hidden" th:value="${vo.pst_ttl_no}" name="pst_ttl_no">
+            <input type="text" th:value="${vo.pst_ttl_nm}" name="pst_ttl_nm">
           </div>
           <div class="reg-content">
             <p>내용</p>
-            <textarea id="textarea"></textarea>
+            <textarea id="textarea" name="pst_ttl_cn">[[${vo.pst_ttl_cn}]]</textarea>
           </div>
           <div class="reg-upload">
             <p>파일등록</p>

@@ -32,6 +32,14 @@ public class CreatorController {
 		return "creator/eduGroup";
 	}
 	
+
+	@GetMapping("/questionList")
+	public String questionList() {
+		
+		return "creator/questionList";
+	}
+	
+	
 	@PostMapping("/registHomeworkForm")
 	public String registHomeworkForm(HomeworkVO vo) {
 		int result=creatorService.makeHomework(vo);
@@ -43,6 +51,7 @@ public class CreatorController {
 		
 		
 	}
+
 	
 	
 }

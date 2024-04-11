@@ -1,0 +1,66 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<link rel="stylesheet" href="/css/questionList.css">
+<script src="/js/jquery-3.7.1.min.js"></script>	
+<th:block th:replace="~{/include/baseLayout :: setContent( ~{ :: .wrap} ) }">
+	<div class="wrap">
+	<div class="container-fluid py-4">
+      <div class="container-title">Q&A</div>
+      <div class="search-wrap">
+        <ul>
+          <li class="active">전체보기</li>
+          <li>답변대기</li>
+          <li>답변완료</li>
+        </ul>
+        <div class="search-box">
+          <input type="text"></input><button>검색</button>
+        </div>
+      </div>
+      <table class="comunity-table">
+        <tr class="table-title">
+          <th>No</th>
+          <th>질문</th>
+          <th>질문자</th>
+          <th>질문날짜</th>
+          <th>상태</th>
+          <th>옵션</th>
+        </tr>
+        <tr class="table-content">
+          <td>1</td>
+          <td>질문했어요</td>
+          <td>김바둑</td>
+          <td>2024-01-01</td>
+          <td class><input type="checkbox" disabled>답변대기</td>
+          <td><button class="answerBtn">답변하기</button></td>
+        </tr>
+        <tr class="table-content">
+          <td>1</td>
+          <td>질문했어요</td>
+          <td>김바둑</td>
+          <td>2024-01-01</td>
+          <td class="question-success"><input type="checkbox" class="question-waiting" checked disabled>답변완료</td>
+           <td><button class="answerBtn">답변하기</button></td>
+        </tr>
+      </table>
+      <div class="reg">
+        <button type="button" class="makeQuestionBtn">질문하기</button>
+      </div>
+      <div class="pagenation">
+        <span>prev</span>
+        <span class="active">1</span>
+        <span>2</span>
+        <span>3</span>
+        <span>next</span>
+      </div>
+    </div>
+	</div>
+</th:block>
+<script>
+  $(".makeQuestionBtn").click(function(){
+    var username="aaa123";//임시유저네임
+    var url="makeQuestion?username="+username;
+    var name="질문작성하기";
+    var option="width=830,length=820,top=0,left=0,location=yes";
+    window.open(url,name,option);
+  });
+</script>
+</html>
