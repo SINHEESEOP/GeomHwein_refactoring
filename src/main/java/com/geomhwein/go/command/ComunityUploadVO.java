@@ -17,6 +17,6 @@ public class ComunityUploadVO {
 	private String uuid;
 	private String regdate;
 	private Integer pst_ttl_no;
-	private String username;
+	private String userId;
 	
 }
