@@ -20,5 +20,5 @@ public class educationGroupVO {
 	private String lastCmcrsYmd; //그룹최종이수일
 	private int contsSn;//그룹 콘텐츠 일련번호
 	private int recAge; //그룹 권장 연령
-	private int groupCost; //그룹 가격
+	
 }

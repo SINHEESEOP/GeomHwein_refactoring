@@ -329,8 +329,8 @@ public class UserController {
   
   @GetMapping("/groupSelectForm")
 	public String groupSelectForm(Model model,@RequestParam("groupNo")int groupNo) {
-		//educationGroupVO vo=userService.getGroup(groupNo);
-		//model.addAttribute("groupForm",vo);
+		educationGroupVO vo=userService.getGroup(groupNo);
+		model.addAttribute("groupForm",vo);
 		System.out.println(groupNo);
 		
 		return "user/groupList";//그룹신청하는폼 또는 화면
