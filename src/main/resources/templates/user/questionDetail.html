@@ -1,0 +1,111 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<link rel="stylesheet" href="/css/comunityDetail.css">
+<th:block th:replace="~{/include/baseLayout :: setContent( ~{ :: .wrap} ) }">
+
+<div class="wrap">
+	 <div class="container-fluid py-4">
+      <div class="container-title">Q&A</div>
+      <div class="content-wrap">
+        <div class="content-title">질문했어요</div>
+        <div class="title-box">
+          <span>
+            <span class="content-writer">작성자:&nbsp;</span>
+            김바둑
+          </span>
+          <span>
+            <span class="content-regdate">작성일:</span>
+            2024-01-01
+          </span>
+          <span>
+            <span class="content-hit">조회수:</span>
+            1
+          </span>
+          <span>
+            <span class="content-reply">댓글수:</span>
+            1
+          </span>
+        </div>
+        <div class="content-box">
+          <textarea name="" id="textarea" cols="30" rows="10" readonly>질문한 내용이 여기 표시가 됩니다.</textarea>
+        </div>
+      </div>
+      <div class="reply-wrap"> 
+        <span>답변</span>
+        <form>
+          <div class="reply-box">
+            <input type="text" class="reply-content">
+          </div>
+          <button type="button" class="reply-reg">등록</button>
+          <div class="reply">
+            <ul>
+              <li>
+                <img src="" alt=" " />
+                <span class="reply-writer">김단수</span>
+                <span class="reply-date">2024-01-01</span>
+                <p>바둑 그렇게 하는거아닌데</p>
+                <div class="reply-child">
+                  <form>
+                    <input type="text" class="child-content">
+                    <input type="submit" value="댓글달기" class="child-reg">
+                  </form>
+                </div>
+                <ul>
+                  <li>
+                    <img src="" alt=" " />
+                  <span class="reply-writer">김바둑</span>
+                  <span class="reply-date">2024-01-01</span>
+                  <p>대댓글 할지 말지 모르겠어요</p>
+                  </li>
+                  <li>
+                    <img src="" alt=" " />
+                  <span class="reply-writer">김고수</span>
+                  <span class="reply-date">2024-01-01</span>
+                  <p>대댓글만 할게요</p>
+                  </li>
+                </ul>
+              </li>
+              <li>
+                <img src="" alt=" " />
+                <span class="reply-writer">김바둑</span>
+                <span class="reply-date">2024-01-01</span>
+                <p>바둑 그렇게 하세요</p>
+                <div class="reply-child">
+                  <form>
+                    <input type="text" class="child-content">
+                    <input type="submit" value="댓글달기" class="child-reg">
+                  </form>
+                </div>
+                <ul>
+                </ul>
+              </li>
+            </ul>
+        </form>
+      </div>
+    </div>
+    <div class="button-wrap">
+      <button type="button" id="changeBtn">수정하기</button>
+      <button type="button" id="deleteBtn">삭제하기</button>
+      <button type="button" id="backBtn">목륵으로</button>
+    </div>
+    </div>
+
+
+</th:block>
+
+  <script>
+      
+      const DEFAULT_HEIGHT = 300; // textarea 기본 height
+
+      const $textarea = document.querySelector('#textarea');
+
+      $textarea.oninput = (event) => {
+      const $target = event.target;
+
+      $target.style.height = 0;
+
+      $target.style.height = DEFAULT_HEIGHT + $target.scrollHeight + 'px';
+
+    };
+    </script>
+
+</html>

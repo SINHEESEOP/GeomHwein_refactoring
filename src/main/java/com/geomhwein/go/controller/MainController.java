@@ -9,12 +9,33 @@ public class MainController {
 	@GetMapping("/")
 	public String main() {
 		return "main";
+	} // 임시로 메인을 billing 으로 함, 메인 완성 시 변경 될 예정.
+
+	@GetMapping("/sign_in")
+	public String signIn() {
+		return "sign_in";
 	}
 
-	@GetMapping("/index")
-	public String index() {
+
+	@GetMapping("/sign_up")
+	public String signUp() {
+		return "sign_up";
+	}
+
+
+	@GetMapping("/mttr")
+	public String mttr() {
 		
-		return "index";
+		return "mttr";
 	}
 	
+
+	@GetMapping("/payment")
+	public String payment() {
+		return "payment";
+	}
+
+
 }
+	
+
