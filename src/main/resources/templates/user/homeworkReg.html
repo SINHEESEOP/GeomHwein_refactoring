@@ -1,16 +1,17 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <link rel="stylesheet" href="/css/homeworkReg.css">
+<script src="/js/jquery-3.7.1.min.js"></script>	
 <th:block th:replace="~{/include/baseLayout :: setContent( ~{ :: .wrap} ) }">
 	
 	<div class="wrap">
 	   <div class="container-fluid py-4">
-      <form>
+      <form action="" method="post">
       <div class="container-title">숙제제출</div>
       <div class="homework-wrap">
         <div class="homework-header">
           <span class="homework-user">학습자:<span>김바둑</span></span>
-          <button type="button">숙제조회</button>
+          <button type="button" class="viewHomeworkBtn">숙제조회</button>
         </div>
         <div class="homework-box">
           <div class="homework-left">
@@ -18,6 +19,7 @@
               <span>숙제내용</span>
             </div>
             <div class="left-content">
+            타임리프로 model로 보낸 homeworkList 반복문 돌려서 화면에 뿌려주기
               <table class="homework-table">
                 <tr>
                   <td>교육자:</td>
@@ -62,4 +64,10 @@
     </div>
 	</div>
 </th:block>
+<script>
+	var userId="aaa123";//시큐리티사용시 시큐리티로 유저값 가져오고 해당 유저의 선생님 여기에 담아주기
+	$(".viewHomeworkBtn").click(function(){
+		location.href="/user/viewHomework?userId="+userId;
+	});
+</script>
 </html>
