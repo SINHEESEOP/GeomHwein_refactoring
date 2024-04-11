@@ -2,6 +2,7 @@ package com.geomhwein.go.user.service;
 
 import java.util.List;
 
+
 import org.springframework.web.multipart.MultipartFile;
 
 import com.geomhwein.go.command.ComunityUploadVO;
@@ -20,4 +21,23 @@ public interface UserService {
 	public int comunityTotal(Criteria cri);
 	public List<ComunityUploadVO> getFile(int pst_ttl_no);
 	public void replyAdd(ReplyVO vo);
+
+import com.geomhwein.go.command.HomeworkVO;
+import com.geomhwein.go.command.QuestionVO;
+import com.geomhwein.go.command.comunityVO;
+import com.geomhwein.go.command.educationGroupVO;
+
+public interface UserService {
+
+	public int comunityForm(comunityVO vo);
+
+	public void addQuestion(QuestionVO vo);
+
+	public int registCreator(String userName, String docsCode, String reason);
+
+	public List<HomeworkVO> getHomeworkList(String userId);
+
+	public educationGroupVO getGroup(int groupNo);
+
+	
 }

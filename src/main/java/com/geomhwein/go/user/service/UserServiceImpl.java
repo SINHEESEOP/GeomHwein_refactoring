@@ -1,10 +1,14 @@
 package com.geomhwein.go.user.service;
 
+
 import java.io.File;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.UUID;
+
+import java.util.List;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -12,10 +16,16 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
+
 import com.geomhwein.go.command.ComunityUploadVO;
 import com.geomhwein.go.command.ReplyVO;
 import com.geomhwein.go.command.comunityVO;
 import com.geomhwein.go.util.Criteria;
+
+import com.geomhwein.go.command.HomeworkVO;
+import com.geomhwein.go.command.QuestionVO;
+import com.geomhwein.go.command.comunityVO;
+import com.geomhwein.go.command.educationGroupVO;
 
 @Service("userService")
 public class UserServiceImpl implements UserService {
@@ -120,6 +130,7 @@ public class UserServiceImpl implements UserService {
 		
 	}
 
+
 	@Override
 	public int comunityTotal(Criteria cri) {
 		
@@ -141,5 +152,32 @@ public class UserServiceImpl implements UserService {
 	}
 
 
+
+	
+	public void addQuestion(QuestionVO vo) {
+		
+		userMapper.addQuestion(vo);
+	}
+
+
+	
+	public int registCreator(String userName, String docsCode, String reason) {
+		
+		return userMapper.registCreator(userName,docsCode,reason);
+	}
+
+
+	
+	public List<HomeworkVO> getHomeworkList(String userId) {
+		
+		return userMapper.getHomeworkList(userId);
+	}
+
+
+	@Override
+	public educationGroupVO getGroup(int groupNo) {
+		
+		return userMapper.getGroup(groupNo);
+	}
 
 }

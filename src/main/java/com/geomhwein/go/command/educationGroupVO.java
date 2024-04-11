@@ -13,11 +13,12 @@ import lombok.NoArgsConstructor;
 @Builder
 public class educationGroupVO {
 	
-	private String groupNm;
-	private int groupNo;
-	private String userId;
-	private int groupUtztnNope;
-	private Timestamp lastCmcrsYmd;
-	private int contsSn;
-	private int recAge;
+	private String groupNm;//그룹명
+	private int groupNo;//그룹등록번호(1~6)
+	private String userId;//선생님 ID
+	private int groupUtztnNope; //그룹 정원
+	private String lastCmcrsYmd; //그룹최종이수일
+	private int contsSn;//그룹 콘텐츠 일련번호
+	private int recAge; //그룹 권장 연령
+	private int groupCost; //그룹 가격
 }

@@ -1,5 +1,6 @@
 package com.geomhwein.go.controller;
 
+
 import java.io.File;
 import java.net.URLEncoder;
 import java.time.LocalDate;
@@ -18,6 +19,16 @@ import org.springframework.core.io.FileSystemResource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+
+
+import java.util.List;
+import com.geomhwein.go.command.UserAuthVO;
+import com.geomhwein.go.securlty.UserAuth;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,14 +36,24 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+
+import com.geomhwein.go.command.HomeworkVO;
+import com.geomhwein.go.command.QuestionVO;
+
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+
+
 import com.geomhwein.go.command.ComunityUploadVO;
 import com.geomhwein.go.command.ReplyVO;
 import com.geomhwein.go.command.comunityVO;
+import com.geomhwein.go.command.educationGroupVO;
 import com.geomhwein.go.user.service.UserService;
 import com.geomhwein.go.util.Criteria;
 import com.geomhwein.go.util.PageVO;
@@ -53,11 +74,28 @@ public class UserController {
 
 	@GetMapping("/billing")
 	public String billing() {
-		return "/user/billing";
+		return "user/billing";
 	}
 
-	@GetMapping("profile")
-	public String profile() {
+
+	@GetMapping("/profile")
+	public String profile(Authentication authentication, Model model) {
+
+		System.out.println("요청 왔는겨?");
+
+		if (authentication != null) {
+			UserAuth userAuth = (UserAuth)authentication.getPrincipal();
+
+			String userId  = userAuth.getUsername();
+			String userPwHash = userAuth.getPassword();
+			String userRole = userAuth.getRole();
+
+			System.out.println(userId + " " + userPwHash + " " + userRole);
+			System.out.println("213231");
+			model.addAttribute("role", userRole );
+
+		}
+
 		return "/user/profile";
 	}
 	
@@ -152,7 +190,16 @@ public class UserController {
 		return "user/homeworkReg";
 	}
 	
-	@GetMapping("/homeworkList")
+	@GetMapping("/viewHomework")
+	public String homeworkList(Model model,@RequestParam("userId")String userId) {
+		List<HomeworkVO> list=userService.getHomeworkList(userId);
+		model.addAttribute("homeworkList",list);
+		return "user/HomeworkReg";
+		
+		//숙제조회 클릭시 다시 화면으로 값 model에 담아서 List<HomeworkVO> 로 보냄
+		//타임리프 반복문 돌려서 화면에서 띄워주면됨
+	}
+	@GetMapping("homeworkList")
 	public String homeworkList() {
 		return "user/homeworkList";
 	}
@@ -160,15 +207,25 @@ public class UserController {
 	@GetMapping("/makeQuestion")
 	public String makeQuestion(@RequestParam("username")String username,Model model){
 		model.addAttribute("username",username);
+		//질문등록하기 팝업으로 보냄 ,username을 모델에 담아서 화면에서 readonly로 뿌려줌
 		return "user/makeQuestion";
 	}
 	@PostMapping("/registQuestionForm")
-	public String registQuestionForm(@RequestParam("userId")String userId,@RequestParam("questionDate")String questionDate,@RequestParam("questionCn")String questionCn) {
-		
-		
-		return "";
+	public void registQuestionForm(@RequestParam("userId")String userId,@RequestParam("questionDate")String questionDate,@RequestParam("questionCn")String questionCn,QuestionVO vo) {
+		vo.setUserId(userId);
+		vo.setQusCn(questionCn);
+		vo.setQusYmd(questionDate);
+		userService.addQuestion(vo);
+		//질문내용을 DB에 저장하는 메서드
 	}
 	
+	@PostMapping("/creatorRegForm")
+	public String creatorRegForm(@RequestParam("userName")String userName,@RequestParam("docsCode")String docsCode,@RequestParam("reason")String reason) {
+		userService.registCreator(userName,docsCode,reason);
+		//교육자 신청 되는 기록 신청가능여부를 위해 DB에 넣어서
+		//관리자 창 열릴때 get방식으로 불러와서 값 보내주면됨
+		return "user/profile";//신청버튼 잇던 곳으로 보내주면됨
+	}
 
 	@GetMapping("/questionReg")
 	public String questionReg() {
@@ -231,6 +288,7 @@ public class UserController {
 		
 		return "redirect:/user/comunityList";
 	}
+
 	
 	@GetMapping("/attachment")
 	@ResponseBody
@@ -247,18 +305,27 @@ public class UserController {
 		 
 		try {
 
+
 			HttpHeaders header = new HttpHeaders();
 			header.add("Content-Disposition", "attachment; filename=" + filename);
 			
-			//filename = URLEncoder.encode(filename, "UTF-8").replaceAll("\\+", "%20");
+		
 			result = new ResponseEntity<>(file, header,HttpStatus.OK);
 
 		} catch (Exception e) {
 			e.printStackTrace();
-		}
-//		response.setHeader("Content-Disposition", "attachment; filename="+filename);
+		} 
 		
 		 return result;
+	}
+  
+  @GetMapping("/groupSelectForm")
+	public String groupSelectForm(Model model,@RequestParam("groupNo")int groupNo) {
+		//educationGroupVO vo=userService.getGroup(groupNo);
+		//model.addAttribute("groupForm",vo);
+		System.out.println(groupNo);
+		
+		return "user/groupList";//그룹신청하는폼 또는 화면
 	}
 	
 	@PostMapping("/replyAdd")
