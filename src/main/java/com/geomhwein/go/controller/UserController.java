@@ -52,7 +52,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 import com.geomhwein.go.command.ComunityUploadVO;
 import com.geomhwein.go.command.ReplyVO;
-import com.geomhwein.go.command.comunityVO;
+import com.geomhwein.go.command.ComunityVO;
 import com.geomhwein.go.command.educationGroupVO;
 import com.geomhwein.go.user.service.UserService;
 import com.geomhwein.go.util.Criteria;
@@ -107,7 +107,7 @@ public class UserController {
 	@GetMapping("/comunityList")
 	public String userComunityList(Model model , Criteria cri) {
 		
-		List<comunityVO> list = userService.getComunityList(cri);
+		List<ComunityVO> list = userService.getComunityList(cri);
 		
 		int total = userService.comunityTotal(cri);
 		
@@ -146,7 +146,7 @@ public class UserController {
 		}
 		
 		
-		comunityVO vo = userService.getComunityDetail(pst_ttl_no);
+		ComunityVO vo = userService.getComunityDetail(pst_ttl_no);
 		List<ComunityUploadVO> list = userService.getFile(pst_ttl_no);
 		
 		model.addAttribute("vo",vo);
@@ -163,7 +163,7 @@ public class UserController {
 	@GetMapping("/comunityModify")
 	public String comunityModify(@RequestParam("pst_ttl_no") int pst_ttl_no , Model model) {
 		
-		comunityVO vo = userService.getComunityDetail(pst_ttl_no);
+		ComunityVO vo = userService.getComunityDetail(pst_ttl_no);
 		
 		model.addAttribute("vo",vo);
 		
@@ -243,7 +243,7 @@ public class UserController {
 	}
 	
 	@PostMapping("/comunityForm")
-	public String comunityForm(comunityVO vo , RedirectAttributes rec,
+	public String comunityForm(ComunityVO vo , RedirectAttributes rec,
 			MultipartHttpServletRequest part) {
 		
 		
@@ -262,7 +262,7 @@ public class UserController {
 	}
 	
 	@PostMapping("/comunityModifyForm")
-	public String comunityModifyForm(comunityVO vo , RedirectAttributes rec) {
+	public String comunityModifyForm(ComunityVO vo , RedirectAttributes rec) {
 		
 		int result = userService.comunityModifyForm(vo);
 		

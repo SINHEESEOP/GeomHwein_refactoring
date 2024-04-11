@@ -19,12 +19,12 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.geomhwein.go.command.ComunityUploadVO;
 import com.geomhwein.go.command.ReplyVO;
-import com.geomhwein.go.command.comunityVO;
+import com.geomhwein.go.command.ComunityVO;
 import com.geomhwein.go.util.Criteria;
 
 import com.geomhwein.go.command.HomeworkVO;
 import com.geomhwein.go.command.QuestionVO;
-import com.geomhwein.go.command.comunityVO;
+import com.geomhwein.go.command.ComunityVO;
 import com.geomhwein.go.command.educationGroupVO;
 
 @Service("userService")
@@ -54,7 +54,7 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	@Transactional(rollbackFor = Exception.class) //에러시 롤백처리
-	public int comunityForm(comunityVO vo , List<MultipartFile> list) {
+	public int comunityForm(ComunityVO vo , List<MultipartFile> list) {
 		
 		int result = userMapper.comunityForm(vo);
 		
@@ -92,27 +92,27 @@ public class UserServiceImpl implements UserService {
 								.filename(filename)
 								.filepath(filepath)
 								.uuid(uuid)
-								.username("aaa123").build());
+								.userId("aaa123").build());
 		}
 		
 		return result;
 	}
 
 	@Override
-	public List<comunityVO> getComunityList(Criteria cri) {
+	public List<ComunityVO> getComunityList(Criteria cri) {
 		
 		
 		return userMapper.getComunityList(cri);
 	}
 
 	@Override
-	public comunityVO getComunityDetail(int pst_ttl_no) {
+	public ComunityVO getComunityDetail(int pst_ttl_no) {
 		
 		return userMapper.getComunityDetail(pst_ttl_no);
 	}
 
 	@Override
-	public int comunityModifyForm(comunityVO vo) {
+	public int comunityModifyForm(ComunityVO vo) {
 		
 		return userMapper.comunityModifyForm(vo);
 	}

@@ -7,23 +7,23 @@ import org.apache.ibatis.annotations.Mapper;
 
 import com.geomhwein.go.command.ComunityUploadVO;
 import com.geomhwein.go.command.ReplyVO;
-import com.geomhwein.go.command.comunityVO;
+import com.geomhwein.go.command.ComunityVO;
 import com.geomhwein.go.util.Criteria;
 
 import com.geomhwein.go.command.HomeworkVO;
 import com.geomhwein.go.command.QuestionVO;
-import com.geomhwein.go.command.comunityVO;
+import com.geomhwein.go.command.ComunityVO;
 import com.geomhwein.go.command.educationGroupVO;
 
 
 @Mapper
 public interface UserMapper {
 	
-	public int comunityForm(comunityVO vo);
+	public int comunityForm(ComunityVO vo);
 
-	public List<comunityVO> getComunityList(Criteria cri);
-	public comunityVO getComunityDetail(int pst_ttl_no);
-	public int comunityModifyForm(comunityVO vo);
+	public List<ComunityVO> getComunityList(Criteria cri);
+	public ComunityVO getComunityDetail(int pst_ttl_no);
+	public int comunityModifyForm(ComunityVO vo);
 	public int comunityDelete(int pst_ttl_no);
 	public void updateHit(int pst_ttl_no);
 	public int comunityTotal(Criteria cri);

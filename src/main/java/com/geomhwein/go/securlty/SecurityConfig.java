@@ -47,7 +47,7 @@ public class SecurityConfig {
 
 
 		http.authorizeRequests( (authorize) -> authorize.antMatchers("/normaluser/**").authenticated()
-														.antMatchers("/user/**").hasAnyRole("USER", "CREATOR", "ADMIN")
+//														.antMatchers("/user/**").hasAnyRole("USER", "CREATOR", "ADMIN")
 														.antMatchers("/creator/**").hasAnyRole("CREATOR", "ADMIN")
 														.antMatchers("/admin/**").hasRole("ADMIN")
 														.anyRequest().permitAll() );

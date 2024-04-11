@@ -12,6 +12,6 @@ public class ReplyVO {
 	private Integer reply_no;
 	private Integer pst_ttl_no;
 	private String reply_cn;
-	private String username;
+	private String userId;
 	
 }

@@ -4,7 +4,7 @@
 <mapper namespace="com.geomhwein.go.user.service.UserMapper">
 
 	<insert id="comunityForm">
-	insert into COMUNITY(PST_TTL_NM,PST_TTL_CN,INQ_CNT,USERNAME) VALUES(#{pst_ttl_nm},#{pst_ttl_cn},0,'aaa123')
+	insert into COMUNITY(PST_TTL_NM,PST_TTL_CN,INQ_CNT,USERID) VALUES(#{pst_ttl_nm},#{pst_ttl_cn},0,'aaa123')
 	</insert>
 	
 	<select id="getComunityList" resultType="comunityVO">
@@ -48,7 +48,7 @@
 	<insert id="registFile">
 		
 		<selectKey resultType="int" keyProperty="pst_ttl_no" order="BEFORE">
-			select max(pst_ttl_no) from COMUNITY where username = 'aaa123'
+			select max(pst_ttl_no) from COMUNITY where USERID = 'aaa123'
 		</selectKey>
 		
 	insert into COMUNITY_UPLOAD(
@@ -56,14 +56,14 @@
 		filepath,
 		uuid,
 		pst_ttl_no,
-		username
+		USERID
 	)
 	values(
 	#{filename},
 	#{filepath},
 	#{uuid},
 	#{pst_ttl_no},
-	#{username}
+	#{userId}
 	)
 	</insert>
 	
@@ -72,6 +72,6 @@
 	</select>
 	
 	<insert id="replyAdd">
-	insert into REPLY values(pst_ttl_no = #{pst_ttl_no},reply_cn=#{reply_cn},username=#{username})
+	insert into REPLY values(pst_ttl_no = #{pst_ttl_no},reply_cn=#{reply_cn},USERID=#{userId})
 	</insert>
 </mapper>

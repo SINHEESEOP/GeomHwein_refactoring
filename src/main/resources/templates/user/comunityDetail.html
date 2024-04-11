@@ -11,7 +11,7 @@
         <div class="title-box">
           <span>
             <span class="content-writer">작성자:&nbsp;</span>
-            [[${vo.userName}]]
+            [[${vo.userId}]]
           </span>
           <span>
             <span class="content-regdate">작성일:</span>
@@ -132,7 +132,7 @@
     const params = {
             pst_ttl_no : '[[${vo.pst_ttl_no}]]',
             reply_cn : reply_cn.value,
-            username : '[[${vo.userName}]]'
+            userId : '[[${vo.userId}]]'
         }
     
     	$.ajax({
