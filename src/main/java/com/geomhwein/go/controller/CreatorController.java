@@ -25,8 +25,10 @@ public class CreatorController {
 	
 	
 	@GetMapping("/eduGroup")
-	public String eduGroup(@RequestParam("username")String username,Model model) {
-		model.addAttribute("username",username );
+	public String eduGroup  (
+		//시큐리티사용시 적용 현재는 비활성화	//@RequestParam("username")String username,Model model
+							) {
+		//model.addAttribute("username",username );
 		return "creator/eduGroup";
 	}
 	

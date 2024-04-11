@@ -5,6 +5,7 @@ import java.util.List;
 import com.geomhwein.go.command.HomeworkVO;
 import com.geomhwein.go.command.QuestionVO;
 import com.geomhwein.go.command.comunityVO;
+import com.geomhwein.go.command.educationGroupVO;
 
 public interface UserService {
 
@@ -15,6 +16,8 @@ public interface UserService {
 	public int registCreator(String userName, String docsCode, String reason);
 
 	public List<HomeworkVO> getHomeworkList(String userId);
+
+	public educationGroupVO getGroup(int groupNo);
 
 	
 }

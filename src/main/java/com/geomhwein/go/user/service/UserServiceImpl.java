@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.geomhwein.go.command.HomeworkVO;
 import com.geomhwein.go.command.QuestionVO;
 import com.geomhwein.go.command.comunityVO;
+import com.geomhwein.go.command.educationGroupVO;
 
 @Service("userService")
 public class UserServiceImpl implements UserService {
@@ -40,5 +41,12 @@ public class UserServiceImpl implements UserService {
 	public List<HomeworkVO> getHomeworkList(String userId) {
 		
 		return userMapper.getHomeworkList(userId);
+	}
+
+
+	@Override
+	public educationGroupVO getGroup(int groupNo) {
+		
+		return userMapper.getGroup(groupNo);
 	}
 }
