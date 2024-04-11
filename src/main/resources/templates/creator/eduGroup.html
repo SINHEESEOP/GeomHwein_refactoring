@@ -271,8 +271,6 @@
 <script>
 	$(".groupChoose").click(function(e){
 		e.stopPropagation();
-        console.log(e.target);
-        console.log(e.target.alt);
         var groupNo=e.target.alt;
         location.href="/user/groupSelectForm?groupNo="+groupNo;
         window.close();

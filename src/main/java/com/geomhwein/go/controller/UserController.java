@@ -145,8 +145,8 @@ public class UserController {
 		return "redirect:/user/comunityList";
 	}
 	@GetMapping("/groupSelectForm")
-	public String groupSelectForm(educationGroupVO vo,Model model,@RequestParam("groupNo")int groupNo) {
-		//vo=userService.getGroup(groupNo);
+	public String groupSelectForm(Model model,@RequestParam("groupNo")int groupNo) {
+		//educationGroupVO vo=userService.getGroup(groupNo);
 		//model.addAttribute("groupForm",vo);
 		System.out.println(groupNo);
 		

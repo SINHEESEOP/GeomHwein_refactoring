@@ -11,11 +11,11 @@ import lombok.NoArgsConstructor;
 @Builder
 public class HomeworkVO {
 	
-	private String userId;
-	private String asmtGrd;
-	private String asmtNm;
-	private String asmtCn;
-	private int asmtNo;
-	private int asmtScr;
+	private String userId; //작성자-선생님
+	private String asmtGrd;//숙제 난이도
+	private String asmtNm;//숙제 제목
+	private String asmtCn;//숙제 내용
+	private int asmtNo;//숙제 등록번호
+	private int asmtScr;//숙제 점수
 	
 }
