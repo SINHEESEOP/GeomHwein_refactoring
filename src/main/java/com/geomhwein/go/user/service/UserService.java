@@ -14,9 +14,6 @@ import com.geomhwein.go.command.QuestionVO;
 
 import com.geomhwein.go.command.educationGroupVO;
 
-import com.geomhwein.go.command.HomeworkVO;
-import com.geomhwein.go.command.QuestionVO;
-import com.geomhwein.go.command.educationGroupVO;
 
 public interface UserService {
 
