@@ -83,7 +83,7 @@
 		SELECT COUNT(*)FROM EDUCATION_GROUP
 	</select>
 	<insert id="applyGroup">
-		insert into group_application(group_NO,user_ID)
-		values(group_no=#{groupNo},user_id=#{userId})
+		insert into group_application(GROUP_NO,USER_ID)
+		values(#{groupNo},#{userId})
 	</insert>
 </mapper>
