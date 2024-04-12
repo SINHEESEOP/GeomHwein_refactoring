@@ -75,7 +75,11 @@
 	insert into REPLY values(pst_ttl_no = #{pst_ttl_no},reply_cn=#{reply_cn},USERID=#{userId})
 	</insert>
 	
-	<select id="getGroup">
+	<select id="getGroup" resultType="educationGroupVO">
 		SELECT * FROM EDUCATION_GROUP where GROUP_NO=#{groupNo}
+	</select>
+	
+	<select id="getGroupCount" resultType="int">
+		SELECT COUNT(*)FROM EDUCATION_GROUP
 	</select>
 </mapper>

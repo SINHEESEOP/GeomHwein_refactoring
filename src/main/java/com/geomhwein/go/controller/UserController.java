@@ -5,6 +5,7 @@ import java.io.File;
 import java.net.URLEncoder;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -173,10 +174,28 @@ public class UserController {
 	}
 	
 	@GetMapping("/groupList")
-	public String userGroupList() {
+	public String userGroupList(Model model ,Authentication authentication) {
+		int gCount=userService.getGroupCount();
+		List<educationGroupVO> groupList=new ArrayList<>();
+		if (authentication != null) {
+			UserAuth userAuth = (UserAuth)authentication.getPrincipal();
+
+			String userId  = userAuth.getUsername();
+			
+			model.addAttribute("userName", userId);
+
+		}
+		for(int i=1;i<=gCount;i++) {
+			groupList.add(userService.getGroup(i));
+		}
+		model.addAttribute("groupList",groupList);
 		return "user/groupList";
 	}
-	
+	@GetMapping("/eduGroup")
+	public String eduGroup  (@RequestParam("username")String username,Model model) {
+		model.addAttribute("username",username );
+		return "user/eduGroup";
+	}
 	@GetMapping("/groupApplyList")
 	public String groupApplyList() {
 		return "user/groupApplyList";

@@ -32,5 +32,7 @@ public interface UserService {
 	public int registCreator(String userName, String docsCode, String reason);
 
 	public educationGroupVO getGroup(int groupNo);
+	
+	public int getGroupCount();
 
 }

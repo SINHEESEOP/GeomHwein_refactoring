@@ -46,4 +46,8 @@ public interface UserMapper {
 	//mapper상에서 
 	//group테이블에서 groupNo값으로 불러와야함
 
+	public int getGroupCount();
+
+	
+
 }

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -265,17 +265,19 @@
             </div>
         </div>
     </div>
+    <pre hidden="hidden" th:value="${userName}" class="userName"></pre>
     Designed By <a class="border-bottom" href="https://htmlcodex.com">HTML Codex</a>
 </div>
 <!-- Classes End -->
 <script>
-	/* $(".groupChoose").click(function(e){
+	$(".groupChoose").click(function(e){
 		e.stopPropagation();
+		var username=$(".userName").val();
         var groupNo=e.target.alt;
-        location.href="/user/groupSelectForm?groupNo="+groupNo;
+        location.href="/user/groupSelectForm?groupNo="+groupNo+"&userName="+username;
         window.close();
 
-	}); */
+	});
 </script>
 
 </body>
