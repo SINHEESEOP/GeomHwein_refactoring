@@ -9,8 +9,6 @@
         <span>학습컨텐츠</span>      
         <select>
           <option value="">전체</option>
-          <option value="">바둑 잘두는 방법</option>
-          <option value="">바둑의 정석</option>
         </select>
       </div>
       <table class="comunity-table">
@@ -23,7 +21,7 @@
           <th>최종이수일</th>
           <th>신청가능인원</th>
   		  <th>권장연령</th>
-  		  <td><button type="button">신청취소</button></td>
+  		  <td>비고</td>
         </tr>
         <tr class="table-content" th:each="vo,status : ${applyList}" >
           <td>[[${vo.aplyNo}]]</td>

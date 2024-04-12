@@ -3,6 +3,7 @@ package com.geomhwein.go.user.service;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.geomhwein.go.command.ComunityUploadVO;
@@ -34,7 +35,7 @@ public interface UserMapper {
 	public void addQuestion(QuestionVO vo);
 	//아직 mapper작업 안햇음
 
-	public int registCreator(String userName, String docsCode, String reason);
+	public int registCreator(@Param("userName") String userName,@Param("docsCode") String docsCode,@Param("reason") String reason);
 	//아직 mapper작업 안함
 	//반환값으로 성공실패여부 확인
 
@@ -48,7 +49,7 @@ public interface UserMapper {
 
 	public int getGroupCount();
 
-	public void applyGroup(@RequestParam("groupNo")int groupNo,@RequestParam("username")String userId);
+	public void applyGroup(@Param("groupNo")int groupNo,@Param("userId")String userId);
 
 	
 

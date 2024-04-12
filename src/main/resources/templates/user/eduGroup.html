@@ -274,8 +274,9 @@
 		e.stopPropagation();
 		var username=$(".userName").val();
         var groupNo=e.target.alt;
-        location.href="/user/groupSelectForm?groupNo="+groupNo+"&userName="+username;
-        window.close();
+        console.log(groupNo);
+        location.href="groupSelectForm?groupNo="+groupNo+"&userName="+username;
+        
 
 	});
 </script>

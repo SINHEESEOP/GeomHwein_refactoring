@@ -347,12 +347,24 @@ public class UserController {
 	}
   
   @GetMapping("/groupSelectForm")
-	public String groupSelectForm(@RequestParam("groupNo")int groupNo,@RequestParam("userName")String username) {
+	public String groupSelectForm(@RequestParam("groupNo")String gno,Authentication authentication) {
+		int groupNo=Integer.parseInt(gno);
+		System.out.println(groupNo);
+		if (authentication != null) {
+			UserAuth userAuth = (UserAuth)authentication.getPrincipal();
+
+			String username  = userAuth.getUsername();
+			
+			userService.applyGroup(groupNo,username);
+
+			
+
+		}else {
+			System.out.println("로그인상태아님");
+			return "creator/creatorFail";//그룹신청하는폼 또는 화면
+		}
+		return "creator/creatorSuccess";
 		
-		userService.applyGroup(groupNo,username);
-		
-		
-		return "user/groupList";//그룹신청하는폼 또는 화면
 	}
 	
 	@PostMapping("/replyAdd")
