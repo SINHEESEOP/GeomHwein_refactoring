@@ -34,5 +34,6 @@ public interface UserService {
 	public educationGroupVO getGroup(int groupNo);
 	
 	public int getGroupCount();
+	public void applyGroup(int groupNo, String username);
 
 }

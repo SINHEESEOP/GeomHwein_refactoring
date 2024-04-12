@@ -186,4 +186,12 @@ public class UserServiceImpl implements UserService {
 		return userMapper.getGroupCount();
 	}
 
+
+	@Override
+	public void applyGroup(int groupNo, String username) {
+		
+		userMapper.applyGroup(groupNo,username);
+		
+	}
+
 }

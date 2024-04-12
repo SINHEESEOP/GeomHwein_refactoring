@@ -82,4 +82,8 @@
 	<select id="getGroupCount" resultType="int">
 		SELECT COUNT(*)FROM EDUCATION_GROUP
 	</select>
+	<insert id="applyGroup">
+		insert into group_application(group_NO,user_ID)
+		values(group_no=#{groupNo},user_id=#{userId})
+	</insert>
 </mapper>

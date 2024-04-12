@@ -347,10 +347,10 @@ public class UserController {
 	}
   
   @GetMapping("/groupSelectForm")
-	public String groupSelectForm(Model model,@RequestParam("groupNo")int groupNo) {
-		educationGroupVO vo=userService.getGroup(groupNo);
-		model.addAttribute("groupForm",vo);
-		System.out.println(groupNo);
+	public String groupSelectForm(@RequestParam("groupNo")int groupNo,@RequestParam("userName")String username) {
+		
+		userService.applyGroup(groupNo,username);
+		
 		
 		return "user/groupList";//그룹신청하는폼 또는 화면
 	}

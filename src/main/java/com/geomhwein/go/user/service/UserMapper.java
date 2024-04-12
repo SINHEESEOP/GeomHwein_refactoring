@@ -3,7 +3,7 @@ package com.geomhwein.go.user.service;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
-
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.geomhwein.go.command.ComunityUploadVO;
 import com.geomhwein.go.command.ReplyVO;
@@ -47,6 +47,8 @@ public interface UserMapper {
 	//group테이블에서 groupNo값으로 불러와야함
 
 	public int getGroupCount();
+
+	public void applyGroup(@RequestParam("groupNo")int groupNo,@RequestParam("username")String userId);
 
 	
 

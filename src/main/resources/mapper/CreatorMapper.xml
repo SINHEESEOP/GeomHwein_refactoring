@@ -1,6 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTO Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.geomhwein.go.creator.service.CreatorMapper">
-
+	<select id="getApplyCount" resultType="int">
+		select count(*) from group_application
+	</select>
+	<select id="getApply" resultType="educationGroupVO">
+		SELECT APLY_NO,
+			   education_group.GROUP_NO,
+			   GROUP_UTZTN_NOPE,
+			   conts_NM,LAST_CMCRS_YMD,
+			   group_application.USER_ID ,
+			   REC_AGE 
+			   FROM education_group 
+			   right join 
+			   group_application 
+			   on group_application.GROUP_NO=education_group.GROUP_NO
+			   where APLY_NO=#{i}
+	</select>
 
 </mapper>
