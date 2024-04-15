@@ -11,9 +11,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+
 
 import com.geomhwein.go.command.HomeworkVO;
+import com.geomhwein.go.command.QuestionVO;
 import com.geomhwein.go.command.EducationGroupVO;
 import com.geomhwein.go.creator.service.CreatorService;
 import com.geomhwein.go.securlty.UserAuth;
@@ -38,8 +39,8 @@ public class CreatorController {
 	
 
 	@GetMapping("/questionList")
-	public String questionList() {
-		
+	public String questionList(Model model) {
+		List<QuestionVO> qList= new ArrayList<>();
 		return "creator/questionList";
 	}
 	
