@@ -8,8 +8,8 @@ import com.geomhwein.go.command.educationGroupVO;
 @Mapper
 public interface CreatorMapper {
 
-	public int makeHomework(HomeworkVO vo);
-	//mapper작업 아직 없음
+	public void makeHomework(HomeworkVO vo);
+	
 
 	public int getApplyCount();
 

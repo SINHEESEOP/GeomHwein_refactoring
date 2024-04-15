@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.geomhwein.go.command.HomeworkVO;
 import com.geomhwein.go.command.educationGroupVO;
 import com.geomhwein.go.creator.service.CreatorService;
+import com.geomhwein.go.securlty.UserAuth;
 
 
 
@@ -41,15 +43,36 @@ public class CreatorController {
 		return "creator/questionList";
 	}
 	
+	@GetMapping("/createHomework")
+	public String createHomework(Authentication authentication,Model model) {
+		if (authentication != null) {
+			UserAuth userAuth = (UserAuth)authentication.getPrincipal();
+
+			String userId  = userAuth.getUsername();
+			model.addAttribute("userId",userId);
+			return "creator/makeHomework";
+		}else {
+			return "creator/noAuth";
+		}
+		
+		
+	}
+	@GetMapping("/getHomeworkDoneList")
+	public String getHomeworkDoneList(Model model) {
+		
+		List<HomeworkVO> homeworkDoneList= new ArrayList<>();
+		
+		
+		return "creator/homeworkList";
+	}
+	
 	
 	@PostMapping("/registHomeworkForm")
-	public String registHomeworkForm(HomeworkVO vo) {
-		int result=creatorService.makeHomework(vo);
-		if(result==1) {
-			return "/";
-		}else {
-			return "creator/creatorFail";
-		}
+	public void registHomeworkForm(HomeworkVO vo) {
+		creatorService.makeHomework(vo);
+		
+			
+		
 		
 		
 	}

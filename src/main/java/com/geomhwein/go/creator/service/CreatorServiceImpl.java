@@ -13,9 +13,9 @@ public class CreatorServiceImpl implements CreatorService{
 	private CreatorMapper creatorMapper;
 
 	@Override
-	public int makeHomework(HomeworkVO vo) {
+	public void makeHomework(HomeworkVO vo) {
 		
-		return creatorMapper.makeHomework(vo);
+		creatorMapper.makeHomework(vo);
 		
 	}
 

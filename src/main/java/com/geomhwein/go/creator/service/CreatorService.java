@@ -5,7 +5,7 @@ import com.geomhwein.go.command.educationGroupVO;
 
 public interface CreatorService {
 
-	public int makeHomework(HomeworkVO vo);
+	public void makeHomework(HomeworkVO vo);
 
 	public int getApplyCount();
 
