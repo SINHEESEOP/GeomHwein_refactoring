@@ -64,8 +64,11 @@
     	window.open(url,name,option);
     });
    
-   $(".content-apply").click(function(){
-	   console.log(1);
+   $(".content-apply").click(function(e){
+	   
+     var groupNo=e.target.parentElement.parentElement.firstElementChild.innerHTML;
+     
+     location.href="groupSelectForm?groupNo="+groupNo;
    });
 </script>
 </html>
