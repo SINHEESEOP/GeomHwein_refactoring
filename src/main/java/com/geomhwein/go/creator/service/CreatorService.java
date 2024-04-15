@@ -1,6 +1,9 @@
 package com.geomhwein.go.creator.service;
 
 import com.geomhwein.go.command.HomeworkVO;
+
+import java.util.List;
+
 import com.geomhwein.go.command.EducationGroupVO;
 
 public interface CreatorService {
@@ -11,8 +14,8 @@ public interface CreatorService {
 
 	public EducationGroupVO getApply(int i);
 
-	public int getHomeworkDone(String userId);
+	public List<HomeworkVO> getHomeworkDone(String userId);
 
-	public HomeworkVO getHomeworkDoneVO(int i);
+	
 
 }

@@ -1,5 +1,7 @@
 package com.geomhwein.go.creator.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -32,16 +34,13 @@ public class CreatorServiceImpl implements CreatorService{
 	}
 
 	
-	public int getHomeworkDone(String userId) {
+	public List<HomeworkVO> getHomeworkDone(String userId) {
 		
 		return creatorMapper.getHomeworkDone(userId);
 	}
 
 	
-	public HomeworkVO getHomeworkDoneVO(int i) {
-		
-		return creatorMapper.getHomeworkDoneVO(i);
-	}
+	
 
 	
 	

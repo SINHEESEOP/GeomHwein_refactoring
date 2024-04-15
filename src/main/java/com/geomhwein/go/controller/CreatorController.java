@@ -64,12 +64,10 @@ public class CreatorController {
 			UserAuth userAuth = (UserAuth)authentication.getPrincipal();
 
 			String userId  = userAuth.getUsername();//선생님 ID
-			int count=creatorService.getHomeworkDone(userId);
-			List<HomeworkVO> homeworkDoneList= new ArrayList<>();
-			for(int i=1;i<=count;i++) {
-				homeworkDoneList.add(creatorService.getHomeworkDoneVO(i));
+			List<HomeworkVO> homeworkDoneList=creatorService.getHomeworkDone(userId);
+			
 			}
-		}	
+			
 		
 		
 		return "creator/homeworkList";
