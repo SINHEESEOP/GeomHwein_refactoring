@@ -30,5 +30,19 @@ public class CreatorServiceImpl implements CreatorService{
 		
 		return creatorMapper.getApply(i);
 	}
+
+	
+	public int getHomeworkDone(String userId) {
+		
+		return creatorMapper.getHomeworkDone(userId);
+	}
+
+	
+	public HomeworkVO getHomeworkDoneVO(int i) {
+		
+		return creatorMapper.getHomeworkDoneVO(i);
+	}
+
+	
 	
 }

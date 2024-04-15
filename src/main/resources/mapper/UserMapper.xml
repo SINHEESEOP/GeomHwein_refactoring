@@ -86,4 +86,5 @@
 		insert into group_application(GROUP_NO,USER_ID)
 		values(#{groupNo},#{userId})
 	</insert>
+	
 </mapper>

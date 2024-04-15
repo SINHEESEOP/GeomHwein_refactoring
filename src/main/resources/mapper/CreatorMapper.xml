@@ -21,4 +21,12 @@
 		INSERT INTO Homework(user_Id,ASMT_NM,ASMT_CN,ASMT_SCR,ASMT_GRD)
 		values(#{userId},#{asmtNm},#{asmtCn},#{asmtScr},#{asmtGrd})
 	</insert>
+	<select id="getHomeworkDone" resultType="int">
+		SELECT count(*)from homework right join homework_submission
+		on homework.ASMT_NO = homework_submission.ASMT_NO
+		where USER_ID=#{userId}
+	</select>
+	<select id="getHomeworkDoneVO" resultType="HomeworkVO">
+		
+	</select>
 </mapper>

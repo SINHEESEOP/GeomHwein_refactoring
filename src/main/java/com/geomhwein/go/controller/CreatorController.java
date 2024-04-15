@@ -59,9 +59,17 @@ public class CreatorController {
 		
 	}
 	@GetMapping("/getHomeworkDoneList")
-	public String getHomeworkDoneList(Model model) {
-		
-		List<HomeworkVO> homeworkDoneList= new ArrayList<>();
+	public String getHomeworkDoneList(Model model,Authentication authentication) {
+		if (authentication != null) {
+			UserAuth userAuth = (UserAuth)authentication.getPrincipal();
+
+			String userId  = userAuth.getUsername();//선생님 ID
+			int count=creatorService.getHomeworkDone(userId);
+			List<HomeworkVO> homeworkDoneList= new ArrayList<>();
+			for(int i=1;i<=count;i++) {
+				homeworkDoneList.add(creatorService.getHomeworkDoneVO(i));
+			}
+		}	
 		
 		
 		return "creator/homeworkList";

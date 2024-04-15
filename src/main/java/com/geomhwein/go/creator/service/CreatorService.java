@@ -11,4 +11,8 @@ public interface CreatorService {
 
 	public EducationGroupVO getApply(int i);
 
+	public int getHomeworkDone(String userId);
+
+	public HomeworkVO getHomeworkDoneVO(int i);
+
 }
