@@ -21,13 +21,18 @@
 		INSERT INTO Homework(user_Id,ASMT_NM,ASMT_CN,ASMT_SCR,ASMT_GRD)
 		values(#{userId},#{asmtNm},#{asmtCn},#{asmtScr},#{asmtGrd})
 	</insert>
-	<!-- <select id="getHomeworkDone" resultType="HomeworkVO">
-		SELECT  
-		
+	<select id="getHomeworkDone" resultType="HomeworkVO">
+		SELECT 
+    		homework_submission.ASMT_ANS_NO,
+    		homework.USER_ID AS Creator_ID,
+    		homework_submission.USER_ID AS Student_ID,
+    		homework_submission.ASMT_ANS,
+    		homework_submission.ASMT_NM,
+    		homework_submission.ASMT_NO
 		FROM
-				 HOMEWORK right join
-				 HOMEWORK_SUBMISSION
-				 on HOMEWORK.ASMT_NO=
-	</select> -->
+    		homework_submission
+        RIGHT JOIN
+    		homework ON homework.ASMT_NO = homework_submission.ASMT_NO;
+	</select>
 	
 </mapper>
