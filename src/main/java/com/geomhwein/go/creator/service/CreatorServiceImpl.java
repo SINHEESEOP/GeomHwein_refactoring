@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.geomhwein.go.command.HomeworkVO;
-import com.geomhwein.go.command.educationGroupVO;
+import com.geomhwein.go.command.EducationGroupVO;
 
 @Service("creatorService")
 public class CreatorServiceImpl implements CreatorService{
@@ -26,7 +26,7 @@ public class CreatorServiceImpl implements CreatorService{
 	}
 
 	@Override
-	public educationGroupVO getApply(int i) {
+	public EducationGroupVO getApply(int i) {
 		
 		return creatorMapper.getApply(i);
 	}

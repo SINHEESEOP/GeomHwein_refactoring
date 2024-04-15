@@ -4,7 +4,7 @@
 	<select id="getApplyCount" resultType="int">
 		select count(*) from group_application
 	</select>
-	<select id="getApply" resultType="educationGroupVO">
+	<select id="getApply" resultType="EducationGroupVO">
 		SELECT APLY_NO,
 			   education_group.GROUP_NO,
 			   GROUP_UTZTN_NOPE,

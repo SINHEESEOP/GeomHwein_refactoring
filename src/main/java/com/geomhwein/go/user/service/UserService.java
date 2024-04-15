@@ -12,7 +12,7 @@ import com.geomhwein.go.util.Criteria;
 import com.geomhwein.go.command.HomeworkVO;
 import com.geomhwein.go.command.QuestionVO;
 
-import com.geomhwein.go.command.educationGroupVO;
+import com.geomhwein.go.command.EducationGroupVO;
 
 
 public interface UserService {
@@ -31,7 +31,7 @@ public interface UserService {
 	public void addQuestion(QuestionVO vo);
 	public int registCreator(String userName, String docsCode, String reason);
 
-	public educationGroupVO getGroup(int groupNo);
+	public EducationGroupVO getGroup(int groupNo);
 	
 	public int getGroupCount();
 	public void applyGroup(int groupNo, String username);

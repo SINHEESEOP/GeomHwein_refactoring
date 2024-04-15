@@ -3,7 +3,7 @@ package com.geomhwein.go.creator.service;
 import org.apache.ibatis.annotations.Mapper;
 
 import com.geomhwein.go.command.HomeworkVO;
-import com.geomhwein.go.command.educationGroupVO;
+import com.geomhwein.go.command.EducationGroupVO;
 
 @Mapper
 public interface CreatorMapper {
@@ -13,6 +13,6 @@ public interface CreatorMapper {
 
 	public int getApplyCount();
 
-	public educationGroupVO getApply(int i);
+	public EducationGroupVO getApply(int i);
 
 }

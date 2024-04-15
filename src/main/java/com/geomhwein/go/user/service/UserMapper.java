@@ -14,7 +14,7 @@ import com.geomhwein.go.util.Criteria;
 import com.geomhwein.go.command.HomeworkVO;
 import com.geomhwein.go.command.QuestionVO;
 import com.geomhwein.go.command.ComunityVO;
-import com.geomhwein.go.command.educationGroupVO;
+import com.geomhwein.go.command.EducationGroupVO;
 
 
 @Mapper
@@ -43,7 +43,7 @@ public interface UserMapper {
 	//mapper작업 안함
 	//리스트 받아와서 Homeworklist창으로 가서 타임리프 돌려서 화면에 리스트 뿌려줌
 
-	public educationGroupVO getGroup(int groupNo);
+	public EducationGroupVO getGroup(int groupNo);
 	//mapper상에서 
 	//group테이블에서 groupNo값으로 불러와야함
 

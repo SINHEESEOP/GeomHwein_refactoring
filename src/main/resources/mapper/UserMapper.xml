@@ -75,7 +75,7 @@
 	insert into REPLY values(pst_ttl_no = #{pst_ttl_no},reply_cn=#{reply_cn},USERID=#{userId})
 	</insert>
 	
-	<select id="getGroup" resultType="educationGroupVO">
+	<select id="getGroup" resultType="EducationGroupVO">
 		SELECT * FROM EDUCATION_GROUP where GROUP_NO=#{groupNo}
 	</select>
 	

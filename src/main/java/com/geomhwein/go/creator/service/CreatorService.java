@@ -1,7 +1,7 @@
 package com.geomhwein.go.creator.service;
 
 import com.geomhwein.go.command.HomeworkVO;
-import com.geomhwein.go.command.educationGroupVO;
+import com.geomhwein.go.command.EducationGroupVO;
 
 public interface CreatorService {
 
@@ -9,6 +9,6 @@ public interface CreatorService {
 
 	public int getApplyCount();
 
-	public educationGroupVO getApply(int i);
+	public EducationGroupVO getApply(int i);
 
 }

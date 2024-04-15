@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.geomhwein.go.command.HomeworkVO;
-import com.geomhwein.go.command.educationGroupVO;
+import com.geomhwein.go.command.EducationGroupVO;
 import com.geomhwein.go.creator.service.CreatorService;
 import com.geomhwein.go.securlty.UserAuth;
 
@@ -82,7 +82,7 @@ public class CreatorController {
 		if(applyCount==0) {
 			return "creator/cretorFail";
 		}
-		List<educationGroupVO> applyList= new ArrayList<>();
+		List<EducationGroupVO> applyList= new ArrayList<>();
 		for(int i=1;i<=applyCount;i++) {
 			applyList.add(creatorService.getApply(i));
 		}

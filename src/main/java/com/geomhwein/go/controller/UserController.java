@@ -54,7 +54,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import com.geomhwein.go.command.ComunityUploadVO;
 import com.geomhwein.go.command.ReplyVO;
 import com.geomhwein.go.command.ComunityVO;
-import com.geomhwein.go.command.educationGroupVO;
+import com.geomhwein.go.command.EducationGroupVO;
 import com.geomhwein.go.user.service.UserService;
 import com.geomhwein.go.util.Criteria;
 import com.geomhwein.go.util.PageVO;
@@ -176,7 +176,7 @@ public class UserController {
 	@GetMapping("/groupList")
 	public String userGroupList(Model model ,Authentication authentication) {
 		int gCount=userService.getGroupCount();
-		List<educationGroupVO> groupList=new ArrayList<>();
+		List<EducationGroupVO> groupList=new ArrayList<>();
 		if (authentication != null) {
 			UserAuth userAuth = (UserAuth)authentication.getPrincipal();
 

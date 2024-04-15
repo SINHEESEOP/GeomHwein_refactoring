@@ -25,7 +25,7 @@ import com.geomhwein.go.util.Criteria;
 import com.geomhwein.go.command.HomeworkVO;
 import com.geomhwein.go.command.QuestionVO;
 import com.geomhwein.go.command.ComunityVO;
-import com.geomhwein.go.command.educationGroupVO;
+import com.geomhwein.go.command.EducationGroupVO;
 
 @Service("userService")
 public class UserServiceImpl implements UserService {
@@ -175,7 +175,7 @@ public class UserServiceImpl implements UserService {
 
 
 	
-	public educationGroupVO getGroup(int groupNo) {
+	public EducationGroupVO getGroup(int groupNo) {
 		
 		return userMapper.getGroup(groupNo);
 	}

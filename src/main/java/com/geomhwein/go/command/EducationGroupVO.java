@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class educationGroupVO {
+public class EducationGroupVO {
 	
 	private int aplyNo;//그룹신청번호
 	private int groupNo;//그룹등록번호(1~6)
