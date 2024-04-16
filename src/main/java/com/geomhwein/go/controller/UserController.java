@@ -66,7 +66,7 @@ public class UserController {
 	
 	@Value("${project.upload.path}")
 	private String uploadPath;
-	
+
 	@GetMapping("/cart")
 	public String cart() {
 		return "user/cart";
@@ -108,7 +108,8 @@ public class UserController {
 	public String userComunityList(Model model , Criteria cri) {
 		
 		List<ComunityVO> list = userService.getComunityList(cri);
-		
+
+		System.out.println(list.toString());
 		int total = userService.comunityTotal(cri);
 		
 		PageVO vo = new PageVO(cri, total);

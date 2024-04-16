@@ -15,5 +15,6 @@ public class ComunityVO {
 	private Integer inq_cnt; //조회수
 	private String pst_regdate; //작성일
 	private String userId; //작성자
-	
+
+
 }
