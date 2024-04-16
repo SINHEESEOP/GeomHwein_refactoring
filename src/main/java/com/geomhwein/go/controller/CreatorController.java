@@ -52,6 +52,20 @@ public class CreatorController {
 		
 		return "creator/homeworkDetail";
 	}
+	@GetMapping("/makeCorrect")
+	public String makeCorrect(@RequestParam("userId")String userId,
+							  @RequestParam("asmtScr")int asmtScr,
+							  @RequestParam("asmtAnsNo")int asmtAnsNo,
+							  Model model) {
+		int currentScore=creatorService.getUserScore(userId);
+		int newScore=currentScore+asmtScr;
+		creatorService.setUserScore(userId,newScore);			 
+		creatorService.deleteAns(asmtAnsNo);
+		return "creator/getHomeworkDoneList";
+	}
+	
+	
+	
 
 	@GetMapping("/questionList")
 	public String questionList(Model model) {

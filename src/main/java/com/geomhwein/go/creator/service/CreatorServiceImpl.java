@@ -40,6 +40,26 @@ public class CreatorServiceImpl implements CreatorService{
 	}
 
 	
+	public void setUserScore(String userId, int newScore) {
+		
+		creatorMapper.setUserScore(userId,newScore);
+		
+	}
+
+	@Override
+	public int getUserScore(String userId) {
+		
+		return creatorMapper.getUserScore(userId);
+	}
+
+	@Override
+	public void deleteAns(int asmtAnsNo) {
+		
+		creatorMapper.deleteAns(asmtAnsNo);
+		
+	}
+
+	
 	
 
 	

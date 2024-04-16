@@ -46,5 +46,18 @@
     		 homework ON homework.ASMT_NO = homework_submission.ASMT_NO) as hwdList 
     	WHERE CREATOR_ID =#{userId}
 	</select>
+	<select id="getUserScore" resultType="int">
+		SELECT USER_SCR FROM USER_DETAILS
+		WHERE USER_ID=#{userId}
+	</select>
+	<update id="setUserScore">
+		UPDATE USER_DETAILS
+		SET USER_SCR=#{newScore}
+		WHERE USER_ID=$#{userId}
+	</update>
+	<delete id="deleteAns">
+		DELETE FROM homework_submission
+		WEHRE ASMT_ANS_NO=#{asmtAnsNo}
+	</delete>
 	
 </mapper>
