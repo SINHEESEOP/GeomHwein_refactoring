@@ -11,7 +11,7 @@
 	select * 
 	from COMUNITY
 	<if test='searchInput != null'>
-		where pst_ttl_nm like concat('%',#{searchInput},'%') OR username like concat('%',#{searchInput},'%')
+		where pst_ttl_nm like concat('%',#{searchInput},'%') OR userId like concat('%',#{searchInput},'%')
 	</if>
 	<if test="searchFilter == 'new'">
 		ORDER BY pst_ttl_no DESC
@@ -87,4 +87,24 @@
 		values(#{groupNo},#{userId})
 	</insert>
 	
+	<insert id="addQuestion">
+	insert into MAKEQUESTION(QSTN_CN,USER_ID) values(#{qstnCn},#{userId})
+	</insert>
+	
+	<select id="getQuestionList" resultType="QuestionVO">
+	
+	select * from MAKEQUESTION WHERE USER_ID = #{userId}
+	</select>
+	
+	<select id="questionDetail" resultType="QuestionVO">
+	select * from MAKEQUESTION WHERE QSTN_NO = #{qstnNo}
+	</select>
+	
+	<update id="questionModifyForm">
+	update MAKEQUESTION SET QSTN_CN = #{qstnCn}
+	</update>
+	
+	<delete id="deleteQuestion">
+	delete FROM MAKEQUESTION WHERE QSTN_NO = #{qstnNo}
+	</delete>
 </mapper>

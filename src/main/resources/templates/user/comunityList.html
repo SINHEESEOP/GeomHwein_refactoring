@@ -48,10 +48,10 @@
         <th:block th:each="vo,status : ${list}">
         <tr class="table-content">
           <td>[[${status.count}]]</td>
-          <td><a th:href="@{comunityDetail(pst_ttl_no = ${vo.pst_ttl_no})}">[[${vo.pst_ttl_nm}]]</a></td>
+          <td><a th:href="@{comunityDetail(pst_ttl_no = ${vo.pstTtlNo})}">[[${vo.PstTtlNm}]]</a></td>
           <td>[[${vo.userId}]]</td>
-         	<td th:text="${#strings.substring(vo.pst_regdate,0,10)}"></td>
-          <td>[[${vo.inq_cnt}]]</td>
+         	<td th:text="${#strings.substring(vo.PstRegdate,0,10)}"></td>
+          <td>[[${vo.InqCnt}]]</td>
           <td>1</td>
         </tr>
         </th:block>

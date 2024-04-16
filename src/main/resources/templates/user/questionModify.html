@@ -5,23 +5,19 @@
 <div class="wrap">
 	<div class="container-fluid py-4">
       <div class="container-title">질문 수정</div>
-      <form>
+      <form action="questionModifyForm" method="post">
         <div class="reg-wrap">
           <div class="reg-title">
-            <p>제목</p>
-            <input type="text">
+            <p>질문자</p>
+            <input type="text" th:value="${vo.userId}" readOnly>
           </div>
           <div class="reg-content">
             <p>내용</p>
-            <textarea id="textarea"></textarea>
-          </div>
-          <div class="reg-upload">
-            <p>파일등록</p>
-            <input type="file">
+            <textarea id="textarea" name="qstnCn">[[${vo.QstnCn}]]</textarea>
           </div>
           <div class="reg-button"> 
             <input type="submit" class="regBtn" value="수정하기">
-            <button type="button" class="backBtn">취소</button>
+            <button type="button" class="backBtn" th:onclick="|location.href='@{questionList}'|">취소</button>
           </div>
           </div>
       </form>

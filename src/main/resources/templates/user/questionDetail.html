@@ -10,86 +10,24 @@
         <div class="title-box">
           <span>
             <span class="content-writer">작성자:&nbsp;</span>
-            김바둑
+            [[${vo.userId}]]
           </span>
           <span>
-            <span class="content-regdate">작성일:</span>
-            2024-01-01
-          </span>
-          <span>
-            <span class="content-hit">조회수:</span>
-            1
-          </span>
-          <span>
-            <span class="content-reply">댓글수:</span>
-            1
+          	작성일:
+            <span class="content-regdate" th:text="${#strings.substring(vo.QstnYmd,0,10)}"></span>
           </span>
         </div>
         <div class="content-box">
-          <textarea name="" id="textarea" cols="30" rows="10" readonly>질문한 내용이 여기 표시가 됩니다.</textarea>
+          <textarea name="" id="textarea" cols="30" rows="10" readonly>[[${vo.QstnCn}]]</textarea>
         </div>
-      </div>
-      <div class="reply-wrap"> 
-        <span>답변</span>
-        <form>
-          <div class="reply-box">
-            <input type="text" class="reply-content">
-          </div>
-          <button type="button" class="reply-reg">등록</button>
-          <div class="reply">
-            <ul>
-              <li>
-                <img src="" alt=" " />
-                <span class="reply-writer">김단수</span>
-                <span class="reply-date">2024-01-01</span>
-                <p>바둑 그렇게 하는거아닌데</p>
-                <div class="reply-child">
-                  <form>
-                    <input type="text" class="child-content">
-                    <input type="submit" value="댓글달기" class="child-reg">
-                  </form>
-                </div>
-                <ul>
-                  <li>
-                    <img src="" alt=" " />
-                  <span class="reply-writer">김바둑</span>
-                  <span class="reply-date">2024-01-01</span>
-                  <p>대댓글 할지 말지 모르겠어요</p>
-                  </li>
-                  <li>
-                    <img src="" alt=" " />
-                  <span class="reply-writer">김고수</span>
-                  <span class="reply-date">2024-01-01</span>
-                  <p>대댓글만 할게요</p>
-                  </li>
-                </ul>
-              </li>
-              <li>
-                <img src="" alt=" " />
-                <span class="reply-writer">김바둑</span>
-                <span class="reply-date">2024-01-01</span>
-                <p>바둑 그렇게 하세요</p>
-                <div class="reply-child">
-                  <form>
-                    <input type="text" class="child-content">
-                    <input type="submit" value="댓글달기" class="child-reg">
-                  </form>
-                </div>
-                <ul>
-                </ul>
-              </li>
-            </ul>
-        </form>
       </div>
     </div>
     <div class="button-wrap">
-      <button type="button" id="changeBtn">수정하기</button>
-      <button type="button" id="deleteBtn">삭제하기</button>
-      <button type="button" id="backBtn">목륵으로</button>
+      <button type="button" id="changeBtn" th:onclick="|location.href='@{questionModify(qstnno=${vo.QstnNo})}'|">수정하기</button>
+      <button type="button" id="deleteBtn" th:onclick="|location.href='@{questionDelete(qstnno=${vo.QstnNo})}'|">삭제하기</button>
+      <button type="button" id="backBtn" onclick="location.href='questionList'">목륵으로</button>
     </div>
     </div>
-
-
 </th:block>
 
   <script>

@@ -194,4 +194,32 @@ public class UserServiceImpl implements UserService {
 		
 	}
 
+	@Override
+	public List<QuestionVO> getQuestionList(String username) {
+		
+		return userMapper.getQuestionList(username);
+	}
+
+
+	@Override
+	public QuestionVO questionDetail(int qstn_no) {
+		
+		return userMapper.questionDetail(qstn_no);
+	}
+
+
+	@Override
+	public void questionModifyForm(QuestionVO vo) {
+		
+		userMapper.questionModifyForm(vo);
+	}
+
+
+	@Override
+	public void deleteQuestion(int qstnno) {
+
+		userMapper.deleteQuestion(qstnno);
+		
+	}
+
 }
