@@ -46,7 +46,7 @@
         <!-- Navbar -->
         <nav class="navbar navbar-expand-lg blur border-radius-xl top-0 z-index-3 shadow position-absolute my-3 py-2 start-0 end-0 mx-4">
           <div class="container-fluid ps-2 pe-0">
-            <a class="navbar-brand font-weight-bolder ms-lg-0 ms-3 " href="/">
+            <a class="navbar-brand font-weight-bolder ms-lg-0 ms-3 " href="/" id="mainA">
               검흰 - 바둑 교육 플랫폼
             </a>
             <button class="navbar-toggler shadow-none ms-2" type="button" data-bs-toggle="collapse" data-bs-target="#navigation" aria-controls="navigation" aria-expanded="false" aria-label="Toggle navigation">
@@ -148,22 +148,24 @@
               </div>
 	            <!--      간편 로그인 창 종료      -->
 	            
+	            <div th:if="${msg}" th:text="${msg}" style="display:none;" id="serverMessage"></div>
+	            
               <div class="card-body">
-                <form role="form" class="text-start">
+                <form role="form" class="text-start" method="post" action="signInForm">
                   <div class="input-group input-group-outline my-3">
                     <label class="form-label">아이디</label>
-                    <input type="email" class="form-control">
+                    <input type="text" name="userId" class="form-control">
                   </div>
                   <div class="input-group input-group-outline mb-3">
                     <label class="form-label">비밀번호</label>
-                    <input type="password" class="form-control">
+                    <input type="password" name="userPwHash" class="form-control">
                   </div>
                   <div class="form-check form-switch d-flex align-items-center mb-3">
-                    <input class="form-check-input" type="checkbox" id="rememberMe" checked>
+                    <input class="form-check-input" type="checkbox" id="rememberMe" name="remember-me" >
                     <label class="form-check-label mb-0 ms-3" for="rememberMe">자동 로그인</label>
                   </div>
                   <div class="text-center">
-                    <button type="button" class="btn bg-gradient-primary w-100 my-1 mb-2">로그인</button>
+                    <button type="submit" class="btn bg-gradient-primary w-100 my-1 mb-2">로그인</button>
 	                  <button type="button" class="btn bg-gradient-primary w-100 my-1 mb-2">아이디 찾기</button>
 		                <button type="button" class="btn bg-gradient-primary w-100 my-1 mb-2">비밀번호 찾기</button>
 	                </div>
@@ -212,10 +214,10 @@
     </div>
   </main>
   <!--   Core JS Files   -->
-  <script src="../assets/js/core/popper.min.js"></script>
-  <script src="../assets/js/core/bootstrap.min.js"></script>
-  <script src="../assets/js/plugins/perfect-scrollbar.min.js"></script>
-  <script src="../assets/js/plugins/smooth-scrollbar.min.js"></script>
+  <script src="/assets/js/core/popper.min.js"></script>
+  <script src="/assets/js/core/bootstrap.min.js"></script>
+  <script src="/assets/js/plugins/perfect-scrollbar.min.js"></script>
+  <script src="/assets/js/plugins/smooth-scrollbar.min.js"></script>
   <script>
     var win = navigator.platform.indexOf('Win') > -1;
     if (win && document.querySelector('#sidenav-scrollbar')) {
@@ -228,7 +230,22 @@
   <!-- Github buttons -->
   <script async defer src="https://buttons.github.io/buttons.js"></script>
   <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
-  <script src="../assets/js/material-dashboard.min.js?v=3.1.0"></script>
+  <script src="/assets/js/material-dashboard.min.js?v=3.1.0"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+	<script>
+		$(document).ready(function() {
+			// 문서가 준비되면 실행
+			var msg = $("#serverMessage").text(); // HTML 요소에서 메시지 텍스트 추출
+			if (msg) {
+				// 메시지가 있으면 경고창으로 보여줌
+				alert(msg);
+			}
+			localStorage.setItem('activeTab' , '#tab1');
+		});
+		
+	</script>
+
 </body>
 
 </html>

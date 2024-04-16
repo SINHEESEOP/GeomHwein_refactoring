@@ -31,6 +31,10 @@
       color: black;
       font-weight: 500;
     }
+    
+    .uploadFile-box {
+    padding:30px;
+    }
 
     .content-box textarea {
       width: 100%;
@@ -60,6 +64,29 @@
       background-color: #DE1B60;
       color: white;
     }
+    
+    .uploadfile {
+    display:inline-block;
+    }
+    
+    .uploadfile .filename {
+    display:block;
+    cursor:pointer;
+    }
+    
+	   
+	.material-symbols-outlined {
+	  font-variation-settings:
+	  'FILL' 0,
+	  'wght' 400,
+	  'GRAD' 0,
+	  'opsz' 24
+	}
+	.material-symbols-outlined {
+		position : relative;
+		top:5px;
+	}
+
 
     .reply-wrap {
       padding: 30px;

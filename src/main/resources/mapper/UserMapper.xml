@@ -4,6 +4,87 @@
 <mapper namespace="com.geomhwein.go.user.service.UserMapper">
 
 	<insert id="comunityForm">
-	insert into COMUNITY(PST_TTL_NM,PST_TTL_CN,USERNAME VALUES(#{PST_TTL_NM},#{PST_TTL_CN},'aaa123')
+	insert into COMUNITY(PST_TTL_NM,PST_TTL_CN,INQ_CNT,USERID) VALUES(#{pst_ttl_nm},#{pst_ttl_cn},0,'aaa123')
 	</insert>
+	
+	<select id="getComunityList" resultType="comunityVO">
+	select * 
+	from COMUNITY
+	<if test='searchInput != null'>
+		where pst_ttl_nm like concat('%',#{searchInput},'%') OR username like concat('%',#{searchInput},'%')
+	</if>
+	<if test="searchFilter == 'new'">
+		ORDER BY pst_ttl_no DESC
+	</if>
+	<if test="searchFilter == 'hit'">
+	ORDER BY INQ_CNT DESC
+	</if>
+	limit #{pageStart},#{amount}
+	</select>
+	
+	<select id="getComunityDetail" resultType="comunityVO">
+	select * from COMUNITY WHERE pst_ttl_no = #{pst_ttl_no}
+	</select>
+	
+	<update id="comunityModifyForm">
+	update COMUNITY set pst_ttl_nm = #{pst_ttl_nm} , pst_ttl_cn = #{pst_ttl_cn} where pst_ttl_no = #{pst_ttl_no}
+	</update>
+	
+	<delete id="comunityDelete">
+	delete from COMUNITY where pst_ttl_no = #{pst_ttl_no}
+	</delete>
+	
+	<update id="updateHit">
+		update COMUNITY set INQ_CNT = INQ_CNT + 1 where pst_ttl_no = #{pst_ttl_no}
+	</update>
+	
+	<select id="comunityTotal" resultType="int">
+	select count(*) from COMUNITY
+	<if test='searchInput != null'>
+		where pst_ttl_nm like concat('%',#{searchInput},'%') OR pst_ttl_cn like concat('%',#{searchInput},'%')
+	</if>
+	</select>
+	
+	<insert id="registFile">
+		
+		<selectKey resultType="int" keyProperty="pst_ttl_no" order="BEFORE">
+			select max(pst_ttl_no) from COMUNITY where USERID = 'aaa123'
+		</selectKey>
+		
+	insert into COMUNITY_UPLOAD(
+		filename,
+		filepath,
+		uuid,
+		pst_ttl_no,
+		USERID
+	)
+	values(
+	#{filename},
+	#{filepath},
+	#{uuid},
+	#{pst_ttl_no},
+	#{userId}
+	)
+	</insert>
+	
+	<select id="getFile" resultType="ComunityUploadVO">
+	select * from COMUNITY_UPLOAD WHERE pst_ttl_no = #{pst_ttl_no}
+	</select>
+	
+	<insert id="replyAdd">
+	insert into REPLY values(pst_ttl_no = #{pst_ttl_no},reply_cn=#{reply_cn},USERID=#{userId})
+	</insert>
+	
+	<select id="getGroup" resultType="EducationGroupVO">
+		SELECT * FROM EDUCATION_GROUP where GROUP_NO=#{groupNo}
+	</select>
+	
+	<select id="getGroupCount" resultType="int">
+		SELECT COUNT(*)FROM EDUCATION_GROUP
+	</select>
+	<insert id="applyGroup">
+		insert into group_application(GROUP_NO,USER_ID)
+		values(#{groupNo},#{userId})
+	</insert>
+	
 </mapper>

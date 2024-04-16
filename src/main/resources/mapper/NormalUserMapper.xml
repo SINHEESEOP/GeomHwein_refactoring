@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.geomhwein.go.securlty.service.NormalUserMapper">
+
+    <insert id="signUp" statementType="CALLABLE">
+        CALL InsertUserDetails(
+                #{userId},
+                #{userPwHash},
+                #{userNm},
+                'testemail@naver.com',
+                'ROLE_CREATOR'
+             )
+    </insert>
+
+    <!-- 결과 매핑 정의 -->
+    <resultMap id="UserAuthResultMap" type="com.geomhwein.go.command.UserAuthVO">
+        <id property="userId" column="USER_ID" />
+        <result property="userNm" column="USER_NM" />
+        <result property="userPwHash" column="USER_PW_HASH" />
+
+        <!-- 중첩된 객체 맵핑 -->
+        <association property="userDetailsVO" javaType="com.geomhwein.go.command.UserDetailsVO">
+            <result property="userEmlAddr" column="USER_EML_ADDR" />
+            <result property="userRole" column="USER_ROLE" />
+            <!-- 필요한 경우 추가 필드 맵핑 -->
+        </association>
+    </resultMap>
+
+    <!-- 로그인 쿼리 -->
+    <select id="signIn" resultMap="UserAuthResultMap">
+        SELECT ua.USER_ID,
+               ua.USER_NM,
+               ua.USER_PW_HASH,
+               ud.USER_EML_ADDR,
+               ud.USER_ROLE
+        FROM USER_AUTH ua
+        JOIN USER_DETAILS ud ON ua.USER_ID = ud.USER_ID
+        WHERE ua.USER_ID = #{userId}
+    </select>
+
+    <!-- 결과 매핑 정의 -->
+    <resultMap id="EducationGroupResultMap" type="com.geomhwein.go.command.EducationGroupVO">
+        <result property="contsNm" column="컨텐츠명"/>
+        <result property="groupUtztnNope" column="그룹이용인원수"/>
+        <result property="recAge" column="권장연령"/>
+
+        <!-- 중첩된 객체 맵핑 for UserAuthVO -->
+        <association property="userAuthVO" javaType="com.geomhwein.go.command.UserAuthVO">
+            <result property="userNm" column="사용자명"/>
+
+            <!-- 더 깊은 중첩 맵핑 for UserDetailsVO inside UserAuthVO -->
+            <association property="userDetailsVO" javaType="com.geomhwein.go.command.UserDetailsVO">
+                <result property="userRating" column="사용자등급"/>
+                <result property="userId" column="사용자식별자"/>
+                <result property="userRole" column="사용자권한"/>
+            </association>
+        </association>
+    </resultMap>
+
+    <select id="getList" resultMap="EducationGroupResultMap">
+        SELECT
+            e.CONTS_NM AS "컨텐츠명",
+            e.GROUP_UTZTN_NOPE AS "그룹이용인원수",
+            e.REC_AGE AS "권장연령",
+            ua.USER_NM AS "사용자명",
+            ud.USER_RATING AS "사용자등급",
+            ud.USER_ID AS "사용자식별자",
+            ud.USER_ROLE AS "사용자권한"
+        FROM
+            EDUCATION_GROUP e
+                JOIN
+            USER_DETAILS ud ON e.USER_ID = ud.USER_ID
+                JOIN
+            USER_AUTH ua ON e.USER_ID = ua.USER_ID
+        limit #{pageStart}, #{amount};
+    </select>
+
+
+
+</mapper>

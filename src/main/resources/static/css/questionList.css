@@ -116,4 +116,9 @@
       .table-content input {
         margin-right: 5px;
       }
+      
+      .answerBtn {
+      	border:1px solid #ced4da;
+      	color : rgb(123, 128, 154);
+      }
 

@@ -9,13 +9,14 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class homeworkVO {
-	
+public class ComunityUploadVO {
+
+	private Integer upload_no;
+	private String filename;
+	private String filepath;
+	private String uuid;
+	private String regdate;
+	private Integer pst_ttl_no;
 	private String userId;
-	private String asmtGrd;
-	private String asmtNm;
-	private String asmtCn;
-	private int asmtNo;
-	private int asmtScr;
 	
 }

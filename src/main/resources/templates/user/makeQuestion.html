@@ -11,10 +11,10 @@
   <link href="/css/eduGroup.css" rel="stylesheet">
 </head>
 <body>
-    <pre hidden="hidden">
-      팝업처리
-      810px * 810px
-    </pre>
+    <script>
+    	window.resizeTo(825,825);
+    	
+    </script>
     <!-- Appointment Start -->
    <div class="container-xxl py-5">
     <div class="container">
@@ -27,7 +27,7 @@
                             <div class="row g-3">
                                 <div class="col-sm-6">
                                     <div class="form-floating">
-                                        <input type="text" class="form-control border-0 userId" placeholder="" readonly="readonly" name="userId" value="">
+                                        <input type="text" class="form-control border-0 userId" placeholder="" readonly="readonly" name="userId" value="${username}">
                                         <label for="gname">학습자 아이디</label>
                                     </div>
                                 </div>
@@ -59,8 +59,9 @@
 </div>
 <!-- Appointment End -->
  <script>
- 	
- 	// $(".userId").attr("value",username);
+ 	$(".qusBtn").click(function(){
+ 		window.close();
+ 	});
  </script>   
 </body>
 </html>

@@ -13,7 +13,11 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 -->
 <!DOCTYPE html>
-<html lang="en">
+
+<html xmlns:th="http://www.thymeleaf.org">
+
+<html lang="en" xmlns:sec="http://www.w3.org/1999/xhtml">
+
 
 
 <!--    사이드바에 필요한 메뉴는 한번에 박아넣고, if 구문을 통해 권한에 따라 보여줄 수 있게 만들기. -->
@@ -41,7 +45,7 @@
 		<link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
 		<!-- CSS Files -->
 		<link id="pagestyle" href="../assets/css/material-dashboard.css?v=3.0.0" rel="stylesheet"/>
-		<script src="/js/jquery.js"></script>
+		<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 	</head>
 	
 	<body class="g-sidenav-show  bg-gray-200">
@@ -52,7 +56,7 @@
 		<div class="sidenav-header">
 			<i class="fas fa-times p-3 cursor-pointer text-white opacity-5 position-absolute end-0 top-0 d-none d-xl-none"
 			   aria-hidden="true" id="iconSidenav"></i>
-			<a class="navbar-brand m-0" href=" https://demos.creative-tim.com/material-dashboard/pages/dashboard "
+			<a class="navbar-brand m-0" href="/"
 			   target="_blank">
 				<img src="../assets/img/logo-ct.png" class="navbar-brand-img h-100" alt="main_logo">
 				<span class="ms-1 font-weight-bold text-white">검흰 - 바둑 교육</span>
@@ -87,14 +91,6 @@
 							<i class="material-icons opacity-10">receipt_long</i>
 						</div>
 						<span class="nav-link-text ms-1">결제 정보</span>
-					</a>
-				</li>
-				<li class="nav-item ">
-					<a class="nav-link text-white tab" id="tab7" href="/payment" data-page-name="결제 페이지">
-						<div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-							<i class="material-icons opacity-10">payment</i>
-						</div>
-						<span class="nav-link-text ms-1">결제 페이지</span>
 					</a>
 				</li>
 				
@@ -197,12 +193,29 @@
 						</div>
 					</div>
 					<ul class="navbar-nav  justify-content-end">
-						<li class="nav-item d-flex align-items-center">
+						
+						<!-- 로그인하지 않은 사용자만 보이도록 설정 -->
+						<li class="nav-item d-flex align-items-center" sec:authorize="!isAuthenticated()">
 							<a href="/sign_in" class="nav-link text-body font-weight-bold px-0">
 								<i class="fa fa-user me-sm-1"></i>
-								<span class="d-sm-inline d-none">Sign In</span>
+								<span class="d-sm-inline d-none">로그인</span>
 							</a>
 						</li>
+						
+						<!-- 로그인한 사용자에게만 보이도록 설정 -->
+						<li class="nav-item d-flex align-items-center" sec:authorize="isAuthenticated()" style="margin-right: 10px">
+							<a href="/user/profile" class="nav-link text-body font-weight-bold px-0">
+								<i class="fa fa-user me-sm-1"></i>
+								<span class="d-sm-inline d-none loginMypage">마이페이지</span>
+							</a>
+						</li>
+						<li class="nav-item d-flex align-items-center" sec:authorize="isAuthenticated()">
+							<a href="/logout" class="nav-link text-body font-weight-bold px-0">
+								<i class="fa fa-sign-out me-sm-1"></i>
+								<span class="d-sm-inline d-none">로그아웃</span>
+							</a>
+						</li>
+						
 						<li class="nav-item d-xl-none ps-3 d-flex align-items-center">
 							<a href="javascript:;" class="nav-link text-body p-0" id="iconNavbarSidenav">
 								<div class="sidenav-toggler-inner">
@@ -212,13 +225,13 @@
 								</div>
 							</a>
 						</li>
-						<li class="nav-item px-3 d-flex align-items-center">
-							<a href="javascript:;" class="nav-link text-body p-0">
-								<i class="fa fa-cog fixed-plugin-button-nav cursor-pointer"></i>
-								<span>설정</span>
-							</a>
-						</li>
-						<li class="nav-item dropdown pe-2 d-flex align-items-center">
+<!--						<li class="nav-item px-3 d-flex align-items-center">-->
+<!--							<a href="javascript:;" class="nav-link text-body p-0">-->
+<!--								<i class="fa fa-cog fixed-plugin-button-nav cursor-pointer"></i>-->
+<!--								<span>설정</span>-->
+<!--							</a>-->
+<!--						</li>-->
+						<li class="nav-item dropdown pe-2 d-flex align-items-center" style="margin-left: 20px">
 							<a href="javascript:;" class="nav-link text-body p-0" id="dropdownMenuButton" data-bs-toggle="dropdown"
 							   aria-expanded="false">
 								<i class="fa fa-bell cursor-pointer"></i>
@@ -304,7 +317,6 @@
 
 		<!-- End Navbar -->
 		
-		
 		<!-- main container	-->
 
 		<!--	메인 컨텐츠가 들어갈 자리.	-->
@@ -350,56 +362,6 @@
 				</div>
 			</div>
 		</footer>
-
-		<div class="container-fluid py-4">
-			
-			
-			<!--	원하는 디자인을 가지고 오고 싶다면 기존 디자인 태그의 클래스명을 사용해야 합니다. -->
-			<!--	메인 컨텐츠가 들어갈 자리.	-->
-			
-			<th:block th:replace="${content}">
-			</th:block>
-			
-			<!--	메인 컨텐츠 끝.		-->
-			
-			<footer class="footer py-4">
-				<div class="container-fluid">
-					<div class="row align-items-center justify-content-lg-between">
-						<div class="col-lg-6 mb-lg-0 mb-4">
-							<div class="copyright text-center text-sm text-muted text-lg-start">
-								©
-								<script>
-									document.write(new Date().getFullYear())
-								</script>
-								,
-								made with <i class="fa fa-heart"></i> by
-								<a href="https://www.creative-tim.com" class="font-weight-bold" target="_blank">Creative Tim</a>
-								for a better web.
-							</div>
-						</div>
-						<div class="col-lg-6">
-							<ul class="nav nav-footer justify-content-center justify-content-lg-end">
-								<li class="nav-item">
-									<a href="https://www.creative-tim.com" class="nav-link text-muted" target="_blank">Creative Tim</a>
-								</li>
-								<li class="nav-item">
-									<a href="https://www.creative-tim.com/presentation" class="nav-link text-muted" target="_blank">About
-										Us</a>
-								</li>
-								<li class="nav-item">
-									<a href="https://www.creative-tim.com/blog" class="nav-link text-muted" target="_blank">Blog</a>
-								</li>
-								<li class="nav-item">
-									<a href="https://www.creative-tim.com/license" class="nav-link pe-0 text-muted"
-									   target="_blank">License</a>
-								</li>
-							</ul>
-						</div>
-					</div>
-				</div>
-			</footer>
-
-		</div>
 	</main>
 	
 	<!--  main container End  -->
@@ -513,8 +475,10 @@
 	</body>
 	<!--  JS 및 플러그인 끝  -->
 	
+	
 	<script>
-		$(document).ready(function() {
+		
+			$(document).ready(function() {
 			var activeTab = localStorage.getItem('activeTab');
 			if(activeTab){
 				$('.sidenav_click .tab').removeClass('active bg-gradient-primary');
@@ -536,9 +500,5 @@
 		});
 	</script>
 	
-	
 </th:block>
-
-
-
 </html>
