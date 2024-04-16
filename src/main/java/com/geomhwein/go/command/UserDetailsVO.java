@@ -32,4 +32,8 @@ public class UserDetailsVO {
 	private Integer userScr;//숙제점수
 	private String Interests;
 
+	public UserDetailsVO(String userId, String Interests) {
+		this.userId = userId;
+		this.userTelno = Interests;
+	}
 }
