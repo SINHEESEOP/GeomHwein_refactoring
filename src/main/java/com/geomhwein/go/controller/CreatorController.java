@@ -30,6 +30,7 @@ public class CreatorController {
 	@Qualifier("creatorService")
 	private CreatorService creatorService;
 	
+
 	
 	@GetMapping("/eduGroup")
 	public String eduGroup  () {
@@ -66,6 +67,7 @@ public class CreatorController {
 	
 	
 	
+
 
 	@GetMapping("/questionList")
 	public String questionList(Model model) {

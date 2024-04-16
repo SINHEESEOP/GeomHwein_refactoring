@@ -1,7 +1,5 @@
 package com.geomhwein.go.command;
 
-import java.sql.Timestamp;
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -21,5 +19,5 @@ public class EducationGroupVO {
 	private String contsNm;//그룹 콘텐츠 이름
 	private int recAge; //그룹 권장 연령
 	private int Active;//신청취소여부
-	
+
 }

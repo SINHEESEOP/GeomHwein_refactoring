@@ -1,8 +1,9 @@
 package com.geomhwein.go.controller;
 
-import com.geomhwein.go.command.UserAuthVO;
-import com.geomhwein.go.command.UserDetailsVO;
 import com.geomhwein.go.securlty.UserAuth;
+import com.geomhwein.go.securlty.service.NormalUserService;
+import com.geomhwein.go.util.Criteria;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,27 +13,23 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class MainController {
 
+	@Autowired
+	private NormalUserService normalUserService;
+
 	@GetMapping("/")
-	public String main(Authentication auth, Model model) {
+	public String main(Authentication auth, Model model, Criteria cri) {
 
 		if (auth != null) {
-//			System.out.println("아이디능??" + auth.getName() );
-//			model.addAttribute("user", auth.getName());
-
 			UserAuth userAuth = (UserAuth)auth.getPrincipal();
 
-			String userId  = userAuth.getUsername();
-			String userPwHash = userAuth.getPassword();
-			String userRole = userAuth.getRole();
+			System.out.println(userAuth.getUsername() + " " + userAuth.getPassword()
+						+ " " + userAuth.getRole() );
 
-			System.out.println(userId + " " + userPwHash + " " + userRole);
-			System.out.println("213231");
-			model.addAttribute("role2", userRole );
-
+			model.addAttribute("role2", userAuth.getRole() );
 		}
 
 		return "main";
-	} // 임시로 메인을 billing 으로 함, 메인 완성 시 변경 될 예정.
+	}
 
 	@GetMapping("/sign_in")
 	public String signIn(@RequestParam(value = "err", required = false) String err,
@@ -53,11 +50,11 @@ public class MainController {
 
 	@GetMapping("/mttr")
 	public String mttr() {
-		
+
 		return "mttr";
 	}
 
 
 }
-	
+
 

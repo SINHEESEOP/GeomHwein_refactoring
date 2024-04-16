@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.Collection;
 
 @Data
 @AllArgsConstructor
@@ -16,7 +17,7 @@ public class UserDetailsVO {
 
 	private String userId; // VARCHAR(100) NOT NULL
 	private String userTelno; // VARCHAR(20)
-	private String userEmailAddr; // VARCHAR(100) NOT NULL
+	private String userEmlAddr; // VARCHAR(100) NOT NULL
 	private Integer userAge; // INT
 	private BigDecimal userRating; // DECIMAL(5,2)
 	private String gender; // ENUM('male', 'female', 'other')
@@ -29,5 +30,6 @@ public class UserDetailsVO {
 	private Integer failedLoginAttempts; // INT DEFAULT 0
 	private LocalDateTime lastLoginDatetime; // DATETIME
 	private Integer userScr;//숙제점수
+	private String Interests;
 
 }

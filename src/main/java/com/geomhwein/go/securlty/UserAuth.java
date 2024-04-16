@@ -46,8 +46,11 @@ public class UserAuth implements UserDetails {
 
 	@Override
 	public String getUsername() {
-		return userAuthVO.getUserId();
+		return userAuthVO.getUserNm();
 	}
+
+	public String getUserId() {
+		return userAuthVO.getUserId(); }
 
 	@Override
 	public boolean isAccountNonExpired() {
