@@ -3,7 +3,7 @@ package com.geomhwein.go.creator.service;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
-
+import org.apache.ibatis.annotations.Param;
 import com.geomhwein.go.command.HomeworkVO;
 import com.geomhwein.go.command.EducationGroupVO;
 
@@ -21,7 +21,7 @@ public interface CreatorMapper {
 	public List<HomeworkVO> getHomeworkDone(String userId);
 
 
-	public void setUserScore(String userId, int newScore);
+	public void setUserScore(@Param("userId")String userId,@Param("newScore") int newScore);
 
 
 	public int getUserScore(String userId);

@@ -4,12 +4,12 @@
 	<select id="getApplyCount" resultType="int">
 		select count(*) from group_application
 	</select>
-	<select id="getApply" resultType="EducationGroupVO">
+	<select id="getApply" resultType="com.geomhwein.go.command.EducationGroupVO">
 		SELECT APLY_NO,
 			   education_group.GROUP_NO,
 			   GROUP_UTZTN_NOPE,
 			   conts_NM,LAST_CMCRS_YMD,
-			   group_application.USER_ID ,
+			   group_application.USER_ID,
 			   REC_AGE 
 			   FROM education_group 
 			   right join 

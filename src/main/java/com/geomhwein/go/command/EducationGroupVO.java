@@ -1,14 +1,12 @@
 package com.geomhwein.go.command;
 
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
 public class EducationGroupVO {
 	
 	private int aplyNo;//그룹신청번호

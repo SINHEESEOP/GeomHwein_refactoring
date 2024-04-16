@@ -89,7 +89,7 @@ public class UserController {
 		if (authentication != null) {
 			UserAuth userAuth = (UserAuth)authentication.getPrincipal();
 
-			String userId  = userAuth.getUsername();
+			String userId  = userAuth.getUserId();
 			String userPwHash = userAuth.getPassword();
 			String userRole = userAuth.getRole();
 
@@ -180,7 +180,7 @@ public class UserController {
 		if (authentication != null) {
 			UserAuth userAuth = (UserAuth)authentication.getPrincipal();
 
-			String userId  = userAuth.getUsername();
+			String userId  = userAuth.getUserId();
 			
 			model.addAttribute("userName", userId);
 
@@ -206,7 +206,7 @@ public class UserController {
 		if (authentication != null) {
 			UserAuth userAuth = (UserAuth)authentication.getPrincipal();
 
-			String userId  = userAuth.getUsername();
+			String userId  = userAuth.getUserId();
 			model.addAttribute("userName",userId);
 
 		}
@@ -353,7 +353,7 @@ public class UserController {
 		if (authentication != null) {
 			UserAuth userAuth = (UserAuth)authentication.getPrincipal();
 
-			String username  = userAuth.getUsername();
+			String username  = userAuth.getUserId();
 			
 			userService.applyGroup(groupNo,username);
 
