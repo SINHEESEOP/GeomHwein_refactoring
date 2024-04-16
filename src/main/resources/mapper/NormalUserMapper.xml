@@ -42,7 +42,7 @@
     </select>
 
     <!-- 결과 매핑 정의 -->
-    <resultMap id="EducationGroupResultMap" type="com.geomhwein.go.command.educationGroupVO">
+    <resultMap id="EducationGroupResultMap" type="com.geomhwein.go.command.EducationGroupVO">
         <result property="contsNm" column="컨텐츠명"/>
         <result property="groupUtztnNope" column="그룹이용인원수"/>
         <result property="recAge" column="권장연령"/>

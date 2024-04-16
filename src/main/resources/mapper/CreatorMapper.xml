@@ -1,6 +1,63 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTO Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.geomhwein.go.creator.service.CreatorMapper">
-
-
+	<select id="getApplyCount" resultType="int">
+		select count(*) from group_application
+	</select>
+	<select id="getApply" resultType="com.geomhwein.go.command.EducationGroupVO">
+		SELECT APLY_NO,
+			   education_group.GROUP_NO,
+			   GROUP_UTZTN_NOPE,
+			   conts_NM,LAST_CMCRS_YMD,
+			   group_application.USER_ID,
+			   REC_AGE 
+			   FROM education_group 
+			   right join 
+			   group_application 
+			   on group_application.GROUP_NO=education_group.GROUP_NO
+			   where APLY_NO=#{i}
+	</select>
+	<insert id="makeHomework">
+		INSERT INTO Homework(user_Id,ASMT_NM,ASMT_CN,ASMT_SCR,ASMT_GRD)
+		values(#{userId},#{asmtNm},#{asmtCn},#{asmtScr},#{asmtGrd})
+	</insert>
+	<select id="getHomeworkDone" resultType="HomeworkVO">
+		SELECT
+				Student_ID as USER_ID,
+    			ASMT_ANS_NO,
+    			ASMT_ANS,
+    			ASMT_NM,
+    			ASMT_NO,
+    			ASMT_GRD,
+    			ASMT_SCR
+		FROM    
+		(SELECT 
+    		 homework_submission.ASMT_ANS_NO,
+   			 homework.USER_ID AS Creator_ID,
+   			 homework_submission.USER_ID AS Student_ID,
+  		     homework_submission.ASMT_ANS,
+   			 homework_submission.ASMT_NM,
+   			 homework_submission.ASMT_NO.
+   			 homework.ASMT_GRD,
+    		 homework.ASMT_SCR
+		FROM
+    		 homework_submission
+        RIGHT JOIN
+    		 homework ON homework.ASMT_NO = homework_submission.ASMT_NO) as hwdList 
+    	WHERE CREATOR_ID =#{userId}
+	</select>
+	<select id="getUserScore" resultType="int">
+		SELECT USER_SCR FROM USER_DETAILS
+		WHERE USER_ID=#{userId}
+	</select>
+	<update id="setUserScore">
+		UPDATE USER_DETAILS
+		SET USER_SCR=#{newScore}
+		WHERE USER_ID=$#{userId}
+	</update>
+	<delete id="deleteAns">
+		DELETE FROM homework_submission
+		WEHRE ASMT_ANS_NO=#{asmtAnsNo}
+	</delete>
+	
 </mapper>

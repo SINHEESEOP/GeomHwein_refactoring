@@ -29,5 +29,7 @@ public class UserDetailsVO {
 	private LocalDateTime deletionRequestedAt; // DATETIME DEFAULT NULL
 	private Integer failedLoginAttempts; // INT DEFAULT 0
 	private LocalDateTime lastLoginDatetime; // DATETIME
+	private Integer userScr;//숙제점수
 	private String Interests;
+
 }

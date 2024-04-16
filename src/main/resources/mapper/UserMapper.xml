@@ -74,4 +74,17 @@
 	<insert id="replyAdd">
 	insert into REPLY values(pst_ttl_no = #{pst_ttl_no},reply_cn=#{reply_cn},USERID=#{userId})
 	</insert>
+	
+	<select id="getGroup" resultType="EducationGroupVO">
+		SELECT * FROM EDUCATION_GROUP where GROUP_NO=#{groupNo}
+	</select>
+	
+	<select id="getGroupCount" resultType="int">
+		SELECT COUNT(*)FROM EDUCATION_GROUP
+	</select>
+	<insert id="applyGroup">
+		insert into group_application(GROUP_NO,USER_ID)
+		values(#{groupNo},#{userId})
+	</insert>
+	
 </mapper>

@@ -5,6 +5,7 @@ import java.io.File;
 import java.net.URLEncoder;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -53,7 +54,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import com.geomhwein.go.command.ComunityUploadVO;
 import com.geomhwein.go.command.ReplyVO;
 import com.geomhwein.go.command.ComunityVO;
-import com.geomhwein.go.command.educationGroupVO;
+import com.geomhwein.go.command.EducationGroupVO;
 import com.geomhwein.go.user.service.UserService;
 import com.geomhwein.go.util.Criteria;
 import com.geomhwein.go.util.PageVO;
@@ -76,7 +77,9 @@ public class UserController {
 	public String billing() {
 		return "user/billing";
 	}
-
+	
+	
+	
 
 	@GetMapping("/profile")
 	public String profile(Authentication authentication, Model model) {
@@ -86,7 +89,7 @@ public class UserController {
 		if (authentication != null) {
 			UserAuth userAuth = (UserAuth)authentication.getPrincipal();
 
-			String userId  = userAuth.getUsername();
+			String userId  = userAuth.getUserId();
 			String userPwHash = userAuth.getPassword();
 			String userRole = userAuth.getRole();
 
@@ -172,17 +175,44 @@ public class UserController {
 	}
 	
 	@GetMapping("/groupList")
-	public String userGroupList() {
+	public String userGroupList(Model model ,Authentication authentication) {
+		int gCount=userService.getGroupCount();
+		List<EducationGroupVO> groupList=new ArrayList<>();
+		if (authentication != null) {
+			UserAuth userAuth = (UserAuth)authentication.getPrincipal();
+
+			String userId  = userAuth.getUserId();
+			
+			model.addAttribute("userName", userId);
+
+		}
+		for(int i=1;i<=gCount;i++) {
+			groupList.add(userService.getGroup(i));
+		}
+		model.addAttribute("groupList",groupList);
 		return "user/groupList";
 	}
-	
+	@GetMapping("/eduGroup")
+	public String eduGroup  (@RequestParam("username")String username,Model model) {
+		model.addAttribute("username",username );
+		return "user/eduGroup";
+	}
 	@GetMapping("/groupApplyList")
 	public String groupApplyList() {
 		return "user/groupApplyList";
 	}
 	
 	@GetMapping("/questionList")
-	public String questionList() {
+	public String questionList(Model model,Authentication authentication) {
+		if (authentication != null) {
+			UserAuth userAuth = (UserAuth)authentication.getPrincipal();
+
+			String userId  = userAuth.getUserId();
+			model.addAttribute("userName",userId);
+
+		}
+		
+		
 		return "user/questionList";
 	}
 	
@@ -208,7 +238,7 @@ public class UserController {
 	@GetMapping("/makeQuestion")
 	public String makeQuestion(@RequestParam("username")String username,Model model){
 		model.addAttribute("username",username);
-		//질문등록하기 팝업으로 보냄 ,username을 모델에 담아서 화면에서 readonly로 뿌려줌
+		
 		return "user/makeQuestion";
 	}
 	@PostMapping("/registQuestionForm")
@@ -228,10 +258,7 @@ public class UserController {
 		return "user/profile";//신청버튼 잇던 곳으로 보내주면됨
 	}
 
-	@GetMapping("/questionReg")
-	public String questionReg() {
-		return "user/questionReg";
-	}
+	
 	
 	@GetMapping("/questionDetail")
 	public String questionDetail() {
@@ -321,12 +348,24 @@ public class UserController {
 	}
   
   @GetMapping("/groupSelectForm")
-	public String groupSelectForm(Model model,@RequestParam("groupNo")int groupNo) {
-		//educationGroupVO vo=userService.getGroup(groupNo);
-		//model.addAttribute("groupForm",vo);
-		System.out.println(groupNo);
+	public String groupSelectForm(@RequestParam("groupNo")String gno,Authentication authentication) {
+		int groupNo=Integer.parseInt(gno);
 		
-		return "user/groupList";//그룹신청하는폼 또는 화면
+		if (authentication != null) {
+			UserAuth userAuth = (UserAuth)authentication.getPrincipal();
+
+			String username  = userAuth.getUserId();
+			
+			userService.applyGroup(groupNo,username);
+
+			
+
+		}else {
+			
+			return "creator/creatorFail";//임시조치
+		}
+		return "creator/creatorSuccess";//임시조치
+		
 	}
 	
 	@PostMapping("/replyAdd")

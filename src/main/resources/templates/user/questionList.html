@@ -48,12 +48,14 @@
         <span>3</span>
         <span>next</span>
       </div>
+        <pre hidden="hidden" th:value="${userName}" class="userName"></pre>
     </div>
 	</div>
+	
 </th:block>
 <script>
   $(".makeQuestionBtn").click(function(){
-    var username="aaa123";//임시유저네임
+    var username=$(".userName").val();
     var url="makeQuestion?username="+username;
     var name="질문작성하기";
     var option="width=830,length=820,top=0,left=0,location=yes";

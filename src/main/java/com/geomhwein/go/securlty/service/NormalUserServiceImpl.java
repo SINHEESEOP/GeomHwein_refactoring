@@ -1,7 +1,7 @@
 package com.geomhwein.go.securlty.service;
 
 import com.geomhwein.go.command.UserAuthVO;
-import com.geomhwein.go.command.educationGroupVO;
+import com.geomhwein.go.command.EducationGroupVO;
 import com.geomhwein.go.util.Criteria;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,7 +21,7 @@ public class NormalUserServiceImpl implements NormalUserService{
 	}
 
 	@Override
-	public ArrayList<educationGroupVO> getList(Criteria cri) {
+	public ArrayList<EducationGroupVO> getList(Criteria cri) {
 		return normalUserMapper.getList(cri);
 	}
 
