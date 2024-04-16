@@ -11,7 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.geomhwein.go.command.HomeworkVO;
 import com.geomhwein.go.command.QuestionVO;
@@ -36,7 +36,22 @@ public class CreatorController {
 		
 		return "creator/eduGroup";
 	}
-	
+	@GetMapping("/homeworkDetail")
+	public String homeworkDetail(@RequestParam("userId")String userId,
+								 @RequestParam("asmtNo")int asmtNo,
+								 @RequestParam("asmtNm")String asmtNm,
+								 @RequestParam("asmtAns")String asmtAns,
+								 Model model,
+								 HomeworkVO vo) {
+		vo.setAsmtAns(asmtAns);
+		vo.setAsmtNo(asmtNo);
+		vo.setUserId(userId);
+		vo.setAsmtNm(asmtNm);
+		model.addAttribute("homeworkDetail",vo);
+		
+		
+		return "creator/homeworkDetail";
+	}
 
 	@GetMapping("/questionList")
 	public String questionList(Model model) {
