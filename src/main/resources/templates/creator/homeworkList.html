@@ -13,6 +13,7 @@
       </div>
       <table class="comunity-table">
         <tr class="table-title">
+          <th>숙제제출번호</th>
           <th>숙제번호</th>
           <th>제출자</th>
           <th>숙제제목</th>
@@ -23,14 +24,15 @@
   		  <th>정답</th>
   		  <td>오답</td>
         </tr>
-        <!-- th:each="vo,status : ${}"  -->
-        <tr class="table-content">
-          <td>[[${}]]</td>
-          <td>[[${}]]</td>
-          <td>[[${}]]</td>
-          <td>[[${}]]</td>
-          <td>[[${}]]</td>
-          <td>[[${}]]</td>
+        
+        <tr class="table-content" th:each="vo,status : ${hwdList}">
+          <td>[[${vo.asmtAnsNo}]]</td>
+          <td>[[${vo.asmtNo}]]</td>
+          <td>[[${vo.userId}]]</td>
+          <td>[[${vo.asmtNm}]]</td>
+          <td>[[${vo.asmtAns}]]</td>
+          <td>[[${vo.asmtScr}]]</td>
+          <td>[[${vo.asmtGrd}]]</td>
           <td><button type="button">상세보기</button></td>
           <td><button type="button">정답처리</button></td>
           <td><button type="button">오답처리</button></td>

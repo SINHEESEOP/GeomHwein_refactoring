@@ -22,17 +22,29 @@
 		values(#{userId},#{asmtNm},#{asmtCn},#{asmtScr},#{asmtGrd})
 	</insert>
 	<select id="getHomeworkDone" resultType="HomeworkVO">
-		SELECT 
-    		homework_submission.ASMT_ANS_NO,
-    		homework.USER_ID AS Creator_ID,
-    		homework_submission.USER_ID AS Student_ID,
-    		homework_submission.ASMT_ANS,
-    		homework_submission.ASMT_NM,
-    		homework_submission.ASMT_NO
+		SELECT
+				Student_ID as USER_ID,
+    			ASMT_ANS_NO,
+    			ASMT_ANS,
+    			ASMT_NM,
+    			ASMT_NO,
+    			ASMT_GRD,
+    			ASMT_SCR
+		FROM    
+		(SELECT 
+    		 homework_submission.ASMT_ANS_NO,
+   			 homework.USER_ID AS Creator_ID,
+   			 homework_submission.USER_ID AS Student_ID,
+  		     homework_submission.ASMT_ANS,
+   			 homework_submission.ASMT_NM,
+   			 homework_submission.ASMT_NO.
+   			 homework.ASMT_GRD,
+    		 homework.ASMT_SCR
 		FROM
-    		homework_submission
+    		 homework_submission
         RIGHT JOIN
-    		homework ON homework.ASMT_NO = homework_submission.ASMT_NO;
+    		 homework ON homework.ASMT_NO = homework_submission.ASMT_NO) as hwdList 
+    	WHERE CREATOR_ID =#{userId}
 	</select>
 	
 </mapper>

@@ -65,12 +65,17 @@ public class CreatorController {
 
 			String userId  = userAuth.getUsername();//선생님 ID
 			List<HomeworkVO> homeworkDoneList=creatorService.getHomeworkDone(userId);
+			model.addAttribute("hwdList",homeworkDoneList);
 			
-			}
+			
+			return "creator/homeworkList";
+			
+		}else {
+			return "creator/creatorFail";
+		}
 			
 		
 		
-		return "creator/homeworkList";
 	}
 	
 	
@@ -87,7 +92,7 @@ public class CreatorController {
 	public String groupApplyList(Model model) {
 		int applyCount=creatorService.getApplyCount();
 		if(applyCount==0) {
-			return "creator/cretorFail";
+			return "creator/creaatorFail";
 		}
 		List<EducationGroupVO> applyList= new ArrayList<>();
 		for(int i=1;i<=applyCount;i++) {

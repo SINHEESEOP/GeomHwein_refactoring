@@ -361,9 +361,9 @@ public class UserController {
 
 		}else {
 			
-			return "creator/creatorFail";
+			return "creator/creatorFail";//임시조치
 		}
-		return "creator/creatorSuccess";
+		return "creator/creatorSuccess";//임시조치
 		
 	}
 	
