@@ -1,6 +1,31 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 
+<style>
+	.container-fluid {
+		position: relative;
+	}
+	.main_btn {
+		border: none;
+		border-radius: 300px;
+		background-color: rgb(255, 255, 255);
+		position: absolute;
+		z-index: 10;
+		opacity : 0.8;
+		font-family: "Roboto", Helvetica, Arial, sans-serif;
+		font-weight: bold;
+	}
+	#prev-button {
+		
+		top: 17.5%;
+	}
+	
+	#next-button {
+		top: 17.5%;
+		left: 95%;
+	}
+</style>
+
 <th:block th:replace="~{/include/baseLayout :: setContent( ~{ :: .container-fluid} ) }">
 	
 	<div class="container-fluid py-4">
@@ -10,28 +35,30 @@
 				<div class="card my-4">
 					<div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
 						<div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
-							<h6 class="text-white text-capitalize ps-3">왕초보도 할 수 있어요 💪</h6>
+							<h6 class="text-white text-capitalize ps-3 interests">왕초보도 할 수 있어요 💪</h6>
 						</div>
 					</div>
 					<div class="card-body px-0 pb-2">
 						<div class="table-responsive p-0">
+							
+							
+							
+							<!-- 컨텐츠 1 -->
 							<table class="table align-items-center mb-0">
-								
-								
 								<thead>
 								<tr>
 									<th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">수업</th>
 									<th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">강사 이름</th>
 									<th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">금액
 									</th>
-									<th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">평점(별 마크로 변경 예정)
+									<th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">평점(별 마크로
+										변경 예정)
 									</th>
 								</tr>
 								</thead>
 								
-								
-								<tbody>
-								<tr>
+								<tbody class="tbody1">
+								<tr class="data-template" style="display: none">
 									<td>
 										<div class="d-flex px-2 py-1">
 											<div>
@@ -39,146 +66,35 @@
 												<img src="../assets/img/team-2.jpg" class="avatar avatar-sm me-3 border-radius-lg" alt="user1">
 											</div>
 											<div class="d-flex flex-column justify-content-center">
-												<h6 class="mb-0 text-sm">초보자도 쉽게 배우는 바둑 교실</h6>
-												<p class="text-xs text-secondary mb-0">바둑 초급반</p>
+												<h6 class="mb-0 text-sm course-name">contsNm</h6>
+												<p class="text-xs text-secondary mb-0 recommended-age">권장연령 : recAge 세</p>
 											</div>
 										</div>
 									</td>
 									<td>
-										<p class="text-xs font-weight-bold mb-0">John Michael</p>
-										<p class="text-xs text-secondary mb-0">백엔드 개발자</p>
+										<p class="text-xs font-weight-bold mb-0 instructor-name" >userAuthVO.userNm</p>
+										<p class="text-xs text-secondary mb-0 instructor-rating" >userAuthVO.userDetailsVO.userRating (아직 데이터가 없어서 안뜸)</p>
 									</td>
 									<td class="align-middle text-center text-sm">
-										<span class="badge badge-sm bg-gradient-success">3,000,000</span>
+										<span class="badge badge-sm bg-gradient-success price">(데이터 없음)</span>
 									</td>
 									<td class="align-middle text-center">
-										<span class="text-secondary text-xs font-weight-bold">5.0 (5점 만점)</span>
-									</td>
-								</tr>
-								<tr>
-									<td>
-										<div class="d-flex px-2 py-1">
-											<div>
-												<img src="../assets/img/team-3.jpg" class="avatar avatar-sm me-3 border-radius-lg" alt="user2">
-											</div>
-											<div class="d-flex flex-column justify-content-center">
-												<h6 class="mb-0 text-sm">Alexa Liras</h6>
-												<p class="text-xs text-secondary mb-0">alexa@creative-tim.com</p>
-											</div>
-										</div>
-									</td>
-									<td>
-										<p class="text-xs font-weight-bold mb-0">Programator</p>
-										<p class="text-xs text-secondary mb-0">Developer</p>
-									</td>
-									<td class="align-middle text-center text-sm">
-										<span class="badge badge-sm bg-gradient-secondary">Offline</span>
-									</td>
-									<td class="align-middle text-center">
-										<span class="text-secondary text-xs font-weight-bold">11/01/19</span>
-									</td>
-								</tr>
-								<tr>
-									<td>
-										<div class="d-flex px-2 py-1">
-											<div>
-												<img src="../assets/img/team-4.jpg" class="avatar avatar-sm me-3 border-radius-lg" alt="user3">
-											</div>
-											<div class="d-flex flex-column justify-content-center">
-												<h6 class="mb-0 text-sm">Laurent Perrier</h6>
-												<p class="text-xs text-secondary mb-0">laurent@creative-tim.com</p>
-											</div>
-										</div>
-									</td>
-									<td>
-										<p class="text-xs font-weight-bold mb-0">Executive</p>
-										<p class="text-xs text-secondary mb-0">Projects</p>
-									</td>
-									<td class="align-middle text-center text-sm">
-										<span class="badge badge-sm bg-gradient-success">Online</span>
-									</td>
-									<td class="align-middle text-center">
-										<span class="text-secondary text-xs font-weight-bold">19/09/17</span>
-									</td>
-								</tr>
-								<tr>
-									<td>
-										<div class="d-flex px-2 py-1">
-											<div>
-												<img src="../assets/img/team-3.jpg" class="avatar avatar-sm me-3 border-radius-lg" alt="user4">
-											</div>
-											<div class="d-flex flex-column justify-content-center">
-												<h6 class="mb-0 text-sm">Michael Levi</h6>
-												<p class="text-xs text-secondary mb-0">michael@creative-tim.com</p>
-											</div>
-										</div>
-									</td>
-									<td>
-										<p class="text-xs font-weight-bold mb-0">Programator</p>
-										<p class="text-xs text-secondary mb-0">Developer</p>
-									</td>
-									<td class="align-middle text-center text-sm">
-										<span class="badge badge-sm bg-gradient-success">Online</span>
-									</td>
-									<td class="align-middle text-center">
-										<span class="text-secondary text-xs font-weight-bold">24/12/08</span>
-									</td>
-								</tr>
-								<tr>
-									<td>
-										<div class="d-flex px-2 py-1">
-											<div>
-												<img src="../assets/img/team-2.jpg" class="avatar avatar-sm me-3 border-radius-lg" alt="user5">
-											</div>
-											<div class="d-flex flex-column justify-content-center">
-												<h6 class="mb-0 text-sm">Richard Gran</h6>
-												<p class="text-xs text-secondary mb-0">richard@creative-tim.com</p>
-											</div>
-										</div>
-									</td>
-									<td>
-										<p class="text-xs font-weight-bold mb-0">Manager</p>
-										<p class="text-xs text-secondary mb-0">Executive</p>
-									</td>
-									<td class="align-middle text-center text-sm">
-										<span class="badge badge-sm bg-gradient-secondary">Offline</span>
-									</td>
-									<td class="align-middle text-center">
-										<span class="text-secondary text-xs font-weight-bold">04/10/21</span>
-									</td>
-								</tr>
-								<tr>
-									<td>
-										<div class="d-flex px-2 py-1">
-											<div>
-												<img src="../assets/img/team-4.jpg" class="avatar avatar-sm me-3 border-radius-lg" alt="user6">
-											</div>
-											<div class="d-flex flex-column justify-content-center">
-												<h6 class="mb-0 text-sm">Miriam Eric</h6>
-												<p class="text-xs text-secondary mb-0">miriam@creative-tim.com</p>
-											</div>
-										</div>
-									</td>
-									<td>
-										<p class="text-xs font-weight-bold mb-0">Programator</p>
-										<p class="text-xs text-secondary mb-0">Developer</p>
-									</td>
-									<td class="align-middle text-center text-sm">
-										<span class="badge badge-sm bg-gradient-secondary">Offline</span>
-									</td>
-									<td class="align-middle text-center">
-										<span class="text-secondary text-xs font-weight-bold">14/09/20</span>
+										<span class="text-secondary text-xs font-weight-bold rating">5.0 (5점 만점)</span>
 									</td>
 								</tr>
 								</tbody>
 							</table>
+							
+							<div id="pagination">
+								<button id="prev-button" class="main_btn">이전</button>
+								<button id="next-button" class="main_btn">다음</button>
+							</div>
+							
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-		
-		
 		
 		
 		<div class="row">
@@ -200,7 +116,8 @@
 									<th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">강사 이름</th>
 									<th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">금액
 									</th>
-									<th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">평점(별 마크로 변경 예정)
+									<th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">평점(별 마크로
+										변경 예정)
 									</th>
 								</tr>
 								</thead>
@@ -358,15 +275,7 @@
 
 </th:block>
 
-<script>
-	$(document).ready(function() {
-		// 문서가 준비되면 실행
-		var role2 = $("#serverMessage2").text(); // HTML 요소에서 메시지 텍스트 추출
-		if (role2) {
-			// 메시지가 있으면 경고창으로 보여줌
-			alert(role2);
-		}
-	});
-</script>
+<!-- 비동기로 JS 파일 로드 -->
+<script src="/js/mainJS.js" async></script>
 
 </html>
