@@ -107,4 +107,14 @@
 	<delete id="deleteQuestion">
 	delete FROM MAKEQUESTION WHERE QSTN_NO = #{qstnNo}
 	</delete>
+	<select id="getUserScoreList" resultType="UserDetailsVO">
+		SELECT 
+			rank() over (order by USER_SCR desc) as USER_RATING,
+			USER_ID,
+			USER_SCR,
+			USER_AGE
+		FROM
+			USER_DETAILS
+	</select>
+	
 </mapper>

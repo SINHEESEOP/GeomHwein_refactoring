@@ -7,6 +7,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.geomhwein.go.command.ComunityUploadVO;
 import com.geomhwein.go.command.ReplyVO;
+import com.geomhwein.go.command.UserDetailsVO;
 import com.geomhwein.go.command.ComunityVO;
 import com.geomhwein.go.util.Criteria;
 import com.geomhwein.go.command.HomeworkVO;
@@ -36,5 +37,6 @@ public interface UserService {
 	public QuestionVO questionDetail(int qstn_no);
 	public void questionModifyForm(QuestionVO vo);
 	public void deleteQuestion(int qstnno);
+	public List<UserDetailsVO> getUserScoreList();
 
 }

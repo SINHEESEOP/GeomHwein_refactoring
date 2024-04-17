@@ -5,6 +5,8 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import com.geomhwein.go.command.HomeworkVO;
+import com.geomhwein.go.command.QuestionVO;
+import com.geomhwein.go.command.UserDetailsVO;
 import com.geomhwein.go.command.EducationGroupVO;
 
 @Mapper
@@ -28,6 +30,21 @@ public interface CreatorMapper {
 
 
 	public void deleteAns(int asmtAnsNo);
+
+
+	public List<UserDetailsVO> getAllStudent();
+
+
+	public void deleteApply(int aplyNo);
+
+
+	public List<QuestionVO> getQuestionList(String userId);
+
+
+	public QuestionVO getQuestion(int qstnNo);
+
+
+	public void addAnswer(QuestionVO vo);
 
 
 	

@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.geomhwein.go.command.ComunityUploadVO;
 import com.geomhwein.go.command.ReplyVO;
+import com.geomhwein.go.command.UserDetailsVO;
 import com.geomhwein.go.command.ComunityVO;
 import com.geomhwein.go.util.Criteria;
 
@@ -52,6 +53,8 @@ public interface UserMapper {
 	public int getGroupCount();
 
 	public void applyGroup(@Param("groupNo")int groupNo,@Param("userId")String userId);
+
+	public List<UserDetailsVO> getUserScoreList();
 
 	
 

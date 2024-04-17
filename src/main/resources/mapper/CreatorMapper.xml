@@ -23,28 +23,29 @@
 	</insert>
 	<select id="getHomeworkDone" resultType="HomeworkVO">
 		SELECT
-				Student_ID as USER_ID,
-    			ASMT_ANS_NO,
-    			ASMT_ANS,
-    			ASMT_NM,
-    			ASMT_NO,
-    			ASMT_GRD,
-    			ASMT_SCR
+			Student_ID as USER_ID,
+    		ASMT_ANS_NO,
+    		ASMT_ANS,
+    		ASMT_NM,
+   			ASMT_NO,
+    		ASMT_GRD,
+    		ASMT_SCR    
 		FROM    
-		(SELECT 
-    		 homework_submission.ASMT_ANS_NO,
-   			 homework.USER_ID AS Creator_ID,
-   			 homework_submission.USER_ID AS Student_ID,
-  		     homework_submission.ASMT_ANS,
-   			 homework_submission.ASMT_NM,
-   			 homework_submission.ASMT_NO.
-   			 homework.ASMT_GRD,
-    		 homework.ASMT_SCR
-		FROM
-    		 homework_submission
-        RIGHT JOIN
-    		 homework ON homework.ASMT_NO = homework_submission.ASMT_NO) as hwdList 
-    	WHERE CREATOR_ID =#{userId}
+			(SELECT 
+    			homework_submission.ASMT_ANS_NO,
+    			homework.USER_ID AS CREATOR_ID,
+    			homework_submission.USER_ID AS Student_ID,
+    			homework_submission.ASMT_ANS,
+    			homework_submission.ASMT_NM,
+    			homework_submission.ASMT_NO,
+    			homework.ASMT_GRD,
+    			homework.ASMT_SCR
+			 FROM
+    			homework_submission
+        	 RIGHT JOIN
+    			homework ON homework.ASMT_NO = homework_submission.ASMT_NO) as hwdList 
+    	WHERE CREATOR_ID = #{userId}
+    ;
 	</select>
 	<select id="getUserScore" resultType="int">
 		SELECT USER_SCR FROM USER_DETAILS
@@ -59,5 +60,31 @@
 		DELETE FROM homework_submission
 		WEHRE ASMT_ANS_NO=#{asmtAnsNo}
 	</delete>
-	
+	<select id="getAllStudent" resultType="UserDetailsVO">
+		SELECT 
+			RANK() OVER (ORDER BY USER_SCR desc) as USER_RATING,
+    		USER_ID,
+    		USER_TELNO,
+    		USER_EML_ADDR,
+    		USER_AGE,
+    		GENDER,
+   		    USER_SCR 
+		FROM 
+			(SELECT * FROM user_details) as users
+	</select>
+	<delete id="deleteApply">
+		DELETE FROM group_application
+		WHERE APLY_NO=#{aplyNo}
+	</delete>
+	<select id="getQuestionList" resultType="QuestionVO">
+		SELECT * FROM makeQuestion
+	</select>
+	<select id="getQuestion" resultType="QuestionVO">
+		SELECT * FROM makeQuestion
+		WHERE QSTN_NO=#{qstnNo}
+	</select>
+	<insert id="addAnswer">
+		INSERT INTO makeAnswer(ANS_CN,ANS_YMD,QSTN_NO,USER_ID)
+		values(#{vo.ansCn},#{vo.ansYmd},#{vo.qstnNo},#{vo.userId}) 
+	</insert>
 </mapper>

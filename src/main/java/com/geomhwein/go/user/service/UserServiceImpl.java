@@ -19,6 +19,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.geomhwein.go.command.ComunityUploadVO;
 import com.geomhwein.go.command.ReplyVO;
+import com.geomhwein.go.command.UserDetailsVO;
 import com.geomhwein.go.command.ComunityVO;
 import com.geomhwein.go.util.Criteria;
 
@@ -220,6 +221,13 @@ public class UserServiceImpl implements UserService {
 
 		userMapper.deleteQuestion(qstnno);
 		
+	}
+
+
+	//사활풀이 순위
+	public List<UserDetailsVO> getUserScoreList() {
+		
+		return userMapper.getUserScoreList();
 	}
 
 }
