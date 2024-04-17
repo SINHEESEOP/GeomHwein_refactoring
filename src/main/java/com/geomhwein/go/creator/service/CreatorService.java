@@ -1,6 +1,7 @@
 package com.geomhwein.go.creator.service;
 
 import com.geomhwein.go.command.HomeworkVO;
+import com.geomhwein.go.command.UserDetailsVO;
 
 import java.util.List;
 
@@ -21,6 +22,8 @@ public interface CreatorService {
 	public int getUserScore(String userId);
 
 	public void deleteAns(int asmtAnsNo);
+
+	public List<UserDetailsVO> getAllStudent();
 
 	
 

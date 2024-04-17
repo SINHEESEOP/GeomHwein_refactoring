@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.geomhwein.go.command.HomeworkVO;
 import com.geomhwein.go.command.QuestionVO;
+import com.geomhwein.go.command.UserDetailsVO;
 import com.geomhwein.go.command.EducationGroupVO;
 import com.geomhwein.go.creator.service.CreatorService;
 import com.geomhwein.go.securlty.UserAuth;
@@ -29,6 +30,15 @@ public class CreatorController {
 	@Autowired
 	@Qualifier("creatorService")
 	private CreatorService creatorService;
+	
+	@GetMapping("/creatorMain")
+	public String creatorMain(Model model) {
+		List<UserDetailsVO> sList=creatorService.getAllStudent();
+		model.addAttribute("studentList",sList);
+		
+		return "creator/creatorMain";
+	}
+	
 	
 	
 	@GetMapping("/eduGroup")

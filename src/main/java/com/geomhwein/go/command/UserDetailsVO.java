@@ -16,7 +16,7 @@ import java.util.Collection;
 public class UserDetailsVO {
 
 	private String userId; // VARCHAR(100) NOT NULL
-	private String userTelno; // VARCHAR(20)
+	private String userTelNo; // VARCHAR(20)
 	private String userEmlAddr; // VARCHAR(100) NOT NULL
 	private Integer userAge; // INT
 	private Integer userRating; // DECIMAL(5,2)
@@ -34,6 +34,6 @@ public class UserDetailsVO {
 
 	public UserDetailsVO(String userId, String Interests) {
 		this.userId = userId;
-		this.userTelno = Interests;
+		this.userTelNo = Interests;
 	}
 }

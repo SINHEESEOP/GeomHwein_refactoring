@@ -60,5 +60,16 @@
 		DELETE FROM homework_submission
 		WEHRE ASMT_ANS_NO=#{asmtAnsNo}
 	</delete>
-	
+	<select id="getAllStudent" resultType="UserDetailsVO">
+		SELECT 
+			RANK() OVER (ORDER BY USER_SCR desc) as USER_RATING,
+    		USER_ID,
+    		USER_TELNO,
+    		USER_EML_ADDR,
+    		USER_AGE,
+    		GENDER,
+   		    USER_SCR 
+		FROM 
+			(SELECT * FROM user_details) as users
+	</select>
 </mapper>
