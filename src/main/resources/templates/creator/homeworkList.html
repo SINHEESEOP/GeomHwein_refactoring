@@ -4,7 +4,9 @@
 <script src="/js/jquery-3.7.1.min.js"></script>
 <div class="wrap">
  <div class="container-fluid py-4">
-      <div class="container-title">그룹신청내역</div>
+	
+      <div class="container-title">숙제 관리</div>
+      <input type="button" class="makeBtn" value="숙제 등록">
       <div class="search-wrap">
         <span>숙제제출내용</span>      
         <select>
@@ -55,7 +57,7 @@
     	var asmtAns=e.target.parentElement.firstElementChild.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling;
     	var url="homeworkDetail?asmtNo"+asmtNo+"&asmtNm"+asmtNm+"&asmtAns"+asmtAns+"&userId"+userId;
     	var name="숙제 상세보기.";
-    	var option="width=825,length=825,top=0,left=0,location=yes";
+    	var option="width=825,length=825,top=0,left=0,location=no";
     	window.open(url,name,option);
   });
   $(".makeCorrect").click(function(e){
@@ -63,6 +65,12 @@
     	var userId=e.target.parentElement.firstElementChild.nextElementSibling.nextElementSibling;
     	var asmtScr=e.target.parentElement.firstElementChild.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling;
     	location.href="/creator/makeCorrect?"+userId+"&asmtScr"+asmtScr+"&asmtAnsNo"+asmtAnsNo;
+  });
+  $(".makeBtn").click(function(){
+	  	var url="createHomework";
+	  	var name="숙제 등록하기"
+	  	var option="width=1300,length=825,top=0,left=0,location=yes"
+	  	window.open(url,name,option);
   });
 </script>
 </html>
