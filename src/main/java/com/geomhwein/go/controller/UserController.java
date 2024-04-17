@@ -489,6 +489,15 @@ public class UserController {
 		 return list;
 	}
 	
+	@GetMapping("/showAnswer")
+	public String showAnswer(@RequestParam("qstnNo") int qstnNo , Model model) {
+		
+		QuestionVO vo= userService.getAnswer(qstnNo);
+		
+		model.addAttribute("vo",vo);
+		
+		return "user/showAnswer";
+	}
 
 	
 

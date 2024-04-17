@@ -331,4 +331,11 @@ public class UserServiceImpl implements UserService {
 		return userMapper.getGroupApplyList(userId);
 	}
 
+
+	@Override
+	public QuestionVO getAnswer(int qstnNo) {
+		
+		return userMapper.getAnswer(qstnNo);
+	}
+
 }

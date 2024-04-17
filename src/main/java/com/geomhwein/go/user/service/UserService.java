@@ -48,6 +48,7 @@ public interface UserService {
 	public void replyStatus(int reply_no);
 	public void allReplyDelete(int pst_ttl_no);
 	public List<GroupApplicationVO> getGroupApplyList(String userId);
+	public QuestionVO getAnswer(int qstnNo);
 
 
 }

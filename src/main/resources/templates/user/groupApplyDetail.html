@@ -53,7 +53,7 @@
           <td th:onclick="|location.href='@{questionDetail(qstnno=${qvo.QstnNo})}'|">[[${qvo.QstnCn}]]</td>
           <td th:text="${#strings.substring(qvo.QstnYmd,0,10)}"></td>
           <td class th:if=${qvo.QstnStatus}==N><input type="checkbox" disabled>답변대기</td>
-          <td class th:if=${qvo.QstnStatus}==Y><input type="checkbox" checked disabled>답변완료</td>
+          <td class th:if=${qvo.QstnStatus}==Y><input type="checkbox" checked disabled><span th:value="${qvo.QstnNo}" id="successBtn">답변완료</span></td>
         </tr>
       </th:block>
       </table>
@@ -76,5 +76,17 @@
     var option="width=830,length=820,top=0,left=0,location=yes";
     window.open(url,name,option);
   });
+  
+  $("#successBtn").click(function(){
+	  	var qstnno = $(event.target).attr("value");	
+	  
+	    var url="showAnswer?qstnNo="+qstnno;
+	    var name="답변보기";
+	    var option="width=830,length=820,top=0,left=0,location=yes";
+	    window.open(url,name,option);
+	  });
+  
+  
+  
 </script>
 </html>

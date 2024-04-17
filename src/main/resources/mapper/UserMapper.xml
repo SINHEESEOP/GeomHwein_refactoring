@@ -151,13 +151,17 @@
 	</delete>
 	
 	<delete id="deleteFile">
-	delete FROM COMUNITY_UPLOAD WHERE PST_TTL_NO = #{pst_ttl_no};
+	delete FROM COMUNITY_UPLOAD WHERE PST_TTL_NO = #{pst_ttl_no}
 	</delete>
 	
 	<select id="getGroupApplyList" resultType="GroupApplicationVO">
 	SELECT * from group_application G
 	LEFT JOIN  education_group E ON  E.GROUP_NO = G.GROUP_NO
 	WHERE  G.USER_ID = #{userId}
+	</select>
+	
+	<select id="getAnswer" resultType="QuestionVO">
+	select * from MAKEANSWER WHERE QSTN_NO = #{qstnNo}
 	</select>
 	
 </mapper>

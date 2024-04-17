@@ -49,6 +49,7 @@ public interface UserMapper {
 	public void deleteFile(int pst_ttl_no);
 	public int registCreator(@Param("userName") String userName,@Param("docsCode") String docsCode,@Param("reason") String reason);
 	public List<GroupApplicationVO> getGroupApplyList(String userId);
+	public QuestionVO getAnswer(int qstnNo);
 	//아직 mapper작업 안함
 	//반환값으로 성공실패여부 확인
 
