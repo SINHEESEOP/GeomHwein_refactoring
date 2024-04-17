@@ -1,5 +1,8 @@
 package com.geomhwein.go.command;
 
+
+import java.time.LocalDate;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -13,9 +16,9 @@ public class AdminVO {
 
 	private  Integer mttrSn;
 	private String mttrTtl;
-	private String bgngTm;
-	private String ntccn;
-	private String userid;
+	private LocalDate bgngTm;
+	private String mttrCn;
+	private String userId;
 	
 	
 	
