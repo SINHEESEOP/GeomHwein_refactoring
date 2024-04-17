@@ -4,7 +4,7 @@
 <mapper namespace="com.geomhwein.go.user.service.UserMapper">
 
 	<insert id="comunityForm">
-	insert into COMUNITY(PST_TTL_NM,PST_TTL_CN,INQ_CNT,USERID) VALUES(#{pst_ttl_nm},#{pst_ttl_cn},0,'aaa123')
+	insert into COMUNITY(PST_TTL_NM,PST_TTL_CN,INQ_CNT,REPLY_CNT,USERID) VALUES(#{pstTtlNm},#{pstTtlCn},0,0,#{userId})
 	</insert>
 	
 	<select id="getComunityList" resultType="comunityVO">
@@ -19,16 +19,19 @@
 	<if test="searchFilter == 'hit'">
 	ORDER BY INQ_CNT DESC
 	</if>
+	<if test="searchFilter == 'reply'">
+	ORDER BY REPLY_CNT DESC
+	</if>
 	limit #{pageStart},#{amount}
 	</select>
 	
 	<select id="getComunityDetail" resultType="comunityVO">
 	select * from COMUNITY WHERE pst_ttl_no = #{pst_ttl_no}
 	</select>
-	
+		
 	<update id="comunityModifyForm">
-	update COMUNITY set pst_ttl_nm = #{pst_ttl_nm} , pst_ttl_cn = #{pst_ttl_cn} where pst_ttl_no = #{pst_ttl_no}
-	</update>
+	update COMUNITY set pst_ttl_nm = #{pstTtlNm} , pst_ttl_cn = #{pstTtlCn} where pst_ttl_no = #{pstTtlNo}
+	</update>	
 	
 	<delete id="comunityDelete">
 	delete from COMUNITY where pst_ttl_no = #{pst_ttl_no}
@@ -47,32 +50,32 @@
 	
 	<insert id="registFile">
 		
-		<selectKey resultType="int" keyProperty="pst_ttl_no" order="BEFORE">
-			select max(pst_ttl_no) from COMUNITY where USERID = 'aaa123'
+		<selectKey resultType="int" keyProperty="pstTtlNo" order="BEFORE">
+			select max(pst_ttl_no) from COMUNITY where USERID = #{userId}
 		</selectKey>
 		
 	insert into COMUNITY_UPLOAD(
-		filename,
-		filepath,
+		file_name,
+		file_path,
 		uuid,
 		pst_ttl_no,
 		USERID
 	)
 	values(
-	#{filename},
-	#{filepath},
+	#{fileName},
+	#{filePath},
 	#{uuid},
-	#{pst_ttl_no},
+	#{pstTtlNo},
 	#{userId}
 	)
 	</insert>
 	
 	<select id="getFile" resultType="ComunityUploadVO">
-	select * from COMUNITY_UPLOAD WHERE pst_ttl_no = #{pst_ttl_no}
+	select * from COMUNITY_UPLOAD WHERE pst_ttl_no = #{pstTtlNo}
 	</select>
 	
 	<insert id="replyAdd">
-	insert into REPLY values(pst_ttl_no = #{pst_ttl_no},reply_cn=#{reply_cn},USERID=#{userId})
+	insert into REPLY(PST_TTL_NO,REPLY_CN,USERID,PARENT_REPLY_NO) values(#{pstTtlNo},#{replyCn},#{userId},#{parentReplyNo})
 	</insert>
 	
 	<select id="getGroup" resultType="EducationGroupVO">
@@ -82,13 +85,14 @@
 	<select id="getGroupCount" resultType="int">
 		SELECT COUNT(*)FROM EDUCATION_GROUP
 	</select>
+	
 	<insert id="applyGroup">
 		insert into group_application(GROUP_NO,USER_ID)
 		values(#{groupNo},#{userId})
 	</insert>
 	
 	<insert id="addQuestion">
-	insert into MAKEQUESTION(QSTN_CN,USER_ID) values(#{qstnCn},#{userId})
+	insert into MAKEQUESTION(QSTN_CN,USER_ID,GROUP_NO) values(#{qstnCn},#{userId},#{groupNo})
 	</insert>
 	
 	<select id="getQuestionList" resultType="QuestionVO">
@@ -107,4 +111,53 @@
 	<delete id="deleteQuestion">
 	delete FROM MAKEQUESTION WHERE QSTN_NO = #{qstnNo}
 	</delete>
+	
+	<select id="getReplyList" resultType="ReplyVO">
+	select * from REPLY where pst_ttl_no = #{pst_ttl_no} and parent_reply_no = 0;
+	</select>
+	
+	<update id="replyUpdate">
+	update REPLY set reply_cn = #{replyCn} where reply_no = #{replyNo}
+	</update>
+	
+	<delete id="replyDelete">
+		delete from REPLY where reply_no = #{reply_no}
+	</delete>
+	
+	<select id="getChildList" resultType="ReplyVO">
+	
+	select * from REPLY where parent_reply_no = #{parent_reply_no};
+	</select>
+	
+	<update id="replyCount">
+		update COMUNITY SET REPLY_CNT = REPLY_CNT + 1 WHERE pst_ttl_no = #{pstTtlNo};
+	</update>
+	
+	<update id="deleteCount">
+		UPDATE COMUNITY SET REPLY_CNT = REPLY_CNT - 1 WHERE PST_TTL_NO = #{pstTtlNo};
+	</update>
+	
+	<select id="replyFilter" resultType="ReplyVO">
+	
+	select * from REPLY WHERE PARENT_REPLY_NO = #{reply_no}
+	</select>
+	
+	<update id="replyStatus">
+		update REPLY set REPLY_STATUS = FALSE WHERE REPLY_NO = #{REPLY_NO}
+	</update>
+	
+	<delete id="allReplyDelete">
+	delete from REPLY where pst_ttl_no = #{pst_ttl_no}
+	</delete>
+	
+	<delete id="deleteFile">
+	delete FROM COMUNITY_UPLOAD WHERE PST_TTL_NO = #{pst_ttl_no};
+	</delete>
+	
+	<select id="getGroupApplyList" resultType="GroupApplicationVO">
+	SELECT * from group_application G
+	LEFT JOIN  education_group E ON  E.GROUP_NO = G.GROUP_NO
+	WHERE  G.USER_ID = #{userId}
+	</select>
+	
 </mapper>

@@ -16,6 +16,10 @@
           	작성일:
             <span class="content-regdate" th:text="${#strings.substring(vo.QstnYmd,0,10)}"></span>
           </span>
+          <span>
+          <span>그룹번호:</span>
+          [[${vo.GroupNo}]]
+          </span>
         </div>
         <div class="content-box">
           <textarea name="" id="textarea" cols="30" rows="10" readonly>[[${vo.QstnCn}]]</textarea>
@@ -24,8 +28,9 @@
     </div>
     <div class="button-wrap">
       <button type="button" id="changeBtn" th:onclick="|location.href='@{questionModify(qstnno=${vo.QstnNo})}'|">수정하기</button>
-      <button type="button" id="deleteBtn" th:onclick="|location.href='@{questionDelete(qstnno=${vo.QstnNo})}'|">삭제하기</button>
-      <button type="button" id="backBtn" onclick="location.href='questionList'">목륵으로</button>
+      <button type="button" id="deleteBtn" th:onclick="|location.href='@{questionDelete(qstnno=${vo.QstnNo},groupno=${vo.GroupNo})}'|">삭제하기</button>
+      <button type="button" id="backBtn" th:onclick="|location.href='@{groupApplyDetail(groupno=${vo.GroupNo})}'|">목륵으로</button>
+     
     </div>
     </div>
 </th:block>

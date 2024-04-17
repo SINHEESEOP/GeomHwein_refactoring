@@ -11,12 +11,12 @@ import lombok.NoArgsConstructor;
 @Builder
 public class ComunityUploadVO {
 
-	private Integer upload_no;
-	private String filename;
-	private String filepath;
+	private Integer uploadNo;
+	private String fileName;
+	private String filePath;
 	private String uuid;
-	private String regdate;
-	private Integer pst_ttl_no;
+	private String regDate;
+	private Integer pstTtlNo;
 	private String userId;
 	
 }
