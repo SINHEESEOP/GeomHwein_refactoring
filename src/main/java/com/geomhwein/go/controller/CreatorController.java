@@ -100,7 +100,7 @@ public class CreatorController {
 			return "creator/homeworkList";
 			
 		}else {
-			return "creator/creatorFail";
+			return "redirect:/";
 		}
 			
 		
@@ -121,7 +121,7 @@ public class CreatorController {
 	public String groupApplyList(Model model) {
 		int applyCount=creatorService.getApplyCount();
 		if(applyCount==0) {
-			return "creator/creatorFail";
+			return "redirect:/";
 		}
 		List<EducationGroupVO> applyList= new ArrayList<>();
 		for(int i=1;i<=applyCount;i++) {

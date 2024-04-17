@@ -6,6 +6,7 @@ import java.net.URLEncoder;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 
@@ -24,6 +25,7 @@ import org.springframework.http.ResponseEntity;
 
 import java.util.List;
 import com.geomhwein.go.command.UserAuthVO;
+import com.geomhwein.go.command.UserDetailsVO;
 import com.geomhwein.go.securlty.UserAuth;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -412,7 +414,11 @@ public class UserController {
 	}
 
 	@GetMapping("/groupProgress")
-	public String groupProgress() {
+	public String groupProgress(Model model) {
+		List<UserDetailsVO> userList=userService.getUserScoreList();
+		System.out.println(userList.toString());
+		model.addAttribute("userList",userList);
+		
 		return "user/groupProgress";
 	}
 	

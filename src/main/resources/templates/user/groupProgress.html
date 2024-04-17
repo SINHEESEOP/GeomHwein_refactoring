@@ -39,18 +39,17 @@
   			<table class="rankTable">
   				<tr>
   					<th>순위</th>
+  					<th>아이디</th>
+  					<th>나이</th>
   					<th>총점</th>
-  					<th>이름</th>
-  					<th>그룹</th>
-  				</tr>
-  				<!-- <tr th:each="vo,status : {rankList}"> -->
-  				<tr>
-  					<td></td>
-  					<td></td>
-  					<td></td>
-  					<td></td>
   				</tr>
   				
+  				<tr th:each="vo,status :${userList}">
+  					<td>[[${vo.userRating}]]</td>
+  					<td>[[${vo.userId}]]</td>
+  					<td>[[${vo.userScr}]]</td>
+  					<td>[[${vo.userAge}]]</td>
+  				</tr>
   			</table>
   		</div>
   	</div>
