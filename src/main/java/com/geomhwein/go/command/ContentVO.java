@@ -27,4 +27,8 @@ public class ContentVO {
 	private String userId;
 	private String keywords;
 
+	public ContentVO(String userId, String keywords) {
+		this.userId = userId;
+		this.keywords = keywords;
+	}
 }

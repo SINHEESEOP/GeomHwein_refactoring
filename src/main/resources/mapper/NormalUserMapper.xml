@@ -78,6 +78,4 @@
         limit #{pageStart}, #{amount};
     </select>
 
-
-
 </mapper>
