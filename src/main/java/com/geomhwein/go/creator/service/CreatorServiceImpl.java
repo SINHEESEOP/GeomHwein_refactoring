@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.geomhwein.go.command.HomeworkVO;
+import com.geomhwein.go.command.QuestionVO;
 import com.geomhwein.go.command.UserDetailsVO;
 import com.geomhwein.go.command.EducationGroupVO;
 
@@ -64,6 +65,32 @@ public class CreatorServiceImpl implements CreatorService{
 	public List<UserDetailsVO> getAllStudent() {
 		
 		return creatorMapper.getAllStudent();
+	}
+
+	@Override
+	public void deleteApply(int aplyNo) {
+		
+		creatorMapper.deleteApply(aplyNo);
+		
+	}
+
+	@Override
+	public List<QuestionVO> getQuestionList(String userId) {
+		
+		return creatorMapper.getQuestionList(userId);
+	}
+
+	
+	public QuestionVO getQuestion(int qstnNo) {
+		
+		return creatorMapper.getQuestion(qstnNo);
+	}
+
+	
+	public void addAnswer(QuestionVO vo) {
+		
+		creatorMapper.addAnswer(vo);
+		
 	}
 
 	

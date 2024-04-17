@@ -375,7 +375,7 @@ public class UserController {
 			
 			return "creator/creatorFail";//임시조치
 		}
-		return "creator/creatorSuccess";//임시조치
+		return "redirect:/";//임시조치
 		
 	}
 	

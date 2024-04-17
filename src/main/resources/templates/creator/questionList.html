@@ -17,33 +17,23 @@
       </div>
       <table class="comunity-table">
         <tr class="table-title">
-          <th>No</th>
-          <th>질문</th>
+          <th>번호</th>
+          <th>질문내용</th>
           <th>질문자</th>
           <th>질문날짜</th>
           <th>상태</th>
           <th>옵션</th>
         </tr>
-        <tr class="table-content">
-          <td>1</td>
-          <td>질문했어요</td>
-          <td>김바둑</td>
-          <td>2024-01-01</td>
-          <td class><input type="checkbox" disabled>답변대기</td>
+        <tr class="table-content" th:each="vo,status : ${questionList}">
+          <td>[[${vo.qstnNo}]]</td>
+          <td>[[${vo.qstnCn}]]</td>
+          <td>[[${vo.userId}]]</td>
+          <td>[[${vo.qstnYmd}]]</td>
+          <td><input type="checkbox" disabled="disabled" class="ansWait">답변대기</td>
           <td><button class="answerBtn">답변하기</button></td>
         </tr>
-        <tr class="table-content">
-          <td>1</td>
-          <td>질문했어요</td>
-          <td>김바둑</td>
-          <td>2024-01-01</td>
-          <td class="question-success"><input type="checkbox" class="question-waiting" checked disabled>답변완료</td>
-           <td><button class="answerBtn">답변하기</button></td>
-        </tr>
       </table>
-      <div class="reg">
-        <button type="button" class="makeQuestionBtn">질문하기</button>
-      </div>
+      
       <div class="pagenation">
         <span>prev</span>
         <span class="active">1</span>
@@ -55,12 +45,12 @@
 	</div>
 </th:block>
 <script>
-  $(".makeQuestionBtn").click(function(){
-    var username="aaa123";//임시유저네임
-    var url="makeQuestion?username="+username;
-    var name="질문작성하기";
-    var option="width=830,length=820,top=0,left=0,location=yes";
-    window.open(url,name,option);
+  $(".answerBtn").click(function(e){
+	  var qstnNo=e.target.parentElement.firstElementChild.innerHTML;
+	  var url="makeAnswerForm?qstnNo="+qstnNo;
+	  var name="답변 등록하기";
+	  var option="width=810,height=810,top=0,left=0,location=yes";
+	  window.open(url,name,option);
   });
 </script>
 </html>

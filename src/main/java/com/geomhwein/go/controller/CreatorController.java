@@ -19,6 +19,8 @@ import com.geomhwein.go.command.UserDetailsVO;
 import com.geomhwein.go.command.EducationGroupVO;
 import com.geomhwein.go.creator.service.CreatorService;
 import com.geomhwein.go.securlty.UserAuth;
+import org.springframework.web.bind.annotation.RequestBody;
+
 
 
 
@@ -77,10 +79,19 @@ public class CreatorController {
 	
 	
 
-	@GetMapping("/questionList")
-	public String questionList(Model model) {
-		List<QuestionVO> qList= new ArrayList<>();
-		return "creator/questionList";
+	@GetMapping("/viewQuestionList")
+	public String questionList(Model model,Authentication authentication) {
+		if (authentication != null) {
+			UserAuth userAuth = (UserAuth)authentication.getPrincipal();
+
+			String userId  = userAuth.getUserId();
+			List<QuestionVO> qList= creatorService.getQuestionList(userId);
+			model.addAttribute("questionList",qList);
+			return "creator/questionList";
+		}else {
+			return "redirect:/";	
+			
+		}
 	}
 	
 	@GetMapping("/createHomework")
@@ -143,6 +154,36 @@ public class CreatorController {
 		}
 		model.addAttribute("applyList",applyList);
 		return "creator/groupApplyList";
+	}
+	
+	@GetMapping("/refuseRegist")
+	public String refuseRegist(@RequestParam("aplyNo")int aplyNo) {
+		creatorService.deleteApply(aplyNo);
+		
+		return "creator/groupApplyList";
+	}
+	
+	@GetMapping("/makeAnswerForm")
+	public String getMethodName(@RequestParam("qstnNo")int qstnNo,Model model,Authentication authentication) {
+		if (authentication != null) {
+			UserAuth userAuth = (UserAuth)authentication.getPrincipal();
+
+			String userId  = userAuth.getUserId();//선생님 ID
+			QuestionVO qvo=creatorService.getQuestion(qstnNo);
+			model.addAttribute("questionVo",qvo);
+			model.addAttribute("creatorId",userId);
+			return "creator/makeAnswer";
+			
+		}else {
+			return "creator/noAuth";
+		}
+		
+	}
+	@PostMapping("/registAnswerForm")
+	public String registAnswerForm(QuestionVO vo) {
+		creatorService.addAnswer(vo);
+		
+		return "creator/creatorMain";
 	}
 	
 	
