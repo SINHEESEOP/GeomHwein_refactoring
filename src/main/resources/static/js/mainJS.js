@@ -3,7 +3,7 @@ $(document).ready(function () {
     var role2 = $("#serverMessage2").text(); // HTML 요소에서 메시지 텍스트 추출
     if (role2) {
         // 메시지가 있으면 경고창으로 보여줌
-        alert(role2);
+        // alert(role2);
     }
 });
 

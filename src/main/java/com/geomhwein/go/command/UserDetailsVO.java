@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Collection;
 
 @Data
@@ -15,6 +16,8 @@ import java.util.Collection;
 @Builder
 public class UserDetailsVO {
 
+	private ContentVO contentVO;
+	private EducationGroupVO educationGroupVO;
 	private String userId; // VARCHAR(100) NOT NULL
 	private String userTelno; // VARCHAR(20)
 	private String userEmlAddr; // VARCHAR(100) NOT NULL
@@ -31,6 +34,7 @@ public class UserDetailsVO {
 	private LocalDateTime lastLoginDatetime; // DATETIME
 	private Integer userScr;//숙제점수
 	private String Interests;
+	private String userNm;
 
 	public UserDetailsVO(String userId, String Interests) {
 		this.userId = userId;

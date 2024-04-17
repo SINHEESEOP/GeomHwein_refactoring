@@ -1,18 +1,15 @@
 package com.geomhwein.go.user.service;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 
+import com.geomhwein.go.command.*;
+import org.apache.ibatis.annotations.Select;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.geomhwein.go.command.ComunityUploadVO;
-import com.geomhwein.go.command.ReplyVO;
-import com.geomhwein.go.command.ComunityVO;
 import com.geomhwein.go.util.Criteria;
-import com.geomhwein.go.command.HomeworkVO;
-import com.geomhwein.go.command.QuestionVO;
-
-import com.geomhwein.go.command.EducationGroupVO;
 
 
 public interface UserService {
@@ -37,4 +34,7 @@ public interface UserService {
 	public void questionModifyForm(QuestionVO vo);
 	public void deleteQuestion(int qstnno);
 
+	public UserDetailsVO getUserDetails (String userId);
+	public ArrayList<UserDetailsVO> getAllEducationGroup(String userId);
+//    public ArrayList< Map<String, Object> > getAllEducationGroup(String userId);
 }

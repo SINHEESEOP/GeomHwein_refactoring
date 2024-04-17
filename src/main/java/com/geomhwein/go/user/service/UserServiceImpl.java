@@ -4,12 +4,13 @@ package com.geomhwein.go.user.service;
 import java.io.File;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 import java.util.List;
 
 
+import com.geomhwein.go.command.*;
+import org.apache.ibatis.annotations.Select;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -17,15 +18,9 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 
-import com.geomhwein.go.command.ComunityUploadVO;
-import com.geomhwein.go.command.ReplyVO;
-import com.geomhwein.go.command.ComunityVO;
 import com.geomhwein.go.util.Criteria;
 
-import com.geomhwein.go.command.HomeworkVO;
-import com.geomhwein.go.command.QuestionVO;
 import com.geomhwein.go.command.ComunityVO;
-import com.geomhwein.go.command.EducationGroupVO;
 
 @Service("userService")
 public class UserServiceImpl implements UserService {
@@ -50,7 +45,18 @@ public class UserServiceImpl implements UserService {
 		}
 		return filepath;
 	}
-	
+
+	public UserDetailsVO getUserDetails (String userId) {
+		return userMapper.getUserDetails(userId);
+	}
+
+	@Override
+	public ArrayList<UserDetailsVO> getAllEducationGroup(String userId) {
+		return userMapper.getAllEducationGroup(userId);
+	}
+//	public ArrayList< Map<String, Object> > getAllEducationGroup(String userId) {
+//		return userMapper.getAllEducationGroup(userId);
+//	}
 
 	@Override
 	@Transactional(rollbackFor = Exception.class) //에러시 롤백처리

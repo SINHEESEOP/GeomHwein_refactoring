@@ -5,14 +5,13 @@ import java.io.File;
 import java.net.URLEncoder;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.geomhwein.go.command.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
@@ -23,7 +22,7 @@ import org.springframework.http.ResponseEntity;
 
 
 import java.util.List;
-import com.geomhwein.go.command.UserAuthVO;
+
 import com.geomhwein.go.securlty.UserAuth;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -44,17 +43,10 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 
-import com.geomhwein.go.command.HomeworkVO;
-import com.geomhwein.go.command.QuestionVO;
-
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 
-import com.geomhwein.go.command.ComunityUploadVO;
-import com.geomhwein.go.command.ReplyVO;
-import com.geomhwein.go.command.ComunityVO;
-import com.geomhwein.go.command.EducationGroupVO;
 import com.geomhwein.go.user.service.UserService;
 import com.geomhwein.go.util.Criteria;
 import com.geomhwein.go.util.PageVO;
@@ -68,6 +60,10 @@ public class UserController {
 	@Value("${project.upload.path}")
 	private String uploadPath;
 
+	@Autowired
+	@Qualifier("userService")
+	private UserService userService;
+
 	@GetMapping("/cart")
 	public String cart() {
 		return "user/cart";
@@ -77,35 +73,23 @@ public class UserController {
 	public String billing() {
 		return "user/billing";
 	}
-	
-	
-	
 
 	@GetMapping("/profile")
 	public String profile(Authentication authentication, Model model) {
-
-		System.out.println("요청 왔는겨?");
-
 		if (authentication != null) {
 			UserAuth userAuth = (UserAuth)authentication.getPrincipal();
+			model.addAttribute("role", userAuth.getRole());
 
-			String userId  = userAuth.getUserId();
-			String userPwHash = userAuth.getPassword();
-			String userRole = userAuth.getRole();
+			List<UserDetailsVO> userEduList = userService.getAllEducationGroup(userAuth.getUserId());
+//			ArrayList<Map<String, Object>> userEduList = userService.getAllEducationGroup(userAuth.getUserId());
 
-			System.out.println(userId + " " + userPwHash + " " + userRole);
-			System.out.println("213231");
-			model.addAttribute("role", userRole );
+			System.out.println("리스트 숫자 : " + userEduList.size());
 
+			model.addAttribute("userEduList", userEduList);
 		}
 
-		return "/user/profile";
+		return "user/profile";
 	}
-	
-	@Autowired
-	@Qualifier("userService")
-	private UserService userService;
-	
 
 	@GetMapping("/comunityList")
 	public String userComunityList(Model model , Criteria cri) {
