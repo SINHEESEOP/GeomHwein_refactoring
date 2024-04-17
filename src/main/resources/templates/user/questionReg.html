@@ -1,0 +1,39 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<link rel="stylesheet" href="/css/comunityReg.css">
+<th:block th:replace="~{/include/baseLayout :: setContent( ~{ :: .wrap} ) }">
+
+<div class="wrap">
+ <div class="container-fluid py-4">
+      <div class="container-title">질문하기</div>
+      <form action="questionForm" method="post">
+        <div class="reg-wrap">
+          <div class="reg-title">
+            <p>사용자 이름</p>
+            <input type="text" name="userId" th:value="${#authentication.name}" readonly>
+          </div>
+          <div class="reg-content">
+            <p>내용</p>
+            <textarea id="textarea" name="qstnCn"></textarea>
+          </div>
+          <div class="reg-button"> 
+            <input type="submit" class="regBtn" value="질문하기">
+            <button type="button" class="backBtn">취소</button>
+          </div>
+      	</div>
+      </form>
+      </div>
+</div>
+</th:block>
+
+<script th:inline="javascript">
+
+
+window.resizeTo(825,825);
+
+$(".backBtn").click(function(){
+	window.close();
+})
+
+</script>
+
+</html>

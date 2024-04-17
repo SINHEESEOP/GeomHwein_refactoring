@@ -202,16 +202,18 @@ public class UserController {
 		return "user/groupApplyList";
 	}
 	
+	
 	@GetMapping("/questionList")
 	public String questionList(Model model,Authentication authentication) {
+		
 		if (authentication != null) {
 			UserAuth userAuth = (UserAuth)authentication.getPrincipal();
-
-			String userId  = userAuth.getUserId();
-			model.addAttribute("userName",userId);
-
-		}
+			String userId = userAuth.getUsername();
+	
+			List<QuestionVO> list = userService.getQuestionList(userId);
 		
+			model.addAttribute("list",list);
+		}
 		
 		return "user/questionList";
 	}
@@ -235,21 +237,6 @@ public class UserController {
 		return "user/homeworkList";
 	}
 
-	@GetMapping("/makeQuestion")
-	public String makeQuestion(@RequestParam("username")String username,Model model){
-		model.addAttribute("username",username);
-		
-		return "user/makeQuestion";
-	}
-	@PostMapping("/registQuestionForm")
-	public void registQuestionForm(@RequestParam("userId")String userId,@RequestParam("questionDate")String questionDate,@RequestParam("questionCn")String questionCn,QuestionVO vo) {
-		vo.setUserId(userId);
-		vo.setQusCn(questionCn);
-		vo.setQusYmd(questionDate);
-		userService.addQuestion(vo);
-		//질문내용을 DB에 저장하는 메서드
-	}
-	
 	@PostMapping("/creatorRegForm")
 	public String creatorRegForm(@RequestParam("userName")String userName,@RequestParam("docsCode")String docsCode,@RequestParam("reason")String reason) {
 		userService.registCreator(userName,docsCode,reason);
@@ -261,12 +248,24 @@ public class UserController {
 	
 	
 	@GetMapping("/questionDetail")
-	public String questionDetail() {
+	public String questionDetail(@RequestParam("qstnno") int qstn_no , Model model) {
+		
+		System.out.println(qstn_no);
+		
+		QuestionVO vo = userService.questionDetail(qstn_no);
+		
+		model.addAttribute("vo",vo);
+		
 		return "user/questionDetail";
 	}
 	
 	@GetMapping("/questionModify")
-	public String questionModify() {
+	public String questionModify(@RequestParam("qstnno") int qstnno , Model model) {
+		
+		QuestionVO vo = userService.questionDetail(qstnno);
+		
+		model.addAttribute("vo",vo);
+		
 		return "user/questionModify";
 	}
 	
@@ -347,7 +346,17 @@ public class UserController {
 		 return result;
 	}
   
-  @GetMapping("/groupSelectForm")
+	@PostMapping("/replyAdd")
+	@ResponseBody
+	public String replayAdd(@RequestBody ReplyVO vo) {
+		
+		
+		userService.replyAdd(vo);
+		
+		return "success";
+	}
+	
+	@GetMapping("/groupSelectForm")
 	public String groupSelectForm(@RequestParam("groupNo")String gno,Authentication authentication) {
 		int groupNo=Integer.parseInt(gno);
 		
@@ -368,15 +377,41 @@ public class UserController {
 		
 	}
 	
-	@PostMapping("/replyAdd")
-	@ResponseBody
-	public String replayAdd(@RequestBody ReplyVO vo) {
+	@GetMapping("/questionReg")
+	public String questionReg() {
 		
 		
-		userService.replyAdd(vo);
-		
-		return "success";
+		return "user/questionReg";
 	}
 	
+	@PostMapping("/questionForm")
+	public String questionForm(QuestionVO vo) {
+		
+		System.out.println(vo.toString());
+		
+		userService.addQuestion(vo);
+		
+		return "redirect:/user/questionList";
+	}
+	
+	@PostMapping("/questionModifyForm")
+	public String questionModifyForm(QuestionVO vo) {
+		
+		userService.questionModifyForm(vo);
+		
+		return "redirect:/user/questionList";
+	}
+	
+	
+	@GetMapping("questionDelete")
+	public String deleteQuestion(@RequestParam("qstnno") int qstnno) {
+		
+		userService.deleteQuestion(qstnno);
+		
+		return "redirect:/user/questionList";
+	}
+
+	
+
 	
 }

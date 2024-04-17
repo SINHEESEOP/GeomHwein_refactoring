@@ -26,14 +26,15 @@ public interface UserService {
 	public int comunityTotal(Criteria cri);
 	public List<ComunityUploadVO> getFile(int pst_ttl_no);
 	public void replyAdd(ReplyVO vo);
-
 	public List<HomeworkVO> getHomeworkList(String userId);
 	public void addQuestion(QuestionVO vo);
 	public int registCreator(String userName, String docsCode, String reason);
-
 	public EducationGroupVO getGroup(int groupNo);
-	
 	public int getGroupCount();
 	public void applyGroup(int groupNo, String username);
+	public List<QuestionVO> getQuestionList(String username);
+	public QuestionVO questionDetail(int qstn_no);
+	public void questionModifyForm(QuestionVO vo);
+	public void deleteQuestion(int qstnno);
 
 }

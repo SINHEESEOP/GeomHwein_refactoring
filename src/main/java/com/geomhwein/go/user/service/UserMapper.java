@@ -31,9 +31,11 @@ public interface UserMapper {
 	public void registFile(ComunityUploadVO vo);
 	public List<ComunityUploadVO> getFile(int pst_ttl_no);
 	public void replyAdd(ReplyVO vo);
-
 	public void addQuestion(QuestionVO vo);
-	//아직 mapper작업 안햇음
+	public List<QuestionVO> getQuestionList(String username);
+	public QuestionVO questionDetail(int qstn_no);
+	public void questionModifyForm(QuestionVO vo);
+	public void deleteQuestion(int qstnno);
 
 	public int registCreator(@Param("userName") String userName,@Param("docsCode") String docsCode,@Param("reason") String reason);
 	//아직 mapper작업 안함
