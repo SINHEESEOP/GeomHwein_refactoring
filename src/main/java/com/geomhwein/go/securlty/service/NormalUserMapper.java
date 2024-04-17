@@ -14,4 +14,5 @@ public interface NormalUserMapper {
 	public UserAuthVO signIn(String userId);
 	public ArrayList<EducationGroupVO> getList(Criteria cri);
 	public ArrayList<UserAuthVO> getUserList(Criteria cri, String id);
+
 }
