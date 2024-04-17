@@ -411,6 +411,10 @@ public class UserController {
 		return "redirect:/user/questionList";
 	}
 
+	@GetMapping("/groupProgress")
+	public String groupProgress() {
+		return "user/groupProgress";
+	}
 	
 
 	

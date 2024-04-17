@@ -65,18 +65,6 @@
 		<hr class="horizontal light mt-0 mb-2">
 		<div class="collapse navbar-collapse w-auto max-height-vh-100 sidenav_click" id="sidenav-collapse-main">
 			<ul class="navbar-nav">
-			
-			
-<!--				<li class="nav-item">-->
-<!--					<a class="nav-link text-white " href="../pages/dashboard.html">-->
-<!--						<div class="text-white text-center me-2 d-flex align-items-center justify-content-center">-->
-<!--							<i class="material-icons opacity-10">dashboard</i>-->
-<!--						</div>-->
-<!--						<span class="nav-link-text ms-1">대쉬보드</span>-->
-<!--					</a>-->
-<!--				</li>-->
-				
-				
 				<li class="nav-item">
 					<a class="nav-link text-white tab " id="tab1" href="/" data-page-name="홈">
 						<div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
@@ -102,28 +90,50 @@
 <!--						<span class="nav-link-text ms-1">Virtual Reality</span>-->
 <!--					</a>-->
 <!--				</li>-->
-
+				<li class="nav-item">
+					<a class="nav-link text-white tab" href="/user/groupList">
+						<div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+							<i class="material-icons opacity-10">group</i>
+						</div>
+						<span class="nav-link-text ms-1">그룹보기</span>
+					</a>
+				</li>
+				<!-- 교육자권한일때만 보이게 처리 시작 -->
+				<li class="nav-item">
+					<a class="nav-link text-white " href="/creator/groupApplyList">
+						<div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+							<i class="material-icons opacity-10">diversity_3</i>
+						</div>
+						<span class="nav-link-text ms-1">그룹관리</span>
+					</a>
+				</li> 
+				<li class="nav-item">
+					<a class="nav-link text-white " href="/creator/createHomework">
+						<div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+							<i class="material-icons opacity-10">library_add</i>
+						</div>
+						<span class="nav-link-text ms-1">숙제등록</span>
+					</a>
+				</li> 
 				
-<!--				<li class="nav-item">-->
-<!--					<a class="nav-link text-white " href="../pages/rtl.html">-->
-<!--						<div class="text-white text-center me-2 d-flex align-items-center justify-content-center">-->
-<!--							<i class="material-icons opacity-10">format_textdirection_r_to_l</i>-->
-<!--						</div>-->
-<!--						<span class="nav-link-text ms-1">RTL</span>-->
-<!--					</a>-->
-<!--				</li>-->
 				
-				
-<!--				<li class="nav-item">-->
-<!--					<a class="nav-link text-white " href="../pages/notifications.html">-->
-<!--						<div class="text-white text-center me-2 d-flex align-items-center justify-content-center">-->
-<!--							<i class="material-icons opacity-10">notifications</i>-->
-<!--						</div>-->
-<!--						<span class="nav-link-text ms-1">알림</span>-->
-<!--					</a>-->
-<!--				</li>-->
-				
-				
+				<li class="nav-item">
+					<a class="nav-link text-white " href="/creator/getHomeworkDoneList">
+						<div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+							<i class="material-icons opacity-10">ad_units</i>
+						</div>
+						<span class="nav-link-text ms-1">숙제관리</span>
+					</a>
+				</li>
+				<!-- 교육자권한일때만 보이게 처리 끝 -->
+				<li class="nav-item">
+					<a class="nav-link text-white " href="/user/groupProgress">
+						<div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+							<i class="material-icons opacity-10">signal_cellular_alt</i>
+						</div>
+						<span class="nav-link-text ms-1">진도현황보기</span>
+					</a>
+				</li> 
 				
 				<li class="nav-item mt-3 ">
 					<h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">계정 페이지</h6>
