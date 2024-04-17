@@ -8,6 +8,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.geomhwein.go.command.ComunityUploadVO;
 import com.geomhwein.go.command.ReplyVO;
+import com.geomhwein.go.command.UserDetailsVO;
 import com.geomhwein.go.command.ComunityVO;
 import com.geomhwein.go.util.Criteria;
 import com.geomhwein.go.command.HomeworkVO;
@@ -38,6 +39,7 @@ public interface UserService {
 	public QuestionVO questionDetail(int qstn_no);
 	public void questionModifyForm(QuestionVO vo);
 	public void deleteQuestion(int qstnno);
+
 	public List<ReplyVO> getReplyList(int pst_ttl_no);
 	public void replyUpdate(ReplyVO vo);
 	public void replyDelete(int reply_no);
@@ -48,6 +50,7 @@ public interface UserService {
 	public void replyStatus(int reply_no);
 	public void allReplyDelete(int pst_ttl_no);
 	public List<GroupApplicationVO> getGroupApplyList(String userId);
+	public List<UserDetailsVO> getUserScoreList();
 
 
 }

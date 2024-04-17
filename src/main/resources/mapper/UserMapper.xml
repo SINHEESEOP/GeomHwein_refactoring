@@ -158,6 +158,15 @@
 	SELECT * from group_application G
 	LEFT JOIN  education_group E ON  E.GROUP_NO = G.GROUP_NO
 	WHERE  G.USER_ID = #{userId}
+
+	<select id="getUserScoreList" resultType="UserDetailsVO">
+		SELECT 
+			rank() over (order by USER_SCR desc) as USER_RATING,
+			USER_ID,
+			USER_SCR,
+			USER_AGE
+		FROM
+			USER_DETAILS
 	</select>
 	
 </mapper>
