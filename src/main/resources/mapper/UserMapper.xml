@@ -217,6 +217,7 @@
 	SELECT * from group_application G
 	LEFT JOIN  education_group E ON  E.GROUP_NO = G.GROUP_NO
 	WHERE  G.USER_ID = #{userId}
+	</select>
 
 	<select id="getUserScoreList" resultType="UserDetailsVO">
 		SELECT 
