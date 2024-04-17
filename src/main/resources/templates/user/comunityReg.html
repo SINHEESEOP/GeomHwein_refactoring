@@ -7,19 +7,23 @@
       <div class="container-title">글등록</div>
       <form action="comunityForm" method="POST" enctype="multipart/form-data">
         <div class="reg-wrap">
+        <div class="reg-title">
+            <p>작성자</p>
+            <input type="text" name="userId" th:value="${#authentication.name}" readonly>
+          </div>
           <div class="reg-title">
             <p>제목</p>
-            <input type="text" name="pst_ttl_nm">
+            <input type="text" name="pstTtlNm">
           </div>
           <div class="reg-content">
             <p>내용</p>
-            <textarea id="textarea" name="pst_ttl_cn"></textarea>
+            <textarea id="textarea" name="pstTtlCn"></textarea>
           </div>
           <div class="reg-upload">
             <p>파일등록</p>
             <input type="file" name="file" multiple="multiple" id="file-input">
             <p>업로드한파일</p>
-            <div class="file-view"> 
+            <div class="file-view">
             </div>
           </div>
           <div class="reg-button"> 

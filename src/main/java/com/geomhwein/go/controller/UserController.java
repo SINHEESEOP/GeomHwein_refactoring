@@ -3,6 +3,7 @@ package com.geomhwein.go.controller;
 
 import java.io.File;
 import java.net.URLEncoder;
+import java.security.Principal;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -57,6 +58,7 @@ import com.geomhwein.go.command.ComunityUploadVO;
 import com.geomhwein.go.command.ReplyVO;
 import com.geomhwein.go.command.ComunityVO;
 import com.geomhwein.go.command.EducationGroupVO;
+import com.geomhwein.go.command.GroupApplicationVO;
 import com.geomhwein.go.user.service.UserService;
 import com.geomhwein.go.util.Criteria;
 import com.geomhwein.go.util.PageVO;
@@ -80,9 +82,6 @@ public class UserController {
 		return "user/billing";
 	}
 	
-	
-	
-
 	@GetMapping("/profile")
 	public String profile(Authentication authentication, Model model) {
 
@@ -171,7 +170,10 @@ public class UserController {
 		
 		ComunityVO vo = userService.getComunityDetail(pst_ttl_no);
 		
+		List<ComunityUploadVO> list = userService.getFile(pst_ttl_no);
+		
 		model.addAttribute("vo",vo);
+		model.addAttribute("list",list);
 		
 		return "user/comunityModify";
 	}
@@ -194,30 +196,39 @@ public class UserController {
 		model.addAttribute("groupList",groupList);
 		return "user/groupList";
 	}
+	
 	@GetMapping("/eduGroup")
 	public String eduGroup  (@RequestParam("username")String username,Model model) {
 		model.addAttribute("username",username );
 		return "user/eduGroup";
 	}
+	
 	@GetMapping("/groupApplyList")
-	public String groupApplyList() {
+	public String groupApplyList(Principal prin , Model model) {
+		
+		String userId = prin.getName();
+		
+		List<GroupApplicationVO> list = userService.getGroupApplyList(userId);
+		
+		model.addAttribute("list",list);
+		
 		return "user/groupApplyList";
 	}
 	
 	
-	@GetMapping("/questionList")
-	public String questionList(Model model,Authentication authentication) {
+
+	@GetMapping("/groupApplyDetail")
+	public String groupApplyDetail(@RequestParam("groupno") int groupNo, Model model , Principal prin) {
 		
-		if (authentication != null) {
-			UserAuth userAuth = (UserAuth)authentication.getPrincipal();
-			String userId = userAuth.getUsername();
-	
-			List<QuestionVO> list = userService.getQuestionList(userId);
+		String userId = prin.getName();
 		
-			model.addAttribute("list",list);
-		}
+		EducationGroupVO vo = userService.getGroup(groupNo);
+		List<QuestionVO> list = userService.getQuestionList(userId);
 		
-		return "user/questionList";
+		model.addAttribute("vo", vo);
+		model.addAttribute("list",list);
+		
+		return "user/groupApplyDetail";
 	}
 	
 	@GetMapping("/homeworkReg")
@@ -265,7 +276,6 @@ public class UserController {
 	public String questionModify(@RequestParam("qstnno") int qstnno , Model model) {
 		
 		QuestionVO vo = userService.questionDetail(qstnno);
-		
 		model.addAttribute("vo",vo);
 		
 		return "user/questionModify";
@@ -273,13 +283,12 @@ public class UserController {
 	
 	@PostMapping("/comunityForm")
 	public String comunityForm(ComunityVO vo , RedirectAttributes rec,
-			MultipartHttpServletRequest part) {
+			MultipartHttpServletRequest part , Principal prin) {
 		
 		
 		List<MultipartFile> list = part.getFiles("file");
 	
-
-		int result = userService.comunityForm(vo , list);
+		int result = userService.comunityForm(vo , list , prin);
 		
 		if(result == 1 ) {
 			rec.addFlashAttribute("msg", "등록성공");
@@ -290,10 +299,14 @@ public class UserController {
 		return "redirect:/user/comunityList";
 	}
 	
+	
 	@PostMapping("/comunityModifyForm")
-	public String comunityModifyForm(ComunityVO vo , RedirectAttributes rec) {
+	public String comunityModifyForm(ComunityVO vo , RedirectAttributes rec
+									, MultipartHttpServletRequest part,Principal prin) {
 		
-		int result = userService.comunityModifyForm(vo);
+		List<MultipartFile> list = part.getFiles("file");
+	
+		int result = userService.comunityModifyForm(vo,list, prin);
 		
 		if(result == 1 ) {
 			rec.addFlashAttribute("msg", "수정성공");
@@ -325,7 +338,6 @@ public class UserController {
 			) {
 		
 		
-			
 		 String savepath = uploadPath + "/" + filepath + "/" + uuid + "_" + filename;
 		
 		 File file = new File(savepath);
@@ -336,9 +348,8 @@ public class UserController {
 
 
 			HttpHeaders header = new HttpHeaders();
-			header.add("Content-Disposition", "attachment; filename=" + filename);
+			header.add("Content-Disposition", "attachment; filename=" + URLEncoder.encode(filename, "utf-8"));
 			
-		
 			result = new ResponseEntity<>(file, header,HttpStatus.OK);
 
 		} catch (Exception e) {
@@ -350,10 +361,21 @@ public class UserController {
   
 	@PostMapping("/replyAdd")
 	@ResponseBody
-	public String replayAdd(@RequestBody ReplyVO vo) {
+	public String replayAdd(@RequestBody ReplyVO vo , Principal prin) {
 		
+		int pst_ttl_no = vo.getPstTtlNo();
 		
+		String userId = prin.getName();
+		vo.setUserId(userId);
+		System.out.println(vo.toString());
 		userService.replyAdd(vo);
+		
+		if(vo != null) {
+			userService.replyCount(pst_ttl_no);
+			
+		}
+		
+
 		
 		return "success";
 	}
@@ -365,53 +387,108 @@ public class UserController {
 		if (authentication != null) {
 			UserAuth userAuth = (UserAuth)authentication.getPrincipal();
 
-			String username  = userAuth.getUserId();
+			String username  = userAuth.getUsername();
 			
-			userService.applyGroup(groupNo,username);
-
-			
+			userService.applyGroup(groupNo,username);	
 
 		}else {
 			
 			return "creator/creatorFail";//임시조치
 		}
-		return "redirect:/";//임시조치
-		
+		return "redirect:/user/groupApplyList";//임시조치
 	}
 	
 	@GetMapping("/questionReg")
-	public String questionReg() {
+	public String questionReg(@RequestParam("groupNo") int groupNo , Model model) {
 		
+		
+		System.out.println(groupNo);
+		
+		model.addAttribute("groupNo",groupNo);
 		
 		return "user/questionReg";
 	}
 	
 	@PostMapping("/questionForm")
+	@ResponseBody
 	public String questionForm(QuestionVO vo) {
 		
 		System.out.println(vo.toString());
 		
 		userService.addQuestion(vo);
-		
-		return "redirect:/user/questionList";
+
+		return "success";
 	}
 	
 	@PostMapping("/questionModifyForm")
 	public String questionModifyForm(QuestionVO vo) {
 		
+		
 		userService.questionModifyForm(vo);
 		
-		return "redirect:/user/questionList";
+		int groupno = vo.getGroupNo();
+		
+		
+		return "redirect:/user/groupApplyDetail?groupno=" + groupno;
 	}
 	
 	
 	@GetMapping("questionDelete")
-	public String deleteQuestion(@RequestParam("qstnno") int qstnno) {
+	public String deleteQuestion(@RequestParam("qstnno") int qstnno , @RequestParam("groupno") int groupno) {
 		
 		userService.deleteQuestion(qstnno);
 		
-		return "redirect:/user/questionList";
+		return "redirect:/user/groupApplyDetail?groupno=" + groupno;
 	}
+	
+	@GetMapping("/getReplyList")
+	@ResponseBody
+	public List<ReplyVO> getReplyList(@RequestParam("pst_ttl_no") int pst_ttl_no){
+		
+		List<ReplyVO> list = userService.getReplyList(pst_ttl_no);
+		
+		return list;
+	}
+	
+	@PostMapping("/replyUpdate")
+	@ResponseBody
+	public String replyUpdate(@RequestBody ReplyVO vo) {
+		
+		userService.replyUpdate(vo);
+		
+		System.out.println(vo.toString());
+		
+		return "success";
+	}
+	
+	@PostMapping("/replyDelete")
+	@ResponseBody
+	public String replyDelete(@RequestBody @RequestParam("reply_no") int reply_no , @RequestParam("pst_ttl_no") int pst_ttl_no) {
+		
+		List<ReplyVO> list = userService.replyFilter(reply_no);
+		
+		if(list.size() == 0) {
+			userService.replyDelete(reply_no);
+			userService.deleteCount(pst_ttl_no);
+		}else {
+			userService.replyStatus(reply_no);
+			userService.deleteCount(pst_ttl_no);
+
+		}
+		
+		
+		return "success";
+	}
+	
+	@PostMapping("/getChildList")
+	@ResponseBody
+	public List<ReplyVO> getChildList(@RequestParam("pst_ttl_no") int pst_ttl_no , @RequestParam("parent_reply_no") int parent_reply_no){
+		
+		 List<ReplyVO> list = userService.getChildList(parent_reply_no);
+		
+		 return list;
+	}
+	
 
 	@GetMapping("/groupProgress")
 	public String groupProgress(Model model) {

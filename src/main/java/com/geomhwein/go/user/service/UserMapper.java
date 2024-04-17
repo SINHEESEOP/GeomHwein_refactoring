@@ -16,6 +16,7 @@ import com.geomhwein.go.command.HomeworkVO;
 import com.geomhwein.go.command.QuestionVO;
 import com.geomhwein.go.command.ComunityVO;
 import com.geomhwein.go.command.EducationGroupVO;
+import com.geomhwein.go.command.GroupApplicationVO;
 
 
 @Mapper
@@ -37,8 +38,18 @@ public interface UserMapper {
 	public QuestionVO questionDetail(int qstn_no);
 	public void questionModifyForm(QuestionVO vo);
 	public void deleteQuestion(int qstnno);
-
+	public List<ReplyVO> getReplyList(int pst_ttl_no);
+	public void replyUpdate(ReplyVO vo);
+	public void replyDelete(int reply_no);
+	public List<ReplyVO> getChildList(int parent_reply_no);
+	public void replyCount(int pst_ttl_no);
+	public void deleteCount(int pst_ttl_no);
+	public List<ReplyVO> replyFilter(int reply_no);
+	public void replyStatus(int reply_no);
+	public void allReplyDelete(int pst_ttl_no);
+	public void deleteFile(int pst_ttl_no);
 	public int registCreator(@Param("userName") String userName,@Param("docsCode") String docsCode,@Param("reason") String reason);
+	public List<GroupApplicationVO> getGroupApplyList(String userId);
 	//아직 mapper작업 안함
 	//반환값으로 성공실패여부 확인
 
