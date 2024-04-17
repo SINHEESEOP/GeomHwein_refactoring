@@ -134,11 +134,11 @@ public class CreatorController {
 	
 	
 	@PostMapping("/registHomeworkForm")
-	public void registHomeworkForm(HomeworkVO vo) {
+	public String registHomeworkForm(HomeworkVO vo) {
 		creatorService.makeHomework(vo);
 		
 			
-		
+		return "creator/creatorSuccess";
 		
 		
 	}
@@ -170,7 +170,8 @@ public class CreatorController {
 
 			String userId  = userAuth.getUserId();//선생님 ID
 			QuestionVO qvo=creatorService.getQuestion(qstnNo);
-			model.addAttribute("questionVo",qvo);
+			
+			model.addAttribute("qvo",qvo);
 			model.addAttribute("creatorId",userId);
 			return "creator/makeAnswer";
 			
@@ -183,7 +184,7 @@ public class CreatorController {
 	public String registAnswerForm(QuestionVO vo) {
 		creatorService.addAnswer(vo);
 		
-		return "creator/creatorMain";
+		return "creator/creatorSuccess";
 	}
 	
 	

@@ -85,6 +85,6 @@
 	</select>
 	<insert id="addAnswer">
 		INSERT INTO makeAnswer(ANS_CN,ANS_YMD,QSTN_NO,USER_ID)
-		values(#{vo.ansCn},#{vo.ansYmd},#{vo.qstnNo},#{vo.userId}) 
+		values(#{ansCn},#{ansYmd},#{qstnNo},#{userId}) 
 	</insert>
 </mapper>
