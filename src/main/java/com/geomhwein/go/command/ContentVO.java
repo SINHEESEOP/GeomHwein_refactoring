@@ -14,6 +14,7 @@ import java.sql.Timestamp;
 @Builder
 public class ContentVO {
 
+	private UserDetailsVO userDetailsVO;
 	private BigInteger contsSn;
 	private String contsNm;
 	private String contsExpln;

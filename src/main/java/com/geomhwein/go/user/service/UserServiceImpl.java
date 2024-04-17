@@ -9,7 +9,6 @@ import java.util.*;
 import java.util.List;
 
 import com.geomhwein.go.command.*;
-import org.apache.ibatis.annotations.Select;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -21,7 +20,6 @@ import com.geomhwein.go.command.UserDetailsVO;
 import com.geomhwein.go.command.ComunityVO;
 import com.geomhwein.go.util.Criteria;
 
-import com.geomhwein.go.command.ComunityVO;
 import com.geomhwein.go.command.EducationGroupVO;
 import com.geomhwein.go.command.GroupApplicationVO;
 
@@ -54,7 +52,7 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public ArrayList<UserDetailsVO> getAllEducationGroup(String userId) {
+	public ArrayList<EducationGroupVO> getAllEducationGroup(String userId) {
 		return userMapper.getAllEducationGroup(userId);
 	}
 //	public ArrayList< Map<String, Object> > getAllEducationGroup(String userId) {

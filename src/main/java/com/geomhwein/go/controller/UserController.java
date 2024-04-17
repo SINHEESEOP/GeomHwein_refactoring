@@ -89,7 +89,7 @@ public class UserController {
 			UserAuth userAuth = (UserAuth)authentication.getPrincipal();
 			model.addAttribute("role", userAuth.getRole());
 
-			List<UserDetailsVO> userEduList = userService.getAllEducationGroup(userAuth.getUserId());
+			List<EducationGroupVO> userEduList = userService.getAllEducationGroup(userAuth.getUserId());
 //			ArrayList<Map<String, Object>> userEduList = userService.getAllEducationGroup(userAuth.getUserId());
 
 			System.out.println("리스트 숫자 : " + userEduList.size());

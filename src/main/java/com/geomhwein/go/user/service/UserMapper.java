@@ -43,7 +43,7 @@ public interface UserMapper {
 
 	@Select("SELECT * FROM USER_DETAILS WHERE USER_ID = #{userId}")
 	public UserDetailsVO getUserDetails (String userId);
-	public ArrayList<UserDetailsVO> getAllEducationGroup(String userId);
+	public ArrayList<EducationGroupVO> getAllEducationGroup(String userId);
 //	public ArrayList< Map<String, Object>> getAllEducationGroup(String userId);
   
 	public List<ReplyVO> getReplyList(int pst_ttl_no);
