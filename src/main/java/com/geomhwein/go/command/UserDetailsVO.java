@@ -19,10 +19,10 @@ public class UserDetailsVO {
 	private ContentVO contentVO;
 	private EducationGroupVO educationGroupVO;
 	private String userId; // VARCHAR(100) NOT NULL
-	private String userTelno; // VARCHAR(20)
+	private String userTelNo; // VARCHAR(20)
 	private String userEmlAddr; // VARCHAR(100) NOT NULL
 	private Integer userAge; // INT
-	private BigDecimal userRating; // DECIMAL(5,2)
+	private Integer userRating; // DECIMAL(5,2)
 	private String gender; // ENUM('male', 'female', 'other')
 	private String address; // TEXT
 	private String profilePictureFilename; // TEXT
@@ -38,6 +38,6 @@ public class UserDetailsVO {
 
 	public UserDetailsVO(String userId, String Interests) {
 		this.userId = userId;
-		this.userTelno = Interests;
+		this.userTelNo = Interests;
 	}
 }

@@ -14,7 +14,7 @@ public class ComunityVO {
 	private String pstTtlCn; //글내용
 	private Integer inqCnt; //조회수
 	private String pstRegdate; //작성일
+	private Integer replyCnt;
 	private String userId; //작성자
-
 
 }

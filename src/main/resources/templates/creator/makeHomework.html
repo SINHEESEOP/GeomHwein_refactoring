@@ -11,15 +11,10 @@
   <title>숙제 등록</title>
 </head>
 <body>
-    <pre hidden="hidden">
-      이것은 팝업입니다. js에서 팝업으로 열어줄것입니다.
-      질문하기 답변하기는 사진부분을 빼면 재사용이 가능함
-      
-    </pre>
     <script>
     	window.resizeTo(800,1030);
     </script>
-    <div hidden="hidden" th:value="${userId}" class="creatorId"></div>
+    
     <!-- Appointment Start -->
     <div class="container-xxl py-5">
       <div class="container">
@@ -27,7 +22,7 @@
               <div class="row g-0">
                   <div class="col-lg-6 wow fadeIn" data-wow-delay="0.5s" style="min-height: 200px;">
                     <div class="position-relative h-100">
-                        <img class="position-absolute w-100 h-100 rounded" src="../../static/img/eduGroup/hw1.jpg">
+                        <img class="position-absolute w-100 h-100 rounded" src="/img/eduGroup/hw1.jpg">
                     </div>
                   </div>
                   <div class="col-lg-6 wow fadeIn" data-wow-delay="0.1s">
@@ -37,25 +32,25 @@
                               <div class="row g-3">
                                   <div class="col-sm-6">
                                       <div class="form-floating">
-                                          <input type="text" class="form-control border-0 creatorName" placeholder="" readonly="readonly" name="userId" value="">
+                                          <input type="text" class="form-control border-0 creatorName" placeholder="" readonly="readonly" name="userId" th:value="${userId}">
                                           <label for="gname">선생님 아이디</label>
                                       </div>
                                   </div>
                                   <div class="col-sm-6">
                                       <div class="form-floating">
-                                          <input type="text" class="form-control border-0 homeworkName" placeholder="" name="asmtNm">
+                                          <input type="text" class="form-control border-0 homeworkName" placeholder="" name="asmtNm" required="required">
                                           <label for="gmail">숙제 제목</label>
                                       </div>
                                   </div>
                                   <div class="col-sm-6">
                                       <div class="form-floating">
-                                          <input type="text" class="form-control border-0 homeworkGrade" placeholder="" name="asmtGrd">
+                                          <input type="text" class="form-control border-0 homeworkGrade" placeholder="" name="asmtGrd" required="required">
                                           <label for="cname">숙제 난이도</label>
                                       </div>
                                   </div>
                                   <div class="col-sm-6">
                                       <div class="form-floating">
-                                          <input type="number" class="form-control border-0 homeworkScore" placeholder="" name="asmtScr">
+                                          <input type="number" class="form-control border-0 homeworkScore" placeholder="" name="asmtScr" required="required">
                                           <label for="cage">숙제 점수</label>
                                       </div>
                                   </div>
@@ -84,6 +79,7 @@
   	var creatorId=$(".creatorId").val();
   	$(".creatorName").attr("value",creatorId);
   	$(".makeHomeworkBtn").click(function(){
+  	
   		window.close();
   	});
   </script>

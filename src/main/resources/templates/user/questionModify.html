@@ -11,13 +11,17 @@
             <p>질문자</p>
             <input type="text" th:value="${vo.userId}" readOnly>
           </div>
+          <div class="reg-title">
+            <p>그룹번호</p>
+            <input type="text" name="groupNo" th:value="${vo.GroupNo}" readOnly>
+          </div>
           <div class="reg-content">
             <p>내용</p>
             <textarea id="textarea" name="qstnCn">[[${vo.QstnCn}]]</textarea>
           </div>
           <div class="reg-button"> 
             <input type="submit" class="regBtn" value="수정하기">
-            <button type="button" class="backBtn" th:onclick="|location.href='@{questionList}'|">취소</button>
+            <button type="button" class="backBtn" th:onclick="|location.href='@{groupApplyDetail(groupno=${vo.GroupNo})}'|">취소</button>
           </div>
           </div>
       </form>
