@@ -115,6 +115,7 @@ public class CreatorController {
 		model.addAttribute("svo",svo);
 		return "creator/homeworkDetail";
 	}
+	
 	@GetMapping("/makeCorrect") //정답처리
 	public String makeCorrect(@RequestParam("userId")String userId,
 			@RequestParam("subScr")String sScr,
