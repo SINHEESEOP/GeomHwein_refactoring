@@ -50,14 +50,16 @@
 </th:block>
 <script>
 	$(".applyDeleteBtn").click(function(e){
-	var aplyNo=e.target.parentElement.parentElement.firstElementChild.innerHTML;
-    location.href="/creator/refuseRegist?aplyNo="+aplyNo;
+    	e.stopPropagation();
+	  	var aplyNo=e.target.parentElement.parentElement.firstElementChild.innerHTML;
+    	location.href="/creator/refuseRegist?aplyNo="+aplyNo;
 	});
 	
-	$("applyAcceptBtn").click(function(e){
-	var aplyNo=e.target.parentElement.parentElement.firstElementChild.innerHTML;
-	var groupNo=e.target.parentElement.parentElement.firstElementChild.nextElementSibling.innerHTML;
-	location.href="/creator/acceptRegist?aplyNo="+aplyNo+"&groupNo="+groupNo;
+	$(".applyAcceptBtn").click(function(e){
+  		e.stopPropagation();  
+		var aplyNo=e.target.parentElement.parentElement.firstElementChild.innerHTML;
+		var groupNo=e.target.parentElement.parentElement.firstElementChild.nextElementSibling.innerHTML;
+		location.href="/creator/acceptRegist?aplyNo="+aplyNo+"&groupNo="+groupNo;
 	});
 	
 </script>

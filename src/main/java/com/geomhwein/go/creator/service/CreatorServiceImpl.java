@@ -31,9 +31,9 @@ public class CreatorServiceImpl implements CreatorService{
 	}
 
 	//등록리스트받기
-	public EducationGroupVO getApply(int i) {
+	public List<EducationGroupVO> getApply() {
 		
-		return creatorMapper.getApply(i);
+		return creatorMapper.getApply();
 	}
 
 	//숙제제출리스트받기	

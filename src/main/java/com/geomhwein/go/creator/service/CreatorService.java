@@ -19,7 +19,7 @@ public interface CreatorService {
 	public int getApplyCount();
 	
 	//그룹신청 조회
-	public EducationGroupVO getApply(int i);
+	public List<EducationGroupVO> getApply();
 	
 	//숙제조회
 	public List<SubmissionVO> getHomeworkDone(String userId);

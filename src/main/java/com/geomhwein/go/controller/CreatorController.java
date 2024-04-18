@@ -147,10 +147,8 @@ public class CreatorController {
 		if(applyCount==0) {
 			return "redirect:/";
 		}
-		List<EducationGroupVO> applyList= new ArrayList<>();
-		for(int i=1;i<=applyCount;i++) {
-			applyList.add(creatorService.getApply(i));
-		}
+		List<EducationGroupVO>applyList=creatorService.getApply();
+		
 		model.addAttribute("applyList",applyList);
 		return "creator/groupApplyList";
 	}
@@ -160,7 +158,7 @@ public class CreatorController {
 		int aplyNo=Integer.parseInt(aNo);
 		creatorService.deleteApply(aplyNo);
 		
-		return "creator/groupApplyList";
+		return "redirect:/";
 	}
 	
 	@GetMapping("/acceptRegist")
@@ -169,7 +167,7 @@ public class CreatorController {
 		int groupNo=Integer.parseInt(gNo);
 		creatorService.setApplyStatus(aplyNo);
 		creatorService.setGroupUtztnNope(groupNo);
-		return "creator/groupApplyList";
+		return "redirect:/";
 	}
 	
 	

@@ -15,8 +15,7 @@
 			   right join 
 			   group_application 
 			   on group_application.GROUP_NO=education_group.GROUP_NO
-			   where APLY_NO=#{i}
-			   AND APLY_STATUS='N'
+			   where APLY_STATUS='N'
 	</select>
 	<insert id="makeHomework">
 		INSERT INTO Homework(user_Id,ASMT_NM,ASMT_CN,ASMT_SCR,ASMT_GRD)

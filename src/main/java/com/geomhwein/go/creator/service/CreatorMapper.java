@@ -18,7 +18,7 @@ public interface CreatorMapper {
 
 	public int getApplyCount();
 
-	public EducationGroupVO getApply(int i);
+	public List<EducationGroupVO> getApply();
 
 
 	public List<SubmissionVO> getHomeworkDone(String userId);
