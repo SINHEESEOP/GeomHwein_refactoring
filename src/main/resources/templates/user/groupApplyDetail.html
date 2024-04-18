@@ -1,7 +1,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <link rel="stylesheet" href="/css/comunityList.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
-<th:block th:replace="~{/include/baseLayout :: setContent( ~{ :: .wrap} ) }">
+<th:block th:replace="~{./include/baseLayout :: setContent( ~{ :: .wrap} ) }">
 <div class="wrap">
 	  <div class="container-fluid py-4">
       <div class="container-title">그룹상세정보</div>
@@ -28,8 +28,30 @@
    	</div>
    	 
    	 <div class="container-fluid py-4">
-      <div class="container-title">숙제내용</div>
+      <div class="container-title">숙제</div>
       <div class="content-wrap">
+       <table class="comunity-table">
+        <tr class="table-title">
+          <th>No</th>
+          <th>숙제명</th>
+          <th>숙제내용</th>
+          <th>점수</th>
+          <th>난이도</th>
+          <th>제출자</th>
+          <th>제출</th>
+        </tr>
+       <th:block th:each="hvo,status : ${list2}">
+        <tr class="table-content">
+          <td>[[${status.count}]]</td>
+          <td>[[${hvo.asmtNm}]]</td>
+          <td>[[${hvo.asmtCn}]]</td>
+          <td>[[${hvo.asmtScr}]]</td>
+          <td>[[${hvo.asmtGrd}]]</td>
+          <td>[[${hvo.userId}]]</td>
+          <td><button type="button" class="updateBtn" th:onclick="|location.href='@{homeworkReg(asmtNo=${hvo.asmtNo})}'|">숙제제출</button></td>
+        </tr>
+        </th:block>
+      </table>
    	 </div>
    	 </div>
    	 
@@ -62,31 +84,28 @@
       </div>
    	 </div>
    	</div>
-   	 
-   
-   	 </div>
+   	
 </th:block>
 
-<script>
+<script th:inline="javascript">
   $(".makeQuestionBtn").click(function(){
     var username=$(".userName").val();
     var groupNo = [[${vo.groupNo}]];
-    var url="questionReg?groupNo="+groupNo;
+    var url="questionReg?groupNo="+groupNo
     var name="질문작성하기";
     var option="width=830,length=820,top=0,left=0,location=yes";
     window.open(url,name,option);
   });
   
+  
   $("#successBtn").click(function(){
 	  	var qstnno = $(event.target).attr("value");	
-	  
-	    var url="showAnswer?qstnNo="+qstnno;
+	  	var userId = [[${vo.userId}]];
+	    var url="showAnswer?qstnNo="+qstnno+"&userId="+userId
 	    var name="답변보기";
-	    var option="width=830,length=820,top=0,left=0,location=yes";
+	    var option="width=830,length=820,top=0,left=0,location=no";
 	    window.open(url,name,option);
 	  });
-  
-  
   
 </script>
 </html>

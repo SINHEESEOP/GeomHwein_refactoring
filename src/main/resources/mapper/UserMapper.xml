@@ -164,4 +164,31 @@
 	select * from MAKEANSWER WHERE QSTN_NO = #{qstnNo}
 	</select>
 	
+	<select id="getHomeworkList" resultType="HomeworkVO">
+	select * from homework where USER_ID = #{userId}
+	</select>
+	
+	<select id="homeworkReg" resultType="HomeworkVO">
+	select * from homework where asmt_no = #{asmtNo}
+	</select>
+	
+	<insert id="submissionForm">
+	insert into HOMEWORK_SUBMISSION(SUB_CN,ASMT_NO,USER_ID) VALUES(#{subCn},#{asmtNo},#{userId})
+	</insert>
+	
+	<select id="getSubmission" resultType="SubmissionVO">
+	select * from HOMEWORK_SUBMISSION where USER_ID = #{userId} AND ASMT_NO = #{asmtNo}
+	</select>
+	
+	
+	<update id="submissionUpdate">
+	
+	<selectKey keyProperty="subNo" resultType="int" order="BEFORE">
+	select sub_no from HOMEWORK_SUBMISSION where USER_ID = #{userId} AND ASMT_NO = #{asmtNo}
+	</selectKey>	
+	
+	update HOMEWORK_SUBMISSION SET SUB_CN = #{subCn} , SUB_YMD = NOW() where sub_no = #{subNo}
+	
+	</update>
+	
 </mapper>
