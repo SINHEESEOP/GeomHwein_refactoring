@@ -12,10 +12,12 @@
   </div>
 </th:block>
 <script>
+	//문서코드 랜덤화
 	var rng=Math.random().toString(36).substring(2,8).toUpperCase().toString();
 	$(".docsCode").attr("value",rng);
-	var username=localStorage.getItem("username",username);//시큐리티 도입시 로그인된사용자로 대체
-  	$(".username").attr("value",username);
+	
+	/* var username=localStorage.getItem("username",username);//시큐리티 도입시 로그인된사용자로 대체 // 컨트롤러 탈때 authentication 타서 입력하기
+  	$(".username").attr("value",username); */
 	
 
 </script>

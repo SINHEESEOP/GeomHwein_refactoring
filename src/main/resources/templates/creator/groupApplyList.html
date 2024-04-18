@@ -21,7 +21,8 @@
           <th>최종이수일</th>
           <th>신청가능인원</th>
   		  <th>권장연령</th>
-  		  <td>비고</td>
+  		  <td>거절</td>
+  		  <td>승인</td>
         </tr>
         <tr class="table-content" th:each="vo,status : ${applyList}" >
           <td>[[${vo.aplyNo}]]</td>
@@ -32,7 +33,8 @@
           <td>[[${vo.lastCmcrsYmd}]]</td>
           <td>[[${vo.groupUtztnNope}]]</td>
           <td>[[${vo.recAge}]]</td>
-          <td><button type="button" class="applyDeleteBtn">신청거절</button></td>
+          <td><button type="button" class="applyDeleteBtn">가입거절</button></td>
+          <td><button type="button" class="applyAcceptBtn">가입승인</button></td>
         </tr>
       </table>
       <div class="pagenation">
@@ -48,8 +50,15 @@
 </th:block>
 <script>
 	$(".applyDeleteBtn").click(function(e){
-		var aplyNo=e.target.parentElement.firstElementChild.innerHTML;
+	var aplyNo=e.target.parentElement.parentElement.firstElementChild.innerHTML;
     location.href="/creator/refuseRegist?aplyNo="+aplyNo;
 	});
+	
+	$("applyAcceptBtn").click(function(e){
+	var aplyNo=e.target.parentElement.parentElement.firstElementChild.innerHTML;
+	var groupNo=e.target.parentElement.parentElement.firstElementChild.nextElementSibling.innerHTML;
+	location.hreg="/creator/acceptRegist?aplyNo="+aplyNo+"&groupNo="+groupNo;
+	});
+	
 </script>
 </html>

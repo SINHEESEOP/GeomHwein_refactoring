@@ -156,11 +156,22 @@ public class CreatorController {
 	}
 	
 	@GetMapping("/refuseRegist")
-	public String refuseRegist(@RequestParam("aplyNo")int aplyNo) {
+	public String refuseRegist(@RequestParam("aplyNo")String aNo) {
+		int aplyNo=Integer.parseInt(aNo);
 		creatorService.deleteApply(aplyNo);
 		
 		return "creator/groupApplyList";
 	}
+	
+	@GetMapping("/acceptRegist")
+	public String acceptRegitst(@RequestParam("aplyNo")String aNo,@RequestParam("groupNo")String gNo) {
+		int aplyNo=Integer.parseInt(aNo);
+		int groupNo=Integer.parseInt(gNo);
+		creatorService.setApplyStatus(aplyNo);
+		creatorService.setGroupUtztnNope(groupNo);
+		return "creator/groupApplyList";
+	}
+	
 	
 	@GetMapping("/makeAnswerForm")
 	public String getMethodName(@RequestParam("qstnNo")int qstnNo,Model model,Authentication authentication) {
@@ -182,7 +193,7 @@ public class CreatorController {
 	@PostMapping("/registAnswerForm")
 	public String registAnswerForm(QuestionVO vo) {
 		creatorService.addAnswer(vo);
-		
+	
 		return "creator/creatorSuccess";
 	}
 	

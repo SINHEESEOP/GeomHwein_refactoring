@@ -51,6 +51,11 @@ public interface CreatorService {
 	//제출된 숙제 점수 갱신- 디폴트 0
 	public void setSubmissionScore(int subScr, int subNo);
 	
+	//그룹승인시 상태변경
+	public void setApplyStatus(int aplyNo);
+	//그룹신청승인시 신청가능인원 변경
+	public void setGroupUtztnNope(int groupNo);
+	
 
 	
 

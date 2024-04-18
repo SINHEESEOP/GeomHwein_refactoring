@@ -16,6 +16,7 @@
 			   group_application 
 			   on group_application.GROUP_NO=education_group.GROUP_NO
 			   where APLY_NO=#{i}
+			   AND APLY_STATUS='N'
 	</select>
 	<insert id="makeHomework">
 		INSERT INTO Homework(user_Id,ASMT_NM,ASMT_CN,ASMT_SCR,ASMT_GRD)
@@ -53,12 +54,22 @@
     		GENDER,
    		    USER_SCR 
 		FROM 
-			(SELECT * FROM user_details) as users
+			USER_DETAILS
 	</select>
 	<delete id="deleteApply">
 		DELETE FROM group_application
 		WHERE APLY_NO=#{aplyNo}
 	</delete>
+	<update id="setApplyStatus">
+		UPDATE GROUP_APPLICATION
+		SET APLY_STATUS= 'Y'
+		WHERE APLY_NO=#{aplyNo}
+	</update>
+	<update id="setGroupUtztnNope">
+		UPDATE EDUCATION_GROUP
+		SET GROUP_UTZTN_NOPE= GROUP_UTZTN_NOPE - 1
+		WHERE GROUP_NO=#{groupNo}
+	</update>
 	<select id="getQuestionList" resultType="QuestionVO">
 		SELECT * FROM makeQuestion
 	</select>
@@ -70,4 +81,5 @@
 		INSERT INTO makeAnswer(ANS_CN,ANS_YMD,QSTN_NO,USER_ID)
 		values(#{ansCn},#{ansYmd},#{qstnNo},#{userId}) 
 	</insert>
+	
 </mapper>

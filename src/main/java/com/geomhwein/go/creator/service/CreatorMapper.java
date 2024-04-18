@@ -54,6 +54,12 @@ public interface CreatorMapper {
 	public void setSubmissionScore(@Param("subScr")int subScr,@Param("subNo") int subNo);
 
 
+	public void setApplyStatus(int aplyNo);
+
+
+	public void setGroupUtztnNope(int groupNo);
+
+
 	
 
 }

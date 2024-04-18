@@ -102,6 +102,20 @@ public class CreatorServiceImpl implements CreatorService{
 	}
 
 	
+	public void setApplyStatus(int aplyNo) {
+		
+		creatorMapper.setApplyStatus(aplyNo);
+		
+	}
+
+	@Override
+	public void setGroupUtztnNope(int groupNo) {
+		
+		creatorMapper.setGroupUtztnNope(groupNo);
+		
+	}
+
+	
 	
 
 	
