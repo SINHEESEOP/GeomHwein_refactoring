@@ -73,6 +73,7 @@
 	</update>
 	<select id="getQuestionList" resultType="QuestionVO">
 		SELECT * FROM makeQuestion
+		WHERE QSTN_STATUS = 'N'
 	</select>
 	<select id="getQuestion" resultType="QuestionVO">
 		SELECT * FROM makeQuestion
@@ -82,5 +83,9 @@
 		INSERT INTO makeAnswer(ANS_CN,ANS_YMD,QSTN_NO,USER_ID)
 		values(#{ansCn},#{ansYmd},#{qstnNo},#{userId}) 
 	</insert>
-	
+	<update id="setQstnStatus">
+		UPDATE MAKEQUESTION
+		SET QSTN_STATUS = 'Y'
+		WHERE QSTN_NO=#{qstnNo}
+	</update>
 </mapper>

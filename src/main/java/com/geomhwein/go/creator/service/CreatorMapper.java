@@ -60,6 +60,9 @@ public interface CreatorMapper {
 	public void setGroupUtztnNope(int groupNo);
 
 
+	public void setQstnStatus(QuestionVO vo);
+
+
 	
 
 }

@@ -193,7 +193,7 @@ public class CreatorController {
 	@PostMapping("/registAnswerForm")
 	public String registAnswerForm(QuestionVO vo) {
 		creatorService.addAnswer(vo);
-	
+		creatorService.setQstnStatus(vo);
 		return "creator/creatorSuccess";
 	}
 	
