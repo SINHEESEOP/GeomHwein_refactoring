@@ -35,7 +35,9 @@ public interface CreatorService {
 	//정답처리 로직
 	public int getUserScore(String userId);
 	public void setUserScore(String userId, int newScore);
-	public void deleteAns(int subNo);
+
+	public void setSubmissionScore(int subScr, int subNo);
+	
 
 	
 

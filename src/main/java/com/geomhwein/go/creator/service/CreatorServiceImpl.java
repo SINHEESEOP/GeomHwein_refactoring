@@ -55,13 +55,7 @@ public class CreatorServiceImpl implements CreatorService{
 		return creatorMapper.getUserScore(userId);
 	}
 
-	//정답시 제출된 숙제 제거
-	public void deleteAns(int subNo) {
-		
-		creatorMapper.deleteAns(subNo);
-		
-	}
-
+	
 	
 	public List<UserDetailsVO> getAllStudent() {
 		
@@ -98,6 +92,13 @@ public class CreatorServiceImpl implements CreatorService{
 	public SubmissionVO getSubmission(int subNo) {
 		
 		return creatorMapper.getSubmission(subNo);
+	}
+
+	@Override
+	public void setSubmissionScore(int subScr, int subNo) {
+		
+		creatorMapper.setSubmissionScore(subScr,subNo);
+		
 	}
 
 	

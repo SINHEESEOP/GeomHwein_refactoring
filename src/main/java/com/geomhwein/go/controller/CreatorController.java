@@ -125,7 +125,7 @@ public class CreatorController {
 		int currentScore=creatorService.getUserScore(userId);
 		int newScore=currentScore+subScr;
 		creatorService.setUserScore(userId,newScore);
-		creatorService.deleteAns(subNo);
+		creatorService.setSubmissionScore(subScr,subNo);
 		
 		return "redirect:/";
 	}

@@ -30,7 +30,7 @@ public interface CreatorMapper {
 	public int getUserScore(String userId);
 
 
-	public void deleteAns(int subNo);
+	
 
 
 	public List<UserDetailsVO> getAllStudent();
@@ -49,6 +49,9 @@ public interface CreatorMapper {
 
 
 	public SubmissionVO getSubmission(int subNo);
+
+
+	public void setSubmissionScore(@Param("subScr")int subScr,@Param("subNo") int subNo);
 
 
 	

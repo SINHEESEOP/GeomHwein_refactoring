@@ -37,10 +37,12 @@
 		SET USER_SCR=#{newScore}
 		WHERE USER_ID=#{userId}
 	</update>
-	<delete id="deleteAns">
-		DELETE FROM HOMEWORK_SUBMISSION
-		WEHRE SUB_NO=#{subNo}
-	</delete>
+	<update id="setSubmissionScore">
+		UPDATE HOMEWORK_SUBMISSION
+		SET SUB_SCR=#{subScr}
+		WHERE SUB_NO=#{subNo}	
+	</update>
+	
 	<select id="getAllStudent" resultType="UserDetailsVO">
 		SELECT 
 			RANK() OVER (ORDER BY USER_SCR desc) as USER_RATING,
