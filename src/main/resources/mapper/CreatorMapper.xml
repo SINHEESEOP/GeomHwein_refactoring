@@ -24,6 +24,7 @@
 	</insert>
 	<select id="getHomeworkDone" resultType="SubmissionVO">
 		SELECT * FROM HOMEWORK_SUBMISSION
+		WHERE SUB_SCR=0
 	</select>
 	<select id="getSubmission" resultType="submissionVo">
 		SELECT * FROM HOMEWORK_SUBMISSION
@@ -67,7 +68,7 @@
 	</update>
 	<update id="setGroupUtztnNope">
 		UPDATE EDUCATION_GROUP
-		SET GROUP_UTZTN_NOPE= GROUP_UTZTN_NOPE - 1
+		SET GROUP_UTZTN_NOPE = GROUP_UTZTN_NOPE - 1
 		WHERE GROUP_NO=#{groupNo}
 	</update>
 	<select id="getQuestionList" resultType="QuestionVO">

@@ -21,7 +21,7 @@
           <th>숙제번호</th>
           <th>제출자</th>
           <th>상세</th>
-  		    <th>정답</th>
+  		  <th>배점</th>
         </tr>
         
         <tr class="table-content" th:each="vo,status : ${subList}">
@@ -33,7 +33,7 @@
           <td><button type="button" class="detailBtn">상세보기</button></td>
           <td>
           		<input type="number" class="subScr" value="" required="required" placeholder="점수를 입력하세요">
-          		<button type="button" class="makeCorrect">정답처리</button>
+          		<button type="button" class="makeCorrect">배점처리</button>
           </td>
         </tr>
       </table>
