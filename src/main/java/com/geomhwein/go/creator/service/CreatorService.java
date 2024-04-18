@@ -2,6 +2,7 @@ package com.geomhwein.go.creator.service;
 
 import com.geomhwein.go.command.HomeworkVO;
 import com.geomhwein.go.command.QuestionVO;
+import com.geomhwein.go.command.SubmissionVO;
 import com.geomhwein.go.command.UserDetailsVO;
 
 import java.util.List;
@@ -16,13 +17,7 @@ public interface CreatorService {
 
 	public EducationGroupVO getApply(int i);
 
-	public List<HomeworkVO> getHomeworkDone(String userId);
-
-	public void setUserScore(String userId, int newScore);
-
-	public int getUserScore(String userId);
-
-	public void deleteAns(int asmtAnsNo);
+	public List<SubmissionVO> getHomeworkDone(String userId);
 
 	public List<UserDetailsVO> getAllStudent();
 
@@ -33,6 +28,14 @@ public interface CreatorService {
 	public QuestionVO getQuestion(int qstnNo);
 
 	public void addAnswer(QuestionVO vo);
+
+	
+	public SubmissionVO getSubmission(int subNo);
+	
+	//정답처리 로직
+	public int getUserScore(String userId);
+	public void setUserScore(String userId, int newScore);
+	public void deleteAns(int subNo);
 
 	
 

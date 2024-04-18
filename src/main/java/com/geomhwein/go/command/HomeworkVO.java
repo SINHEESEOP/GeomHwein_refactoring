@@ -18,7 +18,6 @@ public class HomeworkVO {
 	private String asmtCn;//숙제 내용
 	private int asmtNo;//숙제 등록번호
 	private int asmtScr;//숙제 점수
-	private String asmtAns;//숙제제출자의답안
-	private int asmtAnsNo;//숙제제출번호
+	
 	
 }

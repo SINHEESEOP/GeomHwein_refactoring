@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import com.geomhwein.go.command.HomeworkVO;
 import com.geomhwein.go.command.QuestionVO;
+import com.geomhwein.go.command.SubmissionVO;
 import com.geomhwein.go.command.UserDetailsVO;
 import com.geomhwein.go.command.EducationGroupVO;
 
@@ -20,7 +21,7 @@ public interface CreatorMapper {
 	public EducationGroupVO getApply(int i);
 
 
-	public List<HomeworkVO> getHomeworkDone(String userId);
+	public List<SubmissionVO> getHomeworkDone(String userId);
 
 
 	public void setUserScore(@Param("userId")String userId,@Param("newScore") int newScore);
@@ -29,7 +30,7 @@ public interface CreatorMapper {
 	public int getUserScore(String userId);
 
 
-	public void deleteAns(int asmtAnsNo);
+	public void deleteAns(int subNo);
 
 
 	public List<UserDetailsVO> getAllStudent();
@@ -45,6 +46,9 @@ public interface CreatorMapper {
 
 
 	public void addAnswer(QuestionVO vo);
+
+
+	public SubmissionVO getSubmission(int subNo);
 
 
 	

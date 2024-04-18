@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.geomhwein.go.command.HomeworkVO;
 import com.geomhwein.go.command.QuestionVO;
+import com.geomhwein.go.command.SubmissionVO;
 import com.geomhwein.go.command.UserDetailsVO;
 import com.geomhwein.go.command.EducationGroupVO;
 
@@ -36,7 +37,7 @@ public class CreatorServiceImpl implements CreatorService{
 	}
 
 	
-	public List<HomeworkVO> getHomeworkDone(String userId) {
+	public List<SubmissionVO> getHomeworkDone(String userId) {
 		
 		return creatorMapper.getHomeworkDone(userId);
 	}
@@ -54,10 +55,10 @@ public class CreatorServiceImpl implements CreatorService{
 		return creatorMapper.getUserScore(userId);
 	}
 
-	@Override
-	public void deleteAns(int asmtAnsNo) {
+	//정답시 제출된 숙제 제거
+	public void deleteAns(int subNo) {
 		
-		creatorMapper.deleteAns(asmtAnsNo);
+		creatorMapper.deleteAns(subNo);
 		
 	}
 
@@ -91,6 +92,12 @@ public class CreatorServiceImpl implements CreatorService{
 		
 		creatorMapper.addAnswer(vo);
 		
+	}
+
+	
+	public SubmissionVO getSubmission(int subNo) {
+		
+		return creatorMapper.getSubmission(subNo);
 	}
 
 	

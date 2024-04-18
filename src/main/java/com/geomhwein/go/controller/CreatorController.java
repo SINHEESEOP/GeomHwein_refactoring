@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.geomhwein.go.command.HomeworkVO;
 import com.geomhwein.go.command.QuestionVO;
+import com.geomhwein.go.command.SubmissionVO;
 import com.geomhwein.go.command.UserDetailsVO;
 import com.geomhwein.go.command.EducationGroupVO;
 import com.geomhwein.go.creator.service.CreatorService;
@@ -48,33 +49,7 @@ public class CreatorController {
 		
 		return "creator/eduGroup";
 	}
-	@GetMapping("/homeworkDetail")
-	public String homeworkDetail(@RequestParam("userId")String userId,
-								 @RequestParam("asmtNo")int asmtNo,
-								 @RequestParam("asmtNm")String asmtNm,
-								 @RequestParam("asmtAns")String asmtAns,
-								 Model model,
-								 HomeworkVO vo) {
-		vo.setAsmtAns(asmtAns);
-		vo.setAsmtNo(asmtNo);
-		vo.setUserId(userId);
-		vo.setAsmtNm(asmtNm);
-		model.addAttribute("homeworkDetail",vo);
-		
-		
-		return "creator/homeworkDetail";
-	}
-	@GetMapping("/makeCorrect")
-	public String makeCorrect(@RequestParam("userId")String userId,
-							  @RequestParam("asmtScr")int asmtScr,
-							  @RequestParam("asmtAnsNo")int asmtAnsNo,
-							  Model model) {
-		int currentScore=creatorService.getUserScore(userId);
-		int newScore=currentScore+asmtScr;
-		creatorService.setUserScore(userId,newScore);			 
-		creatorService.deleteAns(asmtAnsNo);
-		return "creator/getHomeworkDoneList";
-	}
+	
 	
 	
 	
@@ -116,9 +91,10 @@ public class CreatorController {
 
 			String userId  = userAuth.getUserId();//선생님 ID
 			System.out.println(userId);
-			 List<HomeworkVO> homeworkDoneList=creatorService.getHomeworkDone(userId);
+			List<SubmissionVO> homeworkDoneList=creatorService.getHomeworkDone(userId);
 			  
-			 model.addAttribute("hwdList",homeworkDoneList);
+			
+			model.addAttribute("subList",homeworkDoneList);
 			 
 			
 			
@@ -130,6 +106,28 @@ public class CreatorController {
 			
 		
 		
+	}
+	
+	@GetMapping("/homeworkDetail")  //상세보기
+	public String homeworkDetail(@RequestParam("subNo")String sNo,Model model) {
+		int subNo=Integer.parseInt(sNo);
+		SubmissionVO svo=creatorService.getSubmission(subNo);
+		model.addAttribute("svo",svo);
+		return "creator/homeworkDetail";
+	}
+	@GetMapping("/makeCorrect") //정답처리
+	public String makeCorrect(@RequestParam("userId")String userId,
+			@RequestParam("subScr")String sScr,
+			@RequestParam("subNo")String sNo,
+			Model model) {
+		int subScr=Integer.parseInt(sScr);
+		int subNo=Integer.parseInt(sNo);
+		int currentScore=creatorService.getUserScore(userId);
+		int newScore=currentScore+subScr;
+		creatorService.setUserScore(userId,newScore);
+		creatorService.deleteAns(subNo);
+		
+		return "redirect:/";
 	}
 	
 	

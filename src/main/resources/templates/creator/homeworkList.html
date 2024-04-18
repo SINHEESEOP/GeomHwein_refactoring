@@ -15,25 +15,21 @@
       </div>
       <table class="comunity-table">
         <tr class="table-title">
-          <th>숙제제출번호</th>
+          <th>제출번호</th>
+          <th>숙제점수</th>
+          <th>제출일자</th>
           <th>숙제번호</th>
           <th>제출자</th>
-          <th>숙제제목</th>
-          <th>제출내용</th>
-          <th>숙제배점</th>
-          <th>숙제난이도</th>
           <th>상세</th>
   		    <th>정답</th>
         </tr>
         
-        <tr class="table-content" th:each="vo,status : ${hwdList}">
-          <td>[[${vo.asmtAnsNo}]]</td>
-          <td class="asmtNo a1">[[${vo.asmtNo}]]</td>
+        <tr class="table-content" th:each="vo,status : ${subList}">
+          <td class="subNo">[[${vo.subNo}]]</td>
+          <td class="subScr">[[${vo.subScr}]]</td>
+          <td class="subYmd">[[${vo.subYmd}]]</td>
+          <td class="asmtNo">[[${vo.asmtNo}]]</td>
           <td class="userId">[[${vo.userId}]]</td>
-          <td class="asmtNm">[[${vo.asmtNm}]]</td>
-          <td class="asmtAns">[[${vo.asmtAns}]]</td>
-          <td>[[${vo.asmtScr}]]</td>
-          <td>[[${vo.asmtGrd}]]</td>
           <td><button type="button" class="detailBtn">상세보기</button></td>
           <td><button type="button" class="makeCorrect">정답처리</button></td>
         </tr>
@@ -51,20 +47,17 @@
 </th:block>
 <script>
 	$(".detailBtn").click(function(e){
-		var asmtNo=e.target.parentElement.firstElementChild.nextElementSibling.innerHTML;
-    	var userId=e.target.parentElement.firstElementChild.nextElementSibling.nextElementSibling.innerHTML;
-    	var asmtNm=e.target.parentElement.firstElementChild.nextElementSibling.nextElementSibling.nextElementSibling.innerHTML;
-    	var asmtAns=e.target.parentElement.firstElementChild.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.innerHTML;
-    	var url="homeworkDetail?asmtNo"+asmtNo+"&asmtNm"+asmtNm+"&asmtAns"+asmtAns+"&userId"+userId;
+		var subNo=e.target.parentElement.parentElement.firstElementChild.innerHTML;
+    	var url="homeworkDetail?subNo="+subNo;
     	var name="숙제 상세보기.";
     	var option="width=825,length=825,top=0,left=0,location=no";
     	window.open(url,name,option);
   });
   $(".makeCorrect").click(function(e){
-	  	var asmtAnsNo=e.target.parentElement.firstElementChild.innerHTML;
-    	var userId=e.target.parentElement.firstElementChild.nextElementSibling.nextElementSibling.innerHTML;
-    	var asmtScr=e.target.parentElement.firstElementChild.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.innerHTML;
-    	location.href="/creator/makeCorrect?"+userId+"&asmtScr"+asmtScr+"&asmtAnsNo"+asmtAnsNo;
+	 	var subNo=e.target.parentElement.parentElement.firstElementChild.innerHTML;
+	 	var subScr=e.target.parentElement.parentElement.firstElementChild.nextElementSibling.innerHTML;
+    	var userId=e.target.parentElement.parentElement.firstElementChild.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.innerHTML;
+    	location.href="/creator/makeCorrect?userId="+userId+"&subScr="+subScr+"&subNo="+subNo;
   });
   $(".makeBtn").click(function(){
 	  	var url="createHomework";
