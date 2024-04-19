@@ -37,6 +37,7 @@ public class CreatorController {
 	
 	
 	//메인
+	//선생님일때는 홈누르면 여기로 가게 설정하는법을 알아야함
 	@GetMapping("/viewcreatorMain")
 	public String creatorMain(Model model) {
 		List<ContentVO> contList=creatorService.getAllContentList();
