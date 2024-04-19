@@ -7,6 +7,7 @@ import com.geomhwein.go.command.UserDetailsVO;
 
 import java.util.List;
 
+import com.geomhwein.go.command.ContentVO;
 import com.geomhwein.go.command.EducationGroupVO;
 
 public interface CreatorService {
@@ -58,6 +59,12 @@ public interface CreatorService {
 	
 	//질의응답 상태재설정
 	public void setQstnStatus(QuestionVO vo);
+
+	public List<ContentVO> getAllContentList();
+
+	public ContentVO getContent(int contsSn);
+
+	public void addGroup(EducationGroupVO evo);
 	
 
 	

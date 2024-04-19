@@ -375,8 +375,14 @@ public class UserController {
 
 			String username  = userAuth.getUserId();
 			
-			userService.applyGroup(groupNo,username);	
-
+			String userId=username;
+			List<GroupApplicationVO> list = userService.getGroupApplyList(userId);
+			if(list.size()>0) {
+				return "redirect:/";
+			}else {
+				userService.applyGroup(groupNo,username);
+				
+			}
 		}else {
 			
 			return "creator/creatorFail";//임시조치

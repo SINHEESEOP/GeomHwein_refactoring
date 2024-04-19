@@ -18,11 +18,11 @@ public class ContentVO {
 	private String contsNm;
 	private String contsExpln;
 	private Number contsPrc;
-	private Timestamp contsYmd;
+	private String contsYmd;
 	private String imgNm;
-	private Timestamp utiznBgngYmd;
-	private String utiznTrmsCn;
-	private String utiznNope;
+	private Timestamp utztnBgngYmd;
+	private String utztnTrmsCn;
+	private String utztnNope;
 	private String contsGrd;
 	private String userId;
 	private String keywords;

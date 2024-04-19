@@ -9,6 +9,7 @@ import com.geomhwein.go.command.HomeworkVO;
 import com.geomhwein.go.command.QuestionVO;
 import com.geomhwein.go.command.SubmissionVO;
 import com.geomhwein.go.command.UserDetailsVO;
+import com.geomhwein.go.command.ContentVO;
 import com.geomhwein.go.command.EducationGroupVO;
 
 @Service("creatorService")
@@ -119,6 +120,25 @@ public class CreatorServiceImpl implements CreatorService{
 	public void setQstnStatus(QuestionVO vo) {
 		
 		creatorMapper.setQstnStatus(vo);
+		
+	}
+
+	//크리에이터 메인으로 발송
+	public List<ContentVO> getAllContentList() {
+		
+		return creatorMapper.getAllContentList();
+	}
+
+	//컨텐츠 불러오기
+	public ContentVO getContent(int contsSn) {
+		
+		return creatorMapper.getContent(contsSn);
+	}
+
+	//그룹등록
+	public void addGroup(EducationGroupVO evo) {
+		
+		creatorMapper.addGroup(evo);
 		
 	}
 

@@ -17,6 +17,7 @@ import com.geomhwein.go.command.HomeworkVO;
 import com.geomhwein.go.command.QuestionVO;
 import com.geomhwein.go.command.SubmissionVO;
 import com.geomhwein.go.command.UserDetailsVO;
+import com.geomhwein.go.command.ContentVO;
 import com.geomhwein.go.command.EducationGroupVO;
 import com.geomhwein.go.creator.service.CreatorService;
 import com.geomhwein.go.securlty.UserAuth;
@@ -36,12 +37,33 @@ public class CreatorController {
 	
 	
 	//메인
-	@GetMapping("/creatorMain")
+	@GetMapping("/viewcreatorMain")
 	public String creatorMain(Model model) {
-		List<UserDetailsVO> sList=creatorService.getAllStudent();
-		model.addAttribute("studentList",sList);
-		
+		List<ContentVO> contList=creatorService.getAllContentList();
+		model.addAttribute("cList",contList);
 		return "creator/creatorMain";
+	}
+	
+	@GetMapping("/makeGroup")
+	public String makeGroup(@RequestParam("contsSn")String cSn,EducationGroupVO evo,Authentication authentication) {
+		//콘텐츠 조회해서 값 가져옴
+		String userId=null;
+		if (authentication != null) {
+			UserAuth userAuth = (UserAuth)authentication.getPrincipal();
+			
+			userId  = userAuth.getUserId();
+		}	
+		int contsSn=Integer.parseInt(cSn);
+		
+		ContentVO cvo=creatorService.getContent(contsSn);
+		//evo 에 각각 담아줌
+		evo.setContsNm(cvo.getContsNm());
+		evo.setGroupUtztnNope(Integer.parseInt(cvo.getUtztnNope()));
+		evo.setLastCmcrsYmd(cvo.getContsYmd());
+		evo.setUserId(userId);
+		evo.setRecAge(8);
+		creatorService.addGroup(evo);
+		return "creator/viewCreatorMain";
 	}
 	
 	
@@ -66,7 +88,7 @@ public class CreatorController {
 			model.addAttribute("questionList",qList);
 			return "creator/questionList";
 		}else {
-			return "redirect:/";	
+			return "creator/viewcreatorMain";	
 			
 		}
 	}
@@ -104,7 +126,7 @@ public class CreatorController {
 			return "creator/homeworkList";
 			
 		}else {
-			return "redirect:/";
+			return "creator/viewcreatorMain";
 		}
 			
 		
@@ -131,7 +153,7 @@ public class CreatorController {
 		creatorService.setUserScore(userId,newScore);
 		creatorService.setSubmissionScore(subScr,subNo);
 		
-		return "redirect:/";
+		return "creator/viewcreatorMain";
 	}
 	
 	//숙제등록절차

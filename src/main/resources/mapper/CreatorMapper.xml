@@ -87,4 +87,15 @@
 		SET QSTN_STATUS = 'Y'
 		WHERE QSTN_NO=#{qstnNo}
 	</update>
+	<select id="getAllContentList" resultType="ContentVO">
+		SELECT * FROM CONTENT
+	</select>
+	<select id="getContent" resultType="ContentVO">
+		SELECT * FROM CONTENT
+		WHERW CONTS_SN=#{contsSn}
+	</select>
+	<insert id="addGroup">
+		INSERT INTO EDUCATION_GROUP(GROUP_UTZTN_NOPE,CONTS_NM,USER_ID,LAST_CMCRS_YMD,REC_AGE)
+		VALUES (#{groupUtztnNope},#{contsNm},#{userId},#{lastCmcrsYmd},#{recAge})
+	</insert>
 </mapper>

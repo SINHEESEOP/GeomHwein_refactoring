@@ -8,6 +8,7 @@ import com.geomhwein.go.command.HomeworkVO;
 import com.geomhwein.go.command.QuestionVO;
 import com.geomhwein.go.command.SubmissionVO;
 import com.geomhwein.go.command.UserDetailsVO;
+import com.geomhwein.go.command.ContentVO;
 import com.geomhwein.go.command.EducationGroupVO;
 
 @Mapper
@@ -61,6 +62,15 @@ public interface CreatorMapper {
 
 
 	public void setQstnStatus(QuestionVO vo);
+
+
+	public List<ContentVO> getAllContentList();
+
+
+	public ContentVO getContent(int contsSn);
+
+
+	public void addGroup(EducationGroupVO evo);
 
 
 	
