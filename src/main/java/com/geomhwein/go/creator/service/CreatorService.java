@@ -59,9 +59,11 @@ public interface CreatorService {
 	
 	//질의응답 상태재설정
 	public void setQstnStatus(QuestionVO vo);
-
+	
+	
+	//크리에이터 메인
 	public List<ContentVO> getAllContentList();
-
+	
 	public ContentVO getContent(int contsSn);
 
 	public void addGroup(EducationGroupVO evo);

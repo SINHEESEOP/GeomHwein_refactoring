@@ -38,7 +38,7 @@ public class CreatorController {
 	
 	//메인
 	//선생님일때는 홈누르면 여기로 가게 설정하는법을 알아야함
-	@GetMapping("/viewcreatorMain")
+	@GetMapping("/viewCreatorMain")
 	public String creatorMain(Model model) {
 		List<ContentVO> contList=creatorService.getAllContentList();
 		model.addAttribute("cList",contList);
@@ -64,7 +64,7 @@ public class CreatorController {
 		evo.setUserId(userId);
 		evo.setRecAge(8);
 		creatorService.addGroup(evo);
-		return "creator/viewCreatorMain";
+		return "creator/creatorMain";
 	}
 	
 	
@@ -89,7 +89,7 @@ public class CreatorController {
 			model.addAttribute("questionList",qList);
 			return "creator/questionList";
 		}else {
-			return "creator/viewcreatorMain";	
+			return "creator/creatorMain";	
 			
 		}
 	}
@@ -127,7 +127,7 @@ public class CreatorController {
 			return "creator/homeworkList";
 			
 		}else {
-			return "creator/viewcreatorMain";
+			return "creator/creatorMain";
 		}
 			
 		
@@ -154,7 +154,7 @@ public class CreatorController {
 		creatorService.setUserScore(userId,newScore);
 		creatorService.setSubmissionScore(subScr,subNo);
 		
-		return "creator/viewcreatorMain";
+		return "creator/creatorMain";
 	}
 	
 	//숙제등록절차
@@ -196,7 +196,7 @@ public class CreatorController {
 		int groupNo=Integer.parseInt(gNo);
 		creatorService.setApplyStatus(aplyNo);
 		creatorService.setGroupUtztnNope(groupNo);
-		return "redirect:/";
+		return "creator/creatorMain";
 	}
 	
 	//답변주기

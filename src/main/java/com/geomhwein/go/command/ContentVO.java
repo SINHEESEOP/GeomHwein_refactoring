@@ -17,7 +17,7 @@ public class ContentVO {
 	private BigInteger contsSn;
 	private String contsNm;
 	private String contsExpln;
-	private Number contsPrc;
+	private int contsPrc;
 	private String contsYmd;
 	private String imgNm;
 	private Timestamp utztnBgngYmd;

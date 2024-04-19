@@ -92,7 +92,7 @@
 	</select>
 	<select id="getContent" resultType="ContentVO">
 		SELECT * FROM CONTENT
-		WHERW CONTS_SN=#{contsSn}
+		WHERE CONTS_SN= #{contsSn}
 	</select>
 	<insert id="addGroup">
 		INSERT INTO EDUCATION_GROUP(GROUP_UTZTN_NOPE,CONTS_NM,USER_ID,LAST_CMCRS_YMD,REC_AGE)
