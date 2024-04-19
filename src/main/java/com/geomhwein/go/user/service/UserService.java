@@ -61,5 +61,6 @@ public interface UserService {
 	public void allReplyDelete(int pst_ttl_no);
 	public List<GroupApplicationVO> getGroupApplyList(String userId);
 	public List<UserDetailsVO> getUserScoreList();
+	public void addBasket(int groupNo, String userId);
 
 }

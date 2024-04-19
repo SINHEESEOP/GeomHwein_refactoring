@@ -76,6 +76,8 @@ public interface UserMapper {
 
 	public List<UserDetailsVO> getUserScoreList();
 
+	public void addBasket(@Param("groupNo") int groupNo,@Param("userId") String userId);
+
 	
 
 }

@@ -379,7 +379,7 @@ public class UserController {
 		if (authentication != null) {
 			UserAuth userAuth = (UserAuth)authentication.getPrincipal();
 
-			String username  = userAuth.getUsername();
+			String username  = userAuth.getUserId();
 			
 			userService.applyGroup(groupNo,username);	
 
@@ -491,6 +491,19 @@ public class UserController {
 		return "user/groupProgress";
 	}
 	
+	@PostMapping("/addOnBasket")
+	@ResponseBody
+	public void addOnBasket(@RequestParam("groupNo")String gNo,Authentication authentication) {
+		int groupNo = Integer.parseInt(gNo);
+		if (authentication != null) {
+			UserAuth userAuth = (UserAuth)authentication.getPrincipal();
 
+			String userId  = userAuth.getUserId();
+			
+		    userService.addBasket(groupNo,userId);
+		}
+		
+	}
+	
 	
 }

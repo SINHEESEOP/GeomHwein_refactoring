@@ -345,4 +345,11 @@ public class UserServiceImpl implements UserService {
 		return userMapper.getUserScoreList();
 	}
 
+	//장바구니 담기
+	public void addBasket(int groupNo, String userId) {
+		
+		userMapper.addBasket(groupNo,userId);
+		
+	}
+
 }

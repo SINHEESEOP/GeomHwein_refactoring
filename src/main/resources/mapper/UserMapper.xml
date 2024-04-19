@@ -228,5 +228,8 @@
 		FROM
 			USER_DETAILS
 	</select>
-    
+    <insert id="addBasket">
+    	INSERT IN TO CART(USER_ID,GROUP_NO)
+    	values(#{userId},#{groupNo})
+    </insert>
 </mapper>
