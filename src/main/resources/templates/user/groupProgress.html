@@ -11,30 +11,31 @@
   		
   		<h6>그룹별 진도 현황</h6>
   		<label for="c1" class="progLabel">입문반</label>
-  		<progress id="c1" max="100" value="89"></progress>
+  		<progress id="c1" max="100" value="44"></progress>
 
   		<label for="c2" class="progLabel">기초반</label>
-  		<progress id="c2" max="100" value="44"></progress>
+  		<progress id="c2" max="100" value="71"></progress>
 
   		<label for="c3" class="progLabel">초급반</label>
-  		<progress id="c3" max="100" value="32"></progress>
+  		<progress id="c3" max="100" value="19"></progress>
   
   		<label for="c4" class="progLabel">중급반</label>
-  		<progress id="c4" max="100" value="49"></progress>
+  		<progress id="c4" max="100" value="23"></progress>
 
   		<label for="c5" class="progLabel">사활반</label>
-  		<progress id="c5" max="100" value="68"></progress>
+  		<progress id="c5" max="100" value="80"></progress>
 
   		<label for="c6" class="progLabel">실전반</label>
-  		<progress id="c6" max="100" value="28"></progress>
+  		<progress id="c6" max="100" value="31"></progress>
   		<div hidden="hidden" class="progressOption">
   			<!-- 관리자권한일 경우 divs hidden="none" -->
-  			입문반<input type="number" id="prog1" value="">
-  			기초반<input type="number" id="prog2" value="">
-  			초급반<input type="number" id="prog3" value="">
-  			중급반<input type="number" id="prog4" value="">
-  			사활반<input type="number" id="prog5" value="">
-  			실전반<input type="number" id="prog6" value="">
+  			입문반<input type="number" id="prog1" value="23">
+  			기초반<input type="number" id="prog2" value="44">
+  			초급반<input type="number" id="prog3" value="55">
+  			중급반<input type="number" id="prog4" value="11">
+  			사활반<input type="number" id="prog5" value="31">
+  			실전반<input type="number" id="prog6" value="24">
+  			<input type="button" id="setBtn" value="setProgress">
   		</div>
   		<div class="tableBack">
   			<h6>사활풀이 순위</h6>
@@ -64,6 +65,31 @@
     
     $(this).val(0).animate({ value: max }, 1500);
 	});
+    
+    
+    $(".setBtn").click(function(){
+    	var pg1=$("#prog1").val();
+    	$("#c1").attr("value",pg1);
+    	
+    	var pg2=$("#prog2").val();
+    	$("#c2").attr("value",pg2);
+    	
+    	var pg3=$("#prog3").val();
+    	$("#c3").attr("value",pg3);
+    	
+    	var pg4=$("#prog4").val();
+    	$("#c4").attr("value",pg4);
+    	
+    	var pg5=$("#prog5").val();
+    	$("#c5").attr("value",pg5);
+    	
+    	var pg6=$("#prog6").val();
+    	$("#c6").attr("value",pg6);
+    	
+    	
+    	
+    });
+    
   </script>
 
 </html>

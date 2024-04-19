@@ -55,7 +55,8 @@ public interface CreatorService {
 	public void setApplyStatus(int aplyNo);
 	//그룹신청승인시 신청가능인원 변경
 	public void setGroupUtztnNope(int groupNo);
-
+	
+	//질의응답 상태재설정
 	public void setQstnStatus(QuestionVO vo);
 	
 
