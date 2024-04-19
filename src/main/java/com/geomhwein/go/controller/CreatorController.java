@@ -66,14 +66,7 @@ public class CreatorController {
 		creatorService.addGroup(evo);
 		return "creator/creatorMain";
 	}
-	
-	
-	//그룹상세보기
-	@GetMapping("/eduGroup")
-	public String eduGroup  () {
-		
-		return "creator/eduGroup";
-	}
+
 	
 	
 	
