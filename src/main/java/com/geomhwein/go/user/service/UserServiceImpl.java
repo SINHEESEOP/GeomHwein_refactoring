@@ -206,16 +206,12 @@ public class UserServiceImpl implements UserService {
 
 
 	
-	public EducationGroupVO getGroup(int groupNo) {
+	public List<EducationGroupVO> getGroup() {
 		
-		return userMapper.getGroup(groupNo);
+		return userMapper.getGroup();
 	}
 
-	//그룹갯수를 불러오는 매서드
-	public int getGroupCount() {
-		
-		return userMapper.getGroupCount();
-	}
+	
 
 
 	@Override
@@ -343,6 +339,12 @@ public class UserServiceImpl implements UserService {
 		
 		userMapper.registCreator(vo);
 		
+	}
+
+	@Override
+	public EducationGroupVO getGroupOne(int groupNo) {
+		
+		return userMapper.getGroupOne(groupNo);
 	}
 
 }

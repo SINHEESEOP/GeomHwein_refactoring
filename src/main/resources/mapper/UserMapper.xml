@@ -78,13 +78,13 @@
 	insert into REPLY(PST_TTL_NO,REPLY_CN,USERID,PARENT_REPLY_NO) values(#{pstTtlNo},#{replyCn},#{userId},#{parentReplyNo})
 	</insert>
 	
-	<select id="getGroup" resultType="EducationGroupVO">
+	<select id="getGroupOne" resultType="EducationGroupVO">
 		SELECT * FROM EDUCATION_GROUP where GROUP_NO=#{groupNo}
 	</select>
-	
-	<select id="getGroupCount" resultType="int">
-		SELECT COUNT(*)FROM EDUCATION_GROUP
+	<select id="getGroup" resultType="EducationGroupVO">
+		SELECT * FROM EDUCATION_GROUP
 	</select>
+	
 	
 	<insert id="applyGroup">
 		insert into group_application(GROUP_NO,USER_ID)

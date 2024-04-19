@@ -59,11 +59,11 @@ public interface UserMapper {
 	//mapper작업 안함
 	//리스트 받아와서 Homeworklist창으로 가서 타임리프 돌려서 화면에 리스트 뿌려줌
 
-	public EducationGroupVO getGroup(int groupNo);
+	public List<EducationGroupVO> getGroup();
 	//mapper상에서 
 	//group테이블에서 groupNo값으로 불러와야함
 
-	public int getGroupCount();
+	
 
 	public void applyGroup(@Param("groupNo")int groupNo,@Param("userId")String userId);
 
@@ -72,6 +72,8 @@ public interface UserMapper {
 	public void addBasket(@Param("groupNo") int groupNo,@Param("userId") String userId);
 
 	public void registCreator(EvaluationVO vo);
+
+	public EducationGroupVO getGroupOne(int groupNo);
 
 	
 

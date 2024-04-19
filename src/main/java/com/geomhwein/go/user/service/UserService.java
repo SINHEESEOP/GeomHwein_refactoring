@@ -27,8 +27,7 @@ public interface UserService {
 	public void replyAdd(ReplyVO vo);
 	public List<HomeworkVO> getHomeworkList(String userId);
 	public void addQuestion(QuestionVO vo);
-	public EducationGroupVO getGroup(int groupNo);
-	public int getGroupCount();
+	
 	public void applyGroup(int groupNo, String username);
 	public List<QuestionVO> getQuestionList(String username);
 	public QuestionVO questionDetail(int qstn_no);
@@ -53,5 +52,7 @@ public interface UserService {
 	public List<UserDetailsVO> getUserScoreList();
 	public void addBasket(int groupNo, String userId);
 	public void registCreator(EvaluationVO vo);
+	public EducationGroupVO getGroupOne(int groupNo);
+	public List<EducationGroupVO> getGroup();
 
 }

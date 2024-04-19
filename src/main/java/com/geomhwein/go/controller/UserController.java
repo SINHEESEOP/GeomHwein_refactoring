@@ -172,8 +172,8 @@ public class UserController {
 	
 	@GetMapping("/groupList")
 	public String userGroupList(Model model ,Authentication authentication) {
-		int gCount=userService.getGroupCount();
-		List<EducationGroupVO> groupList=new ArrayList<>();
+		
+		List<EducationGroupVO> groupList=userService.getGroup();
 		if (authentication != null) {
 			UserAuth userAuth = (UserAuth)authentication.getPrincipal();
 
@@ -182,9 +182,9 @@ public class UserController {
 			model.addAttribute("userName", userId);
 
 		}
-		for(int i=1;i<=gCount;i++) {
-			groupList.add(userService.getGroup(i));
-		}
+		
+			
+		
 		model.addAttribute("groupList",groupList);
 		return "user/groupList";
 	}
@@ -214,7 +214,7 @@ public class UserController {
 		
 		String userId = prin.getName();
 		
-		EducationGroupVO vo = userService.getGroup(groupNo);
+		EducationGroupVO vo = userService.getGroupOne(groupNo);
 		List<QuestionVO> list = userService.getQuestionList(userId);
 		
 		model.addAttribute("vo", vo);
