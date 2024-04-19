@@ -11,16 +11,7 @@ import org.apache.ibatis.annotations.Select;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.geomhwein.go.util.Criteria;
-import com.geomhwein.go.command.ComunityUploadVO;
-import com.geomhwein.go.command.ReplyVO;
-import com.geomhwein.go.command.UserDetailsVO;
-import com.geomhwein.go.command.ComunityVO;
 import com.geomhwein.go.util.Criteria;
-import com.geomhwein.go.command.HomeworkVO;
-import com.geomhwein.go.command.QuestionVO;
-
-import com.geomhwein.go.command.EducationGroupVO;
-import com.geomhwein.go.command.GroupApplicationVO;
 
 
 public interface UserService {
@@ -36,7 +27,6 @@ public interface UserService {
 	public void replyAdd(ReplyVO vo);
 	public List<HomeworkVO> getHomeworkList(String userId);
 	public void addQuestion(QuestionVO vo);
-	public int registCreator(String userName, String docsCode, String reason);
 	public EducationGroupVO getGroup(int groupNo);
 	public int getGroupCount();
 	public void applyGroup(int groupNo, String username);
@@ -62,5 +52,6 @@ public interface UserService {
 	public List<GroupApplicationVO> getGroupApplyList(String userId);
 	public List<UserDetailsVO> getUserScoreList();
 	public void addBasket(int groupNo, String userId);
+	public void registCreator(EvaluationVO vo);
 
 }

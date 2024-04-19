@@ -9,15 +9,8 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.springframework.web.bind.annotation.RequestParam;
-import com.geomhwein.go.command.ComunityUploadVO;
-import com.geomhwein.go.command.ReplyVO;
-import com.geomhwein.go.command.UserDetailsVO;
-import com.geomhwein.go.command.ComunityVO;
-import com.geomhwein.go.util.Criteria;
 
-import com.geomhwein.go.command.ComunityVO;
-import com.geomhwein.go.command.EducationGroupVO;
-import com.geomhwein.go.command.GroupApplicationVO;
+import com.geomhwein.go.util.Criteria;
 
 
 @Mapper
@@ -57,7 +50,7 @@ public interface UserMapper {
 	public void allReplyDelete(int pst_ttl_no);
 	public void deleteFile(int pst_ttl_no);
 
-	public int registCreator(@Param("userName") String userName,@Param("docsCode") String docsCode,@Param("reason") String reason);
+	
 	public List<GroupApplicationVO> getGroupApplyList(String userId);
 	//아직 mapper작업 안함
 	//반환값으로 성공실패여부 확인
@@ -77,6 +70,8 @@ public interface UserMapper {
 	public List<UserDetailsVO> getUserScoreList();
 
 	public void addBasket(@Param("groupNo") int groupNo,@Param("userId") String userId);
+
+	public void registCreator(EvaluationVO vo);
 
 	
 

@@ -229,7 +229,11 @@
 			USER_DETAILS
 	</select>
     <insert id="addBasket">
-    	INSERT IN TO CART(USER_ID,GROUP_NO)
+    	INSERT INTO CART(USER_ID,GROUP_NO)
     	values(#{userId},#{groupNo})
+    </insert>
+    <insert id="registCreator">
+    	INSERT INTO teacher_evaluations(USER_ID,DOC_ID,DOC_TYPE)
+    	values(#{userId},#{docId},#{docType})
     </insert>
 </mapper>

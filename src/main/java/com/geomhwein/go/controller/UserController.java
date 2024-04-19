@@ -242,13 +242,7 @@ public class UserController {
 		return "user/homeworkList";
 	}
 
-	@PostMapping("/creatorRegForm")
-	public String creatorRegForm(@RequestParam("userName")String userName,@RequestParam("docsCode")String docsCode,@RequestParam("reason")String reason) {
-		userService.registCreator(userName,docsCode,reason);
-		//교육자 신청 되는 기록 신청가능여부를 위해 DB에 넣어서
-		//관리자 창 열릴때 get방식으로 불러와서 값 보내주면됨
-		return "user/profile";//신청버튼 잇던 곳으로 보내주면됨
-	}
+	
 
 	
 	
@@ -491,6 +485,8 @@ public class UserController {
 		return "user/groupProgress";
 	}
 	
+	
+	//장바구니 담기
 	@PostMapping("/addOnBasket")
 	@ResponseBody
 	public void addOnBasket(@RequestParam("groupNo")String gNo,Authentication authentication) {
@@ -504,6 +500,31 @@ public class UserController {
 		}
 		
 	}
+	
+	//교육자승급신청
+	@GetMapping("/registCreator")
+	public String registCreator(Authentication authentication,Model model) {
+		String userId=null;
+		if (authentication != null) {
+			UserAuth userAuth = (UserAuth)authentication.getPrincipal();
+
+			userId  = userAuth.getUserId();
+			
+		}
+		model.addAttribute("userId",userId);
+		return "user/regBeingCreator";
+	}
+	
+	@PostMapping("/creatorRegForm")
+	public String creatorRegForm(EvaluationVO vo) {
+		userService.registCreator(vo);
+		
+		return "user/profile";
+	}
+	
+	
+	
+	
 	
 	
 }

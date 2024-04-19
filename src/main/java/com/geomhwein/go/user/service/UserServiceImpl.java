@@ -15,15 +15,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
-import com.geomhwein.go.command.ComunityUploadVO;
-import com.geomhwein.go.command.ReplyVO;
-import com.geomhwein.go.command.UserDetailsVO;
-import com.geomhwein.go.command.ComunityVO;
-import com.geomhwein.go.util.Criteria;
 
-import com.geomhwein.go.command.ComunityVO;
-import com.geomhwein.go.command.EducationGroupVO;
-import com.geomhwein.go.command.GroupApplicationVO;
+import com.geomhwein.go.util.Criteria;
 
 @Service("userService")
 public class UserServiceImpl implements UserService {
@@ -206,13 +199,6 @@ public class UserServiceImpl implements UserService {
 
 
 	
-	public int registCreator(String userName, String docsCode, String reason) {
-		
-		return userMapper.registCreator(userName,docsCode,reason);
-	}
-
-
-	
 	public List<HomeworkVO> getHomeworkList(String userId) {
 		
 		return userMapper.getHomeworkList(userId);
@@ -349,6 +335,13 @@ public class UserServiceImpl implements UserService {
 	public void addBasket(int groupNo, String userId) {
 		
 		userMapper.addBasket(groupNo,userId);
+		
+	}
+
+	@Override
+	public void registCreator(EvaluationVO vo) {
+		
+		userMapper.registCreator(vo);
 		
 	}
 
