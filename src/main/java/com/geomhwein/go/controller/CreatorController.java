@@ -34,6 +34,8 @@ public class CreatorController {
 	@Qualifier("creatorService")
 	private CreatorService creatorService;
 	
+	
+	//메인
 	@GetMapping("/creatorMain")
 	public String creatorMain(Model model) {
 		List<UserDetailsVO> sList=creatorService.getAllStudent();
@@ -43,7 +45,7 @@ public class CreatorController {
 	}
 	
 	
-	
+	//그룹상세보기
 	@GetMapping("/eduGroup")
 	public String eduGroup  () {
 		
@@ -53,7 +55,7 @@ public class CreatorController {
 	
 	
 	
-
+	//질문리스트 보기
 	@GetMapping("/viewQuestionList")
 	public String questionList(Model model,Authentication authentication) {
 		if (authentication != null) {
@@ -68,7 +70,7 @@ public class CreatorController {
 			
 		}
 	}
-	
+	//숙제 작성
 	@GetMapping("/createHomework")
 	public String createHomework(Authentication authentication,Model model) {
 		if (authentication != null) {
@@ -84,6 +86,7 @@ public class CreatorController {
 		
 		
 	}
+	//숙제제출리스트보기
 	@GetMapping("/getHomeworkDoneList")
 	public String getHomeworkDoneList(Model model,Authentication authentication) {
 		if (authentication != null) {
@@ -107,7 +110,7 @@ public class CreatorController {
 		
 		
 	}
-	
+	//숙제 상세보기
 	@GetMapping("/homeworkDetail")  //상세보기
 	public String homeworkDetail(@RequestParam("subNo")String sNo,Model model) {
 		int subNo=Integer.parseInt(sNo);
@@ -131,7 +134,7 @@ public class CreatorController {
 		return "redirect:/";
 	}
 	
-	
+	//숙제등록절차
 	@PostMapping("/registHomeworkForm")
 	public String registHomeworkForm(HomeworkVO vo) {
 		creatorService.makeHomework(vo);
@@ -141,6 +144,7 @@ public class CreatorController {
 		
 		
 	}
+	//그룹신청목록보기
 	@GetMapping("/groupApplyList")
 	public String groupApplyList(Model model) {
 		int applyCount=creatorService.getApplyCount();
@@ -153,6 +157,7 @@ public class CreatorController {
 		return "creator/groupApplyList";
 	}
 	
+	//신청반려
 	@GetMapping("/refuseRegist")
 	public String refuseRegist(@RequestParam("aplyNo")String aNo) {
 		int aplyNo=Integer.parseInt(aNo);
@@ -161,6 +166,7 @@ public class CreatorController {
 		return "redirect:/";
 	}
 	
+	//신청승인
 	@GetMapping("/acceptRegist")
 	public String acceptRegitst(@RequestParam("aplyNo")String aNo,@RequestParam("groupNo")String gNo) {
 		int aplyNo=Integer.parseInt(aNo);
@@ -170,7 +176,7 @@ public class CreatorController {
 		return "redirect:/";
 	}
 	
-	
+	//답변주기
 	@GetMapping("/makeAnswerForm")
 	public String getMethodName(@RequestParam("qstnNo")int qstnNo,Model model,Authentication authentication) {
 		if (authentication != null) {
@@ -188,6 +194,8 @@ public class CreatorController {
 		}
 		
 	}
+	
+	//답변등록절차
 	@PostMapping("/registAnswerForm")
 	public String registAnswerForm(QuestionVO vo) {
 		creatorService.addAnswer(vo);
