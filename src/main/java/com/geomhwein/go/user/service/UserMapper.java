@@ -36,6 +36,9 @@ public interface UserMapper {
 	public QuestionVO questionDetail(int qstn_no);
 	public void questionModifyForm(QuestionVO vo);
 	public void deleteQuestion(int qstnno);
+	public void applyCancle(int aplyNo);
+	public void deleteUpload(int pst_ttl_no);
+
 
 
 	@Select("SELECT * FROM USER_DETAILS WHERE USER_ID = #{userId}")

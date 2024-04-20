@@ -81,6 +81,7 @@
 						<span class="nav-link-text ms-1">결제 정보</span>
 					</a>
 				</li>
+				<th:block sec:authorize="hasRole('ROLE_CREATOR')">
 				<li class="nav-item mt-3">
 					<h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">교육 페이지</h6>
 				</li>
@@ -126,7 +127,7 @@
 						<span class="nav-link-text ms-1">진도현황보기</span>
 					</a>
 				</li> 
-				
+				</th:block>
 				<li class="nav-item mt-3">
 					<h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">계정 페이지</h6>
 				</li>
@@ -146,7 +147,7 @@
 						<span class="nav-link-text ms-1">마이페이지</span>
 					</a>
 				</li>
-        
+        		<th:block sec:authorize="hasRole('ROLE_USER')">
 				<li class="nav-item ">
 					<a class="nav-link text-white tab" id="tab10" href="/user/comunityList" data-page-name="커뮤니티">
 						<div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
@@ -155,25 +156,24 @@
 						<span class="nav-link-text ms-1">커뮤니티</span>
 					</a>
 				</li>
-        
-				<li class="nav-item">
-					<a class="nav-link text-white tab" id="tab8" href="/user/groupList" data-page-name="장바구니">
+				<li class="nav-item ">
+					<a class="nav-link text-white tab" id="tab14" href="/user/groupApplyList" data-page-name="나의 학습그룹">
 						<div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-							<i class="material-icons opacity-10">person</i>
+							<i class="material-icons opacity-10">group</i>
 						</div>
-						<span class="nav-link-text ms-1">그룹보기</span>
+						<span class="nav-link-text ms-1">나의 학습그룹</span>
 					</a>
 				</li>
-				
+				</th:block>
 				<li class="nav-item sideBtn ">
-					<a class="nav-link text-white tab" id="tab9" href="/cart" data-page-name="장바구니">
+					<a class="nav-link text-white tab" id="tab11" href="/cart" data-page-name="장바구니">
 						<div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
 							<i class="material-icons opacity-10">shopping_cart</i>
 						</div>
 						<span class="nav-link-text ms-1">장바구니</span>
 					</a>
 				</li>
-				
+				<th:block sec:authorize="!isAuthenticated()">
 				<li class="nav-item sideBtn ">
 					<a class="nav-link text-white tab" id="tab12" href="/sign_in" data-page-name="로그인">
 						<div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
@@ -191,6 +191,7 @@
 						<span class="nav-link-text ms-1">회원가입</span>
 					</a>
 				</li>
+				</th:block>
 			</ul>
 		</div>
 		<div class="sidenav-footer position-absolute w-100 bottom-0 ">

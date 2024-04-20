@@ -54,8 +54,10 @@ t<html xmlns:th="http://www.thymeleaf.org">
       </div>
     </div>
     <div class="button-wrap">
+      <th:block th:if="${vo.userId} == ${#authentication.getPrincipal().getUserId}">
       <button type="button" id="changeBtn" th:onclick="|location.href='@{comunityModify(pst_ttl_no=${vo.PstTtlNo})}'|">수정하기</button>
       <button type="button" id="deleteBtn" th:onclick="|location.href='@{comunityDelete(pst_ttl_no=${vo.PstTtlNo})}'|">삭제하기</button>
+      </th:block>
       <button type="button" id="backBtn" th:onclick="|location.href='@{comunityList}'|">목륵으로</button>
     </div>
     </div>

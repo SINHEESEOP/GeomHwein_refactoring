@@ -20,12 +20,12 @@
   		  <td>비고</td>
         </tr>
         <tr class="table-content" th:each="vo,status : ${list}" >
-          <td>[[${status.count}]]</td>
+          <td th:value="${aplyNo}">[[${vo.aplyNo}]]</td>
           <td>[[${vo.groupNo}]]</td>
-          <th:block th:if="${vo.aplyStatus} == Y">
+          <th:block th:if="${vo.aplyStatus} == N">
           <td th:onclick="|location.href='@{groupApplyDetail(groupno=${vo.groupNo})}'|"><img src="" alt="이미지"/></td>
           </th:block>
-          <th:block th:if="${vo.aplyStatus} == N">
+          <th:block th:if="${vo.aplyStatus} == Y">
           <td><img src="" alt="이미지"/></td>
           </th:block>
           <td>[[${vo.contsNm}]]</td>
@@ -33,7 +33,7 @@
           <td>[[${vo.groupUtztnNope}]]</td>
           <td>[[${vo.recAge}]]</td>
           <td>[[${vo.aplyStatus}]]</td>
-          <td><button type="button" th:onclick="|location.href=''|">신청취소</button></td>
+          <td><button type="button" class="applyCancle">신청취소</button></td>
         </tr>
       </table>
       <div class="pagenation">
@@ -47,4 +47,27 @@
 </div>
 
 </th:block>
+
+<script th:inline="javascript">
+	
+	
+	
+	$(".applyCancle").click(function(){
+		
+		var aplyno = $(event.target).closest("tr").children().first().text();
+		
+		$.ajax({
+			type:"get",
+			url:"applyCancle?aplyno="+aplyno,
+			success:function(data){
+				console.log(data);
+				location.reload();
+			},
+			error:function(err,status){
+				console.log(err);
+				console.log(status);
+			}
+		})
+	})
+</script>
 </html>
