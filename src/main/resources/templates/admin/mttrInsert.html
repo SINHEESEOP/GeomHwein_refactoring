@@ -24,11 +24,12 @@
             </div>
 
         </div>
-
+	
 
         <div class="mttrInfo">
             <p>공지 내용 : </p>
-            <div><textarea name="ntccn" id="" cols="30" rows="10"></textarea></div>
+            <div><textarea name="mttrCn" id="" cols="30" rows="10"></textarea></div>
+          	
         </div>
         <div class="reg-button">
             <button type="button" class="reg" id="insertBtn">등록</button>
@@ -42,7 +43,7 @@
     <script>
         $(document).ready(function () {
             $("#listBtn").click(function () {
-                window.location.href = "mttr";
+                window.location.href = "mttrList";
             });
 
             $("#insertBtn").click(function () {

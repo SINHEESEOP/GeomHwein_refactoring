@@ -23,7 +23,7 @@
 <!--    사이드바에 필요한 메뉴는 한번에 박아넣고, if 구문을 통해 권한에 따라 보여줄 수 있게 만들기. -->
 
 <th:block th:fragment="setContent( content )">
-	
+<script src="/js/jquery-3.7.1.min.js"></script>		
 	<head>
 		
 		<meta charset="utf-8"/>
@@ -51,8 +51,8 @@
 	<body class="g-sidenav-show  bg-gray-200">
 	<aside
 			class="sidenav navbar navbar-vertical navbar-expand-xs border-0
-						 border-radius-xl my-3 fixed-start ms-3 bg-gradient-dark "
-			id="sidenav-main">
+						 my-3 fixed-start ms-3 bg-gradient-dark"
+			id="sidenav-main" style="margin: 0px !important;">
 		<div class="sidenav-header">
 			<i class="fas fa-times p-3 cursor-pointer text-white opacity-5 position-absolute end-0 top-0 d-none d-xl-none"
 			   aria-hidden="true" id="iconSidenav"></i>
@@ -65,83 +65,89 @@
 		<hr class="horizontal light mt-0 mb-2">
 		<div class="collapse navbar-collapse w-auto max-height-vh-100 sidenav_click" id="sidenav-collapse-main">
 			<ul class="navbar-nav">
-			
-			
-<!--				<li class="nav-item">-->
-<!--					<a class="nav-link text-white " href="../pages/dashboard.html">-->
-<!--						<div class="text-white text-center me-2 d-flex align-items-center justify-content-center">-->
-<!--							<i class="material-icons opacity-10">dashboard</i>-->
-<!--						</div>-->
-<!--						<span class="nav-link-text ms-1">대쉬보드</span>-->
-<!--					</a>-->
-<!--				</li>-->
-				
-				
-				<li class="nav-item">
+				<li class="nav-item sideBtn ">
 					<a class="nav-link text-white tab " id="tab1" href="/" data-page-name="홈">
 						<div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-							<i class="material-icons opacity-10">table_view</i>
+							<i class="material-icons opacity-10">cast_for_education</i>
 						</div>
 						<span class="nav-link-text ms-1">홈</span>
 					</a>
 				</li>
-				<li class="nav-item ">
-					<a class="nav-link text-white tab" id="tab2" href="/user/billing" data-page-name="결제 정보">
+				<li class="nav-item sideBtn ">
+					<a class="nav-link text-white tab " id="tab2" href="/user/billing" data-page-name="결제 정보">
 						<div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
 							<i class="material-icons opacity-10">receipt_long</i>
 						</div>
 						<span class="nav-link-text ms-1">결제 정보</span>
 					</a>
 				</li>
+				<li class="nav-item mt-3">
+					<h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">교육 페이지</h6>
+				</li>
+				<li class="nav-item sideBtn ">
+					<a class="nav-link text-white tab" id="tab3" href="/user/groupList" data-page-name="그룹 보기">
+						<div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+							<i class="material-icons opacity-10">group</i>
+						</div>
+						<span class="nav-link-text ms-1">그룹보기</span>
+					</a>
+				</li>
+				<!-- 교육자권한일때만 보이게 처리 시작 -->
+				<li class="nav-item sideBtn ">
+					<a class="nav-link text-white tab" id="tab4" href="/creator/groupApplyList" data-page-name="그룹 관리">
+						<div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+							<i class="material-icons opacity-10">diversity_3</i>
+						</div>
+						<span class="nav-link-text ms-1">그룹관리</span>
+					</a>
+				</li>
+				<li class="nav-item sideBtn ">
+					<a class="nav-link text-white tab" id="tab12" href="/creator/viewQuestionList" data-page-name="질문 보기">
+						<div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+							<i class="material-icons opacity-10">help</i>
+						</div>
+						<span class="nav-link-text ms-1">질문보기</span>
+					</a>
+				</li> 
+				<li class="nav-item sideBtn ">
+					<a class="nav-link text-white tab" id="tab6" href="/creator/getHomeworkDoneList" data-page-name="숙제 관리">
+						<div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+							<i class="material-icons opacity-10">ad_units</i>
+						</div>
+						<span class="nav-link-text ms-1">숙제관리</span>
+					</a>
+				</li>
+				<!-- 교육자권한일때만 보이게 처리 끝 -->
+				<li class="nav-item sideBtn ">
+					<a class="nav-link text-white tab" id="tab7" href="/user/groupProgress" data-page-name="진도 현황/사활 순위">
+						<div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+							<i class="material-icons opacity-10">signal_cellular_alt</i>
+						</div>
+						<span class="nav-link-text ms-1">진도현황보기</span>
+					</a>
+				</li> 
 				
-<!--				<li class="nav-item">-->
-<!--					<a class="nav-link text-white " href="../pages/virtual-reality.html">-->
-<!--						<div class="text-white text-center me-2 d-flex align-items-center justify-content-center">-->
-<!--							<i class="material-icons opacity-10">view_in_ar</i>-->
-<!--						</div>-->
-<!--						<span class="nav-link-text ms-1">Virtual Reality</span>-->
-<!--					</a>-->
-<!--				</li>-->
-
-				
-<!--				<li class="nav-item">-->
-<!--					<a class="nav-link text-white " href="../pages/rtl.html">-->
-<!--						<div class="text-white text-center me-2 d-flex align-items-center justify-content-center">-->
-<!--							<i class="material-icons opacity-10">format_textdirection_r_to_l</i>-->
-<!--						</div>-->
-<!--						<span class="nav-link-text ms-1">RTL</span>-->
-<!--					</a>-->
-<!--				</li>-->
-				
-				
-<!--				<li class="nav-item">-->
-<!--					<a class="nav-link text-white " href="../pages/notifications.html">-->
-<!--						<div class="text-white text-center me-2 d-flex align-items-center justify-content-center">-->
-<!--							<i class="material-icons opacity-10">notifications</i>-->
-<!--						</div>-->
-<!--						<span class="nav-link-text ms-1">알림</span>-->
-<!--					</a>-->
-<!--				</li>-->
-				
-				<li class="nav-item mt-3 ">
+				<li class="nav-item mt-3">
 					<h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">계정 페이지</h6>
 				</li>
-				<li class="nav-item">
-					<a class="nav-link text-white tab" id="tab3" href="/user/profile" data-page-name="마이페이지">
+				<li class="nav-item sideBtn ">
+					<a class="nav-link text-white tab" id="tab8" href="/user/profile" data-page-name="마이 페이지">
 						<div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
 							<i class="material-icons opacity-10">person</i>
 						</div>
 						<span class="nav-link-text ms-1">마이페이지</span>
 					</a>
 				</li>
-				<li class="nav-item">
-					<a class="nav-link text-white tab" id="tab7" href="/user/comunityList" data-page-name="커뮤니티">
+        
+				<li class="nav-item ">
+					<a class="nav-link text-white tab" id="tab6" href="/user/comunityList" data-page-name="커뮤니티">
 						<div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
 							<i class="material-icons opacity-10">person</i>
 						</div>
 						<span class="nav-link-text ms-1">커뮤니티</span>
 					</a>
 				</li>
+        
 				<li class="nav-item">
 					<a class="nav-link text-white tab" id="tab8" href="/user/groupList" data-page-name="장바구니">
 						<div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
@@ -150,24 +156,27 @@
 						<span class="nav-link-text ms-1">그룹보기</span>
 					</a>
 				</li>
-				<li class="nav-item ">
-					<a class="nav-link text-white tab" id="tab6" href="/user/cart" data-page-name="장바구니">
+				
+				<li class="nav-item sideBtn ">
+					<a class="nav-link text-white tab" id="tab9" href="/cart" data-page-name="장바구니">
 						<div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
 							<i class="material-icons opacity-10">shopping_cart</i>
 						</div>
 						<span class="nav-link-text ms-1">장바구니</span>
 					</a>
 				</li>
-				<li class="nav-item ">
-					<a class="nav-link text-white tab" id="tab4" href="/sign_in" data-page-name="로그인">
+				
+				<li class="nav-item sideBtn ">
+					<a class="nav-link text-white tab" id="tab10" href="/sign_in" data-page-name="로그인">
 						<div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
 							<i class="material-icons opacity-10">login</i>
 						</div>
 						<span class="nav-link-text ms-1">로그인</span>
 					</a>
 				</li>
-				<li class="nav-item ">
-					<a class="nav-link text-white tab" id="tab5" href="/sign_up" data-page-name="회원가입">
+            
+				<li class="nav-item sideBtn ">
+					<a class="nav-link text-white tab" id="tab11" href="/sign_up" data-page-name="회원가입">
 						<div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
 							<i class="material-icons opacity-10">assignment</i>
 						</div>
@@ -195,9 +204,9 @@
 				<nav aria-label="breadcrumb">
 					<ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
 						<li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" href="javascript:;">Pages</a></li>
-						<li class="breadcrumb-item text-sm text-dark active pageName" aria-current="page">Billing</li>
+						<li class="breadcrumb-item text-sm text-dark active pageName" aria-current="page"></li>
 					</ol>
-					<h6 class="font-weight-bolder mb-0 pageName">Billing</h6>
+					<h6 class="font-weight-bolder mb-0 pageName"></h6>
 				</nav>
 				<div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
 					<div class="ms-md-auto pe-md-3 d-flex align-items-center">
@@ -215,7 +224,6 @@
 								<span class="d-sm-inline d-none">로그인</span>
 							</a>
 						</li>
-						
 						<!-- 로그인한 사용자에게만 보이도록 설정 -->
 						<li class="nav-item d-flex align-items-center" sec:authorize="isAuthenticated()" style="margin-right: 10px">
 							<a href="/user/profile" class="nav-link text-body font-weight-bold px-0">
@@ -492,7 +500,7 @@
 	
 	<script>
 		
-			$(document).ready(function() {
+		$(document).ready(function() {
 			var activeTab = localStorage.getItem('activeTab');
 			if(activeTab){
 				$('.sidenav_click .tab').removeClass('active bg-gradient-primary');

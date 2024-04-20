@@ -5,28 +5,22 @@ import java.io.File;
 import java.security.Principal;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.List;
-import java.util.UUID;
-
+import java.util.*;
 import java.util.List;
 
-
+import com.geomhwein.go.command.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
-
-
 import com.geomhwein.go.command.ComunityUploadVO;
 import com.geomhwein.go.command.ReplyVO;
 import com.geomhwein.go.command.SubmissionVO;
+import com.geomhwein.go.command.UserDetailsVO;
 import com.geomhwein.go.command.ComunityVO;
 import com.geomhwein.go.util.Criteria;
 
-import com.geomhwein.go.command.HomeworkVO;
-import com.geomhwein.go.command.QuestionVO;
-import com.geomhwein.go.command.ComunityVO;
 import com.geomhwein.go.command.EducationGroupVO;
 import com.geomhwein.go.command.GroupApplicationVO;
 
@@ -53,7 +47,27 @@ public class UserServiceImpl implements UserService {
 		}
 		return filepath;
 	}
-	
+
+	public UserDetailsVO getUserDetails (String userId) {
+		return userMapper.getUserDetails(userId);
+	}
+
+	@Override
+	public ArrayList<EducationGroupVO> getAllEducationGroup(String userId) {
+
+		ArrayList<EducationGroupVO> userEduList = userMapper.getAllEducationGroup(userId);
+
+		for (int i = 0; i < userEduList.size(); i++) {
+			String time = userEduList.get(i).getContentVO().getUtztnBgngYmd().substring(0, 10);
+			userEduList.get(i).getContentVO().setUtztnBgngYmd(time);
+		}
+		return userEduList;
+	}
+
+	@Transactional
+	public void updateProfile(UserDetailsVO userDetailsVO) {
+		userMapper.updateProfile(userDetailsVO);
+	}
 
 	@Override
 	@Transactional(rollbackFor = Exception.class) //에러시 롤백처리
@@ -332,7 +346,6 @@ public class UserServiceImpl implements UserService {
 		return userMapper.getGroupApplyList(userId);
 	}
 
-
 	@Override
 	public QuestionVO getAnswer(int qstnNo) {
 		
@@ -366,6 +379,10 @@ public class UserServiceImpl implements UserService {
 		
 		userMapper.submissionUpdate(vo);
 		
+	//사활풀이 순위
+	public List<UserDetailsVO> getUserScoreList() {
+		
+		return userMapper.getUserScoreList();
 	}
 
 }

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -24,35 +24,41 @@
                 <div class="col-lg-6 wow fadeIn" data-wow-delay="0.1s">
                     <div class="h-100 d-flex flex-column justify-content-center p-5">
                         <h1 class="mb-4">답변등록</h1>
-                        <form action="" method="post">
+                        <form action="registAnswerForm" method="post">
                             <div class="row g-3">
                                 <div class="col-sm-6">
                                     <div class="form-floating">
-                                        <input type="text" class="form-control border-0" placeholder="" readonly="readonly" name="userId">
+                                        <input type="text" class="form-control border-0" placeholder="" readonly="readonly" name="userId" th:value="${qvo.userId}">
                                         <label for="gname">학습자 아이디</label>
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
                                     <div class="form-floating">
-                                        <input type="email" class="form-control border-0" placeholder="" readonly="readonly" name="questionNumber">
+                                        <input type="email" class="form-control border-0" placeholder="" readonly="readonly" name="questionNumber" th:value="${qvo.qstnNo}">
                                         <label for="gmail">질문번호</label>
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
                                     <div class="form-floating">
-                                        <input type="date" class="form-control border-0" placeholder="" name="answerDate">
+                                        <input type="text" class="form-control border-0" placeholder="" th:value="${creatorId}">
+                                        <label for="cname">교육자 아이디</label>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-floating">
+                                        <input type="date" class="form-control border-0" placeholder="" name="ansYmd">
                                         <label for="cname">답변 일자</label>
                                     </div>
                                 </div>
                                 <div class="col-12">
                                     <div class="form-floating">
-                                        <textarea class="form-control border-0" placeholder="300자내" style="height: 300px" name="answerCn"></textarea>
+                                        <textarea class="form-control border-0" placeholder="300자내" style="height: 300px" name="ansCn"></textarea>
                                         <label for="message">답변 내용</label>
                                     </div>
                                 </div>
 
                                 <div class="col-12">
-                                    <button class="btn btn-primary w-100 py-3" type="submit">Submit</button>
+                                    <button class="btn btn-primary w-100 py-3 sbmBtn" type="submit">Submit</button>
                                 </div>
                             </div>
                         </form>
@@ -66,4 +72,9 @@
 </div>
 <!-- Appointment End -->
 </body>
+<script>
+    $(".sbmBtn").click(function(){
+        window.close();
+    });
+</script>
 </html>

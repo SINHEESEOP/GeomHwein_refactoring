@@ -6,7 +6,7 @@
  <div class="container-fluid py-4">
       <div class="container-title">그룹신청내역</div>
       <div class="search-wrap">
-        <span>학습컨텐츠</span>      
+        <span>그룹명</span>      
         <select>
           <option value="">전체</option>
         </select>
@@ -32,7 +32,7 @@
           <td>[[${vo.lastCmcrsYmd}]]</td>
           <td>[[${vo.groupUtztnNope}]]</td>
           <td>[[${vo.recAge}]]</td>
-          <td><button type="button" class="applyDeleteBtn">신청취소</button></td>
+          <td><button type="button" class="applyDeleteBtn">신청거절</button></td>
         </tr>
       </table>
       <div class="pagenation">
@@ -47,8 +47,9 @@
 
 </th:block>
 <script>
-	$(".applyDeleteBtn").click(function(){
-		
+	$(".applyDeleteBtn").click(function(e){
+		var aplyNo=e.target.parentElement.firstElementChild.innerHTML;
+    location.href="/creator/refuseRegist?aplyNo="+aplyNo;
 	});
 </script>
 </html>

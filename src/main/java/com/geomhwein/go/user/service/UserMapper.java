@@ -1,19 +1,21 @@
 package com.geomhwein.go.user.service;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
+import com.geomhwein.go.command.*;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
 import org.springframework.web.bind.annotation.RequestParam;
-
 import com.geomhwein.go.command.ComunityUploadVO;
 import com.geomhwein.go.command.ReplyVO;
 import com.geomhwein.go.command.SubmissionVO;
+import com.geomhwein.go.command.UserDetailsVO;
 import com.geomhwein.go.command.ComunityVO;
 import com.geomhwein.go.util.Criteria;
 
-import com.geomhwein.go.command.HomeworkVO;
-import com.geomhwein.go.command.QuestionVO;
 import com.geomhwein.go.command.ComunityVO;
 import com.geomhwein.go.command.EducationGroupVO;
 import com.geomhwein.go.command.GroupApplicationVO;
@@ -38,6 +40,14 @@ public interface UserMapper {
 	public QuestionVO questionDetail(int qstn_no);
 	public void questionModifyForm(QuestionVO vo);
 	public void deleteQuestion(int qstnno);
+
+
+	@Select("SELECT * FROM USER_DETAILS WHERE USER_ID = #{userId}")
+	public UserDetailsVO getUserDetails (String userId);
+	public ArrayList<EducationGroupVO> getAllEducationGroup(String userId);
+	public void updateProfile(UserDetailsVO userDetailsVO);
+
+  
 	public List<ReplyVO> getReplyList(int pst_ttl_no);
 	public void replyUpdate(ReplyVO vo);
 	public void replyDelete(int reply_no);
@@ -48,6 +58,7 @@ public interface UserMapper {
 	public void replyStatus(int reply_no);
 	public void allReplyDelete(int pst_ttl_no);
 	public void deleteFile(int pst_ttl_no);
+
 	public int registCreator(@Param("userName") String userName,@Param("docsCode") String docsCode,@Param("reason") String reason);
 	public List<GroupApplicationVO> getGroupApplyList(String userId);
 	public QuestionVO getAnswer(int qstnNo);
@@ -65,6 +76,8 @@ public interface UserMapper {
 	public int getGroupCount();
 
 	public void applyGroup(@Param("groupNo")int groupNo,@Param("userId")String userId);
+
+	public List<UserDetailsVO> getUserScoreList();
 
 	
 

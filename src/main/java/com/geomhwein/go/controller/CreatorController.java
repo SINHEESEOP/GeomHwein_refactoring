@@ -15,9 +15,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.geomhwein.go.command.HomeworkVO;
 import com.geomhwein.go.command.QuestionVO;
+import com.geomhwein.go.command.UserDetailsVO;
 import com.geomhwein.go.command.EducationGroupVO;
 import com.geomhwein.go.creator.service.CreatorService;
 import com.geomhwein.go.securlty.UserAuth;
+import org.springframework.web.bind.annotation.RequestBody;
+
 
 
 
@@ -29,6 +32,15 @@ public class CreatorController {
 	@Autowired
 	@Qualifier("creatorService")
 	private CreatorService creatorService;
+	
+	@GetMapping("/creatorMain")
+	public String creatorMain(Model model) {
+		List<UserDetailsVO> sList=creatorService.getAllStudent();
+		model.addAttribute("studentList",sList);
+		
+		return "creator/creatorMain";
+	}
+	
 	
 	
 	@GetMapping("/eduGroup")
@@ -67,10 +79,19 @@ public class CreatorController {
 	
 	
 
-	@GetMapping("/questionList")
-	public String questionList(Model model) {
-		List<QuestionVO> qList= new ArrayList<>();
-		return "creator/questionList";
+	@GetMapping("/viewQuestionList")
+	public String questionList(Model model,Authentication authentication) {
+		if (authentication != null) {
+			UserAuth userAuth = (UserAuth)authentication.getPrincipal();
+
+			String userId  = userAuth.getUserId();
+			List<QuestionVO> qList= creatorService.getQuestionList(userId);
+			model.addAttribute("questionList",qList);
+			return "creator/questionList";
+		}else {
+			return "redirect:/";	
+			
+		}
 	}
 	
 	@GetMapping("/createHomework")
@@ -78,7 +99,8 @@ public class CreatorController {
 		if (authentication != null) {
 			UserAuth userAuth = (UserAuth)authentication.getPrincipal();
 
-			String userId  = userAuth.getUsername();
+			String userId  = userAuth.getUserId();
+			System.out.println(userId);
 			model.addAttribute("userId",userId);
 			return "creator/makeHomework";
 		}else {
@@ -94,12 +116,11 @@ public class CreatorController {
 			String userId  = userAuth.getUsername();//선생님 ID
 			List<HomeworkVO> homeworkDoneList=creatorService.getHomeworkDone(userId);
 			model.addAttribute("hwdList",homeworkDoneList);
-			
-			
+      
 			return "creator/homeworkList";
 			
 		}else {
-			return "creator/creatorFail";
+			return "redirect:/";
 		}
 			
 		
@@ -111,16 +132,13 @@ public class CreatorController {
 	public void registHomeworkForm(HomeworkVO vo) {
 		creatorService.makeHomework(vo);
 		
-			
-		
-		
 		
 	}
 	@GetMapping("/groupApplyList")
 	public String groupApplyList(Model model) {
 		int applyCount=creatorService.getApplyCount();
 		if(applyCount==0) {
-			return "creator/creatorFail";
+			return "redirect:/";
 		}
 		List<EducationGroupVO> applyList= new ArrayList<>();
 		for(int i=1;i<=applyCount;i++) {
@@ -128,6 +146,36 @@ public class CreatorController {
 		}
 		model.addAttribute("applyList",applyList);
 		return "creator/groupApplyList";
+	}
+	
+	@GetMapping("/refuseRegist")
+	public String refuseRegist(@RequestParam("aplyNo")int aplyNo) {
+		creatorService.deleteApply(aplyNo);
+		
+		return "creator/groupApplyList";
+	}
+	
+	@GetMapping("/makeAnswerForm")
+	public String getMethodName(@RequestParam("qstnNo")int qstnNo,Model model,Authentication authentication) {
+		if (authentication != null) {
+			UserAuth userAuth = (UserAuth)authentication.getPrincipal();
+
+			String userId  = userAuth.getUserId();//선생님 ID
+			QuestionVO qvo=creatorService.getQuestion(qstnNo);
+			model.addAttribute("questionVo",qvo);
+			model.addAttribute("creatorId",userId);
+			return "creator/makeAnswer";
+			
+		}else {
+			return "creator/noAuth";
+		}
+		
+	}
+	@PostMapping("/registAnswerForm")
+	public String registAnswerForm(QuestionVO vo) {
+		creatorService.addAnswer(vo);
+		
+		return "creator/creatorMain";
 	}
 	
 	

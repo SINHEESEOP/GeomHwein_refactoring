@@ -1,16 +1,18 @@
 package com.geomhwein.go.user.service;
 
 import java.security.Principal;
+import java.util.ArrayList;
 import java.util.List;
 
 
 import org.springframework.web.multipart.MultipartFile;
 
+import com.geomhwein.go.util.Criteria;
 import com.geomhwein.go.command.ComunityUploadVO;
 import com.geomhwein.go.command.ReplyVO;
 import com.geomhwein.go.command.SubmissionVO;
+import com.geomhwein.go.command.UserDetailsVO;
 import com.geomhwein.go.command.ComunityVO;
-import com.geomhwein.go.util.Criteria;
 import com.geomhwein.go.command.HomeworkVO;
 import com.geomhwein.go.command.QuestionVO;
 
@@ -39,6 +41,12 @@ public interface UserService {
 	public QuestionVO questionDetail(int qstn_no);
 	public void questionModifyForm(QuestionVO vo);
 	public void deleteQuestion(int qstnno);
+
+
+	public UserDetailsVO getUserDetails (String userId);
+	public ArrayList<EducationGroupVO> getAllEducationGroup(String userId);
+	public void updateProfile(UserDetailsVO userDetailsVO);
+
 	public List<ReplyVO> getReplyList(int pst_ttl_no);
 	public void replyUpdate(ReplyVO vo);
 	public void replyDelete(int reply_no);
@@ -54,6 +62,6 @@ public interface UserService {
 	public void submissionForm(SubmissionVO vo);
 	public SubmissionVO getSubmission(String userId , int amstNo);
 	public void submissionUpdate(SubmissionVO vo);
-
+	public List<UserDetailsVO> getUserScoreList();
 
 }
