@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<link rel="stylesheet" href="/css/contentList.css">
+</head>
+
+<th:block th:replace="~{/include/baseLayout :: setContent ( ~{ :: .wrap})}">
+
+
+<div class="wrap">
+    <div class="container-fluid py-4">
+      <div class="row">
+          <div class="card my-4">
+            <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
+              <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
+                <h6 class="text-white text-capitalize ps-3">강의 내역</h6>
+              </div>
+            </div>
+                  
+ <section id="cardType" class="card__wrap nexon section">
+    <h2>바둑 강의</h2>
+    
+    <div class="card__inner container">
+    <th:block th:each="vo : ${ContentList}">
+        <article class="card">    
+            <figure class="card__header">
+                <img style="width : 350px;" src="/assets/img/img.jpg" alt="바둑 강의"> 
+            </figure>
+            <div class="card__body">
+                <h3 class="tit">[[${vo.contsNm}]]</h3>
+                <p class="desc">[[${vo.contsExpln}]]</p>
+                <a class="btn" href="/">더 자세히 보기</a>  
+            </div>
+        </article>
+    </th:block>
+    </div>
+    
+    
+</section>
+
+
+              </div>
+            </div>
+          </div>
+        </div>
+    
+  
+
+</html>

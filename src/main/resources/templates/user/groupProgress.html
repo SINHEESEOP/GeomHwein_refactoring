@@ -1,17 +1,18 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
+  
 <link rel="stylesheet" href="/css/progressBar.css">
 <link rel="stylesheet" href="/css/tableBack.css">
 
 <script src="/js/jquery-3.7.1.min.js"></script>
 
-<th:block th:replace="~{/include/baseLayout :: setContent( ~{ :: .wrap} ) }">
+<th:block th:replace="~{./include/baseLayout :: setContent( ~{ :: .container-fluid} ) }">
 	
-	<div class="wrap">
-  		
-  		<h6>그룹별 진도 현황</h6>
-  		<label for="c1" class="progLabel">입문반</label>
-  		<progress id="c1" max="100" value="44"></progress>
+	<div class="container-fluid">
+		
+  		<h4>그룹별 진도 현황</h4>
+  		<label for="c1">입문반</label>
+  		<progress id="c1" max="100" value="87"></progress>
 
   		<label for="c2" class="progLabel">기초반</label>
   		<progress id="c2" max="100" value="71"></progress>

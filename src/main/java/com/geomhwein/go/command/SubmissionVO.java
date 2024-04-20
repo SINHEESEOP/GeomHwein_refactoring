@@ -8,12 +8,12 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class SubmissionVO {
-   
-   private int subNo;
-   private String subCn;
-   private int subScr;
-   private String subYmd;
-   private int asmtNo;
-   private String userId;
-   
+	
+	private Integer subNo;
+	private String subCn;
+	private Integer subScr;
+	private String subYmd;
+	private Integer asmtNo;
+	private String userId;
+	
 }

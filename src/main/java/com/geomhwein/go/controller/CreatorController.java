@@ -114,9 +114,7 @@ public class CreatorController {
 			  
 			
 			model.addAttribute("subList",homeworkDoneList);
-			 
-			
-			
+
 			return "creator/homeworkList";
 			
 		}else {
@@ -154,12 +152,11 @@ public class CreatorController {
 	@PostMapping("/registHomeworkForm")
 	public String registHomeworkForm(HomeworkVO vo) {
 		creatorService.makeHomework(vo);
-		
 			
 		return "creator/creatorSuccess";
-		
-		
 	}
+  
+  
 	//그룹신청목록보기
 	@GetMapping("/groupApplyList")
 	public String groupApplyList(Model model) {

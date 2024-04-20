@@ -1,7 +1,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <link rel="stylesheet" href="/css/comunityList.css">
 
-<th:block th:replace="~{/include/baseLayout :: setContent( ~{ :: .wrap} ) }">
+<th:block th:replace="~{./include/baseLayout :: setContent( ~{ :: .wrap} ) }">
 	
 	<div class="wrap">
 	<div class="container-fluid py-4">
@@ -108,7 +108,21 @@
 		location.href="comunityList?pageNum="+pageNum+"&amount="+amount+"&searchInput="+search;
 	});
 	
-	 
+	
+	$(document).ready(function(){
+		
+	const groupId = '1'; // 그룹 ID 설정
+	
+	const eventSource = new EventSource("http://localhost:8282/notification/1/subscribe");
+
+	eventSource.onmessage = (event) => {
+	  const message = event.data;
+	  console.log(message);
+	  
+		};
+	})
+	
+
 	</script>
 	
 </html>

@@ -7,6 +7,8 @@ import lombok.NoArgsConstructor;
 
 import java.math.BigInteger;
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 @Data
 @AllArgsConstructor
@@ -14,6 +16,9 @@ import java.sql.Timestamp;
 @Builder
 public class ContentVO {
 
+	private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
+	private UserDetailsVO userDetailsVO;
 	private BigInteger contsSn;
 	private String contsNm;
 	private String contsExpln;
@@ -21,6 +26,7 @@ public class ContentVO {
 	private String contsYmd;
 	private String imgNm;
 	private Timestamp utztnBgngYmd;
+	private String utztnBgngYmd;
 	private String utztnTrmsCn;
 	private String utztnNope;
 	private String contsGrd;
@@ -31,4 +37,5 @@ public class ContentVO {
 		this.userId = userId;
 		this.keywords = keywords;
 	}
+
 }
