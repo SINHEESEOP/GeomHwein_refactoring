@@ -16,6 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 import com.geomhwein.go.command.ComunityUploadVO;
 import com.geomhwein.go.command.ReplyVO;
+import com.geomhwein.go.command.SubmissionVO;
 import com.geomhwein.go.command.UserDetailsVO;
 import com.geomhwein.go.command.ComunityVO;
 import com.geomhwein.go.util.Criteria;
@@ -345,7 +346,39 @@ public class UserServiceImpl implements UserService {
 		return userMapper.getGroupApplyList(userId);
 	}
 
+	@Override
+	public QuestionVO getAnswer(int qstnNo) {
+		
+		return userMapper.getAnswer(qstnNo);
+	}
 
+
+	@Override
+	public HomeworkVO homeworkReg(int asmtNo) {
+		
+		return userMapper.homeworkReg(asmtNo);
+	}
+
+
+	@Override
+	public void submissionForm(SubmissionVO vo) {
+		
+		userMapper.submissionForm(vo);
+	}
+
+
+	@Override
+	public SubmissionVO getSubmission(String userId, int amstNo) {
+		
+		return userMapper.getSubmission(userId, amstNo);
+	}
+
+
+	@Override
+	public void submissionUpdate(SubmissionVO vo) {
+		
+		userMapper.submissionUpdate(vo);
+		
 	//사활풀이 순위
 	public List<UserDetailsVO> getUserScoreList() {
 		

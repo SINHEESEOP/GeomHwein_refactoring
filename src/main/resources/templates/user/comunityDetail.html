@@ -1,7 +1,7 @@
 t<html xmlns:th="http://www.thymeleaf.org">
 <link rel="stylesheet" href="/css/comunityDetail.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
-<th:block th:replace="~{/include/baseLayout :: setContent( ~{ :: .wrap} ) }">
+<th:block th:replace="~{./include/baseLayout :: setContent( ~{ :: .wrap} ) }">
 
 <div class="wrap">
 	 <div class="container-fluid py-4">
@@ -148,7 +148,8 @@ t<html xmlns:th="http://www.thymeleaf.org">
 		   }
 	   })
    })
- 
+   
+  
    </script>
    
    <script>

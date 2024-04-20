@@ -113,15 +113,10 @@ public class CreatorController {
 	public String getHomeworkDoneList(Model model,Authentication authentication) {
 		if (authentication != null) {
 			UserAuth userAuth = (UserAuth)authentication.getPrincipal();
-
-			String userId  = userAuth.getUserId();//선생님 ID
-			System.out.println(userId);
-			 List<HomeworkVO> homeworkDoneList=creatorService.getHomeworkDone(userId);
-			  
-			 model.addAttribute("hwdList",homeworkDoneList);
-			 
-			
-			
+			String userId  = userAuth.getUsername();//선생님 ID
+			List<HomeworkVO> homeworkDoneList=creatorService.getHomeworkDone(userId);
+			model.addAttribute("hwdList",homeworkDoneList);
+      
 			return "creator/homeworkList";
 			
 		}else {
@@ -136,9 +131,6 @@ public class CreatorController {
 	@PostMapping("/registHomeworkForm")
 	public void registHomeworkForm(HomeworkVO vo) {
 		creatorService.makeHomework(vo);
-		
-			
-		
 		
 		
 	}

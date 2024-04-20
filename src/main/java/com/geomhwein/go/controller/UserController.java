@@ -36,6 +36,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -53,6 +54,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 import com.geomhwein.go.command.ComunityUploadVO;
 import com.geomhwein.go.command.ReplyVO;
+import com.geomhwein.go.command.SubmissionVO;
 import com.geomhwein.go.command.ComunityVO;
 import com.geomhwein.go.command.EducationGroupVO;
 import com.geomhwein.go.command.GroupApplicationVO;
@@ -65,14 +67,18 @@ import ch.qos.logback.core.status.Status;
 @RequestMapping("/user")
 public class UserController {
 	
-	@Value("${project.upload.path}")
-	private String uploadPath;
-
 	@Autowired
 	@Qualifier("userService")
 	private UserService userService;
-
-
+  
+  @Value("${project.upload.path}")
+	private String uploadPath;
+	
+	@GetMapping("/cart")
+	public String cart() {
+		return "user/cart";
+	}
+	
 	@GetMapping("/billing")
 	public String billing() {
 		return "user/billing";
@@ -216,16 +222,13 @@ public class UserController {
 		
 		EducationGroupVO vo = userService.getGroup(groupNo);
 		List<QuestionVO> list = userService.getQuestionList(userId);
+		List<HomeworkVO> list2 =userService.getHomeworkList(vo.getUserId());
 		
 		model.addAttribute("vo", vo);
 		model.addAttribute("list",list);
+		model.addAttribute("list2",list2);
 		
 		return "user/groupApplyDetail";
-	}
-	
-	@GetMapping("/homeworkReg")
-	public String homeworkReg() {
-		return "user/homeworkReg";
 	}
 	
 	@GetMapping("/viewHomework")
@@ -279,6 +282,7 @@ public class UserController {
 		
 		
 		List<MultipartFile> list = part.getFiles("file");
+		
 	
 		int result = userService.comunityForm(vo , list , prin);
 		
@@ -306,7 +310,7 @@ public class UserController {
 			rec.addFlashAttribute("msg", "수정실패");
 		}
 		
-		return "redirect:/user/comunityList";
+		return "redirect:	/user/comunityList";
 	}
 	
 	@GetMapping("/comunityDelete")
@@ -353,22 +357,24 @@ public class UserController {
   
 	@PostMapping("/replyAdd")
 	@ResponseBody
-	public String replayAdd(@RequestBody ReplyVO vo , Principal prin) {
+	@CrossOrigin("*")
+	public String replayAdd(@RequestBody ReplyVO vo , Authentication authentication) {
 		
+	
 		int pst_ttl_no = vo.getPstTtlNo();
 		
-		String userId = prin.getName();
-		vo.setUserId(userId);
-		System.out.println(vo.toString());
-		userService.replyAdd(vo);
-		
-		if(vo != null) {
-			userService.replyCount(pst_ttl_no);
+		if (authentication != null) {
+			UserAuth userAuth = (UserAuth)authentication.getPrincipal();
+			String userId = userAuth.getUserId();
+			vo.setUserId(userId);
 			
+			userService.replyAdd(vo);
+			userService.replyCount(pst_ttl_no);
 		}
 		
-
 		
+		
+
 		return "success";
 	}
 	
@@ -481,6 +487,54 @@ public class UserController {
 		 return list;
 	}
 	
+	@GetMapping("/showAnswer")
+	public String showAnswer(@RequestParam("qstnNo") int qstnNo , Model model , @RequestParam("userId") String creatorId) {
+		
+		QuestionVO vo= userService.getAnswer(qstnNo);
+
+		
+		model.addAttribute("vo",vo);
+		model.addAttribute("creatorId",creatorId);
+		
+		return "user/showAnswer";
+	}
+	
+	@GetMapping("/homeworkReg")
+	public String homeworkReg(@RequestParam("asmtNo") int asmtNo , Model model,Authentication authentication) {
+		
+		UserAuth userAuth = (UserAuth)authentication.getPrincipal();
+		String userId = userAuth.getUserId();
+		
+		HomeworkVO vo = userService.homeworkReg(asmtNo);
+		SubmissionVO svo = userService.getSubmission(userId ,asmtNo);
+		
+		model.addAttribute("vo",vo);
+		model.addAttribute("svo",svo);
+		
+		return "user/homeworkReg";
+	}
+	
+	@PostMapping("homeworkRegForm")
+	public String homeworkRegForm(SubmissionVO vo ,Authentication authentication) {
+		
+		
+		UserAuth userAuth = (UserAuth)authentication.getPrincipal();
+		String userId = userAuth.getUserId();
+		vo.setUserId(userId);
+		
+		userService.submissionForm(vo);
+		
+		return "redirect:/user/homeworkReg?asmtNo="+vo.getAsmtNo();
+	}
+	
+	@PostMapping("homeworkUpdate")
+	public String homeworkUpdate(SubmissionVO vo) {
+		
+		System.out.println(vo.toString() + "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+		userService.submissionUpdate(vo);
+		
+		return "redirect:/user/homeworkReg?asmtNo="+vo.getAsmtNo();
+	}
 
 	@GetMapping("/groupProgress")
 	public String groupProgress(Model model) {

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <link rel="stylesheet" href="/css/groupList.css">
-<th:block th:replace="~{/include/baseLayout :: setContent( ~{ :: .wrap} ) }">
+<th:block th:replace="~{./include/baseLayout :: setContent( ~{ :: .wrap} ) }">
 <script src="/js/jquery-3.7.1.min.js"></script>	
 	<div class="wrap">
 	 <div class="container-fluid py-4">
@@ -59,6 +59,7 @@
     	var username=$(".userName").val();
     	//시큐리티 적용시 username시큐리티꺼 사용 위에거 삭제하고 다른값 넣어주세요
    	 	var name="그룹페이지로 이동합니다.";
+    	var url="eduGroup";
     	var option="width=1700,length=1050,top=0,left=0,location=yes";
     	window.open(url,name,option);
     });
@@ -66,7 +67,6 @@
    $(".content-apply").click(function(e){
 	   
      var groupNo=e.target.parentElement.parentElement.firstElementChild.innerHTML;
-     
      location.href="groupSelectForm?groupNo="+groupNo;
    });
 </script>

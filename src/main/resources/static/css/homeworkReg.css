@@ -114,3 +114,15 @@
       text-align: center;
       margin-top: 50px;
     }
+    
+    .homeworkBtn > button {
+    
+    border:1px solid #DEDEDE;
+    font-size:14px;
+    font-weight:bold;
+    }
+    
+    .regBtn {
+    	text-align: center;
+      margin-top: 50px;
+    }

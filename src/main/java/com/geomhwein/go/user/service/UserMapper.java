@@ -11,6 +11,7 @@ import org.apache.ibatis.annotations.Select;
 import org.springframework.web.bind.annotation.RequestParam;
 import com.geomhwein.go.command.ComunityUploadVO;
 import com.geomhwein.go.command.ReplyVO;
+import com.geomhwein.go.command.SubmissionVO;
 import com.geomhwein.go.command.UserDetailsVO;
 import com.geomhwein.go.command.ComunityVO;
 import com.geomhwein.go.util.Criteria;
@@ -60,14 +61,15 @@ public interface UserMapper {
 
 	public int registCreator(@Param("userName") String userName,@Param("docsCode") String docsCode,@Param("reason") String reason);
 	public List<GroupApplicationVO> getGroupApplyList(String userId);
-	//아직 mapper작업 안함
-	//반환값으로 성공실패여부 확인
-
+	public QuestionVO getAnswer(int qstnNo);
 	public List<HomeworkVO> getHomeworkList(String userId);
-	//mapper작업 안함
-	//리스트 받아와서 Homeworklist창으로 가서 타임리프 돌려서 화면에 리스트 뿌려줌
-
+	public HomeworkVO homeworkReg(int asmtNo);
 	public EducationGroupVO getGroup(int groupNo);
+	public void submissionForm(SubmissionVO vo);
+	public SubmissionVO getSubmission(@Param("userId") String userId ,@Param("asmtNo") int amstNo);
+	public void submissionUpdate(SubmissionVO vo);
+	
+	
 	//mapper상에서 
 	//group테이블에서 groupNo값으로 불러와야함
 
