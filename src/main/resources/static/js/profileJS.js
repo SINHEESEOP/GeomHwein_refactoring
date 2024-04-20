@@ -31,39 +31,64 @@ $(document).ready(function () {
     }
 });
 
+function fetchUpdatedProfile() {
+    return new Promise((resolve, reject) => {
+        $.ajax({
+            url: '/user/pfBring', // 요청을 보낼 URL
+            type: 'POST', // HTTP 요청 방식
+            contentType: 'application/json', // 서버로 전송할 데이터의 MIME 타입
+            dataType: 'json', // 서버에서 반환하는 데이터의 타입
+            headers: {
+                'Authorization': 'Bearer your_access_token_here' // 필요한 경우 Bearer 토큰 사용
+            },
+            success: function (response) {
+                console.log('성공:', response);
+                $(".userNm").text(response.userNm);
+                $(".userEmlAddr").text(response.userEmlAddr);
+
+                if (response.userTelno == null || response.userTelno === "") {
+                    $(".userTelno").text("데이터가 없습니다.");
+                } else {
+                    $(".userTelno").text(response.userTelno);
+                }
+
+                if (response.address == null || response.address === "") {
+                    $(".address").text("데이터가 없습니다.");
+                } else {
+                    $(".address").text(response.address);
+                }
+                resolve(response);
+            },
+            error: function (xhr, status, error) {
+                console.error('에러:', error);
+                reject(error);  // 프로미스 거부
+            }
+        });
+    })
+}
+
+$(document).ready(fetchUpdatedProfile() )
+
 
 $(document).ready(function () {
-    $.ajax({
-        url: '/user/pfBring', // 요청을 보낼 URL
-        type: 'POST', // HTTP 요청 방식
-        contentType: 'application/json', // 서버로 전송할 데이터의 MIME 타입
-        dataType: 'json', // 서버에서 반환하는 데이터의 타입
-        headers: {
-            'Authorization': 'Bearer your_access_token_here' // Bearer 토큰을 사용한 인증 헤더 (필요한 경우)
-        },
-        success: function (response) {
-            console.log('성공:', response);
+    $('.pfSetBtn').on('click', function (e) {
+        e.preventDefault(); // 폼의 기본 제출을 방지
+        var formData = $('#userForm').serialize(); // 폼 데이터 직렬화
 
-            $(".userNm").text(response.userNm)
-            $(".userEmlAddr").text(response.userEmlAddr)
-
-            if (response.userTelno == null || response.userTelno == "") {
-                $(".userTelno").text("데이터가 없습니다.")
-            } else {
-                $(".userTelno").text(response.userTelno)
+        $.ajax({
+            type: 'POST', // HTTP 요청 방식
+            url: '/user/pfUpdate', // 요청을 보낼 URL
+            data: formData, // 전송할 데이터
+            success: function (response) {
+                fetchUpdatedProfile().then(function() {
+                    // alert('프로필이 업데이트되었습니다!');
+                }).catch(function(error) {
+                    console.error('프로필 업데이트 중 오류 발생:', error);
+                });
+            },
+            error: function (xhr, status, error) {
+                alert('업데이트 실패: ' + error);
             }
-
-            if (response.address == null || response.address == "") {
-                $(".address").text("데이터가 없습니다.")
-            } else {
-                $(".address").text(response.address)
-            }
-
-        },
-        error: function (xhr, status, error) {
-            console.error('에러:', error);
-            // 에러 처리 로직
-        }
+        });
     });
 });
-

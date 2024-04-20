@@ -29,4 +29,14 @@ public class NormalUserServiceImpl implements NormalUserService{
 		return normalUserMapper.getUserList(cri, id);
 	}
 
+	@Override
+	public ArrayList<EducationGroupVO> getList2(Criteria cri) {
+		return normalUserMapper.getList2(cri);
+	}
+
+	@Override
+	public ArrayList<EducationGroupVO> getCart(String userId) {
+		return normalUserMapper.getCart(userId);
+	}
+
 }

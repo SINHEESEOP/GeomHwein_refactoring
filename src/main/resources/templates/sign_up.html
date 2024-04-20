@@ -189,6 +189,7 @@
   
   <script>
 	  $(document).ready(function(){
+		  localStorage.setItem('activeTab' , '#tab1');
 		  $('#signUpForm').on('submit', function(e){
 			  // 폼 제출 기본 동작을 방지
 			  e.preventDefault();

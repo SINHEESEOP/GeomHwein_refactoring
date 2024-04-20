@@ -44,7 +44,8 @@ public interface UserMapper {
 	@Select("SELECT * FROM USER_DETAILS WHERE USER_ID = #{userId}")
 	public UserDetailsVO getUserDetails (String userId);
 	public ArrayList<EducationGroupVO> getAllEducationGroup(String userId);
-//	public ArrayList< Map<String, Object>> getAllEducationGroup(String userId);
+	public void updateProfile(UserDetailsVO userDetailsVO);
+
   
 	public List<ReplyVO> getReplyList(int pst_ttl_no);
 	public void replyUpdate(ReplyVO vo);
