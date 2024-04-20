@@ -45,10 +45,38 @@
 	
 	<select id="ContentList" resultType="ContentVO">
 	
-		select * from content
+	select * from content C 
+	LEFT JOIN CONTENT_UPLOAD U 
+	ON C.CONTS_SN = U.CONTS_SN order by C.CONTS_SN desc
 	
 	</select>
 	
-
+	<insert id="contentInsert">
+	
+		insert into Content (CONTS_NM, CONTS_EXPLN, CONTS_PRC, UTZTN_NOPE,CONTS_GRD,USER_ID)
+		
+		values(#{contsNm}, #{contsExpln}, #{contsPrc}, #{utztnNope}, #{contsGrd},#{userId})
+		
+	
+	</insert>
+	
+	
+	
+	<insert id= "registFile">
+	
+	<selectKey resultType="int" keyProperty="contsSn" order="BEFORE">
+		
+	 select max(CONTS_SN) from CONTENT
+		
+	</selectKey>
+	
+	
+	insert into Content_Upload (fileName, filePath, uuId, CONTS_SN)
+	
+	values(#{fileName}, #{filePath}, #{uuId}, #{contsSn})
+		
+	
+	</insert>
+	
 
 </mapper>

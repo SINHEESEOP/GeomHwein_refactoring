@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 
-<th:block th:replace="~{/include/baseLayout :: setContent ( ~{ :: .wrap})}">
+<th:block th:replace="~{./include/baseLayout :: setContent ( ~{ :: .wrap})}">
 
   
 <div class="wrap">
@@ -52,11 +52,12 @@
               </div>
             </div>
           </div>
+          <th:block sec:authorize="hasRole('ROLE_ADMIN')">
           <div style="float: right; padding: 30px; ">
           
-             <button th:onclick="|location.href='@{mttrInsert}'|" class="bg-gradient-primary mttrBtn text-white text-capitalize ps-3" style="border-radius: 5px; border-style: none; padding-right: 15px;">공지사항 작성</button>
-
+             <button th:onclick="|location.href='@{admin/mttrInsert}'|" class="bg-gradient-primary mttrBtn text-white text-capitalize ps-3" style="border-radius: 5px; border-style: none; padding-right: 15px;">공지사항 작성</button>
           </div>
+          </th:block>
         </div>
       </div>
     </div>

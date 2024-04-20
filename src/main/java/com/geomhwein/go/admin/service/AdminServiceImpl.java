@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.geomhwein.go.command.AdminVO;
+import com.geomhwein.go.command.ContentUploadVO;
 import com.geomhwein.go.command.ContentVO;
 import com.geomhwein.go.command.UserDetailsVO;
 
@@ -58,6 +59,21 @@ public class AdminServiceImpl implements AdminService{
 		
 		
 		return adminMapper.ContentList();
+	}
+
+
+	@Override
+	public int contentInsert(ContentVO vo) {
+		
+		
+		
+		return adminMapper.contentInsert(vo);
+	}
+
+
+	@Override
+	public ContentUploadVO getImg() {
+		return adminMapper.getImg();
 	}
 
 

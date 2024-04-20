@@ -6,9 +6,11 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.math.BigInteger;
+import java.time.LocalDateTime;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+
 
 @Data
 @AllArgsConstructor
@@ -27,15 +29,20 @@ public class ContentVO {
 	private String imgNm;
 	private Timestamp utztnBgngYmd;
 	private String utztnBgngYmd;
+
 	private String utztnTrmsCn;
 	private String utztnNope;
 	private String contsGrd;
 	private String userId;
 	private String keywords;
+	private String fileName;
+	private String filePath;
+	private String uuId;
 
 	public ContentVO(String userId, String keywords) {
 		this.userId = userId;
 		this.keywords = keywords;
 	}
+
 
 }
