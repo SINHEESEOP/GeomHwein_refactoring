@@ -24,7 +24,7 @@
                 <div class="col-lg-6 wow fadeIn" data-wow-delay="0.1s">
                     <div class="h-100 d-flex flex-column justify-content-center p-5">
                         <h1 class="mb-4">답변등록</h1>
-                        <form action="registAnswerForm" method="post">
+                        <form action="registAnswerForm" method="post" name="registAnswerForm">
                             <div class="row g-3">
                                 <div class="col-sm-6">
                                     <div class="form-floating">
@@ -34,7 +34,7 @@
                                 </div>
                                 <div class="col-sm-6">
                                     <div class="form-floating">
-                                        <input type="email" class="form-control border-0" placeholder="" readonly="readonly" name="questionNumber" th:value="${qvo.qstnNo}">
+                                        <input type="email" class="form-control border-0" placeholder="" readonly="readonly" name="qstnNo" th:value="${qvo.qstnNo}">
                                         <label for="gmail">질문번호</label>
                                     </div>
                                 </div>
@@ -58,7 +58,7 @@
                                 </div>
 
                                 <div class="col-12">
-                                    <button class="btn btn-primary w-100 py-3 sbmBtn" type="submit">Submit</button>
+                                    <button class="btn btn-primary w-100 py-3 sbmBtn" type="button">Submit</button>
                                 </div>
                             </div>
                         </form>
@@ -74,7 +74,7 @@
 </body>
 <script>
     $(".sbmBtn").click(function(){
-        window.close();
+        document.registAnswerForm.submit();
     });
 </script>
 </html>

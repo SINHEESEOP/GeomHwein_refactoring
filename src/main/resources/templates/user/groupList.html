@@ -30,6 +30,7 @@
           <th>신청가능인원</th>
           <th>권장연령</th>
           <th>상태</th>
+          <th>비고</th>
         </tr>
         <tr class="table-content" th:each="vo,status: ${groupList}">
           <td>[[${vo.groupNo}]]</td>
@@ -40,6 +41,7 @@
           <td>[[${vo.groupUtztnNope}]]</td>
           <td>[[${vo.recAge}]]</td>
           <td><button type="button" class="content-apply">신청하기</button></td>
+          <td><button type="button" class="content-basket">담기</button></td>
         </tr>
       </table>
       <div class="pagenation">
@@ -54,7 +56,7 @@
 	</div>
 </th:block>
 
-<script>
+<script th:inline="javascript">
    $(".groupBtn").click(function(){
     	var username=$(".userName").val();
     	//시큐리티 적용시 username시큐리티꺼 사용 위에거 삭제하고 다른값 넣어주세요
@@ -69,5 +71,28 @@
      var groupNo=e.target.parentElement.parentElement.firstElementChild.innerHTML;
      location.href="groupSelectForm?groupNo="+groupNo;
    });
+   
+   $(".content-basket").click(function(e){
+	  var groupNo=e.target.parentElement.parentElement.firstElementChild.innerHTML;
+		
+	  $.ajax({
+  		url:"http://localhost:8282/user/addOnBasket",
+  		type:"post",
+  		contentType:"application/json; charset=utf-8",
+  		dataType:"text",
+  		async : false,
+  		data:JSON.stringify(groupNo),
+  		success : function(response){
+  			
+  			console.log(response);
+  			location.reload();
+  		},
+  		error : function(request,status,error){
+  			console.log(error);
+  		}
+  	})
+   });
+   
+   
 </script>
 </html>

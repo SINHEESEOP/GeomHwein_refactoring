@@ -214,13 +214,6 @@ public class UserServiceImpl implements UserService {
 
 
 	
-	public int registCreator(String userName, String docsCode, String reason) {
-		
-		return userMapper.registCreator(userName,docsCode,reason);
-	}
-
-
-	
 	public List<HomeworkVO> getHomeworkList(String userId) {
 		
 		return userMapper.getHomeworkList(userId);
@@ -228,16 +221,12 @@ public class UserServiceImpl implements UserService {
 
 
 	
-	public EducationGroupVO getGroup(int groupNo) {
+	public List<EducationGroupVO> getGroup() {
 		
-		return userMapper.getGroup(groupNo);
+		return userMapper.getGroup();
 	}
 
-	//그룹갯수를 불러오는 매서드
-	public int getGroupCount() {
-		
-		return userMapper.getGroupCount();
-	}
+	
 
 
 	@Override
@@ -383,6 +372,26 @@ public class UserServiceImpl implements UserService {
 	public List<UserDetailsVO> getUserScoreList() {
 		
 		return userMapper.getUserScoreList();
+	}
+
+	//장바구니 담기
+	public void addBasket(int groupNo, String userId) {
+		
+		userMapper.addBasket(groupNo,userId);
+		
+	}
+
+	@Override
+	public void registCreator(EvaluationVO vo) {
+		
+		userMapper.registCreator(vo);
+		
+	}
+
+	@Override
+	public EducationGroupVO getGroupOne(int groupNo) {
+		
+		return userMapper.getGroupOne(groupNo);
 	}
 
 }

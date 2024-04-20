@@ -178,8 +178,8 @@ public class UserController {
 	
 	@GetMapping("/groupList")
 	public String userGroupList(Model model ,Authentication authentication) {
-		int gCount=userService.getGroupCount();
-		List<EducationGroupVO> groupList=new ArrayList<>();
+		
+		List<EducationGroupVO> groupList=userService.getGroup();
 		if (authentication != null) {
 			UserAuth userAuth = (UserAuth)authentication.getPrincipal();
 
@@ -188,9 +188,9 @@ public class UserController {
 			model.addAttribute("userName", userId);
 
 		}
-		for(int i=1;i<=gCount;i++) {
-			groupList.add(userService.getGroup(i));
-		}
+		
+			
+		
 		model.addAttribute("groupList",groupList);
 		return "user/groupList";
 	}
@@ -220,7 +220,7 @@ public class UserController {
 		
 		String userId = prin.getName();
 		
-		EducationGroupVO vo = userService.getGroup(groupNo);
+		EducationGroupVO vo = userService.getGroupOne(groupNo);
 		List<QuestionVO> list = userService.getQuestionList(userId);
 		List<HomeworkVO> list2 =userService.getHomeworkList(vo.getUserId());
 		
@@ -245,13 +245,7 @@ public class UserController {
 		return "user/homeworkList";
 	}
 
-	@PostMapping("/creatorRegForm")
-	public String creatorRegForm(@RequestParam("userName")String userName,@RequestParam("docsCode")String docsCode,@RequestParam("reason")String reason) {
-		userService.registCreator(userName,docsCode,reason);
-		//교육자 신청 되는 기록 신청가능여부를 위해 DB에 넣어서
-		//관리자 창 열릴때 get방식으로 불러와서 값 보내주면됨
-		return "user/profile";//신청버튼 잇던 곳으로 보내주면됨
-	}
+	
 
 	
 	
@@ -385,10 +379,16 @@ public class UserController {
 		if (authentication != null) {
 			UserAuth userAuth = (UserAuth)authentication.getPrincipal();
 
-			String username  = userAuth.getUsername();
+			String username  = userAuth.getUserId();
 			
-			userService.applyGroup(groupNo,username);	
-
+			String userId=username;
+			List<GroupApplicationVO> list = userService.getGroupApplyList(userId);
+			if(list.size()>0) {
+				return "redirect:/";
+			}else {
+				userService.applyGroup(groupNo,username);
+				
+			}
 		}else {
 			
 			return "creator/creatorFail";//임시조치
@@ -545,6 +545,46 @@ public class UserController {
 		return "user/groupProgress";
 	}
 	
+	
+	//장바구니 담기
+	@PostMapping("/addOnBasket")
+	@ResponseBody
+	public void addOnBasket(@RequestParam("groupNo")String gNo,Authentication authentication) {
+		int groupNo = Integer.parseInt(gNo);
+		if (authentication != null) {
+			UserAuth userAuth = (UserAuth)authentication.getPrincipal();
 
+			String userId  = userAuth.getUserId();
+			
+		    userService.addBasket(groupNo,userId);
+		}
+		
+	}
+	
+	//교육자승급신청
+	@GetMapping("/registCreator")
+	public String registCreator(Authentication authentication,Model model) {
+		String userId=null;
+		if (authentication != null) {
+			UserAuth userAuth = (UserAuth)authentication.getPrincipal();
+
+			userId  = userAuth.getUserId();
+			
+		}
+		model.addAttribute("userId",userId);
+		return "user/regBeingCreator";
+	}
+	
+	@PostMapping("/creatorRegForm")
+	public String creatorRegForm(EvaluationVO vo) {
+		userService.registCreator(vo);
+		
+		return "user/profile";
+	}
+	
+	
+	
+	
+	
 	
 }

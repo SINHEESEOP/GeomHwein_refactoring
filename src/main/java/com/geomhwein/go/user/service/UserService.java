@@ -6,7 +6,6 @@ import java.util.List;
 
 
 import org.springframework.web.multipart.MultipartFile;
-
 import com.geomhwein.go.util.Criteria;
 import com.geomhwein.go.command.ComunityUploadVO;
 import com.geomhwein.go.command.ReplyVO;
@@ -33,9 +32,7 @@ public interface UserService {
 	public void replyAdd(ReplyVO vo);
 	public List<HomeworkVO> getHomeworkList(String userId);
 	public void addQuestion(QuestionVO vo);
-	public int registCreator(String userName, String docsCode, String reason);
-	public EducationGroupVO getGroup(int groupNo);
-	public int getGroupCount();
+	
 	public void applyGroup(int groupNo, String username);
 	public List<QuestionVO> getQuestionList(String username);
 	public QuestionVO questionDetail(int qstn_no);
@@ -63,5 +60,9 @@ public interface UserService {
 	public SubmissionVO getSubmission(String userId , int amstNo);
 	public void submissionUpdate(SubmissionVO vo);
 	public List<UserDetailsVO> getUserScoreList();
+	public void addBasket(int groupNo, String userId);
+	public void registCreator(EvaluationVO vo);
+	public EducationGroupVO getGroupOne(int groupNo);
+	public List<EducationGroupVO> getGroup();
 
 }

@@ -1,7 +1,7 @@
-label {
+.progLabel {
   display: block;
   padding: 15px 5px 5px;
-  font-size: 24px;
+  font-size: 12px;
   font-weight: 900;
 }
 

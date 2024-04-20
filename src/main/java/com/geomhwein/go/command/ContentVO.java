@@ -22,9 +22,10 @@ public class ContentVO {
 	private BigInteger contsSn;
 	private String contsNm;
 	private String contsExpln;
-	private Number contsPrc;
-	private Timestamp contsYmd;
+	private int contsPrc;
+	private String contsYmd;
 	private String imgNm;
+	private Timestamp utztnBgngYmd;
 	private String utztnBgngYmd;
 	private String utztnTrmsCn;
 	private String utztnNope;

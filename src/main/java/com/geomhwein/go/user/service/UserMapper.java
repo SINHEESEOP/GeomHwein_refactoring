@@ -16,10 +16,6 @@ import com.geomhwein.go.command.UserDetailsVO;
 import com.geomhwein.go.command.ComunityVO;
 import com.geomhwein.go.util.Criteria;
 
-import com.geomhwein.go.command.ComunityVO;
-import com.geomhwein.go.command.EducationGroupVO;
-import com.geomhwein.go.command.GroupApplicationVO;
-
 
 @Mapper
 public interface UserMapper {
@@ -59,25 +55,27 @@ public interface UserMapper {
 	public void allReplyDelete(int pst_ttl_no);
 	public void deleteFile(int pst_ttl_no);
 
-	public int registCreator(@Param("userName") String userName,@Param("docsCode") String docsCode,@Param("reason") String reason);
+	
 	public List<GroupApplicationVO> getGroupApplyList(String userId);
 	public QuestionVO getAnswer(int qstnNo);
 	public List<HomeworkVO> getHomeworkList(String userId);
+	public List<EducationGroupVO> getGroup();
 	public HomeworkVO homeworkReg(int asmtNo);
 	public EducationGroupVO getGroup(int groupNo);
 	public void submissionForm(SubmissionVO vo);
 	public SubmissionVO getSubmission(@Param("userId") String userId ,@Param("asmtNo") int amstNo);
 	public void submissionUpdate(SubmissionVO vo);
 	
-	
-	//mapper상에서 
-	//group테이블에서 groupNo값으로 불러와야함
-
-	public int getGroupCount();
 
 	public void applyGroup(@Param("groupNo")int groupNo,@Param("userId")String userId);
 
 	public List<UserDetailsVO> getUserScoreList();
+
+	public void addBasket(@Param("groupNo") int groupNo,@Param("userId") String userId);
+
+	public void registCreator(EvaluationVO vo);
+
+	public EducationGroupVO getGroupOne(int groupNo);
 
 	
 
