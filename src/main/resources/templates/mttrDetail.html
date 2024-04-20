@@ -6,7 +6,7 @@
 </head>
 
 <body>
-    <div th:replace="~{/include/baseLayout :: setContent ( ~{ :: .wrap})}">
+    <div th:replace="~{./include/baseLayout :: setContent ( ~{ :: .wrap})}">
           
         <div class="wrap">
             <div class="container-fluid py-4">
@@ -28,7 +28,6 @@
                         </div>
                         <div>
                             등록일 : <span th:text="${vo.bgngTm}"></span>
-                            <p>조회수 : 10</p>
                         </div>
                         <br>
                         <br>
@@ -41,8 +40,10 @@
         	<!-- 시큐리티 user -->
         	<button type="button" th:onclick="|location.href='@{mttrList}'|">목록</button>
       		<!-- 시큐리티 admin -->
+      		
+      		<th:block sec:authorize="hasRole('ROLE_ADMIN')">
         	<button type="button" id="deleteMttr">삭제</button>
-      
+      		</th:block>
       	</div>
       	
                     </div>

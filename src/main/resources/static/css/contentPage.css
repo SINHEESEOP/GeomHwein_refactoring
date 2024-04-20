@@ -1,0 +1,102 @@
+@charset "UTF-8";
+
+/* Form Container */
+section {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* Form Body */
+.board_basic_view {
+    width: 100%;
+    border-collapse: collapse;
+    border-radius: 8px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+.board_basic_view th {
+    background-color: #f5f5f5;
+    color: #333;
+    padding: 10px;
+    text-align: left;
+}
+
+.board_basic_view td {
+    padding: 10px;
+}
+
+/* Input Styles */
+.inputw99p, .inputw150, textarea {
+    width: calc(100% - 20px);
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-top: 5px;
+    margin-bottom: 10px;
+}
+
+.inputw150 {
+    width: 140px;
+}
+
+/* Button Styles */
+.btn_area {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.save, .revise {
+    display: inline-block;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.save {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.save:hover {
+    background-color: #45a049;
+}
+
+.revise {
+    background-color: #f44336;
+    color: white;
+    margin-left: 10px;
+}
+
+.revise:hover {
+    background-color: #da190b;
+}
+
+.inputw99p, .inputw150, textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    box-sizing: border-box; /* 입력란의 크기를 계산할 때 padding과 border를 포함시킵니다. */
+}
+
+
+#rating {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    background-color: #fff; /* 배경색 */
+    color: #333; /* 텍스트 색상 */
+}
+
+#rating option {
+    padding: 10px;
+    background-color: #fff; /* 배경색 */
+    color: #333; /* 텍스트 색상 */
+}
