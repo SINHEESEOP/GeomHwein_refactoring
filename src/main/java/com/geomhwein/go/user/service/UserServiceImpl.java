@@ -9,7 +9,6 @@ import java.util.*;
 import java.util.List;
 
 import com.geomhwein.go.command.*;
-import org.apache.ibatis.annotations.Select;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -21,7 +20,6 @@ import com.geomhwein.go.command.UserDetailsVO;
 import com.geomhwein.go.command.ComunityVO;
 import com.geomhwein.go.util.Criteria;
 
-import com.geomhwein.go.command.ComunityVO;
 import com.geomhwein.go.command.EducationGroupVO;
 import com.geomhwein.go.command.GroupApplicationVO;
 
@@ -54,12 +52,21 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public ArrayList<UserDetailsVO> getAllEducationGroup(String userId) {
-		return userMapper.getAllEducationGroup(userId);
+	public ArrayList<EducationGroupVO> getAllEducationGroup(String userId) {
+
+		ArrayList<EducationGroupVO> userEduList = userMapper.getAllEducationGroup(userId);
+
+		for (int i = 0; i < userEduList.size(); i++) {
+			String time = userEduList.get(i).getContentVO().getUtztnBgngYmd().substring(0, 10);
+			userEduList.get(i).getContentVO().setUtztnBgngYmd(time);
+		}
+		return userEduList;
 	}
-//	public ArrayList< Map<String, Object> > getAllEducationGroup(String userId) {
-//		return userMapper.getAllEducationGroup(userId);
-//	}
+
+	@Transactional
+	public void updateProfile(UserDetailsVO userDetailsVO) {
+		userMapper.updateProfile(userDetailsVO);
+	}
 
 	@Override
 	@Transactional(rollbackFor = Exception.class) //에러시 롤백처리

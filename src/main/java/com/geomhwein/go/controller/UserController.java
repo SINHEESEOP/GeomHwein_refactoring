@@ -72,10 +72,6 @@ public class UserController {
 	@Qualifier("userService")
 	private UserService userService;
 
-	@GetMapping("/cart")
-	public String cart() {
-		return "user/cart";
-	}
 
 	@GetMapping("/billing")
 	public String billing() {
@@ -89,10 +85,14 @@ public class UserController {
 			UserAuth userAuth = (UserAuth)authentication.getPrincipal();
 			model.addAttribute("role", userAuth.getRole());
 
-			List<UserDetailsVO> userEduList = userService.getAllEducationGroup(userAuth.getUserId());
-//			ArrayList<Map<String, Object>> userEduList = userService.getAllEducationGroup(userAuth.getUserId());
-
+			List<EducationGroupVO> userEduList = userService.getAllEducationGroup(userAuth.getUserId());
 			System.out.println("리스트 숫자 : " + userEduList.size());
+
+			for (int i = 0; i < userEduList.size(); i++) {
+				String time = userEduList.get(i).getContentVO().getUtztnBgngYmd().substring(0, 10);
+				userEduList.get(i).getContentVO().setUtztnBgngYmd(time);
+				System.out.println(time);
+			}
 
 			model.addAttribute("userEduList", userEduList);
 		}

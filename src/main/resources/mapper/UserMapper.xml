@@ -112,64 +112,54 @@
 	delete FROM MAKEQUESTION WHERE QSTN_NO = #{qstnNo}
 	</delete>
 
+	<update id="updateProfile" parameterType="com.geomhwein.go.command.UserDetailsVO">
+		UPDATE USER_DETAILS
+		SET
+			USER_EML_ADDR = #{userEmlAddr},
+			ADDRESS = #{address},
+			USER_TELNO = #{userTelno}
+		WHERE
+			USER_ID = #{userId};
+	</update>
+
 	<!-- 결과 매핑 정의 -->
-	<resultMap id="EducationGroupResultMap" type="com.geomhwein.go.command.EducationGroupVO">
+	<resultMap id="UserDetailsResultMap" type="com.geomhwein.go.command.EducationGroupVO">
 		<result property="recAge" column="권장연령"/>
 		<result property="groupUtztnNope" column="그룹이용인원수"/>
+		<result property="contsNm" column="콘텐츠명"/>
 
-		<association property="userDetailsVO" javaType="com.geomhwein.go.command.UserDetailsVO">
-			<result property="userId" column="사용자식별자"/>
+		<association property="contentVO" javaType="com.geomhwein.go.command.ContentVO">
+			<result property="contsExpln" column="콘텐츠설명"/>
+			<result property="utztnBgngYmd" column="콘텐츠기간"/>
+			<result property="contsGrd" column="콘텐츠등급"/>
+			<result property="imgNm" column="이미지명"/>
 
-				<association property="contentVO" javaType="com.geomhwein.go.command.ContentVO">
-					<result property="contsNm" column="콘텐츠명"/>
-					<result property="contsExpln" column="콘텐츠설명"/>
-					<result property="utiznBgngYmd" column="콘텐츠기간"/>
-					<result property="contsGrd" column="콘텐츠등급"/>
-					<result property="imgNm" column="이미지명"/>
-				</association>
+			<association property="userDetailsVO" javaType="com.geomhwein.go.command.UserDetailsVO">
+				<result property="userId" column="사용자식별자"/>
+			</association>
 		</association>
 	</resultMap>
 
 	<!-- 사용자 정보와 관련된 콘텐츠 정보 조회 쿼리 -->
-	<select id="getAllEducationGroup" resultMap="EducationGroupResultMap">
+	<select id="getAllEducationGroup" resultMap="UserDetailsResultMap">
 		SELECT
-			ud.USER_ID AS 사용자식별자,
-			c.CONTS_NM AS 콘텐츠명,
-			c.CONTS_EXPLN AS 콘텐츠설명,
-			c.CONTS_GRD AS 콘텐츠등급,
-			c.IMG_NM AS 이미지명,
-			eg.REC_AGE AS 권장연령,
-			eg.GROUP_UTZTN_NOPE AS 그룹이용인원수,
-			c.UTZTN_BGNG_YMD AS 이용시작일자
+			ud.USER_ID AS "사용자식별자",
+			eq.GROUP_UTZTN_NOPE AS "그룹이용인원수",
+			eq.REC_AGE AS "권장연령",
+			eq.CONTS_NM AS "콘텐츠명",
+			c.UTZTN_BGNG_YMD AS "콘텐츠기간",
+			c.CONTS_EXPLN AS "콘텐츠설명",
+			c.CONTS_GRD AS "콘텐츠등급",
+			c.IMG_NM AS "이미지명"
 		FROM
-			EDUCATION_GROUP eg
+			EDUCATION_GROUP eq
 				JOIN
-			USER_DETAILS ud ON eg.USER_ID = ud.USER_ID
+			CONTENT c ON c.CONTS_NM = eq.CONTS_NM
 				JOIN
-			CONTENT c ON eg.CONTS_NM = c.CONTS_NM
-		WHERE ud.USER_ID = #{userId};
+			USER_DETAILS ud ON ud.USER_ID = eq.USER_ID
+		WHERE
+			ud.USER_ID = #{userId};
 	</select>
-
-
-<!--	<select id="getAllEducationGroup" resultType="map">-->
-<!--		SELECT-->
-<!--			ud.USER_ID AS "사용자식별자",-->
-<!--			eg.GROUP_UTZTN_NOPE AS "그룹이용인원수",-->
-<!--			eg.REC_AGE AS "권장연령",-->
-<!--			c.UTZTN_BGNG_YMD AS "이용시작일자",-->
-<!--			c.CONTS_NM AS "콘텐츠명",-->
-<!--			c.CONTS_EXPLN AS "콘텐츠설명",-->
-<!--			c.CONTS_GRD AS "콘텐츠등급",-->
-<!--			c.IMG_NM AS "이미지명"-->
-<!--		FROM-->
-<!--			USER_DETAILS ud-->
-<!--				JOIN-->
-<!--			EDUCATION_GROUP eg ON ud.USER_ID = eg.USER_ID-->
-<!--				JOIN-->
-<!--			CONTENT c ON eg.CONTS_NM = c.CONTS_NM-->
-<!--		WHERE-->
-<!--			ud.USER_ID = #{userId};-->
-<!--	</select>-->
 	
 	<select id="getReplyList" resultType="ReplyVO">
 	select * from REPLY where pst_ttl_no = #{pst_ttl_no} and parent_reply_no = 0;
@@ -217,7 +207,7 @@
 	SELECT * from group_application G
 	LEFT JOIN  education_group E ON  E.GROUP_NO = G.GROUP_NO
 	WHERE  G.USER_ID = #{userId}
-	</select>
+	 </select>
 
 	<select id="getUserScoreList" resultType="UserDetailsVO">
 		SELECT 

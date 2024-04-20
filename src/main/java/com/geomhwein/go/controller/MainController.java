@@ -1,5 +1,6 @@
 package com.geomhwein.go.controller;
 
+import com.geomhwein.go.command.EducationGroupVO;
 import com.geomhwein.go.securlty.UserAuth;
 import com.geomhwein.go.securlty.service.NormalUserService;
 import com.geomhwein.go.util.Criteria;
@@ -10,9 +11,14 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.security.Principal;
+import java.util.ArrayList;
+
 @Controller
 public class MainController {
 
+
+	// 비회원 서비스는 노말유저 서비스와 공유합니다.
 	@Autowired
 	private NormalUserService normalUserService;
 
@@ -52,6 +58,17 @@ public class MainController {
 	public String mttr() {
 
 		return "mttr";
+	}
+
+	@GetMapping("/cart")
+	public String cart(Model model, Authentication auth) {
+
+		UserAuth userAuth = (UserAuth) auth.getPrincipal();
+		ArrayList<EducationGroupVO> carts = normalUserService.getCart(userAuth.getUserId());
+		System.out.println(carts.toString());
+		model.addAttribute("carts", carts);
+
+		return "cart";
 	}
 
 

@@ -138,7 +138,7 @@
 						<span class="nav-link-text ms-1">마이페이지</span>
 					</a>
 				</li>
-
+				
 				<li class="nav-item ">
 					<a class="nav-link text-white tab" id="tab6" href="/user/comunityList" data-page-name="커뮤니티">
 						<div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
@@ -147,16 +147,16 @@
 						<span class="nav-link-text ms-1">커뮤니티</span>
 					</a>
 				</li>
-
+				
 				<li class="nav-item sideBtn ">
-					<a class="nav-link text-white tab" id="tab9" href="/user/cart" data-page-name="장바구니">
+					<a class="nav-link text-white tab" id="tab9" href="/cart" data-page-name="장바구니">
 						<div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
 							<i class="material-icons opacity-10">shopping_cart</i>
 						</div>
 						<span class="nav-link-text ms-1">장바구니</span>
 					</a>
 				</li>
-            
+				
 				<li class="nav-item sideBtn ">
 					<a class="nav-link text-white tab" id="tab10" href="/sign_in" data-page-name="로그인">
 						<div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
@@ -215,7 +215,6 @@
 								<span class="d-sm-inline d-none">로그인</span>
 							</a>
 						</li>
-						
 						<!-- 로그인한 사용자에게만 보이도록 설정 -->
 						<li class="nav-item d-flex align-items-center" sec:authorize="isAuthenticated()" style="margin-right: 10px">
 							<a href="/user/profile" class="nav-link text-body font-weight-bold px-0">

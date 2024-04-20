@@ -47,6 +47,11 @@
         <result property="groupUtztnNope" column="그룹이용인원수"/>
         <result property="recAge" column="권장연령"/>
 
+        <association property="contentVO" javaType="com.geomhwein.go.command.ContentVO">
+            <result property="utztnBgngYmd" column="이용시작일자"/>
+            <result property="contsGrd" column="콘텐츠등급"/>
+        </association>
+
         <!-- 중첩된 객체 맵핑 for UserAuthVO -->
         <association property="userAuthVO" javaType="com.geomhwein.go.command.UserAuthVO">
             <result property="userNm" column="사용자명"/>
@@ -68,6 +73,31 @@
             ua.USER_NM AS "사용자명",
             ud.USER_RATING AS "사용자등급",
             ud.USER_ID AS "사용자식별자",
+            ud.USER_ROLE AS "사용자권한",
+            c.CONTS_GRD AS "콘텐츠등급",
+            c.CONTS_PRC AS "콘텐츠가격"
+        FROM
+            EDUCATION_GROUP e
+                JOIN
+            USER_DETAILS ud ON e.USER_ID = ud.USER_ID
+                JOIN
+            USER_AUTH ua ON e.USER_ID = ua.USER_ID
+                JOIN
+            CONTENT c ON c.CONTS_NM = e.CONTS_NM
+        WHERE
+            CONTS_GRD = '초급'
+        limit #{pageStart}, #{amount};
+    </select>
+
+    <select id="getList2" resultMap="EducationGroupResultMap">
+        SELECT
+            e.CONTS_NM AS "컨텐츠명",
+            e.GROUP_UTZTN_NOPE AS "그룹이용인원수",
+            e.REC_AGE AS "권장연령",
+            c.UTZTN_BGNG_YMD AS "이용시작일자",
+            ua.USER_NM AS "사용자명",
+            ud.USER_RATING AS "사용자등급",
+            ud.USER_ID AS "사용자식별자",
             ud.USER_ROLE AS "사용자권한"
         FROM
             EDUCATION_GROUP e
@@ -75,7 +105,32 @@
             USER_DETAILS ud ON e.USER_ID = ud.USER_ID
                 JOIN
             USER_AUTH ua ON e.USER_ID = ua.USER_ID
+                JOIN
+            CONTENT c ON c.CONTS_NM = e.CONTS_NM
+        ORDER BY
+            c.UTZTN_BGNG_YMD DESC
         limit #{pageStart}, #{amount};
+    </select>
+
+    <select id="getCart" resultType="CartVO">
+
+        SELECT
+            c.USER_ID,
+            cont.CONTS_NM AS contsNm,
+            cont.CONTS_PRC AS contsPrc,
+            (SELECT ua.USER_NM FROM USER_AUTH ua WHERE ua.USER_ID = u.USER_ID) AS userNm, -- 서브쿼리 사용
+            u.USER_RATING AS userRating,
+            eg.REC_AGE AS recAge
+        FROM
+            CART c
+                JOIN
+            CONTENT cont ON c.GROUP_NO = cont.CONTS_SN
+                JOIN
+            USER_DETAILS u ON c.USER_ID = u.USER_ID
+                JOIN
+            EDUCATION_GROUP eg ON c.GROUP_NO = eg.GROUP_NO
+        WHERE
+            c.USER_ID = #{userId};  -- 사용자 ID를 파라미터로 받음
     </select>
 
 </mapper>
