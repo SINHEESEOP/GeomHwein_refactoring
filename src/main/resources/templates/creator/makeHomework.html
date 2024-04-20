@@ -28,7 +28,7 @@
                   <div class="col-lg-6 wow fadeIn" data-wow-delay="0.1s">
                       <div class="h-100 d-flex flex-column justify-content-center p-5">
                           <h1 class="mb-4">숙제 등록</h1>
-                          <form action="registHomeworkForm" method="post">
+                          <form action="registHomeworkForm" method="post" name="registHomeworkForm">
                               <div class="row g-3">
                                   <div class="col-sm-6">
                                       <div class="form-floating">
@@ -62,7 +62,7 @@
                                   </div>
 
                                   <div class="col-12">
-                                      <button class="btn btn-primary w-100 py-3 makeHomeworkBtn" type="submit">Submit</button>
+                                      <button class="btn btn-primary w-100 py-3 makeHomeworkBtn" type="button">Submit</button>
                                   </div>
                               </div>
                           </form>
@@ -79,8 +79,7 @@
   	var creatorId=$(".creatorId").val();
   	$(".creatorName").attr("value",creatorId);
   	$(".makeHomeworkBtn").click(function(){
-  	
-  		window.close();
+  		document.registHomeworkForm.submit();
   	});
   </script>
 </body>

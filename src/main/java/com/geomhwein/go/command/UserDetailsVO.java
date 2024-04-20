@@ -19,7 +19,7 @@ public class UserDetailsVO {
 	private ContentVO contentVO;
 	private EducationGroupVO educationGroupVO;
 	private String userId; // VARCHAR(100) NOT NULL
-	private String userTelNo; // VARCHAR(20)
+	private String userTelno; // VARCHAR(20)  // 50으로 변경예정
 	private String userEmlAddr; // VARCHAR(100) NOT NULL
 	private Integer userAge; // INT
 	private Integer userRating; // DECIMAL(5,2)
@@ -38,6 +38,6 @@ public class UserDetailsVO {
 
 	public UserDetailsVO(String userId, String Interests) {
 		this.userId = userId;
-		this.userTelNo = Interests;
+		this.userTelno = Interests;
 	}
 }

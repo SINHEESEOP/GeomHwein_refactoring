@@ -1,6 +1,6 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <link rel="stylesheet" href="/css/groupList.css">
-<th:block th:replace="~{/include/baseLayout :: setContent( ~{ :: .wrap} ) }">
+<th:block th:replace="~{./include/baseLayout :: setContent( ~{ :: .wrap} ) }">
 
 <div class="wrap">
  <div class="container-fluid py-4">
@@ -22,10 +22,10 @@
         <tr class="table-content" th:each="vo,status : ${list}" >
           <td>[[${status.count}]]</td>
           <td>[[${vo.groupNo}]]</td>
-          <th:block th:if="${vo.aplyStatus} == N">
+          <th:block th:if="${vo.aplyStatus} == Y">
           <td th:onclick="|location.href='@{groupApplyDetail(groupno=${vo.groupNo})}'|"><img src="" alt="이미지"/></td>
           </th:block>
-          <th:block th:if="${vo.aplyStatus} == Y">
+          <th:block th:if="${vo.aplyStatus} == N">
           <td><img src="" alt="이미지"/></td>
           </th:block>
           <td>[[${vo.contsNm}]]</td>

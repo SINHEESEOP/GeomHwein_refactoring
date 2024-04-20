@@ -46,7 +46,8 @@
 </th:block>
 <script>
   $(".answerBtn").click(function(e){
-	  var qstnNo=e.target.parentElement.firstElementChild.innerHTML;
+	  var qstnNo=e.target.parentElement.parentElement.firstElementChild.innerHTML;
+	  
 	  var url="makeAnswerForm?qstnNo="+qstnNo;
 	  var name="답변 등록하기";
 	  var option="width=810,height=810,top=0,left=0,location=yes";

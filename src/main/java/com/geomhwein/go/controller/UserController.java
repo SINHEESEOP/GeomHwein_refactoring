@@ -36,6 +36,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -53,6 +54,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 import com.geomhwein.go.command.ComunityUploadVO;
 import com.geomhwein.go.command.ReplyVO;
+import com.geomhwein.go.command.SubmissionVO;
 import com.geomhwein.go.command.ComunityVO;
 import com.geomhwein.go.command.EducationGroupVO;
 import com.geomhwein.go.command.GroupApplicationVO;
@@ -65,18 +67,18 @@ import ch.qos.logback.core.status.Status;
 @RequestMapping("/user")
 public class UserController {
 	
-	@Value("${project.upload.path}")
-	private String uploadPath;
-
 	@Autowired
 	@Qualifier("userService")
 	private UserService userService;
-
+  
+  @Value("${project.upload.path}")
+	private String uploadPath;
+	
 	@GetMapping("/cart")
 	public String cart() {
 		return "user/cart";
 	}
-
+	
 	@GetMapping("/billing")
 	public String billing() {
 		return "user/billing";
@@ -89,10 +91,14 @@ public class UserController {
 			UserAuth userAuth = (UserAuth)authentication.getPrincipal();
 			model.addAttribute("role", userAuth.getRole());
 
-			List<UserDetailsVO> userEduList = userService.getAllEducationGroup(userAuth.getUserId());
-//			ArrayList<Map<String, Object>> userEduList = userService.getAllEducationGroup(userAuth.getUserId());
-
+			List<EducationGroupVO> userEduList = userService.getAllEducationGroup(userAuth.getUserId());
 			System.out.println("리스트 숫자 : " + userEduList.size());
+
+			for (int i = 0; i < userEduList.size(); i++) {
+				String time = userEduList.get(i).getContentVO().getUtztnBgngYmd().substring(0, 10);
+				userEduList.get(i).getContentVO().setUtztnBgngYmd(time);
+				System.out.println(time);
+			}
 
 			model.addAttribute("userEduList", userEduList);
 		}
@@ -172,8 +178,8 @@ public class UserController {
 	
 	@GetMapping("/groupList")
 	public String userGroupList(Model model ,Authentication authentication) {
-		int gCount=userService.getGroupCount();
-		List<EducationGroupVO> groupList=new ArrayList<>();
+		
+		List<EducationGroupVO> groupList=userService.getGroup();
 		if (authentication != null) {
 			UserAuth userAuth = (UserAuth)authentication.getPrincipal();
 
@@ -182,9 +188,9 @@ public class UserController {
 			model.addAttribute("userName", userId);
 
 		}
-		for(int i=1;i<=gCount;i++) {
-			groupList.add(userService.getGroup(i));
-		}
+		
+			
+		
 		model.addAttribute("groupList",groupList);
 		return "user/groupList";
 	}
@@ -214,18 +220,15 @@ public class UserController {
 		
 		String userId = prin.getName();
 		
-		EducationGroupVO vo = userService.getGroup(groupNo);
+		EducationGroupVO vo = userService.getGroupOne(groupNo);
 		List<QuestionVO> list = userService.getQuestionList(userId);
+		List<HomeworkVO> list2 =userService.getHomeworkList(vo.getUserId());
 		
 		model.addAttribute("vo", vo);
 		model.addAttribute("list",list);
+		model.addAttribute("list2",list2);
 		
 		return "user/groupApplyDetail";
-	}
-	
-	@GetMapping("/homeworkReg")
-	public String homeworkReg() {
-		return "user/homeworkReg";
 	}
 	
 	@GetMapping("/viewHomework")
@@ -242,13 +245,7 @@ public class UserController {
 		return "user/homeworkList";
 	}
 
-	@PostMapping("/creatorRegForm")
-	public String creatorRegForm(@RequestParam("userName")String userName,@RequestParam("docsCode")String docsCode,@RequestParam("reason")String reason) {
-		userService.registCreator(userName,docsCode,reason);
-		//교육자 신청 되는 기록 신청가능여부를 위해 DB에 넣어서
-		//관리자 창 열릴때 get방식으로 불러와서 값 보내주면됨
-		return "user/profile";//신청버튼 잇던 곳으로 보내주면됨
-	}
+	
 
 	
 	
@@ -279,6 +276,7 @@ public class UserController {
 		
 		
 		List<MultipartFile> list = part.getFiles("file");
+		
 	
 		int result = userService.comunityForm(vo , list , prin);
 		
@@ -306,7 +304,7 @@ public class UserController {
 			rec.addFlashAttribute("msg", "수정실패");
 		}
 		
-		return "redirect:/user/comunityList";
+		return "redirect:	/user/comunityList";
 	}
 	
 	@GetMapping("/comunityDelete")
@@ -353,22 +351,24 @@ public class UserController {
   
 	@PostMapping("/replyAdd")
 	@ResponseBody
-	public String replayAdd(@RequestBody ReplyVO vo , Principal prin) {
+	@CrossOrigin("*")
+	public String replayAdd(@RequestBody ReplyVO vo , Authentication authentication) {
 		
+	
 		int pst_ttl_no = vo.getPstTtlNo();
 		
-		String userId = prin.getName();
-		vo.setUserId(userId);
-		System.out.println(vo.toString());
-		userService.replyAdd(vo);
-		
-		if(vo != null) {
-			userService.replyCount(pst_ttl_no);
+		if (authentication != null) {
+			UserAuth userAuth = (UserAuth)authentication.getPrincipal();
+			String userId = userAuth.getUserId();
+			vo.setUserId(userId);
 			
+			userService.replyAdd(vo);
+			userService.replyCount(pst_ttl_no);
 		}
 		
-
 		
+		
+
 		return "success";
 	}
 	
@@ -379,10 +379,16 @@ public class UserController {
 		if (authentication != null) {
 			UserAuth userAuth = (UserAuth)authentication.getPrincipal();
 
-			String username  = userAuth.getUsername();
+			String username  = userAuth.getUserId();
 			
-			userService.applyGroup(groupNo,username);	
-
+			String userId=username;
+			List<GroupApplicationVO> list = userService.getGroupApplyList(userId);
+			if(list.size()>0) {
+				return "redirect:/";
+			}else {
+				userService.applyGroup(groupNo,username);
+				
+			}
 		}else {
 			
 			return "creator/creatorFail";//임시조치
@@ -481,6 +487,54 @@ public class UserController {
 		 return list;
 	}
 	
+	@GetMapping("/showAnswer")
+	public String showAnswer(@RequestParam("qstnNo") int qstnNo , Model model , @RequestParam("userId") String creatorId) {
+		
+		QuestionVO vo= userService.getAnswer(qstnNo);
+
+		
+		model.addAttribute("vo",vo);
+		model.addAttribute("creatorId",creatorId);
+		
+		return "user/showAnswer";
+	}
+	
+	@GetMapping("/homeworkReg")
+	public String homeworkReg(@RequestParam("asmtNo") int asmtNo , Model model,Authentication authentication) {
+		
+		UserAuth userAuth = (UserAuth)authentication.getPrincipal();
+		String userId = userAuth.getUserId();
+		
+		HomeworkVO vo = userService.homeworkReg(asmtNo);
+		SubmissionVO svo = userService.getSubmission(userId ,asmtNo);
+		
+		model.addAttribute("vo",vo);
+		model.addAttribute("svo",svo);
+		
+		return "user/homeworkReg";
+	}
+	
+	@PostMapping("homeworkRegForm")
+	public String homeworkRegForm(SubmissionVO vo ,Authentication authentication) {
+		
+		
+		UserAuth userAuth = (UserAuth)authentication.getPrincipal();
+		String userId = userAuth.getUserId();
+		vo.setUserId(userId);
+		
+		userService.submissionForm(vo);
+		
+		return "redirect:/user/homeworkReg?asmtNo="+vo.getAsmtNo();
+	}
+	
+	@PostMapping("homeworkUpdate")
+	public String homeworkUpdate(SubmissionVO vo) {
+		
+		System.out.println(vo.toString() + "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+		userService.submissionUpdate(vo);
+		
+		return "redirect:/user/homeworkReg?asmtNo="+vo.getAsmtNo();
+	}
 
 	@GetMapping("/groupProgress")
 	public String groupProgress(Model model) {
@@ -494,5 +548,45 @@ public class UserController {
 	
 	
 
+	//장바구니 담기
+	@PostMapping("/addOnBasket")
+	@ResponseBody
+	public void addOnBasket(@RequestParam("groupNo")String gNo,Authentication authentication) {
+		int groupNo = Integer.parseInt(gNo);
+		if (authentication != null) {
+			UserAuth userAuth = (UserAuth)authentication.getPrincipal();
+
+			String userId  = userAuth.getUserId();
+			
+		    userService.addBasket(groupNo,userId);
+		}
+		
+	}
+	
+	//교육자승급신청
+	@GetMapping("/registCreator")
+	public String registCreator(Authentication authentication,Model model) {
+		String userId=null;
+		if (authentication != null) {
+			UserAuth userAuth = (UserAuth)authentication.getPrincipal();
+
+			userId  = userAuth.getUserId();
+			
+		}
+		model.addAttribute("userId",userId);
+		return "user/regBeingCreator";
+	}
+	
+	@PostMapping("/creatorRegForm")
+	public String creatorRegForm(EvaluationVO vo) {
+		userService.registCreator(vo);
+		
+		return "user/profile";
+	}
+	
+	
+	
+	
+	
 	
 }

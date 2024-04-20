@@ -72,6 +72,24 @@ public class MainRestController {
 		return new ResponseEntity<>(response, HttpStatus.CREATED);
 	}
 
+
+	@PostMapping("/mainContent2")
+	public ResponseEntity<Map<String, Object>> mainContent2(Authentication auth, @RequestBody Criteria cri) {
+		Map<String, Object> response = new HashMap<>();
+
+		if (auth != null) {
+			UserAuth userAuth = (UserAuth) auth.getPrincipal();
+			String role = userAuth.getRole();
+			response.put("role", role); // 역할 정보를 맵에 추가
+			System.out.println("Role: " + role);
+		}
+
+		List<EducationGroupVO> results = normalUserService.getList2(cri);
+		response.put("educationGroups", new ArrayList<>(results)); // 교육 그룹 리스트를 맵에 추가
+
+		return new ResponseEntity<>(response, HttpStatus.CREATED);
+	}
+
 	@GetMapping("/contents")
 	public ResponseEntity<List<ContentVO>> getProcessedContents() {
 		// ContentService에서 전처리된 컨텐츠 데이터를 가져옵니다.

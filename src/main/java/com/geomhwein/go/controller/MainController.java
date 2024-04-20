@@ -1,9 +1,13 @@
 package com.geomhwein.go.controller;
 
+
 import com.geomhwein.go.admin.service.AdminService;
 import com.geomhwein.go.command.AdminVO;
 import com.geomhwein.go.command.ContentUploadVO;
 import com.geomhwein.go.command.ContentVO;
+
+import com.geomhwein.go.command.EducationGroupVO;
+
 import com.geomhwein.go.securlty.UserAuth;
 import com.geomhwein.go.securlty.service.NormalUserService;
 import com.geomhwein.go.util.Criteria;
@@ -21,15 +25,23 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+
 import org.springframework.util.FileCopyUtils;
+
+import org.springframework.web.bind.annotation.CrossOrigin;
+
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.security.Principal;
+import java.util.ArrayList;
+
 @Controller
 public class MainController {
+
 
 	@Autowired
 	private NormalUserService normalUserService;
@@ -43,12 +55,16 @@ public class MainController {
 	private AdminService adminService;
 	
 
+	// 비회원 서비스는 노말유저 서비스와 공유합니다.
+@Autowired
+private NormalUserService normalUserService;
+
 	@GetMapping("/")
 	public String main(Authentication auth, Model model, Criteria cri) {
-
+		
 		if (auth != null) {
 			UserAuth userAuth = (UserAuth)auth.getPrincipal();
-
+			
 			System.out.println(userAuth.getUsername() + " " + userAuth.getPassword()
 						+ " " + userAuth.getRole() );
 
@@ -160,7 +176,17 @@ public class MainController {
 		return "redirect:/mttrList";
 		
 	}
-	
+	@GetMapping("/cart")
+	public String cart(Model model, Authentication auth) {
+
+		UserAuth userAuth = (UserAuth) auth.getPrincipal();
+		ArrayList<EducationGroupVO> carts = normalUserService.getCart(userAuth.getUserId());
+		System.out.println(carts.toString());
+		model.addAttribute("carts", carts);
+
+		return "cart";
+	}
+
 
 }
 

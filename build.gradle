@@ -58,8 +58,7 @@ dependencies {
     implementation 'org.apache.lucene:lucene-queryparser:7.7.3'
 
     // 추가적으로 필요한 Lucene 모듈들을 여기에 추가합니다.
-
-
+  
     //구글 애널리틱스
  	implementation 'com.google.apis:google-api-services-analyticsreporting:v4-rev20211020-1.32.1'
  	
