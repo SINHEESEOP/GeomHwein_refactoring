@@ -33,6 +33,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -62,7 +63,6 @@ import com.geomhwein.go.user.service.UserService;
 import com.geomhwein.go.util.Criteria;
 import com.geomhwein.go.util.PageVO;
 
-import ch.qos.logback.core.status.Status;
 
 @Controller
 @RequestMapping("/user")
@@ -70,12 +70,14 @@ public class UserController {
 	
 	@Value("${project.upload.path}")
 	private String uploadPath;
-
+	
 	@GetMapping("/cart")
 	public String cart() {
 		return "user/cart";
 	}
+	
 
+	
 	@GetMapping("/billing")
 	public String billing() {
 		return "user/billing";
@@ -283,6 +285,7 @@ public class UserController {
 		
 		
 		List<MultipartFile> list = part.getFiles("file");
+		
 	
 		int result = userService.comunityForm(vo , list , prin);
 		
@@ -357,22 +360,24 @@ public class UserController {
   
 	@PostMapping("/replyAdd")
 	@ResponseBody
-	public String replayAdd(@RequestBody ReplyVO vo , Principal prin) {
+	@CrossOrigin("*")
+	public String replayAdd(@RequestBody ReplyVO vo , Authentication authentication) {
 		
+	
 		int pst_ttl_no = vo.getPstTtlNo();
 		
-		String userId = prin.getName();
-		vo.setUserId(userId);
-		System.out.println(vo.toString());
-		userService.replyAdd(vo);
-		
-		if(vo != null) {
-			userService.replyCount(pst_ttl_no);
+		if (authentication != null) {
+			UserAuth userAuth = (UserAuth)authentication.getPrincipal();
+			String userId = userAuth.getUserId();
+			vo.setUserId(userId);
 			
+			userService.replyAdd(vo);
+			userService.replyCount(pst_ttl_no);
 		}
 		
-
 		
+		
+
 		return "success";
 	}
 	
@@ -516,6 +521,7 @@ public class UserController {
 	
 	@PostMapping("homeworkRegForm")
 	public String homeworkRegForm(SubmissionVO vo ,Authentication authentication) {
+		
 		
 		UserAuth userAuth = (UserAuth)authentication.getPrincipal();
 		String userId = userAuth.getUserId();
