@@ -260,4 +260,8 @@
 	
 	</update>
     
+    <delete id="applyCancle">
+    	
+    	delete from group_application where APLY_NO = #{aplyNO}
+    </delete>
 </mapper>

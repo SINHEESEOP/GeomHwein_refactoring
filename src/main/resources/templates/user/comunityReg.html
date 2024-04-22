@@ -9,7 +9,7 @@
         <div class="reg-wrap">
         <div class="reg-title">
             <p>작성자</p>
-            <input type="text" name="userId" th:value="${#authentication.name}" readonly>
+            <input type="text" name="userId" th:value="${#authentication.getPrincipal().getUserId}" readonly>
           </div>
           <div class="reg-title">
             <p>제목</p>
