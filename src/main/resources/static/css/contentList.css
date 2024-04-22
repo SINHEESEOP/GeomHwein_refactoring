@@ -106,3 +106,23 @@ h1, h2, h3, h4, h5, h6 {
       	height:30px;
         border: 1px solid #ced4da;
       }
+
+.write-button {
+    text-align: right;
+    margin-top: 20px;
+    margin-right:200px;
+}
+
+.write-button button {
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.write-button button:hover {
+    background-color: #45a049;
+}
