@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
+import com.geomhwein.go.command.*;
 import org.springframework.web.multipart.MultipartFile;
 import com.geomhwein.go.util.Criteria;
 import com.geomhwein.go.command.ComunityUploadVO;

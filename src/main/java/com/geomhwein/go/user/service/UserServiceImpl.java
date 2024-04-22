@@ -362,28 +362,24 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public void submissionUpdate(SubmissionVO vo) {
-		
+
 		userMapper.submissionUpdate(vo);
 	}
 		
 	//사활풀이 순위
 	public List<UserDetailsVO> getUserScoreList() {
-		
+
 		return userMapper.getUserScoreList();
 	}
 
 	//장바구니 담기
-	public void addBasket(int groupNo, String userId) {
-		
+	public void addBasket (int groupNo, String userId) {
 		userMapper.addBasket(groupNo,userId);
-		
 	}
 
 	@Override
-	public void registCreator(EvaluationVO vo) {
-		
+	public void registCreator (EvaluationVO vo) {
 		userMapper.registCreator(vo);
-		
 	}
 
 	@Override
