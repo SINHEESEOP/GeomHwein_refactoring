@@ -3,6 +3,9 @@ package com.geomhwein.go.controller;
 
 import java.io.File;
 import java.net.URLEncoder;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.*;
 import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
@@ -53,7 +56,9 @@ import com.geomhwein.go.util.PageVO;
 @Controller
 @RequestMapping("/user")
 public class UserController {
-
+	
+	String cookieValue = "";
+	
 	@Autowired
 	@Qualifier("userService")
 	private UserService userService;
@@ -108,27 +113,31 @@ public class UserController {
 
 
 		Cookie[] cookies = request.getCookies();
-
+    
+		String pstTtlNo = request.getParameter("pst_ttl_no");
+		
 		if (cookies != null) {
-
-			for (Cookie cookie : cookies) {
-
-				if (!cookie.getValue().contains(request.getParameter("pst_ttl_no"))) {
-					cookie.setValue(cookie.getValue() + "_" + request.getParameter("pst_ttl_no"));
-					cookie.setMaxAge(3600);
-					response.addCookie(cookie);
-					userService.updateHit(pst_ttl_no);
-				}
-			}
-
+		    boolean found = false;
+		    for (Cookie cookie : cookies) {
+		        if (cookie.getName().equals("visit_cookie") && cookie.getValue().contains(pstTtlNo)) {
+		        	cookieValue = cookie.getValue();
+		        	found = true;
+		            break;
+		        }
+		    }
+		    if (!found) {
+		        Cookie newCookie = new Cookie("visit_cookie", cookieValue + pstTtlNo);
+		        newCookie.setMaxAge(3600);
+		        response.addCookie(newCookie);
+		        userService.updateHit(pst_ttl_no);
+		    }
 		} else {
-			Cookie newcookie = new Cookie("visit_cookie", request.getParameter("pst_ttl_no"));
-			newcookie.setMaxAge(3600);
-			response.addCookie(newcookie);
-			userService.updateHit(pst_ttl_no);
+		    Cookie newCookie = new Cookie("visit_cookie", pstTtlNo);
+		    newCookie.setMaxAge(3600);
+		    response.addCookie(newCookie);
+		    userService.updateHit(pst_ttl_no);
 		}
-
-
+		
 		ComunityVO vo = userService.getComunityDetail(pst_ttl_no);
 		List<ComunityUploadVO> list = userService.getFile(pst_ttl_no);
 
@@ -181,10 +190,12 @@ public class UserController {
 	}
 
 	@GetMapping("/groupApplyList")
-	public String groupApplyList(Principal prin, Model model) {
-
-		String userId = prin.getName();
-
+	public String groupApplyList(Authentication authentication , Model model) {
+		
+		UserAuth userAuth = (UserAuth)authentication.getPrincipal();
+		
+		String userId = userAuth.getUserId();
+		
 		List<GroupApplicationVO> list = userService.getGroupApplyList(userId);
 
 		model.addAttribute("list", list);
@@ -194,10 +205,12 @@ public class UserController {
 
 
 	@GetMapping("/groupApplyDetail")
-	public String groupApplyDetail(@RequestParam("groupno") int groupNo, Model model, Principal prin) {
-
-		String userId = prin.getName();
-
+	public String groupApplyDetail(@RequestParam("groupno") int groupNo, Model model , Authentication authentication) {
+		
+		UserAuth userAuth = (UserAuth)authentication.getPrincipal();
+		
+		String userId = userAuth.getUserId();
+		
 		EducationGroupVO vo = userService.getGroupOne(groupNo);
 		List<QuestionVO> list = userService.getQuestionList(userId);
 		List<HomeworkVO> list2 = userService.getHomeworkList(vo.getUserId());
@@ -247,16 +260,19 @@ public class UserController {
 	}
 
 	@PostMapping("/comunityForm")
-	public String comunityForm(ComunityVO vo, RedirectAttributes rec,
-	                           MultipartHttpServletRequest part, Principal prin) {
-
-
+	public String comunityForm(ComunityVO vo , RedirectAttributes rec,
+			MultipartHttpServletRequest part , Authentication authentication) {
+		
+		
+		UserAuth userauth = (UserAuth)authentication.getPrincipal();
+		String userId = userauth.getUserId();
+		
 		List<MultipartFile> list = part.getFiles("file");
-
-
-		int result = userService.comunityForm(vo, list, prin);
-
-		if (result == 1) {
+		
+	
+		int result = userService.comunityForm(vo , list , userId);
+		
+		if(result == 1 ) {
 			rec.addFlashAttribute("msg", "등록성공");
 		} else {
 			rec.addFlashAttribute("msg", "등록실패");
@@ -267,20 +283,23 @@ public class UserController {
 
 
 	@PostMapping("/comunityModifyForm")
-	public String comunityModifyForm(ComunityVO vo, RedirectAttributes rec
-			, MultipartHttpServletRequest part, Principal prin) {
-
+	public String comunityModifyForm(ComunityVO vo , RedirectAttributes rec
+									, MultipartHttpServletRequest part,Authentication authentication) {
+		
 		List<MultipartFile> list = part.getFiles("file");
-
-		int result = userService.comunityModifyForm(vo, list, prin);
-
-		if (result == 1) {
+		
+		UserAuth userauth = (UserAuth)authentication.getPrincipal();
+		
+		String userId = userauth.getUserId();
+		int result = userService.comunityModifyForm(vo,list, userId);
+		
+		if(result == 1 ) {
 			rec.addFlashAttribute("msg", "수정성공");
 		} else {
 			rec.addFlashAttribute("msg", "수정실패");
 		}
-
-		return "redirect:	/user/comunityList";
+		
+		return "redirect:/user/comunityList";
 	}
 
 	@GetMapping("/comunityDelete")
@@ -290,10 +309,10 @@ public class UserController {
 
 		if (result == 1) {
 			rec.addFlashAttribute("msg", "삭제성공");
-		} else {
+			userService.deleteFile(pst_ttl_no);
+		}else {
 			rec.addFlashAttribute("msg", "삭제실패");
 		}
-
 		return "redirect:/user/comunityList";
 	}
 
@@ -555,7 +574,16 @@ public class UserController {
 
 		return "user/profile";
 	}
-
+	
+	@GetMapping("/applyCancle")
+	@ResponseBody
+	public String applyCancle(@RequestParam("aplyno") int aplyno) {
+		
+		userService.applyCancle(aplyno);
+		
+		return "success";
+	}
+	
 
 	@GetMapping("/cart")
 	public String cart(Model model, Authentication auth) {
@@ -576,5 +604,6 @@ public class UserController {
 
 		return "user/cart";
 	}
+
 
 }

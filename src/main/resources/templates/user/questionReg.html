@@ -10,7 +10,7 @@
         <div class="reg-wrap">
           <div class="reg-title">
             <p>사용자 이름</p>
-            <input type="text" id="id" name="userId" th:value="${#authentication.name}" readonly>
+            <input type="text" id="id" name="userId" th:value="${#authentication.getPrincipal().getUserId}" readonly>
           </div>
           <div class="reg-title">
             <p>그룹번호</p>
@@ -50,6 +50,8 @@ window.resizeTo(825,825);
 				console.log(data);
 			}
 		});
+		
+		window.opener.postMessage("questionSubmitted", "*");
 	
 		window.close();
 	})

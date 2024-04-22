@@ -46,8 +46,8 @@ public class MainController {
 	@Qualifier("AdminService")
 	private AdminService adminService;
 
-
 	// 비회원 서비스는 노말유저 서비스와 공유합니다.
+
 	@Autowired
 	private NormalUserService normalUserService;
 

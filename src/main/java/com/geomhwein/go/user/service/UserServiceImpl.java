@@ -71,7 +71,7 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	@Transactional(rollbackFor = Exception.class) //에러시 롤백처리
-	public int comunityForm(ComunityVO vo , List<MultipartFile> list, Principal prin) {
+	public int comunityForm(ComunityVO vo , List<MultipartFile> list, String userId) {
 		
 		int result = userMapper.comunityForm(vo);
 		
@@ -101,7 +101,6 @@ public class UserServiceImpl implements UserService {
 				e.printStackTrace();
 			}
 			
-			String userId = prin.getName();
 			//업로드 이후에는 데이터베이스에 경로를 저장
 			userMapper.registFile(ComunityUploadVO.builder()
 								.fileName(filename)
@@ -127,12 +126,11 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public int comunityModifyForm(ComunityVO vo , List<MultipartFile> list , Principal prin) {
+	public int comunityModifyForm(ComunityVO vo , List<MultipartFile> list , String userId) {
 		
 		userMapper.deleteFile(vo.getPstTtlNo());
 		
 	
-		
 		for(MultipartFile file :list) {
 			 //파일명 //브라우저별로 파일 경로가 포함되서 올라오는 경우가 있음
 			String filename = file.getOriginalFilename();
@@ -158,7 +156,6 @@ public class UserServiceImpl implements UserService {
 				e.printStackTrace();
 			}
 			
-			String userId = prin.getName();
 			//업로드 이후에는 데이터베이스에 경로를 저장
 			userMapper.registFile(ComunityUploadVO.builder()
 								.fileName(filename)
@@ -389,6 +386,19 @@ public class UserServiceImpl implements UserService {
 	public EducationGroupVO getGroupOne(int groupNo) {
 		
 		return userMapper.getGroupOne(groupNo);
+	}
+
+	@Override
+	public void applyCancle(int aplyNo) {
+		
+		userMapper.applyCancle(aplyNo);
+	}
+
+	@Override
+	public void deleteFile(int pst_ttl_no) {
+		
+		userMapper.deleteFile(pst_ttl_no);
+		
 	}
 
 }

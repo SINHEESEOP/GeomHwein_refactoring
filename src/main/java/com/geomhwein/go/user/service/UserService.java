@@ -8,14 +8,25 @@ import java.util.List;
 import com.geomhwein.go.command.*;
 import org.springframework.web.multipart.MultipartFile;
 import com.geomhwein.go.util.Criteria;
+import com.geomhwein.go.command.ComunityUploadVO;
+import com.geomhwein.go.command.ReplyVO;
+import com.geomhwein.go.command.SubmissionVO;
+import com.geomhwein.go.command.UserDetailsVO;
+import com.geomhwein.go.command.ComunityVO;
+import com.geomhwein.go.command.HomeworkVO;
+import com.geomhwein.go.command.QuestionVO;
+
+import com.geomhwein.go.command.EducationGroupVO;
+import com.geomhwein.go.command.EvaluationVO;
+import com.geomhwein.go.command.GroupApplicationVO;
 
 
 public interface UserService {
 
-	public int comunityForm(ComunityVO vo , List<MultipartFile> list , Principal prin);
+	public int comunityForm(ComunityVO vo , List<MultipartFile> list , String userId);
 	public List<ComunityVO> getComunityList(Criteria cri);
 	public ComunityVO getComunityDetail(int pst_ttl_no);
-	public int comunityModifyForm(ComunityVO vo , List<MultipartFile> list , Principal prin);
+	public int comunityModifyForm(ComunityVO vo , List<MultipartFile> list , String userId);
 	public int comunityDelete(int pst_ttl_no);
 	public void updateHit(int pst_ttl_no);
 	public int comunityTotal(Criteria cri);
@@ -55,5 +66,7 @@ public interface UserService {
 	public void registCreator(EvaluationVO vo);
 	public EducationGroupVO getGroupOne(int groupNo);
 	public List<EducationGroupVO> getGroup();
+	public void applyCancle(int aplyNo);
+	public void deleteFile(int pst_ttl_no);
 
 }
