@@ -87,8 +87,10 @@ t<html xmlns:th="http://www.thymeleaf.org">
     
     $(".reply-reg").click(function(){
     
+    var PstTtlNo = /*[[${vo.PstTtlNo}]]*/'';	
+    	
     var params = {
-    		"pstTtlNo" : [[${vo.PstTtlNo}]],
+    		"pstTtlNo" : PstTtlNo,
     		"replyCn" : replyCn.value,
     		"parentReplyNo" : 0
     }
@@ -121,8 +123,10 @@ t<html xmlns:th="http://www.thymeleaf.org">
   
    $(document).ready(function(){
 	   
+	   var pstTtlNo = /*[[${vo.PstTtlNo}]]*/ '';
+	   
 	   $.ajax({
-		   url:"/user/getReplyList?pst_ttl_no="+[[${vo.PstTtlNo}]],
+		   url:"/user/getReplyList?pst_ttl_no="+pstTtlNo,
 		   type:"get",
 		   dataType:"json",
 		   async : false,
@@ -136,12 +140,32 @@ t<html xmlns:th="http://www.thymeleaf.org">
 			   }
 			   
 			   $.each(data, function(index,item) { // 데이터 =item
-					if(item.replyStatus){
-				   $(".replyList").append("<li><span class='reply-writer'>"+item.userId+"</span><input type='hidden' class='hidden' value=" + item.replyNo + "><span class='reply-date'>"+item.replyReg+"</span><p>"+item.replyCn+"</p><button type='button' class='show'>답글보기</button><button type='button' class='update'>수정<div></div></button><button type='button' class='delete'>삭제</button><ul></ul></li></th:block>"); 
+					
+				   var loggedInUser = /*[[${#authentication.getPrincipal().getUserId()}]]*/ '';
+				   
+				   if(item.replyStatus){
+						var buttonHTML = "";
+						if (item.userId === loggedInUser) {
+						    buttonHTML += "<button type='button' class='update'>수정<div></div></button>";
+						    buttonHTML += "<button type='button' class='delete'>삭제</button>";
+						}
+
+						$(".replyList").append(
+						    "<li>" +
+						        "<span class='reply-writer'>" + item.userId + "</span>" +
+						        "<input type='hidden' class='hidden' value='" + item.replyNo + "'>" +
+						        "<span class='reply-date'>" + item.replyReg + "</span>" +
+						        "<p>" + item.replyCn + "</p>" +
+						        "<button type='button' class='show'>답글보기</button>" +
+						        buttonHTML +
+						        "<ul></ul>" +
+						    "</li>"
+						);
 					}else{
 					$(".replyList").append("<li><span class='reply-writer'>"+item.userId+"</span><input type='hidden' class='hidden' value=" + item.replyNo + "><span class='reply-date'>"+item.replyReg+"</span><p>삭제된댓글입니다</p><button type='button' class='show'>답글보기</button><ul></ul></li></th:block>");
 					}
 				});
+			   
 			   
 		   },
 		   error : function(err,status){
@@ -154,14 +178,15 @@ t<html xmlns:th="http://www.thymeleaf.org">
   
    </script>
    
-   <script>
+   <script th:inline="javascript">
    
    $(document).on('click',".close",function(){
 	   
    })
    
    $(document).on('click',".update",function(){
-	  
+	   
+	   if(event.target.tagName != "BUTTON") return;
 	   $(event.target).children().html("<div>수정할내용:<input type='text' class='updateCn'><button class='update-yes'>수정</button><button class='update-no'>취소</button></div>");
 	   $(document).on('click','.update-no',function(){
 		   $(event.target).closest("div").html("");
@@ -200,16 +225,19 @@ t<html xmlns:th="http://www.thymeleaf.org">
    $(document).on('click','.delete',function(){
 	 	
 	 	var reply_no = $(event.target).closest("li").find(".hidden").val();
-	 	console.log(reply_no);
+	 	var pstTtlNo = /*[[${vo.PstTtlNo}]]*/'';
+	 	
+	 	console.log(pstTtlNo);
 	 	
 	 	if(confirm("삭제하시겠습니까?")){
 	 		
+
 	 		$.ajax({
 		 		type:"post",
 		 		url:"http://localhost:8282/user/replyDelete",
 		 		dataType:"text",
 		 		ContentType:"application/json",
-		 		data:{"reply_no" : reply_no , "pst_ttl_no":[[${vo.PstTtlNo}]]},
+		 		data:{"reply_no" : reply_no , "pst_ttl_no":pstTtlNo},
 		 		success : function(data){
 		 			console.log(data);
 		 			location.reload();
@@ -226,7 +254,7 @@ t<html xmlns:th="http://www.thymeleaf.org">
    
    $(document).on('click',".show",function(){
 	   
-	  var pst_ttl_no = [[${vo.PstTtlNo}]];
+	  var pstTtlNo = /*[[${vo.PstTtlNo}]]*/ '';
 	  var parent_reply_no = parseInt($(event.target).siblings()[1].value);
 	  var li = $(event.target).closest("li");
 	  
@@ -239,7 +267,7 @@ t<html xmlns:th="http://www.thymeleaf.org">
 		   type:"post",
 		   url:"http://localhost:8282/user/getChildList",
 		   ContentType:"application/json",
-		   data:{"pst_ttl_no" : pst_ttl_no , "parent_reply_no" : parent_reply_no},
+		   data:{"pst_ttl_no" : pstTtlNo , "parent_reply_no" : parent_reply_no},
 		   success: function(data){
 			  
 			   li.children().last().empty();
@@ -266,10 +294,11 @@ t<html xmlns:th="http://www.thymeleaf.org">
 	   })
 	   
 	   $(document).on('click',".reg",function(){
-		   
+		  
+		   var pstTtlNo = /*[[${vo.PstTtlNo}]]*/ '';
 		
 		   var params = {
-		    		"pstTtlNo" : [[${vo.PstTtlNo}]],
+		    		"pstTtlNo" : pstTtlNo,
 		    		"replyCn" : $(".cn").val(),
 		    		"parentReplyNo" : $(event.target).closest("li").find(".hidden").val()
 		    }

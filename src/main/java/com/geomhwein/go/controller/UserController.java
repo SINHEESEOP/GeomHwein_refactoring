@@ -66,6 +66,8 @@ import ch.qos.logback.core.status.Status;
 @RequestMapping("/user")
 public class UserController {
 	
+	String cookieValue = "";
+	
 	@Autowired
 	@Qualifier("userService")
 	private UserService userService;
@@ -127,26 +129,29 @@ public class UserController {
 		
 		
 		Cookie[] cookies = request.getCookies();
+		String pstTtlNo = request.getParameter("pst_ttl_no");
 		
-		if(cookies != null) {
-			
-			for(Cookie cookie : cookies) {
-				
-				if(!cookie.getValue().contains(request.getParameter("pst_ttl_no"))) {
-					cookie.setValue(cookie.getValue() + "_" + request.getParameter("pst_ttl_no"));
-					cookie.setMaxAge(3600);
-					response.addCookie(cookie);
-					userService.updateHit(pst_ttl_no);
-				}
-			}
-			
-		}else {
-			Cookie newcookie = new Cookie("visit_cookie" , request.getParameter("pst_ttl_no"));
-			newcookie.setMaxAge(3600);
-			response.addCookie(newcookie);
-			userService.updateHit(pst_ttl_no);
+		if (cookies != null) {
+		    boolean found = false;
+		    for (Cookie cookie : cookies) {
+		        if (cookie.getName().equals("visit_cookie") && cookie.getValue().contains(pstTtlNo)) {
+		        	cookieValue = cookie.getValue();
+		        	found = true;
+		            break;
+		        }
+		    }
+		    if (!found) {
+		        Cookie newCookie = new Cookie("visit_cookie", cookieValue + pstTtlNo);
+		        newCookie.setMaxAge(3600);
+		        response.addCookie(newCookie);
+		        userService.updateHit(pst_ttl_no);
+		    }
+		} else {
+		    Cookie newCookie = new Cookie("visit_cookie", pstTtlNo);
+		    newCookie.setMaxAge(3600);
+		    response.addCookie(newCookie);
+		    userService.updateHit(pst_ttl_no);
 		}
-		
 		
 		ComunityVO vo = userService.getComunityDetail(pst_ttl_no);
 		List<ComunityUploadVO> list = userService.getFile(pst_ttl_no);
