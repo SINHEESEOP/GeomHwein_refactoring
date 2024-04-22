@@ -1,0 +1,91 @@
+@charset "UTF-8";
+
+	.container-fluid {
+      margin-top: 10px;
+    }
+    .container-title {
+      padding: 23px 20px;
+      height: 70px;
+      margin: 8px 10px;
+      border-radius: 10px;
+       background-image: linear-gradient(195deg, #EC407A 0%, #D81B60 100%);
+		box-shadow: 0 4px 20px 0 rgba(0, 0, 0, 0.14), 0 7px 10px -5px rgba(233, 30, 99, 0.4) !important;
+      color: white;
+      font-weight: bold;
+      margin-bottom: 30px;
+    }
+
+    .comunity-table {
+      width: 1576px;
+    }
+
+    .table-title{
+      text-align: center;
+      height: 50px;
+    }
+
+    .table-content {
+      text-align: center;
+      height: 50px;
+    }
+    
+    .table-content td > button {
+    	border:1px solid #ced4da;
+    	font-size:14px;
+    	
+    }
+
+    .search-wrap {
+      margin-bottom: 50px;
+    }
+
+    .search-wrap span {
+      margin-left: 60px;
+      margin-right: 10px;
+    }
+
+    .search-wrap select {
+      width: 100px;
+      }
+
+      .pagenation {
+        width: 300px;
+        margin: 0 auto;
+        text-align: center;
+        margin-top: 100px;
+        display: flex;
+        justify-content: space-around;
+      }
+
+      .pagenation > span {
+        padding: 10px;
+        cursor: pointer;
+      }
+
+      .pagenation .active {
+        color: #D81B60;
+        font-weight: bold;
+      }
+      .search-wrap > select {
+        font-size: 14px;
+        width: 150px;
+        padding: 5px;
+      }
+
+      .search-wrap > select:focus {
+        outline: none;
+      }
+
+      .content-apply {
+        border-radius: 5px;
+        color: black;
+        font-weight: bold;
+        border: 1px solid #DEDEDE;
+      }
+
+      .content-deadline {
+        border: 1px solid #DEDEDE;
+        border-radius: 5px;
+        font-weight: bold;
+        color: #D81B60;
+      }

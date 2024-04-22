@@ -1,0 +1,195 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<style>
+	.container-fluid {
+		position: relative;
+	}
+	
+	.main_btn {
+		border: none;
+		border-radius: 300px;
+		background-color: rgb(255, 255, 255);
+		position: absolute;
+		z-index: 10;
+		opacity: 0.8;
+		font-family: "Roboto", Helvetica, Arial, sans-serif;
+		font-weight: bold;
+	}
+	
+	#prev-button {
+		top: 14.5%;
+	}
+	
+	#next-button {
+		top: 14.5%;
+		left: 95%;
+	}
+	
+	.main_btn2 {
+		border: none;
+		border-radius: 300px;
+		background-color: rgb(255, 255, 255);
+		position: absolute;
+		z-index: 10;
+		opacity: 0.8;
+		font-family: "Roboto", Helvetica, Arial, sans-serif;
+		font-weight: bold;
+	}
+	
+	#prev-button2 {
+		top: 10.8%;
+	}
+	
+	#next-button2 {
+		top: 10.8%;
+		left: 95%;
+	}
+</style>
+
+<th:block th:replace="~{./include/baseLayout :: setContent( ~{ :: .container-fluid} ) }">
+  
+  
+	<div class="container-fluid py-4">
+		
+		<div class="row">
+			<div class="col-12">
+				<div class="card my-4">
+					<div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
+						<div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
+							<h6 class="text-white text-capitalize ps-3 interests">왕초보도 할 수 있어요 💪</h6>
+								<div class="hello"></div>
+						</div>
+					</div>
+					<div class="card-body px-0 pb-2">
+						<div class="table-responsive p-0">
+							
+							
+							<!-- 컨텐츠 1 -->
+							<table class="table align-items-center mb-0">
+								<thead>
+								<tr>
+									<th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">수업</th>
+									<th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">강사 이름</th>
+									<th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">금액
+									</th>
+									<th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">평점(별 마크로
+										변경 예정)
+									</th>
+								</tr>
+								</thead>
+								
+								<tbody class="tbody1">
+								<tr class="data-template" style="display: none">
+									<td>
+										<div class="d-flex px-2 py-1">
+											<div>
+												<!--  강사 사진  -->
+												<img src="../assets/img/team-2.jpg" class="avatar avatar-sm me-3 border-radius-lg" alt="user1">
+											</div>
+											<div class="d-flex flex-column justify-content-center">
+												<h6 class="mb-0 text-sm course-name">contsNm</h6>
+												<p class="text-xs text-secondary mb-0 recommended-age">권장연령 : recAge 세</p>
+											</div>
+										</div>
+									</td>
+									<td>
+										<p class="text-xs font-weight-bold mb-0 instructor-name">userAuthVO.userNm</p>
+										<p class="text-xs text-secondary mb-0 instructor-rating">userAuthVO.userDetailsVO.userRating (아직
+											데이터가 없어서 안뜸)</p>
+									</td>
+									<td class="align-middle text-center text-sm">
+										<span class="badge badge-sm bg-gradient-success price">(데이터 없음)</span>
+									</td>
+									<td class="align-middle text-center">
+										<span class="text-secondary text-xs font-weight-bold rating">5.0 (5점 만점)</span>
+									</td>
+								</tr>
+								</tbody>
+							</table>
+							
+							<div id="pagination">
+								<button id="prev-button" class="main_btn">이전</button>
+								<button id="next-button" class="main_btn">다음</button>
+							</div>
+						
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		
+		<div class="row">
+			<div class="col-12">
+				<div class="card my-4">
+					<div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
+						<div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
+							<h6 class="text-white text-capitalize ps-3">신규 강의</h6>
+						</div>
+					</div>
+					<div class="card-body px-0 pb-2">
+						<div class="table-responsive p-0">
+							
+							
+							<table class="table align-items-center mb-0">
+								
+								
+								<thead>
+								<tr>
+									<th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">수업</th>
+									<th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">강사 이름</th>
+									<th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">금액
+									</th>
+									<th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">평점(별 마크로
+										변경 예정)
+									</th>
+								</tr>
+								</thead>
+								
+								<tbody class="tbody2">
+									<tr class="data-template2" style="display: none">
+										<td>
+											<div class="d-flex px-2 py-1">
+												<div>
+													<img src="../assets/img/team-2.jpg" class="avatar avatar-sm me-3 border-radius-lg" alt="user1">
+												</div>
+												<div class="d-flex flex-column justify-content-center">
+													<h6 class="mb-0 text-sm course-name2"></h6>
+													<p class="text-xs text-secondary mb-0 recommended-age2"></p>
+												</div>
+											</div>
+										</td>
+										<td>
+											<p class="text-xs font-weight-bold mb-0 instructor-name2"></p>
+											<p class="text-xs text-secondary mb-0 instructor-rating2"></p>
+										</td>
+										<td class="align-middle text-center text-sm">
+											<span class="badge badge-sm bg-gradient-success price2"></span>
+										</td>
+										<td class="align-middle text-center">
+											<span class="text-secondary text-xs font-weight-bold rating2"></span>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+							
+							<div id="pagination2">
+								<button id="prev-button2" class="main_btn2">이전</button>
+								<button id="next-button2" class="main_btn2">다음</button>
+							</div>
+						
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div th:if="${role2}" th:text="${role2}" style="display:none;" id="serverMessage2"></div>
+	</div>
+
+</th:block>
+
+<!-- 비동기로 JS 파일 로드 -->
+<script src="/js/mainJS.js" async></script>
+
+</html>

@@ -1,0 +1,267 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTO Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.geomhwein.go.user.service.UserMapper">
+
+	<insert id="comunityForm">
+	insert into COMUNITY(PST_TTL_NM,PST_TTL_CN,INQ_CNT,REPLY_CNT,USERID) VALUES(#{pstTtlNm},#{pstTtlCn},0,0,#{userId})
+	</insert>
+	
+	<select id="getComunityList" resultType="comunityVO">
+	select * 
+	from COMUNITY
+	<if test='searchInput != null'>
+		where pst_ttl_nm like concat('%',#{searchInput},'%') OR userId like concat('%',#{searchInput},'%')
+	</if>
+	<if test="searchFilter == 'new'">
+		ORDER BY pst_ttl_no DESC
+	</if>
+	<if test="searchFilter == 'hit'">
+	ORDER BY INQ_CNT DESC
+	</if>
+	<if test="searchFilter == 'reply'">
+	ORDER BY REPLY_CNT DESC
+	</if>
+	limit #{pageStart},#{amount}
+	</select>
+	
+	<select id="getComunityDetail" resultType="comunityVO">
+	select * from COMUNITY WHERE pst_ttl_no = #{pst_ttl_no}
+	</select>
+		
+	<update id="comunityModifyForm">
+	update COMUNITY set pst_ttl_nm = #{pstTtlNm} , pst_ttl_cn = #{pstTtlCn} where pst_ttl_no = #{pstTtlNo}
+	</update>	
+	
+	<delete id="comunityDelete">
+	delete from COMUNITY where pst_ttl_no = #{pst_ttl_no}
+	</delete>
+	
+	<update id="updateHit">
+		update COMUNITY set INQ_CNT = INQ_CNT + 1 where pst_ttl_no = #{pst_ttl_no}
+	</update>
+	
+	<select id="comunityTotal" resultType="int">
+	select count(*) from COMUNITY
+	<if test='searchInput != null'>
+		where pst_ttl_nm like concat('%',#{searchInput},'%') OR pst_ttl_cn like concat('%',#{searchInput},'%')
+	</if>
+	</select>
+	
+	<insert id="registFile">
+		
+		<selectKey resultType="int" keyProperty="pstTtlNo" order="BEFORE">
+			select max(pst_ttl_no) from COMUNITY where USERID = #{userId}
+		</selectKey>
+		
+	insert into COMUNITY_UPLOAD(
+		file_name,
+		file_path,
+		uuid,
+		pst_ttl_no,
+		USERID
+	)
+	values(
+	#{fileName},
+	#{filePath},
+	#{uuid},
+	#{pstTtlNo},
+	#{userId}
+	)
+	</insert>
+	
+	<select id="getFile" resultType="ComunityUploadVO">
+	select * from COMUNITY_UPLOAD WHERE pst_ttl_no = #{pstTtlNo}
+	</select>
+	
+	<insert id="replyAdd">
+	insert into REPLY(PST_TTL_NO,REPLY_CN,USERID,PARENT_REPLY_NO) values(#{pstTtlNo},#{replyCn},#{userId},#{parentReplyNo})
+	</insert>
+	
+	<select id="getGroupOne" resultType="EducationGroupVO">
+		SELECT * FROM EDUCATION_GROUP where GROUP_NO=#{groupNo}
+	</select>
+	<select id="getGroup" resultType="EducationGroupVO">
+		SELECT * FROM EDUCATION_GROUP
+	</select>
+	
+	
+	<insert id="applyGroup">
+		insert into group_application(GROUP_NO,USER_ID)
+		values(#{groupNo},#{userId})
+	</insert>
+	
+	<insert id="addQuestion">
+	insert into MAKEQUESTION(QSTN_CN,USER_ID,GROUP_NO) values(#{qstnCn},#{userId},#{groupNo})
+	</insert>
+	
+	<select id="getQuestionList" resultType="QuestionVO">
+	
+	select * from MAKEQUESTION WHERE USER_ID = #{userId}
+	</select>
+	
+	<select id="questionDetail" resultType="QuestionVO">
+	select * from MAKEQUESTION WHERE QSTN_NO = #{qstnNo}
+	</select>
+	
+	<update id="questionModifyForm">
+	update MAKEQUESTION SET QSTN_CN = #{qstnCn}
+	</update>
+	
+	<delete id="deleteQuestion">
+	delete FROM MAKEQUESTION WHERE QSTN_NO = #{qstnNo}
+	</delete>
+
+	<update id="updateProfile" parameterType="com.geomhwein.go.command.UserDetailsVO">
+		UPDATE USER_DETAILS
+		SET
+			USER_EML_ADDR = #{userEmlAddr},
+			ADDRESS = #{address},
+			USER_TELNO = #{userTelno}
+		WHERE
+			USER_ID = #{userId};
+	</update>
+
+	<!-- 결과 매핑 정의 -->
+	<resultMap id="UserDetailsResultMap" type="com.geomhwein.go.command.EducationGroupVO">
+		<result property="recAge" column="권장연령"/>
+		<result property="groupUtztnNope" column="그룹이용인원수"/>
+		<result property="contsNm" column="콘텐츠명"/>
+
+		<association property="contentVO" javaType="com.geomhwein.go.command.ContentVO">
+			<result property="contsExpln" column="콘텐츠설명"/>
+			<result property="utztnBgngYmd" column="콘텐츠기간"/>
+			<result property="contsGrd" column="콘텐츠등급"/>
+			<result property="imgNm" column="이미지명"/>
+
+			<association property="userDetailsVO" javaType="com.geomhwein.go.command.UserDetailsVO">
+				<result property="userId" column="사용자식별자"/>
+			</association>
+		</association>
+	</resultMap>
+
+	<!-- 사용자 정보와 관련된 콘텐츠 정보 조회 쿼리 -->
+	<select id="getAllEducationGroup" resultMap="UserDetailsResultMap">
+		SELECT
+			ud.USER_ID AS "사용자식별자",
+			eq.GROUP_UTZTN_NOPE AS "그룹이용인원수",
+			eq.REC_AGE AS "권장연령",
+			eq.CONTS_NM AS "콘텐츠명",
+			c.UTZTN_BGNG_YMD AS "콘텐츠기간",
+			c.CONTS_EXPLN AS "콘텐츠설명",
+			c.CONTS_GRD AS "콘텐츠등급",
+			c.IMG_NM AS "이미지명"
+		FROM
+			EDUCATION_GROUP eq
+				JOIN
+			CONTENT c ON c.CONTS_NM = eq.CONTS_NM
+				JOIN
+			USER_DETAILS ud ON ud.USER_ID = eq.USER_ID
+		WHERE
+			ud.USER_ID = #{userId};
+	</select>
+	
+	<select id="getReplyList" resultType="ReplyVO">
+	select * from REPLY where pst_ttl_no = #{pst_ttl_no} and parent_reply_no = 0;
+	</select>
+	
+	<update id="replyUpdate">
+	update REPLY set reply_cn = #{replyCn} where reply_no = #{replyNo}
+	</update>
+	
+	<delete id="replyDelete">
+		delete from REPLY where reply_no = #{reply_no}
+	</delete>
+	
+	<select id="getChildList" resultType="ReplyVO">
+	
+	select * from REPLY where parent_reply_no = #{parent_reply_no};
+	</select>
+	
+	<update id="replyCount">
+		update COMUNITY SET REPLY_CNT = REPLY_CNT + 1 WHERE pst_ttl_no = #{pstTtlNo};
+	</update>
+	
+	<update id="deleteCount">
+		UPDATE COMUNITY SET REPLY_CNT = REPLY_CNT - 1 WHERE PST_TTL_NO = #{pstTtlNo};
+	</update>
+	
+	<select id="replyFilter" resultType="ReplyVO">
+	
+	select * from REPLY WHERE PARENT_REPLY_NO = #{reply_no}
+	</select>
+	
+	<update id="replyStatus">
+		update REPLY set REPLY_STATUS = FALSE WHERE REPLY_NO = #{REPLY_NO}
+	</update>
+	
+	<delete id="allReplyDelete">
+	delete from REPLY where pst_ttl_no = #{pst_ttl_no}
+	</delete>
+	
+	<delete id="deleteFile">
+	delete FROM COMUNITY_UPLOAD WHERE PST_TTL_NO = #{pst_ttl_no}
+	</delete>
+	
+	<select id="getGroupApplyList" resultType="GroupApplicationVO">
+	SELECT * from group_application G
+	LEFT JOIN  education_group E ON  E.GROUP_NO = G.GROUP_NO
+	WHERE  G.USER_ID = #{userId}
+	 </select>
+
+	<select id="getUserScoreList" resultType="UserDetailsVO">
+		SELECT 
+			rank() over (order by USER_SCR desc) as USER_RATING,
+			USER_ID,
+			USER_SCR,
+			USER_AGE
+		FROM
+			USER_DETAILS
+	</select>
+
+    <insert id="addBasket">
+    	INSERT INTO CART(USER_ID,GROUP_NO)
+    	values(#{userId},#{groupNo})
+    </insert>
+    <insert id="registCreator">
+    	INSERT INTO teacher_evaluations(USER_ID,DOC_ID,DOC_TYPE)
+    	values(#{userId},#{docId},#{docType})
+    </insert>
+
+  
+	<select id="getAnswer" resultType="QuestionVO">
+	select * from MAKEANSWER WHERE QSTN_NO = #{qstnNo}
+	</select>
+	
+	<select id="getHomeworkList" resultType="HomeworkVO">
+	select * from homework where USER_ID = #{userId}
+	</select>
+	
+	<select id="homeworkReg" resultType="HomeworkVO">
+	select * from homework where asmt_no = #{asmtNo}
+	</select>
+	
+	<insert id="submissionForm">
+	insert into HOMEWORK_SUBMISSION(SUB_CN,ASMT_NO,USER_ID) VALUES(#{subCn},#{asmtNo},#{userId})
+	</insert>
+	
+	<select id="getSubmission" resultType="SubmissionVO">
+	select * from HOMEWORK_SUBMISSION where USER_ID = #{userId} AND ASMT_NO = #{asmtNo}
+	</select>
+	
+	
+	<update id="submissionUpdate">
+	
+	<selectKey keyProperty="subNo" resultType="int" order="BEFORE">
+	select sub_no from HOMEWORK_SUBMISSION where USER_ID = #{userId} AND ASMT_NO = #{asmtNo}
+	</selectKey>	
+	
+	update HOMEWORK_SUBMISSION SET SUB_CN = #{subCn} , SUB_YMD = NOW() where sub_no = #{subNo}
+	
+	</update>
+    
+    <delete id="applyCancle">
+    	
+    	delete from group_application where APLY_NO = #{aplyNO}
+    </delete>
+</mapper>

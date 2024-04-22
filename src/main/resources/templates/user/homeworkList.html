@@ -1,0 +1,50 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<link rel="stylesheet" href="/css/comunityList.css">
+<th:block th:replace="~{./include/baseLayout :: setContent( ~{ :: .wrap} ) }">
+	
+	<div class="wrap">
+	<div class="container-fluid py-4">
+	  <div class="container-title">숙제제출내역</div>
+        <table class="comunity-table">
+        <tr class="table-title">
+          <th>번호</th>
+          <th>제출내용</th>
+          <th>제출날짜</th>
+          <th>점수</th>
+          <th>옵션</th>
+        </tr>
+        <tr class="table-content">
+          <td>1</td>
+          <td>축이란 바둑의 수를 계속 두어도 결국 잡히게 되는 상황</td>
+          <td>2024-04-01</td>
+          <td>평가전</td>
+          <td>
+          <button type="button" class="updateBtn">수정하기</button>
+          <button type="button" class="deleteBtn">삭제하기</button>
+          </td>
+        </tr>
+        <tr class="table-content">
+         <td>2</td>
+          <td>축이란 바둑의 수를 계속 두어도 결국 잡히게 되는 상황</td>
+          <td>2024-04-01</td>
+          <td>우수</td>
+           <td>
+          <button type="button">수정하기</button>
+          <button type="button">삭제하기</button>
+          </td>
+        </tr>
+      </table>
+      <div class="pagenation">
+        <span>prev</span>
+        <span class="active">1</span>
+        <span>2</span>
+        <span>3</span>
+        <span>next</span>
+      </div>
+	</div>
+    </div>
+  
+
+  
+</th:block>
+</html>

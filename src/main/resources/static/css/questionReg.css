@@ -1,0 +1,87 @@
+@charset "UTF-8";
+
+.container-fluid {
+      margin-top: 10px;
+    }
+    .container-title {
+      padding: 23px 20px;
+      height: 70px;
+      margin: 8px 10px;
+      border-radius: 10px;
+       background-image: linear-gradient(195deg, #EC407A 0%, #D81B60 100%);
+		box-shadow: 0 4px 20px 0 rgba(0, 0, 0, 0.14), 0 7px 10px -5px rgba(233, 30, 99, 0.4) !important;
+      color: white;
+      font-weight: bold;
+      margin-bottom: 30px;
+    }
+
+    .reg-wrap {
+      padding: 30px;
+    }
+
+    .reg-title > p {
+      margin-bottom: 5px;
+      color: #6b7280;
+      font-weight: bold;
+    }
+
+    .reg-title > input {
+      width: 40%;
+      height: 40px;
+      border-radius: 5px;
+      border: 1px solid #6b7280;
+      margin-bottom: 10px;
+    }
+    .reg-title > input:focus {
+      outline: none;
+    }
+
+    .reg-content > p {
+      margin-bottom: 5px;
+      color: #6b7280;
+      font-weight: bold;
+    }
+
+    .reg-content > textarea {
+      width: 40%;
+      height: 300px;
+    }
+
+    .reg-content > textarea:focus {
+      outline: none;
+    }
+    
+    .reg-upload > p {
+      margin-bottom: 5px;
+      color: #6b7280;
+      font-weight: bold;
+    }
+
+    .reg-upload > input {
+      margin-bottom: 10px;
+      
+    }
+    .reg-upload > input::file-selector-button {
+      font-size: 15px;
+      margin-right: 5px;
+      border-radius: 5px;
+      border: 1px solid #6b7280;
+    }
+
+    .reg-button {
+      width: 40%;
+      margin-top: 100px;
+      text-align: end;
+    }
+
+    .reg-button > button {
+      border: 1px solid #6b7280;
+      border-radius: 5px;
+      font-size: 15px;
+    }
+
+    .reg-button > input {
+      border-radius: 5px;
+      border: 1px solid #6b7280;
+      font-size: 15px;
+    }

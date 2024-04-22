@@ -1,0 +1,128 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<link rel="stylesheet" href="/css/comunityList.css">
+
+<th:block th:replace="~{./include/baseLayout :: setContent( ~{ :: .wrap} ) }">
+	
+	<div class="wrap">
+	<div class="container-fluid py-4">
+      <div class="container-title">커뮤니티</div>
+      <div class="search-wrap">
+        <ul class="search-filter">
+          <li class="" th:onclick="|location.href='@{comunityList(pageNum=1,amount=${pageVO.amount},searchFilter=new)}'|">
+          <th:block th:if="${pageVO.cri.searchFilter} == new">
+          <span class="active">최신순</span>
+          </th:block>
+          <th:block th:if="${pageVO.cri.searchFilter} != new">
+          <span>최신순</span>
+          </th:block>
+          </li>
+          <li class="" th:onclick="|location.href='@{comunityList(pageNum=1,amount=${pageVO.amount},searchFilter=hit)}'|">
+          <th:block th:if="${pageVO.cri.searchFilter} == hit">
+          <span class="active">조회순</span>
+          </th:block>
+          <th:block th:if="${pageVO.cri.searchFilter} != hit">
+          <span>조회순</span>
+          </th:block></li>
+          <li class="" th:onclick="|location.href='@{comunityList(pageNum=1,amount=${pageVO.amount},searchFilter=reply)}'|">
+          <th:block th:if="${pageVO.cri.searchFilter} == reply">
+          <span class="active">댓글순</span>
+          </th:block>
+          <th:block th:if="${pageVO.cri.searchFilter} != reply">
+          <span>댓글순</span>
+          </th:block>
+          </li>
+        </ul>
+        <div class="search-box">
+          <input type="text" value="" class="searchInput"></input><button id="searchBtn">검색</button>
+        </div>
+      </div>
+      <table class="comunity-table">
+        <tr class="table-title">
+          <th>No</th>
+          <th>글제목</th>
+          <th>작성자</th>
+          <th>작성일</th>
+          <th>조회수</th>
+          <th>댓글수</th>
+        </tr>
+        <th:block th:each="vo,status : ${list}">
+        <tr class="table-content">
+          <td>[[${status.count}]]</td>
+          <td><a th:href="@{comunityDetail(pst_ttl_no = ${vo.pstTtlNo})}">[[${vo.PstTtlNm}]]</a></td>
+          <td>[[${vo.userId}]]</td>
+         	<td th:text="${#strings.substring(vo.PstRegdate,0,10)}"></td>
+          <td>[[${vo.InqCnt}]]</td>
+          <td>[[${vo.ReplyCnt}]]</td>
+        </tr>
+        </th:block>
+      </table>
+      <div class="reg">
+        <button type="button" th:onclick="|location.href='@{comunityReg}'|">등록하기</button>
+      </div>
+      <div class="pagenation">
+      	<th:block th:if="${pageVO.prev} == true">
+      	  <span><a th:href="@{comunityList(pageNum=${pageVO.startPage -1},amount=${pageVO.amount})}">prev</a></span>
+      	</th:block>
+        <th:block th:each="page : ${pageVO.pageList}">
+        <span class="hi" th:onclick="|location.href='@{comunityList(pageNum=${page},amount=${pageVO.amount})}'|">[[${page}]]</span>
+        </th:block>
+        <span th:if="${pageVO.next} == true"><a th:href="@{comunityList(pageNum=${pageVO.endPage -1},amount=${pageVO.amount})}">next</a></span>
+      </div>
+    </div>
+	</div>
+</th:block>
+
+	<script th:inline="javascript">
+	
+	var msg = '[[${msg}]]';
+	msg = JSON.parse(msg);
+	
+	if(msg != null){
+		alert(msg);
+	}
+	
+	var result = '[[${result}]]';
+	result = JSON.parse(result);
+	if(result != null){
+	alert(result);
+	}
+	</script>
+	
+	<script th:inline="javascript">
+	
+	
+	$(".search-filter").click(function(){
+		
+		$(".search-filter span").removeClass("active");
+		
+		$(event.target).toggleClass("active");
+		
+	})
+	
+	
+	$("#searchBtn").click(function(){ 
+		
+		var amount = '[[${pageVO.amount}]]';
+		var search = $(".searchInput").val();
+		var pageNum = 1;
+		location.href="comunityList?pageNum="+pageNum+"&amount="+amount+"&searchInput="+search;
+	});
+	
+	
+	$(document).ready(function(){
+		
+	const groupId = '1'; // 그룹 ID 설정
+	
+	const eventSource = new EventSource("http://localhost:8282/notification/1/subscribe");
+
+	eventSource.onmessage = (event) => {
+	  const message = event.data;
+	  console.log(message);
+	  
+		};
+	})
+	
+
+	</script>
+	
+</html>

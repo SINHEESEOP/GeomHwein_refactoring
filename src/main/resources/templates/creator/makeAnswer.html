@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>답변등록하기</title>
+  <link href="/css/bootstrap.min.css" rel="stylesheet">
+  <script src="/js/jquery-3.7.1.min.js"></script>
+
+  <!-- Template Stylesheet -->
+  <link href="/css/style.css" rel="stylesheet">
+  <link href="/css/eduGroup.css" rel="stylesheet">
+</head>
+<body>
+   <pre hidden="hidden">
+      팝업처리
+      810px * 810px
+   </pre>
+   <!-- Appointment Start -->
+   <div class="container-xxl py-5">
+    <div class="container">
+        <div class="bg-light rounded">
+            <div class="row g-0">
+                <div class="col-lg-6 wow fadeIn" data-wow-delay="0.1s">
+                    <div class="h-100 d-flex flex-column justify-content-center p-5">
+                        <h1 class="mb-4">답변등록</h1>
+                        <form action="registAnswerForm" method="post" name="registAnswerForm">
+                            <div class="row g-3">
+                                <div class="col-sm-6">
+                                    <div class="form-floating">
+                                        <input type="text" class="form-control border-0" placeholder="" readonly="readonly" name="userId" th:value="${qvo.userId}">
+                                        <label for="gname">학습자 아이디</label>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-floating">
+                                        <input type="email" class="form-control border-0" placeholder="" readonly="readonly" name="qstnNo" th:value="${qvo.qstnNo}">
+                                        <label for="gmail">질문번호</label>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-floating">
+                                        <input type="text" class="form-control border-0" placeholder="" th:value="${creatorId}">
+                                        <label for="cname">교육자 아이디</label>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-floating">
+                                        <input type="date" class="form-control border-0" placeholder="" name="ansYmd">
+                                        <label for="cname">답변 일자</label>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="form-floating">
+                                        <textarea class="form-control border-0" placeholder="300자내" style="height: 300px" name="ansCn"></textarea>
+                                        <label for="message">답변 내용</label>
+                                    </div>
+                                </div>
+
+                                <div class="col-12">
+                                    <button class="btn btn-primary w-100 py-3 sbmBtn" type="button">Submit</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    Designed By <a class="border-bottom" href="https://htmlcodex.com">HTML Codex</a>
+</div>
+<!-- Appointment End -->
+</body>
+<script>
+    $(".sbmBtn").click(function(){
+        document.registAnswerForm.submit();
+    });
+</script>
+</html>

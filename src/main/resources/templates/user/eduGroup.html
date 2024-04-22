@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Customized Bootstrap Stylesheet -->
+  <link href="/css/bootstrap.min.css" rel="stylesheet">
+  <script src="/js/jquery-3.7.1.min.js"></script>
+
+  <!-- Template Stylesheet -->
+  <link href="/css/style.css" rel="stylesheet">
+  <link href="/css/eduGroup.css" rel="stylesheet">
+  <title>교육 그룹 선택하기</title>
+</head>
+<body>
+  <script>
+    window.resizeTo(1300,900);
+  </script>
+  <div class="container-xxl py-5">
+    <div class="container">
+        <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 600px;">
+            <h1 class="mb-3">교육 그룹 선택</h1>
+            <p>당신의 실력에 맞는 그룹을 선택하세요</p>
+        </div>
+        <div class="row g-4">
+            <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s" id="gN1">
+                <div class="classes-item">
+                    <div class="bg-light rounded-circle w-75 mx-auto p-3">
+                        <img class="img-fluid rounded-circle groupChoose" src="/img/eduGroup/classes-1.jpg" alt="1">
+                    </div>
+                    <div class="bg-light rounded p-4 pt-5 mt-n5">
+                        <a class="d-block text-center h3 mt-3 mb-4 groupName" href="">기초반</a>
+                        <div class="d-flex align-items-center justify-content-between mb-4">
+                            <div class="d-flex align-items-center">
+                                <img class="rounded-circle flex-shrink-0" src="/img/eduGroupCreator/user-1.jpg" alt="1" style="width: 45px; height: 45px;">
+                                <div class="ms-3">
+                                    <h6 class="text-primary mb-1 groupCreatorName">알파고</h6>
+                                    <small>AI</small>
+                                </div>
+                            </div>
+                            <span class="bg-primary text-white rounded-pill py-2 px-3 groupCost" href="">무료</span>
+                        </div>
+                        <div class="row g-1">
+                            <div class="col-4">
+                                <div class="border-top border-3 border-primary pt-2">
+                                    <h6 class="text-primary mb-1">권장연령:</h6>
+                                    <small class="groupRecAge">8+ 세</small>
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <div class="border-top border-3 border-success pt-2">
+                                    <h6 class="text-success mb-1">수업종료일</h6>
+                                    <small class="groupEndDate">2024-06-07</small>
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <div class="border-top border-3 border-warning pt-2">
+                                    <h6 class="text-warning mb-1">정원:</h6>
+                                    <small class="groupCap">80명</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.3s" id="gN2">
+                <div class="classes-item">
+                    <div class="bg-light rounded-circle w-75 mx-auto p-3">
+                        <img class="img-fluid rounded-circle groupChoose" src="/img/eduGroup/classes-2.jpg" alt="2">
+                    </div>
+                    <div class="bg-light rounded p-4 pt-5 mt-n5">
+                        <a class="d-block text-center h3 mt-3 mb-4 groupName" href="">입문반</a>
+                        <div class="d-flex align-items-center justify-content-between mb-4">
+                            <div class="d-flex align-items-center">
+                                <img class="rounded-circle flex-shrink-0" src="/img/eduGroupCreator/user-2.jpg" alt="2" style="width: 45px; height: 45px;">
+                                <div class="ms-3">
+                                    <h6 class="text-primary mb-1 groupCreatorName">김길동</h6>
+                                    <small>선생님</small>
+                                </div>
+                            </div>
+                            <span class="bg-primary text-white rounded-pill py-2 px-3 groupCost" href="">33900원/월</span>
+                        </div>
+                        <div class="row g-1">
+                            <div class="col-4">
+                                <div class="border-top border-3 border-primary pt-2">
+                                    <h6 class="text-primary mb-1">권장연령:</h6>
+                                    <small class="groupRecAge">8+ 세</small>
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <div class="border-top border-3 border-success pt-2">
+                                    <h6 class="text-success mb-1">수업종료일</h6>
+                                    <small class="groupEndDate">2024-06-06</small>
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <div class="border-top border-3 border-warning pt-2">
+                                    <h6 class="text-warning mb-1">정원:</h6>
+                                    <small class="groupCap">35명</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.5s" id="gN3">
+                <div class="classes-item">
+                    <div class="bg-light rounded-circle w-75 mx-auto p-3">
+                        <img class="img-fluid rounded-circle groupChoose" src="/img/eduGroup/classes-3.jpg" alt="3">
+                    </div>
+                    <div class="bg-light rounded p-4 pt-5 mt-n5">
+                        <a class="d-block text-center h3 mt-3 mb-4 groupName" href="">초급반</a>
+                        <div class="d-flex align-items-center justify-content-between mb-4">
+                            <div class="d-flex align-items-center">
+                                <img class="rounded-circle flex-shrink-0" src="/img/eduGroupCreator/user-3.jpg" alt="3" style="width: 45px; height: 45px;">
+                                <div class="ms-3">
+                                    <h6 class="text-primary mb-1 groupCreatorName">심짐해</h6>
+                                    <small>선생님</small>
+                                </div>
+                            </div>
+                            <span class="bg-primary text-white rounded-pill py-2 px-3 groupCost" href="">47900원/월</span>
+                        </div>
+                        <div class="row g-1">
+                            <div class="col-4">
+                                <div class="border-top border-3 border-primary pt-2">
+                                    <h6 class="text-primary mb-1">권장연령:</h6>
+                                    <small class="groupRecAge">8+ 세</small>
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <div class="border-top border-3 border-success pt-2">
+                                    <h6 class="text-success mb-1">수업종료일</h6>
+                                    <small class="groupEndDate">2024-06-08</small>
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <div class="border-top border-3 border-warning pt-2">
+                                    <h6 class="text-warning mb-1">정원:</h6>
+                                    <small class="groupCap">35명</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s" id="gN4">
+                <div class="classes-item">
+                    <div class="bg-light rounded-circle w-75 mx-auto p-3">
+                        <img class="img-fluid rounded-circle groupChoose" src="/img/eduGroup/classes-4.jpg" alt="4">
+                    </div>
+                    <div class="bg-light rounded p-4 pt-5 mt-n5">
+                        <a class="d-block text-center h3 mt-3 mb-4 groupName" href="">중급반</a>
+                        <div class="d-flex align-items-center justify-content-between mb-4">
+                            <div class="d-flex align-items-center">
+                                <img class="rounded-circle flex-shrink-0" src="/img/eduGroupCreator/user-4.jpg" alt="4" style="width: 45px; height: 45px;">
+                                <div class="ms-3">
+                                    <h6 class="text-primary mb-1 groupCreatorName">아놀드</h6>
+                                    <small>선생님</small>
+                                </div>
+                            </div>
+                            <span class="bg-primary text-white rounded-pill py-2 px-3 groupCost" href="">53900원/월</span>
+                        </div>
+                        <div class="row g-1">
+                            <div class="col-4">
+                                <div class="border-top border-3 border-primary pt-2">
+                                    <h6 class="text-primary mb-1">권장연령:</h6>
+                                    <small class="groupRecAge">8+ 세</small>
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <div class="border-top border-3 border-success pt-2">
+                                    <h6 class="text-success mb-1">수업종료일</h6>
+                                    <small class="groupEndDate">2024-08-05</small>
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <div class="border-top border-3 border-warning pt-2">
+                                    <h6 class="text-warning mb-1">정원:</h6>
+                                    <small class="groupCap">50명</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.3s" id="gN5">
+                <div class="classes-item">
+                    <div class="bg-light rounded-circle w-75 mx-auto p-3">
+                        <img class="img-fluid rounded-circle groupChoose" src="/img/eduGroup/classes-5.jpg" alt="5">
+                    </div>
+                    <div class="bg-light rounded p-4 pt-5 mt-n5">
+                        <a class="d-block text-center h3 mt-3 mb-4 groupName" href="">사활반</a>
+                        <div class="d-flex align-items-center justify-content-between mb-4">
+                            <div class="d-flex align-items-center">
+                                <img class="rounded-circle flex-shrink-0" src="/img/eduGroupCreator/user-5.jpg" alt="5" style="width: 45px; height: 45px;">
+                                <div class="ms-3">
+                                    <h6 class="text-primary mb-1 groupCreatorNames">김가나</h6>
+                                    <small>선생님</small>
+                                </div>
+                            </div>
+                            <span class="bg-primary text-white rounded-pill py-2 px-3 groupCost" href="">61900원/월</span>
+                        </div>
+                        <div class="row g-1">
+                            <div class="col-4">
+                                <div class="border-top border-3 border-primary pt-2">
+                                    <h6 class="text-primary mb-1">권장연령:</h6>
+                                    <small class="groupRecAge">10+ 세</small>
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <div class="border-top border-3 border-success pt-2">
+                                    <h6 class="text-success mb-1">수업종료일</h6>
+                                    <small class="groupEndDate">2024-07-07</small>
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <div class="border-top border-3 border-warning pt-2">
+                                    <h6 class="text-warning mb-1">정원:</h6>
+                                    <small class="groupCap">40명</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.5s" id="gN6">
+                <div class="classes-item">
+                    <div class="bg-light rounded-circle w-75 mx-auto p-3">
+                        <img class="img-fluid rounded-circle groupChoose" src="/img/eduGroup/classes-6.jpg" alt="6">
+                    </div>
+                    <div class="bg-light rounded p-4 pt-5 mt-n5">
+                        <a class="d-block text-center h3 mt-3 mb-4 groupName" href="">실전반</a>
+                        <div class="d-flex align-items-center justify-content-between mb-4">
+                            <div class="d-flex align-items-center">
+                                <img class="rounded-circle flex-shrink-0" src="/img/eduGroupCreator/user-6.jpg" alt="6" style="width: 45px; height: 45px;">
+                                <div class="ms-3">
+                                    <h6 class="text-primary mb-1 groupCreatorName">김프로</h6>
+                                    <small>선생님</small>
+                                </div>
+                            </div>
+                            <span class="bg-primary text-white rounded-pill py-2 px-3 groupCost" href="">93900원/월</span>
+                        </div>
+                        <div class="row g-1">
+                            <div class="col-4">
+                                <div class="border-top border-3 border-primary pt-2">
+                                    <h6 class="text-primary mb-1">권장연령:</h6>
+                                    <small class="groupRecAge">11+ 세</small>
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <div class="border-top border-3 border-success pt-2">
+                                    <h6 class="text-success mb-1">수업종료일</h6>
+                                    <small class="groupEndDate">2024-09-10</small>
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <div class="border-top border-3 border-warning pt-2">
+                                    <h6 class="text-warning mb-1">정원:</h6>
+                                    <small class="groupCap">15명</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <pre hidden="hidden" th:value="${userName}" class="userName"></pre>
+    Designed By <a class="border-bottom" href="https://htmlcodex.com">HTML Codex</a>
+</div>
+<!-- Classes End -->
+<script>
+	$(".groupChoose").click(function(e){
+		e.stopPropagation();
+		var username=$(".userName").val();
+        var groupNo=e.target.alt;
+        console.log(groupNo);
+        location.href="groupSelectForm?groupNo="+groupNo+"&userName="+username;
+        
+
+	});
+</script>
+
+</body>
+</html>

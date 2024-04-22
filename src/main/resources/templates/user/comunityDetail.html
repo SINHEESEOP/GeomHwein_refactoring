@@ -1,0 +1,333 @@
+t<html xmlns:th="http://www.thymeleaf.org">
+<link rel="stylesheet" href="/css/comunityDetail.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+<th:block th:replace="~{./include/baseLayout :: setContent( ~{ :: .wrap} ) }">
+
+<div class="wrap">
+	 <div class="container-fluid py-4">
+      <div class="container-title">커뮤니티</div>
+      <div class="content-wrap">
+        <div class="content-title">자유로운 글</div>
+        <div class="title-box">
+          <span>
+            <span class="content-writer">작성자:&nbsp;</span>
+            [[${vo.userId}]]
+          </span>
+          <span>
+            <span class="content-regdate">작성일:</span>
+          	[[${vo.PstRegdate}]]
+          </span>
+          <span>
+            <span class="content-hit">조회수:</span>
+            [[${vo.InqCnt}]]
+          </span>
+          <span>
+            <span class="content-reply">댓글수:</span>
+            [[${vo.ReplyCnt}]]
+          </span>
+        </div>
+        <div class="content-box">
+          <textarea name="" id="textarea" cols="30" rows="10" readonly>[[${vo.PstTtlCn}]]</textarea>
+        </div>
+      </div>
+      <div class="uploadFile-box">
+      	<h4>업로드 한 파일<span class="material-symbols-outlined">
+		download
+		</span>	</h4>
+      	<div class="uploadFile">
+      	<th:block th:each="uploadvo : ${list} ">
+      	<span th:onclick="|location.href='@{attachment(filepath=${uploadvo.FilePath},uuid=${uploadvo.Uuid},filename=${uploadvo.FileName})}'|" class="filename">
+      	[[${uploadvo.FileName}]]</span>
+      	</th:block>
+      	</div>
+      </div>
+      <div class="reply-wrap"> 
+        <span>댓글</span>
+          <div class="reply-box">
+            <input type="text" class="reply-content">
+          </div>
+          <button type="button" class="reply-reg">등록</button>
+          <div class="reply">
+            <ul class="replyList">
+            </ul>
+           </div>
+      </div>
+    </div>
+    <div class="button-wrap">
+      <th:block th:if="${vo.userId} == ${#authentication.getPrincipal().getUserId}">
+      <button type="button" id="changeBtn" th:onclick="|location.href='@{comunityModify(pst_ttl_no=${vo.PstTtlNo})}'|">수정하기</button>
+      <button type="button" id="deleteBtn" th:onclick="|location.href='@{comunityDelete(pst_ttl_no=${vo.PstTtlNo})}'|">삭제하기</button>
+      </th:block>
+      <button type="button" id="backBtn" th:onclick="|location.href='@{comunityList}'|">목륵으로</button>
+    </div>
+    </div>
+</th:block>
+
+ <script>
+      
+      const DEFAULT_HEIGHT = 300; // textarea 기본 height
+
+      const $textarea = document.querySelector('#textarea');
+
+      $textarea.oninput = (event) => {
+      const $target = event.target;
+
+      $target.style.height = 0;
+
+      $target.style.height = DEFAULT_HEIGHT + $target.scrollHeight + 'px';
+
+    };
+    
+    </script>
+    
+    <script th:inline="javascript">
+   
+    var replyCn = document.querySelector(".reply-content");
+   
+    
+    $(".reply-reg").click(function(){
+    
+    var PstTtlNo = /*[[${vo.PstTtlNo}]]*/'';	
+    	
+    var params = {
+    		"pstTtlNo" : PstTtlNo,
+    		"replyCn" : replyCn.value,
+    		"parentReplyNo" : 0
+    }
+    
+    	$.ajax({
+    		url:"http://localhost:8282/user/replyAdd",
+    		type:"post",
+    		contentType:"application/json; charset=utf-8",
+    		dataType:"text",
+    		async : false,
+    		data:JSON.stringify(params),
+    		success : function(response){
+    			
+    			console.log(response);
+    			location.reload();
+    		},
+    		error : function(request,status,error){
+    			console.log(error);
+    		}
+    	})
+    	
+    	replyCn.value = "";
+
+   	 })
+   	 
+
+    </script>
+    
+   <script th:inline="javascript">
+  
+   $(document).ready(function(){
+	   
+	   var pstTtlNo = /*[[${vo.PstTtlNo}]]*/ '';
+	   
+	   $.ajax({
+		   url:"/user/getReplyList?pst_ttl_no="+pstTtlNo,
+		   type:"get",
+		   dataType:"json",
+		   async : false,
+		   success : function(data) {
+			   
+			   console.log(data);
+			   
+			   if(!data.length) {
+				   $(".replyList").append("등록된 댓글이 없습니다");
+				   return false;
+			   }
+			   
+			   $.each(data, function(index,item) { // 데이터 =item
+					
+				   var loggedInUser = /*[[${#authentication.getPrincipal().getUserId()}]]*/ '';
+				   
+				   if(item.replyStatus){
+						var buttonHTML = "";
+						if (item.userId === loggedInUser) {
+						    buttonHTML += "<button type='button' class='update'>수정<div></div></button>";
+						    buttonHTML += "<button type='button' class='delete'>삭제</button>";
+						}
+
+						$(".replyList").append(
+						    "<li>" +
+						        "<span class='reply-writer'>" + item.userId + "</span>" +
+						        "<input type='hidden' class='hidden' value='" + item.replyNo + "'>" +
+						        "<span class='reply-date'>" + item.replyReg + "</span>" +
+						        "<p>" + item.replyCn + "</p>" +
+						        "<button type='button' class='show'>답글보기</button>" +
+						        buttonHTML +
+						        "<ul></ul>" +
+						    "</li>"
+						);
+					}else{
+					$(".replyList").append("<li><span class='reply-writer'>"+item.userId+"</span><input type='hidden' class='hidden' value=" + item.replyNo + "><span class='reply-date'>"+item.replyReg+"</span><p>삭제된댓글입니다</p><button type='button' class='show'>답글보기</button><ul></ul></li></th:block>");
+					}
+				});
+			   
+			   
+		   },
+		   error : function(err,status){
+			   console.log(err);
+			   console.log(status);
+		   }
+	   })
+   })
+   
+  
+   </script>
+   
+   <script th:inline="javascript">
+   
+   $(document).on('click',".close",function(){
+	   
+   })
+   
+   $(document).on('click',".update",function(){
+	   
+	   if(event.target.tagName != "BUTTON") return;
+	   $(event.target).children().html("<div>수정할내용:<input type='text' class='updateCn'><button class='update-yes'>수정</button><button class='update-no'>취소</button></div>");
+	   $(document).on('click','.update-no',function(){
+		   $(event.target).closest("div").html("");
+	   })
+	   
+	   $(document).on('click','.update-yes',function(){
+	   	 
+		   var reply_no = parseInt($(event.target).closest("li").children()[1].value);
+	   
+		   var updateCn = $(".updateCn").val();
+		   
+
+		   
+				 $.ajax({
+				   		url:"http://localhost:8282/user/replyUpdate",
+				   		type:"post",
+				   		dataType:"text",
+				   		contentType:"application/json; charset=utf-8",
+				   		data:JSON.stringify({'replyNo':reply_no,'replyCn':updateCn}),
+				   		success : function(data) {
+				   			
+				   			console.log(data);
+				   			location.reload();
+				   		},
+				   		error: function(err,status) {
+				   			console.log(err,status)
+				   		}
+				   	 });
+		   	
+	   	
+   });
+   
+   });
+   
+   
+   $(document).on('click','.delete',function(){
+	 	
+	 	var reply_no = $(event.target).closest("li").find(".hidden").val();
+	 	var pstTtlNo = /*[[${vo.PstTtlNo}]]*/'';
+	 	
+	 	console.log(pstTtlNo);
+	 	
+	 	if(confirm("삭제하시겠습니까?")){
+	 		
+
+	 		$.ajax({
+		 		type:"post",
+		 		url:"http://localhost:8282/user/replyDelete",
+		 		dataType:"text",
+		 		ContentType:"application/json",
+		 		data:{"reply_no" : reply_no , "pst_ttl_no":pstTtlNo},
+		 		success : function(data){
+		 			console.log(data);
+		 			location.reload();
+		 		},
+		 		error: function(err,status){
+		 			console.log(err);
+		 			console.log(status);
+		 		}
+		 	});
+	 	}
+	 	
+	 	
+   	});
+   
+   $(document).on('click',".show",function(){
+	   
+	  var pstTtlNo = /*[[${vo.PstTtlNo}]]*/ '';
+	  var parent_reply_no = parseInt($(event.target).siblings()[1].value);
+	  var li = $(event.target).closest("li");
+	  
+	  
+	  li.children().last().remove("div");
+	  var p = $(event.target).prev().text();
+	 	
+	  
+	   $.ajax({
+		   type:"post",
+		   url:"http://localhost:8282/user/getChildList",
+		   ContentType:"application/json",
+		   data:{"pst_ttl_no" : pstTtlNo , "parent_reply_no" : parent_reply_no},
+		   success: function(data){
+			  
+			   li.children().last().empty();
+			   console.log(data);
+			   
+			   $.each(data, function(index,item) { 
+				   $(li).children().last().append("<li><span>"+item.userId+"</span><input type='hidden' class='hidden' value=" + item.replyNo + "><span class='reply-date'>"+item.replyReg+"</span><p>"+item.replyCn+"</p><button type='button' class='show'>답글보기</button><button type='button' class='update'>수정<div></div></button><button type='button' class='delete'>삭제</button><ul></ul></li>");
+			   });
+					if(p != '삭제된댓글입니다'){
+		   			li.append("<div>답글달기:<input type='text' class='cn'><button type='button' class='reg'>등록</button><button type='button' class='close'>취소</button></div>")
+					}
+						   
+		   },
+		   error:function(err,status){
+			   console.log(err);
+			   console.log(status);
+			   
+		   }
+	   })
+	   
+	   $(document).on('click',".close",function(){
+		  $(event.target).closest("div").prev().empty();
+		  $(event.target).closest("div").remove();
+	   })
+	   
+	   $(document).on('click',".reg",function(){
+		  
+		   var pstTtlNo = /*[[${vo.PstTtlNo}]]*/ '';
+		
+		   var params = {
+		    		"pstTtlNo" : pstTtlNo,
+		    		"replyCn" : $(".cn").val(),
+		    		"parentReplyNo" : $(event.target).closest("li").find(".hidden").val()
+		    }
+		   
+		   console.log(params);
+
+	    	$.ajax({
+	    		url:"http://localhost:8282/user/replyAdd",
+	    		type:"post",
+	    		contentType:"application/json; charset=utf-8",
+	    		dataType:"text",
+	    		async : false,
+	    		data:JSON.stringify(params),
+	    		success : function(response){
+	    			console.log(response);
+	    			location.reload();
+	    		},
+	    		error : function(request,status,error){
+	    			console.log(error);
+	    		}
+	    	})
+	    	
+	    	$(".cn").val() = "";
+	   })
+	   
+	 
+   })
+  	
+	 
+   </script>
+  
+</html>

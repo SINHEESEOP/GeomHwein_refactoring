@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <link rel="stylesheet" href="/css/mttrDetail.css">
+</head>
+
+    <div th:replace="~{./include/baseLayout :: setContent ( ~{ :: .wrap})}">
+          
+        <div class="wrap">
+            <div class="container-fluid py-4">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card my-4">
+                        </div>
+     
+    </div>
+                        <form name="updateForm" action="updateForm" method="POST">
+                            <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
+                                <h6 class="text-white text-capitalize ps-3">공지사항</h6>
+                                
+                                <input type="hidden" name="mttrSn" th:value="${vo.mttrSn}">
+                           
+                            </div>
+                            </form>
+                        </div>
+                        <div>
+                            <br>
+                            <h3 th:text="${vo.mttrTtl}"></h3>
+                        </div>
+                        <div>
+                            등록일 : <span th:text="${vo.bgngTm}"></span>
+                        </div>
+                        <br>
+                        <br>
+                        <div class="mttrCnInput">
+                            <input name="mttrCn" readonly="readonly" th:value="${vo.mttrCn}">
+                        </div> 
+                        
+        <div class="detailBtn">
+      		<!-- 시큐리티 admin -->
+        	<!-- 시큐리티 user -->
+        	<button type="button" th:onclick="|location.href='@{mttrList}'|">목록</button>
+      		<!-- 시큐리티 admin -->
+      		
+      		<th:block sec:authorize="hasRole('ROLE_ADMIN')">
+        	<button type="button" id="deleteMttr">삭제</button>
+      		</th:block>
+      	</div>
+      	
+                    </div>
+                </div>
+            </div>
+        
+
+	<script>
+	
+	
+	
+	
+	var deleteBtn = document.getElementById("deleteMttr");
+	
+	deleteBtn.addEventListener('click',function(){
+		
+		event.preventDefault();
+		
+		if(confirm("삭제후에는 데이터를 복구 할 수 없습니다.") == false){
+			return;
+		}
+		
+		document.updateForm.action= "deleteForm";
+		document.updateForm.submit();
+		
+		
+	});
+	
+	
+
+</script>
+
+</html>

@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTO Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.geomhwein.go.creator.service.CreatorMapper">
+	<select id="getApplyCount" resultType="int">
+		select count(*) from group_application
+	</select>
+	<select id="getApply" resultType="com.geomhwein.go.command.EducationGroupVO">
+		SELECT APLY_NO,
+			   education_group.GROUP_NO,
+			   GROUP_UTZTN_NOPE,
+			   conts_NM,LAST_CMCRS_YMD,
+			   group_application.USER_ID,
+			   REC_AGE 
+			   FROM education_group 
+			   right join 
+			   group_application 
+			   on group_application.GROUP_NO=education_group.GROUP_NO
+			   where APLY_STATUS='N'
+	</select>
+	<insert id="makeHomework">
+		INSERT INTO Homework(user_Id,ASMT_NM,ASMT_CN,ASMT_SCR,ASMT_GRD)
+		values(#{userId},#{asmtNm},#{asmtCn},#{asmtScr},#{asmtGrd})
+	</insert>
+	<select id="getHomeworkDone" resultType="SubmissionVO">
+		SELECT * FROM HOMEWORK_SUBMISSION
+		WHERE SUB_SCR=0
+	</select>
+	<select id="getSubmission" resultType="submissionVo">
+		SELECT * FROM HOMEWORK_SUBMISSION
+		WHERE SUB_NO=#{subNo}
+	</select>
+	<select id="getUserScore" resultType="Integer">
+		SELECT USER_SCR FROM USER_DETAILS
+		WHERE USER_ID=#{userId}
+	</select>
+	<update id="setUserScore">
+		UPDATE USER_DETAILS
+		SET USER_SCR=#{newScore}
+		WHERE USER_ID=#{userId}
+	</update>
+	<update id="setSubmissionScore">
+		UPDATE HOMEWORK_SUBMISSION
+		SET SUB_SCR=#{subScr}
+		WHERE SUB_NO=#{subNo}	
+	</update>
+	
+	<select id="getAllStudent" resultType="UserDetailsVO">
+		SELECT 
+			RANK() OVER (ORDER BY USER_SCR desc) as USER_RATING,
+    		USER_ID,
+    		USER_TELNO,
+    		USER_EML_ADDR,
+    		USER_AGE,
+    		GENDER,
+   		    USER_SCR 
+		FROM 
+			USER_DETAILS
+	</select>
+	<delete id="deleteApply">
+		DELETE FROM group_application
+		WHERE APLY_NO=#{aplyNo}
+	</delete>
+	<update id="setApplyStatus">
+		UPDATE GROUP_APPLICATION
+		SET APLY_STATUS= 'Y'
+		WHERE APLY_NO=#{aplyNo}
+	</update>
+	<update id="setGroupUtztnNope">
+		UPDATE EDUCATION_GROUP
+		SET GROUP_UTZTN_NOPE = GROUP_UTZTN_NOPE - 1
+		WHERE GROUP_NO=#{groupNo}
+	</update>
+	<select id="getQuestionList" resultType="QuestionVO">
+		SELECT * FROM makeQuestion
+		WHERE QSTN_STATUS = 'N'
+	</select>
+	<select id="getQuestion" resultType="QuestionVO">
+		SELECT * FROM makeQuestion
+		WHERE QSTN_NO=#{qstnNo}
+	</select>
+	<insert id="addAnswer">
+		INSERT INTO makeAnswer(ANS_CN,ANS_YMD,QSTN_NO,USER_ID)
+		values(#{ansCn},#{ansYmd},#{qstnNo},#{userId}) 
+	</insert>
+	<update id="setQstnStatus">
+		UPDATE MAKEQUESTION
+		SET QSTN_STATUS = 'Y'
+		WHERE QSTN_NO=#{qstnNo}
+	</update>
+	<select id="getAllContentList" resultType="ContentVO">
+		SELECT * FROM CONTENT
+	</select>
+	<select id="getContent" resultType="ContentVO">
+		SELECT * FROM CONTENT
+		WHERE CONTS_SN= #{contsSn}
+	</select>
+	<insert id="addGroup">
+		INSERT INTO EDUCATION_GROUP(GROUP_UTZTN_NOPE,CONTS_NM,USER_ID,LAST_CMCRS_YMD,REC_AGE)
+		VALUES (#{groupUtztnNope},#{contsNm},#{userId},#{lastCmcrsYmd},#{recAge})
+	</insert>
+</mapper>

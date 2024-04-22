@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<th:block th:replace="~{./include/baseLayout :: setContent( ~{ :: .wrap} ) }">
+<script src="/js/jquery-3.7.1.min.js"></script>
+  <div class="wrap"> 
+    <form action="creatorRegForm" method="post">
+      사용자ID : <input type="text" readonly="readonly" class="userId" name="userId" th:value="${userId}">
+      문서코드 : <input type="text" value="" readonly="readonly" class="docId" hidden="hidden" name="docId">
+      문서타입 : <input type="text" value="" required="required" class="docType" name="docType">
+      
+ 	  <input type="submit" value="신청">
+    </form>
+  </div>
+</th:block>
+<script>
+	//문서코드 랜덤화
+	var rng=Math.random().toString(36).substring(2,8).toUpperCase().toString();
+	$(".docId").attr("value",rng);
+	
+	/* var username=localStorage.getItem("username",username);//시큐리티 도입시 로그인된사용자로 대체 // 컨트롤러 탈때 authentication 타서 입력하기
+  	$(".username").attr("value",username); */
+	
+
+</script>
+</html>

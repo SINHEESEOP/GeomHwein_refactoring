@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <link rel="stylesheet" href="/css/contentPage.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+<th:block th:replace="~{./include/baseLayout :: setContent ( ~{ :: .wrap})}">
+
+<body>
+    <div class="wrap">
+        <div class="container-fluid py-4">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card my-4">
+                            <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
+                                <h6 class="text-white text-capitalize ps-3">교육 자료 등록</h6>
+                            </div>
+                            </div>
+                            
+                            
+                         <section>
+                        <form name="uploadForm" id="uploadForm" action="uploadForm" method="POST" enctype="multipart/form-data">
+                            <br>
+                            <br>
+                            <br>
+                            <ul>
+                                <li>
+                                    <table class="board_basic_view">
+                                        <tbody class="tbody">
+                                            <tr>
+                                                <th scope="row">제목(교육명)</th>
+                                                <td>
+                                                <input class="inputw99p margin_center" type="text" name="contsNm"></td>
+                                            </tr>
+                                            <tr>
+                                                <th>구독료</th>
+                                                <td colspan="3"><input type="text" class="inputw150" name="contsPrc">원</td>
+                                            </tr>
+                                            <tr>
+                                                <th>인원수</th>
+                                                <td colspan="3"><input type="text" class="inputw150" name="utztnNope" placeholder="숫자로 입력">명</td>
+                                            </tr>
+                                            <tr>
+                                            	<th>첨부파일 </th>
+                                            	<td><input type="file" name="file"></td>
+                                            
+                                            </tr>
+                                            
+                                            <tr>
+                                            	<th>콘텐츠 등급 선택:</th>
+                                            	<td>
+													<select id="rating" name="contsGrd">
+    												<option value="고급">고급</option>
+    												<option value="중급">중급</option>
+    												<option value="초급">초급</option>
+													</select>
+                                            </td>
+                                            
+                                            </tr>
+                                            
+                                            <tr>
+                                                <th>설명</th>
+                                                <td colspan="5">
+                                                    <div><textarea class="inputw99p" name="contsExpln" style="height: 200px;" placeholder="설명은 10글자 이상 입력하세요"></textarea></div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <div class="btn_area">
+                                        <button type="submit" class="save" id="insertBtn">저장</button>
+                                        <a th:onclick="|location.href='@{/user/contentList}'|" class="revise">목록</a>
+                                    </div>
+                                </li>
+                            </ul>
+                        </form>
+                        
+                        </section>
+                   
+   <script>
+   $("#insertBtn").click(function () {
+	    // 폼 제출 이벤트를 감지하고 처리합니다.
+	    // 이벤트 핸들러 함수 내에 있는 코드를 추가합니다.
+	    // 폼을 직접 제출하기 전에 추가한 코드를 실행합니다.
+	    var form = document.getElementById('uploadForm');
+	    var textarea = form.querySelector('textarea[name="contsExpln"]');
+	    var regex = /^.{10,}$/; // 10글자 이상의 문자열을 나타내는 정규 표현식
+	    var text = textarea.value.trim();
+
+	    if (!regex.test(text)) {
+	        // 입력된 설명이 10글자 이상이 아니라면 알림을 표시하고 폼 제출을 막습니다.
+	        alert('설명은 10글자 이상 입력하세요');
+	        return false; // 폼 제출을 막습니다.
+	    }
+
+	    // 폼을 제출합니다.
+	    form.submit();
+	});
+            
+            
+            
+            
+            
+            
+  </script>
+                    
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+
+</html>

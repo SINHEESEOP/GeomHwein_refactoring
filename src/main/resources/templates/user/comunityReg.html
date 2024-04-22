@@ -1,0 +1,62 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<link rel="stylesheet" href="/css/comunityReg.css">
+<th:block th:replace="~{./include/baseLayout :: setContent( ~{ :: .wrap} ) }">
+
+<div class="wrap">
+	<div class="container-fluid py-4">
+      <div class="container-title">글등록</div>
+      <form action="comunityForm" method="POST" enctype="multipart/form-data">
+        <div class="reg-wrap">
+        <div class="reg-title">
+            <p>작성자</p>
+            <input type="text" name="userId" th:value="${#authentication.getPrincipal().getUserId}" readonly>
+          </div>
+          <div class="reg-title">
+            <p>제목</p>
+            <input type="text" name="pstTtlNm">
+          </div>
+          <div class="reg-content">
+            <p>내용</p>
+            <textarea id="textarea" name="pstTtlCn"></textarea>
+          </div>
+          <div class="reg-upload">
+            <p>파일등록</p>
+            <input type="file" name="file" multiple="multiple" id="file-input">
+            <p>업로드한파일</p>
+            <div class="file-view">
+            </div>
+          </div>
+          <div class="reg-button"> 
+            <input type="submit" class="regBtn" value="등록하기">
+            <button type="button" class="backBtn" onclick="history.back(-1)">취소</button>	
+          </div>
+          </div>
+      </form>
+   </div>
+</div>
+</th:block>
+
+<script>
+	
+	
+	var fileinput = document.querySelector("#file-input");
+	var fileview = document.querySelector(".file-view");
+	
+	fileinput.addEventListener('change', () => {
+		
+		fileview.innerHTML = "";
+		
+		var files = Array.from(fileinput.files);
+		
+		
+		files.forEach(file => {
+			fileview.innerHTML += `<p id="${file.lastModified}">
+            ${file.name}
+            </p>`;
+		})
+	        
+	})
+		
+
+</script>
+</html>

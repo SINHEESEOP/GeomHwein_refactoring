@@ -44,11 +44,26 @@ dependencies {
     implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:2.3.0'
     //SQL로그
     implementation 'org.bgee.log4jdbc-log4j2:log4jdbc-log4j2-jdbc4.1:1.16'
+
+    //시큐리티
     implementation 'org.springframework.boot:spring-boot-starter-security'
     //시큐리티 타임리프에서 사용
     implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity5'
     //시큐리티 테스트
     testImplementation 'org.springframework.security:spring-security-test'
+
+    // Apache Lucene 의존성
+    implementation 'org.apache.lucene:lucene-core:7.7.3' // Lucene의 코어 기능
+    implementation 'org.apache.lucene:lucene-analyzers-common:7.7.3' // 표준 분석기 포함
+    implementation 'org.apache.lucene:lucene-queryparser:7.7.3'
+
+    // 추가적으로 필요한 Lucene 모듈들을 여기에 추가합니다.
+  
+    //구글 애널리틱스
+ 	implementation 'com.google.apis:google-api-services-analyticsreporting:v4-rev20211020-1.32.1'
+ 	
+ 	//섬네일
+ 	implementation group: 'net.coobird', name: 'thumbnailator', version: '0.4.8'
 }
 
 tasks.named('test') {

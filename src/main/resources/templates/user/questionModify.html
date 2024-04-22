@@ -1,0 +1,31 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<link rel="stylesheet" href="/css/comunityReg.css">
+<th:block th:replace="~{./include/baseLayout :: setContent( ~{ :: .wrap} ) }">
+
+<div class="wrap">
+	<div class="container-fluid py-4">
+      <div class="container-title">질문 수정</div>
+      <form action="questionModifyForm" method="post">
+        <div class="reg-wrap">
+          <div class="reg-title">
+            <p>질문자</p>
+            <input type="text" th:value="${vo.userId}" readOnly>
+          </div>
+          <div class="reg-title">
+            <p>그룹번호</p>
+            <input type="text" name="groupNo" th:value="${vo.GroupNo}" readOnly>
+          </div>
+          <div class="reg-content">
+            <p>내용</p>
+            <textarea id="textarea" name="qstnCn">[[${vo.QstnCn}]]</textarea>
+          </div>
+          <div class="reg-button"> 
+            <input type="submit" class="regBtn" value="수정하기">
+            <button type="button" class="backBtn" th:onclick="|location.href='@{groupApplyDetail(groupno=${vo.GroupNo})}'|">취소</button>
+          </div>
+          </div>
+      </form>
+   </div>
+</div>
+</th:block>
+</html>

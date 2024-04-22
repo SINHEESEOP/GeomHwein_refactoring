@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <link rel="stylesheet" href="/css/mttrInsert.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+
+<body>
+    <th:block th:replace="~{./include/baseLayout :: setContent(~{ :: .wrap})}">
+        <!-- 위 코드에서 닫는 태그가 없습니다. -->
+    <div class="wrap">
+    <form id="insertForm" action="insertForm" method="post">
+        <div class="mttrTitle">
+            <p class="text-white text-capitalize ps-3">공지사항 작성</p>
+        </div>
+
+        <div class="mttrTtl">
+            <div>
+                <p>제목 : </p>
+                <div class="mttrInput">
+                    <input type="text" name="mttrTtl">
+                </div>
+            </div>
+
+        </div>
+	
+
+        <div class="mttrInfo">
+            <p>공지 내용 : </p>
+            <div><textarea name="mttrCn" id="" cols="30" rows="10"></textarea></div>
+          	
+        </div>
+        <div class="reg-button">
+            <button type="button" class="reg" id="insertBtn">등록</button>
+            <button type="button" class="list" id="listBtn">목록</button>
+        </div>
+     </form>
+    </div>
+    
+    </th:block>
+
+    <script>
+        $(document).ready(function () {
+            $("#listBtn").click(function () {
+                window.location.href = "mttrList";
+            });
+
+            $("#insertBtn").click(function () {
+                document.getElementById('insertForm').submit();
+            });
+        });
+    </script>
+</body>
+
+</html>

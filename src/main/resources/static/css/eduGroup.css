@@ -1,0 +1,10 @@
+.rounded-circle{
+  width: 301px;
+  height: 150px;
+  cursor : pointer;
+
+}
+textarea{
+  resize: none;
+}
+

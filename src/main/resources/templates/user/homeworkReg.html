@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<link rel="stylesheet" href="/css/homeworkReg.css">
+<script src="/js/jquery-3.7.1.min.js"></script>	
+<th:block th:replace="~{./include/baseLayout :: setContent( ~{ :: .wrap} ) }">
+	
+	<div class="wrap">
+	   <div class="container-fluid py-4">
+      <div class="container-title">숙제제출</div>
+          <form action="" method="post" name="homeworkForm">
+      <div class="homework-wrap">
+        <div class="homework-header">
+          <span class="homework-user">학습자:<span th:text="${#authentication.name}"></span></span>
+        </div>
+        <div class="homework-box">
+          <div class="homework-left">
+            <div class="left-title">
+              <span>숙제내용</span>
+            </div>
+            <div class="left-content">
+              <table class="homework-table">
+                <tr>
+                  <td>교육자:</td>
+                  <td>[[${vo.userId}]]</td>
+                </tr>
+                <tr>
+                  <td>숙제명:</td>
+                  <td>[[${vo.asmtNm}]]</td>
+                </tr>
+                <tr>
+                  <td>숙재내용:</td>
+                  <td>[[${vo.asmtCn}]]</td>
+                </tr>
+                <tr>
+                  <td>점수:</td>
+                  <td>[[${vo.asmtScr}]]</td>
+                </tr>
+                <tr>
+                  <td>난이도:</td>
+                  <td>[[${vo.asmtGrd}]]</td>
+                </tr>
+                <tr>
+                  <td>제출기한</td>
+                  <td>2024-01-01</td>
+                </tr>
+              </table>
+            </div>
+          </div>
+          <div class="homework-right">
+            <div class="right-title">
+              <span>제출내용</span>
+            </div>
+            <div class="right-content">
+              <table class="homework-table">
+                <tr>
+                 <td>제출내용:</td>
+                 <td th:if="${svo} != null"><textarea name="subCn">[[${svo.subCn}]]</textarea></td>
+                 <td th:if="${svo} == null"><textarea name="subCn"></textarea></td>
+                </tr>
+                <tr>
+                <td>점수:</td>
+                <td th:if="true">평가전</td>
+                </tr>
+                <tr>
+                 <td>제출날짜:</td>
+                 <td th:if="${svo} != null">[[${svo.subYmd}]]</td>
+                </tr>
+              </table>
+               <input type="hidden" th:value="${vo.asmtNo}" name="asmtNo"></input>
+               <input type="hidden" th:value="${#authentication.principal.UserId}" name="userId"></input>
+            </div>
+          </div>
+        </div>
+        <div class="regBtn" th:if="${svo} == null"><button type="button">제출하기</button></div>
+        <div th:if="${svo} != null" class="homeworkBtn"><button type="button" class="updateBtn">수정하기</button>
+        												<button type="button" class="backBtn" onclick="history.back(-1)">뒤로가기</button></div>
+      </div>
+     </form>
+    </div>
+	</div>
+</th:block>
+
+<script>
+
+	$(".regBtn").click(function(){
+		document.homeworkForm.action="homeworkRegForm";
+		document.homeworkForm.submit();
+	});
+	
+	$(".updateBtn").click(function(){
+		document.homeworkForm.action="homeworkUpdate";;
+		document.homeworkForm.submit();
+	});
+
+</script>
+</html>

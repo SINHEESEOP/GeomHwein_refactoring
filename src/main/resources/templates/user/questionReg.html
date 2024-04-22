@@ -1,0 +1,66 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<link rel="stylesheet" href="/css/comunityReg.css">
+<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+
+
+<div class="wrap">
+ <div class="container-fluid py-4">
+      <form id="questionReg" action="" method="post">
+      <div class="container-title">질문하기</div>
+        <div class="reg-wrap">
+          <div class="reg-title">
+            <p>사용자 이름</p>
+            <input type="text" id="id" name="userId" th:value="${#authentication.getPrincipal().getUserId}" readonly>
+          </div>
+          <div class="reg-title">
+            <p>그룹번호</p>
+            <input type="text" name="groupNo" th:value="${groupNo}" readonly>
+          </div>
+          <div class="reg-content">
+            <p>내용</p>
+            <textarea id="textarea" name="qstnCn"></textarea>
+          </div>
+          <div class="reg-button"> 
+            <button type="button" class="regBtn">질문하기</button>
+            <button type="button" class="backBtn">취소</button>
+          </div>
+      	</div>
+      	</form>
+      </div>
+</div>
+
+
+<script th:inline="javascript">
+	
+window.resizeTo(825,825);
+
+	$(".regBtn").click(function(){
+		
+		var formdata =  $("#questionReg").serialize();
+		
+		$.ajax({
+			type : 'POST',
+			url : '/user/questionForm',
+			data : formdata,
+			error: function(status, error){
+				console.log(status);
+				console.log(error);
+			},
+			success : function(data){
+				console.log(data);
+			}
+		});
+		
+		window.opener.postMessage("questionSubmitted", "*");
+	
+		window.close();
+	})
+
+
+$(".backBtn").click(function(){
+	window.close();
+})
+
+</script>
+
+</html>

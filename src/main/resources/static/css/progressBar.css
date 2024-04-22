@@ -1,0 +1,30 @@
+.progLabel {
+  display: block;
+  padding: 15px 5px 5px;
+  font-size: 12px;
+  font-weight: 900;
+}
+
+progress {
+  width: 96%;
+  height: 19px;
+  background-color: #f3f3f3;
+  border: 0;
+  border-radius: 18px;
+}
+
+progress::-webkit-progress-bar {
+  background-image: linear-gradient(55deg,#ebcecf,#e9eed7);
+  border: 1px solid #bababa;
+  border-radius: 18px;
+}
+
+progress::-webkit-progress-value {
+  border-radius: 18px;
+  background-image: linear-gradient(55deg, #13E2DA, #543ab7);
+}
+
+progress::-moz-progress-bar {
+  border-radius: 18px;
+  background-image: linear-gradient(55deg, #13E2DA, #543ab7);
+}

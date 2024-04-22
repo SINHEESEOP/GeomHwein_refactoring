@@ -1,0 +1,63 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<link rel="stylesheet" href="/css/comunityReg.css">
+<th:block th:replace="~{./include/baseLayout :: setContent( ~{ :: .wrap} ) }">
+
+<div class="wrap">
+	<div class="container-fluid py-4">
+      <div class="container-title">글수정</div>
+      <form action="comunityModifyForm" method="POST" enctype="multipart/form-data">
+        <div class="reg-wrap">
+          <div class="reg-title">
+            <p>제목</p>
+            <input type="hidden" th:value="${vo.pstTtlNo}" name="pstTtlNo">
+            <input type="text" th:value="${vo.pstTtlNm}" name="pstTtlNm">
+          </div>
+          <div class="reg-content">
+            <p>내용</p>
+            <textarea id="textarea" name="pstTtlCn">[[${vo.pstTtlCn}]]</textarea>
+          </div>
+            <div class="reg-upload">
+            <p>파일등록</p>
+            <input type="file" name="file" multiple="multiple" id="file-input">
+            <p>업로드한파일</p>
+            <div class="file-view">
+            <th:block th:each="uploadvo : ${list} ">
+      		<span th:onclick="|location.href='@{attachment(filepath=${uploadvo.FilePath},uuid=${uploadvo.Uuid},filename=${uploadvo.FileName})}'|" class="filename">
+      		[[${uploadvo.FileName}]]</span>
+      		</th:block>
+            </div>
+          </div>
+          <div class="reg-button"> 
+            <input type="submit" class="regBtn" value="수정하기">
+            <button type="button" class="backBtn" onclick="location.href='/user/comunityList'">취소</button>
+          </div>
+          </div>
+      </form>
+   </div>
+</div>
+</th:block>
+<script>
+	
+	
+	var fileinput = document.querySelector("#file-input");
+	var fileview = document.querySelector(".file-view");
+	
+	fileinput.addEventListener('change', () => {
+		
+		fileview.innerHTML = "";
+		
+		var files = Array.from(fileinput.files);
+		
+		
+		files.forEach(file => {
+			fileview.innerHTML += `<p id="${file.lastModified}">
+            ${file.name}
+            </p>`;
+		})
+	        
+	})
+	
+		
+
+</script>
+</html>

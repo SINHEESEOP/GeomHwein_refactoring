@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  
+<link rel="stylesheet" href="/css/progressBar.css">
+<link rel="stylesheet" href="/css/tableBack.css">
+
+<script src="/js/jquery-3.7.1.min.js"></script>
+
+<th:block th:replace="~{./include/baseLayout :: setContent( ~{ :: .container-fluid} ) }">
+	
+	<div class="container-fluid">
+		
+  		<h4>그룹별 진도 현황</h4>
+  		<label for="c1">입문반</label>
+  		<progress id="c1" max="100" value="87"></progress>
+
+  		<label for="c2" class="progLabel">기초반</label>
+  		<progress id="c2" max="100" value="71"></progress>
+
+  		<label for="c3" class="progLabel">초급반</label>
+  		<progress id="c3" max="100" value="19"></progress>
+  
+  		<label for="c4" class="progLabel">중급반</label>
+  		<progress id="c4" max="100" value="23"></progress>
+
+  		<label for="c5" class="progLabel">사활반</label>
+  		<progress id="c5" max="100" value="80"></progress>
+
+  		<label for="c6" class="progLabel">실전반</label>
+  		<progress id="c6" max="100" value="31"></progress>
+  		<div hidden="hidden" class="progressOption">
+  			<!-- 관리자권한일 경우 divs hidden="none" -->
+  			입문반<input type="number" id="prog1" value="23">
+  			기초반<input type="number" id="prog2" value="44">
+  			초급반<input type="number" id="prog3" value="55">
+  			중급반<input type="number" id="prog4" value="11">
+  			사활반<input type="number" id="prog5" value="31">
+  			실전반<input type="number" id="prog6" value="24">
+  			<input type="button" id="setBtn" value="setProgress">
+  		</div>
+  		<div class="tableBack">
+  			<h6>사활풀이 순위</h6>
+  			<table class="rankTable">
+  				<tr>
+  					<th>순위</th>
+  					<th>아이디</th>
+  					<th>총점</th>
+  				</tr>
+  				
+  				<tr th:each="vo,status :${userList}">
+  					<td>[[${vo.userRating}]]</td>
+  					<td>[[${vo.userId}]]</td>
+  					<td>[[${vo.userScr}]]</td>
+  				</tr>
+  			</table>
+  		</div>
+  	</div>
+  	
+</th:block>
+  <script>
+    $('progress').each(function () {
+    
+    const max = $(this).attr('value');
+    
+    $(this).val(0).animate({ value: max }, 1500);
+	});
+    
+    
+    $("#setBtn").click(function(){
+    	var pg1=$("#prog1").val();
+    	$("#c1").attr("value",pg1);
+    	
+    	var pg2=$("#prog2").val();
+    	$("#c2").attr("value",pg2);
+    	
+    	var pg3=$("#prog3").val();
+    	$("#c3").attr("value",pg3);
+    	
+    	var pg4=$("#prog4").val();
+    	$("#c4").attr("value",pg4);
+    	
+    	var pg5=$("#prog5").val();
+    	$("#c5").attr("value",pg5);
+    	
+    	var pg6=$("#prog6").val();
+    	$("#c6").attr("value",pg6);
+    	
+    	
+    	
+    });
+    
+  </script>
+
+</html>
