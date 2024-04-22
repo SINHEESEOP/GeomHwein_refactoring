@@ -28,7 +28,6 @@ public class ContentVO {
 	private String contsYmd;
 	private String imgNm;
 	private String utztnBgngYmd;
-
 	private String utztnTrmsCn;
 	private String utztnNope;
 	private String contsGrd;

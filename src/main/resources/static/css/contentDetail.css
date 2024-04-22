@@ -1,0 +1,64 @@
+@charset "UTF-8";
+
+  .container-fluid {
+            padding: 20px;
+        }
+
+        .card {
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            padding: 20px;
+        }
+
+        .contsNm h3 {
+            font-size: 24px;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .container p {
+            font-size: 18px;
+            color: #666;
+            margin-bottom: 10px;
+        }
+
+        .button-section {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .button-section button {
+            padding: 10px 20px;
+            margin: 0 10px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .button-section button.btn-list {
+            background-color: #6c63ff;
+            color: white;
+        }
+
+        .button-section button.btn-list:hover {
+            background-color: #4f48cc;
+        }
+
+        .button-section button.btn-delete {
+            background-color: #ff6b6b;
+            color: white;
+        }
+
+        .button-section button.btn-delete:hover {
+            background-color: #cc5656;
+        }
+        
+        .box {
+        margin-top:20px;
+        margin-bottom:30px;
+        border-bottom: 1px solid #7b809a;
+        
+        }
+       

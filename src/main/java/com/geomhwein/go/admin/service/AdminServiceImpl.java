@@ -9,6 +9,7 @@ import com.geomhwein.go.command.AdminVO;
 import com.geomhwein.go.command.ContentUploadVO;
 import com.geomhwein.go.command.ContentVO;
 import com.geomhwein.go.command.UserDetailsVO;
+import com.geomhwein.go.util.Criteria;
 
 @Service("AdminService")
 public class AdminServiceImpl implements AdminService{
@@ -55,10 +56,10 @@ public class AdminServiceImpl implements AdminService{
 
 
 	@Override
-	public ArrayList<ContentVO> ContentList() {
+	public ArrayList<ContentVO> ContentList(Criteria cri) {
 		
 		
-		return adminMapper.ContentList();
+		return adminMapper.ContentList(cri );
 	}
 
 
@@ -74,6 +75,29 @@ public class AdminServiceImpl implements AdminService{
 	@Override
 	public ContentUploadVO getImg() {
 		return adminMapper.getImg();
+	}
+
+
+	@Override
+	public ContentVO contentDetail(int contsSn) {
+		
+		
+		return adminMapper.contentDetail(contsSn);
+	}
+
+
+	@Override
+	public void deleteContent(int contsSn) {
+		
+		
+		adminMapper.deleteContent(contsSn);
+	}
+
+
+	@Override
+	public int getContentTotal() {
+		// TODO Auto-generated method stub
+		return adminMapper.getContentTotal();
 	}
 
 
