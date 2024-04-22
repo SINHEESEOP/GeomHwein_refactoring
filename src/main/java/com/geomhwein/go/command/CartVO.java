@@ -1,5 +1,14 @@
 package com.geomhwein.go.command;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
 public class CartVO {
 
 	private String contsNm; //
@@ -8,6 +17,6 @@ public class CartVO {
 	private String userRating; // 강사 등급
 	private String contsPrc; // 가격.
 	private int recAge;
-	
+	private int groupNo;
 
 }
