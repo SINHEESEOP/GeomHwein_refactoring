@@ -11,6 +11,11 @@
     margin: 0;
     padding: 0;
 }
+
+li {
+	list-style-type: none;
+}
+
 a {
     text-decoration: none;
     color: #000;
@@ -84,3 +89,20 @@ h1, h2, h3, h4, h5, h6 {
     font-weight: 300;
      height: 150px;
 }
+
+
+
+.pagenation {
+        width: 100px;
+        margin: 0 auto;
+        text-align: center;
+        margin-top: 100px;
+        display: flex;
+        justify-content: space-around;
+      }
+
+      .pagenation > span {
+      	width:30px;
+      	height:30px;
+        border: 1px solid #ced4da;
+      }

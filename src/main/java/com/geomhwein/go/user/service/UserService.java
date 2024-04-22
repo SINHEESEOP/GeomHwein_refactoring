@@ -16,6 +16,7 @@ import com.geomhwein.go.command.HomeworkVO;
 import com.geomhwein.go.command.QuestionVO;
 
 import com.geomhwein.go.command.EducationGroupVO;
+import com.geomhwein.go.command.EvaluationVO;
 import com.geomhwein.go.command.GroupApplicationVO;
 
 

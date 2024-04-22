@@ -367,6 +367,7 @@ public class UserServiceImpl implements UserService {
 	public void submissionUpdate(SubmissionVO vo) {
 		
 		userMapper.submissionUpdate(vo);
+	}
 		
 	//사활풀이 순위
 	public List<UserDetailsVO> getUserScoreList() {

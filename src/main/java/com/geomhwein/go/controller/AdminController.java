@@ -43,7 +43,7 @@ import net.coobird.thumbnailator.Thumbnailator;
 
 
 @Controller
-@RequestMapping("admin")
+@RequestMapping("/admin")
 public class AdminController {
 	
 	
@@ -99,17 +99,22 @@ public class AdminController {
 	
 	
 	
-	@GetMapping("/admin/AllUserList")
+	@GetMapping("/AllUserList")
 	public String AllUserList(Model mo) {
 		
 		ArrayList<UserDetailsVO> AllUserList = adminService.AllUserList();
 		mo.addAttribute("AllUserList", AllUserList);
 		
+		System.out.println(AllUserList.toString()+"!@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+		
 		return "admin/AllUserList";
 	}
 	
 	
-	@GetMapping("/admin/contentPage")
+	
+	
+	
+	@GetMapping("/contentPage")
 	public String ContentPage() {
 		
 		return "admin/contentPage";
@@ -117,13 +122,6 @@ public class AdminController {
 	
 	
 	
-	
-	
-	@GetMapping("contentPage")
-	public String contentPage () {
-		
-		return "admin/contentPage";
-	}
 	
 	
 	@PostMapping("/uploadForm")
@@ -159,7 +157,6 @@ public class AdminController {
 		try {
 			File saveFile = new File(saveName);
 			file.transferTo(saveFile);
-			System.out.println(vo+"!@#@@@@@@@@@@@@@@@@@@@@@");
 			
 			String thumbnailFileName = uuid + "_thumb_" + filename; // 썸네일 파일명
 			String thumbnailPath = uploadPath + "\\" + filepath + "\\" + thumbnailFileName; // 썸네일 파일 경로

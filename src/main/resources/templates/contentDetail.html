@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<link rel="stylesheet" href="/css/contentDetail.css">
+</head>
+<body>
+    <div th:replace="~{./include/baseLayout :: setContent ( ~{ :: .wrap})}">
+        <div class="wrap">
+            <div class="container-fluid py-4">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card my-4">
+                        
+                        
+                        
+                        <form id="deleteForm" method="post">
+                            <input type="hidden" name="contsSn" th:value="${vo.contsSn}">
+                            <div class="contsNm">
+                                <h2 name="contsNm" readonly="readonly" th:text="${vo.contsNm}"></h2>
+                            </div>
+                            </form>
+                            <div>
+                                <p>모집 인원 : [[${vo.utztnNope}]]</p>
+                            </div>
+                            <div>
+                            <h5>난이도 : [[${vo.contsGrd}]]</h5>
+                            </div>
+                            <br>
+                            <br>
+                            <br>
+                            <div>
+                            <div class="box">
+                            	<h4>내용</h4>
+                            </div>
+                            <img style="width : 50%;  height: 50%;"  th:src="@{/display/{filepath}/{uuid}/{filename}(filepath=${vo.FilePath},uuid=${vo.UuId},filename=${vo.FileName})}">
+                            </div>
+                            <br>
+                            <br>
+                            <br>
+                            <br>
+                            
+                            <div>
+                                <span>[[${vo.contsExpln}]]</span>
+                            </div>
+                        </div>
+                        
+                        <div class="button-section">
+                            <button type="button" class="btn-list" th:onclick="|location.href='@{contentList}'|">목록</button>
+                            <th:block sec:authorize="hasRole('ROLE_ADMIN')">
+                                <button type="button" id="deleteContent" class="btn-delete">삭제</button>
+                            </th:block>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+                        
+    </div>
+</body>
+
+<script>
+
+    var deleteContent = document.getElementById("deleteContent");
+
+    deleteContent.addEventListener('click', function(event) {
+        event.preventDefault();
+
+        if (confirm("삭제 후에는 데이터를 복구할 수 없습니다.") == false) {
+            return;
+        }
+
+        var deleteForm = document.getElementById("deleteForm");
+
+        deleteForm.action = "deleteContent";
+
+        deleteForm.submit();
+    });
+    
+</script>
+
+</html>

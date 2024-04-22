@@ -5,7 +5,6 @@
     <link rel="stylesheet" href="/css/mttrDetail.css">
 </head>
 
-<body>
     <div th:replace="~{./include/baseLayout :: setContent ( ~{ :: .wrap})}">
           
         <div class="wrap">
@@ -13,6 +12,9 @@
                 <div class="row">
                     <div class="col-12">
                         <div class="card my-4">
+                        </div>
+     
+    </div>
                         <form name="updateForm" action="updateForm" method="POST">
                             <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
                                 <h6 class="text-white text-capitalize ps-3">공지사항</h6>
@@ -49,10 +51,7 @@
                     </div>
                 </div>
             </div>
-        </div>
-     
-    </div>
-</body>
+        
 
 	<script>
 	

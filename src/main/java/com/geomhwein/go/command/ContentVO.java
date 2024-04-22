@@ -27,9 +27,7 @@ public class ContentVO {
 	private int contsPrc;
 	private String contsYmd;
 	private String imgNm;
-	private Timestamp utztnBgngYmd;
 	private String utztnBgngYmd;
-
 	private String utztnTrmsCn;
 	private String utztnNope;
 	private String contsGrd;

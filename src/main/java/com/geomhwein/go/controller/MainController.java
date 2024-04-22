@@ -11,6 +11,7 @@ import com.geomhwein.go.command.EducationGroupVO;
 import com.geomhwein.go.securlty.UserAuth;
 import com.geomhwein.go.securlty.service.NormalUserService;
 import com.geomhwein.go.util.Criteria;
+import com.geomhwein.go.util.PageVO;
 
 import java.io.File;
 import java.nio.file.Files;
@@ -44,7 +45,7 @@ public class MainController {
 
 
 	@Autowired
-	private NormalUserService normalUserService;
+	private NormalUserService normalUserService2;
 	
 	@Value("${project.upload.path}")
 	private String uploadPath;
@@ -93,16 +94,22 @@ private NormalUserService normalUserService;
 
 	
 	@GetMapping("/contentList")
-	public String contentList(Model mo){
+	public String contentList(Model mo,Criteria cri){
 		
-		ArrayList<ContentVO> contentList = adminService.ContentList();
+		ArrayList<ContentVO> contentList = adminService.ContentList(cri);
+		
+		int total = adminService.getContentTotal();
+		
+		PageVO pageVO = new PageVO(cri,total);
 		
 		
 		mo.addAttribute("ContentList", contentList);
-	
+		mo.addAttribute("pageVO", pageVO);
 		
 		return "contentList";
 	}
+	
+	
 	
 	@GetMapping("/display/{filepath}/{uuid}/{filename}")
 	@ResponseBody
@@ -154,7 +161,7 @@ private NormalUserService normalUserService;
 		return "mttrList";
 	}
 	
-	@GetMapping("mttrDetail")
+	@GetMapping("/mttrDetail")
 	public String mttrDetail (@RequestParam("mttrSn") int mttrSn,Model mo) {
 		
 		
@@ -164,7 +171,7 @@ private NormalUserService normalUserService;
 		mo.addAttribute("vo",vo);
 		
 		
-		return "/mttrDetail";
+		return "mttrDetail";
 	}
 	
 	@PostMapping("/deleteForm")
@@ -185,6 +192,28 @@ private NormalUserService normalUserService;
 		model.addAttribute("carts", carts);
 
 		return "cart";
+	}
+	
+	@GetMapping("/contentDetail")
+	public String contentDetail(@RequestParam("contsSn") int contsSn, Model mo) {
+		
+		
+		ContentVO vo = adminService.contentDetail(contsSn);
+		
+		mo.addAttribute("vo",vo);
+		
+		return "contentDetail";
+	}
+	
+	
+	
+	@PostMapping("/deleteContent")
+	public String deleteContent(@RequestParam("contsSn") int contsSn) {
+		
+		
+		adminService.deleteContent(contsSn);
+		
+		return "redirect:/contentList";
 	}
 
 

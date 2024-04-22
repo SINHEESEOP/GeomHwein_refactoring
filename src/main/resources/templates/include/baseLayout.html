@@ -69,6 +69,7 @@
 					<a class="nav-link text-white tab " id="tab1" href="/" data-page-name="홈">
 						<div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
 							<i class="material-icons opacity-10">cast_for_education</i>
+							
 						</div>
 						<span class="nav-link-text ms-1">홈</span>
 					</a>
@@ -81,6 +82,27 @@
 						<span class="nav-link-text ms-1">결제 정보</span>
 					</a>
 				</li>
+				
+				<th:block sec:authorize="hasRole('ROLE_ADMIN')">
+				<li class="nav-item sideBtn ">
+					<a class="nav-link text-white tab" id="tab15" href="/admin/AllUserList" data-page-name="전체회원조회">
+						<div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+							<i class="material-icons opacity-10">content_paste_go</i>
+						</div>
+						<span class="nav-link-text ms-1">전체회원조회</span>
+					</a>
+				</li>
+				</th:block>
+				
+				<li class="nav-item sideBtn ">
+					<a class="nav-link text-white tab" id="tab14" href="/mttrList" data-page-name="공지사항">
+						<div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+							<i class="material-icons opacity-10">assignment</i>
+						</div>
+						<span class="nav-link-text ms-1">공지사항</span>
+					</a>
+				</li>
+				
 				<li class="nav-item mt-3">
 					<h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">교육 페이지</h6>
 				</li>
@@ -92,6 +114,17 @@
 						<span class="nav-link-text ms-1">컨텐츠 보기</span>
 					</a>
 				</li>
+				
+				
+				<li class="nav-item sideBtn ">
+					<a class="nav-link text-white tab" id="tab16" href="/contentList" data-page-name="교육강의 보기">
+						<div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+							<i class="material-icons opacity-10">content_paste_go</i>
+						</div>
+						<span class="nav-link-text ms-1">교육강의 보기</span>
+					</a>
+				</li>
+				
 				<!-- 교육자권한일때만 보이게 처리 시작 -->
 				<li class="nav-item sideBtn ">
 					<a class="nav-link text-white tab" id="tab4" href="/creator/groupApplyList" data-page-name="그룹 관리">
@@ -191,6 +224,8 @@
 						<span class="nav-link-text ms-1">회원가입</span>
 					</a>
 				</li>
+				
+				
 			</ul>
 		</div>
 		<div class="sidenav-footer position-absolute w-100 bottom-0 ">
@@ -217,6 +252,7 @@
 					<h6 class="font-weight-bolder mb-0 pageName"></h6>
 				</nav>
 				<div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
+				<script id="_wauowd">var _wau = _wau || []; _wau.push(["dynamic", "8r5i56gufb", "owd", "6d9eebffffff", "small"]);</script><script async src="//waust.at/d.js"></script>
 					<div class="ms-md-auto pe-md-3 d-flex align-items-center">
 						<div class="input-group input-group-outline">
 							<label class="form-label">강의 검색</label>
@@ -351,6 +387,7 @@
 
 		<!--	메인 컨텐츠가 들어갈 자리.	-->
 		<th:block th:replace="${content}">
+		
 		</th:block>
 		<!--	원하는 디자인을 가지고 오고 싶다면 기존 디자인 태그의 클래스명을 사용해야 합니다. -->
 		
