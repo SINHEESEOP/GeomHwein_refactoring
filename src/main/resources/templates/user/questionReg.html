@@ -50,6 +50,8 @@ window.resizeTo(825,825);
 				console.log(data);
 			}
 		});
+		
+		window.opener.postMessage("questionSubmitted", "*");
 	
 		window.close();
 	})

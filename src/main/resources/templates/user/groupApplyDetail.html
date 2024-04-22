@@ -90,17 +90,24 @@
 <script th:inline="javascript">
   $(".makeQuestionBtn").click(function(){
     var username=$(".userName").val();
-    var groupNo = [[${vo.groupNo}]];
+    var groupNo = /*[[${vo.groupNo}]]*/'';
     var url="questionReg?groupNo="+groupNo
     var name="질문작성하기";
     var option="width=830,length=820,top=0,left=0,location=yes";
     window.open(url,name,option);
+    
+    window.addEventListener('message', function(event) {
+        if (event.data === 'questionSubmitted') {
+            // 새 창이 닫히고 질문이 제출되었을 때 부모 창 새로고침
+            location.reload();
+        }
+    });
   });
   
   
   $("#successBtn").click(function(){
 	  	var qstnno = $(event.target).attr("value");	
-	  	var userId = [[${vo.userId}]];
+	  	var userId = /*[[${vo.userId}]]*/'';
 	    var url="showAnswer?qstnNo="+qstnno+"&userId="+userId
 	    var name="답변보기";
 	    var option="width=830,length=820,top=0,left=0,location=no";
