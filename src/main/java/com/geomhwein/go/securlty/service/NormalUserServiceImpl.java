@@ -1,5 +1,6 @@
 package com.geomhwein.go.securlty.service;
 
+import com.geomhwein.go.command.CartVO;
 import com.geomhwein.go.command.UserAuthVO;
 import com.geomhwein.go.command.EducationGroupVO;
 import com.geomhwein.go.util.Criteria;
@@ -27,6 +28,20 @@ public class NormalUserServiceImpl implements NormalUserService{
 
 	public ArrayList<UserAuthVO> getUserList(Criteria cri, String id) {
 		return normalUserMapper.getUserList(cri, id);
+	}
+
+	@Override
+	public ArrayList<EducationGroupVO> getList2(Criteria cri) {
+		return normalUserMapper.getList2(cri);
+	}
+
+	@Override
+	public ArrayList<CartVO> getCart(String userId) {
+		return normalUserMapper.getCart(userId);
+	}
+
+	public int deleteCart(Long groupNo, String userId) {
+		return normalUserMapper.deleteCart(groupNo, userId);
 	}
 
 }

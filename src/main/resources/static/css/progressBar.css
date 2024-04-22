@@ -1,12 +1,12 @@
-label {
+.progLabel {
   display: block;
   padding: 15px 5px 5px;
-  font-size: 20px;
+  font-size: 12px;
   font-weight: 900;
 }
 
 progress {
-  width: 100%;
+  width: 96%;
   height: 19px;
   background-color: #f3f3f3;
   border: 0;

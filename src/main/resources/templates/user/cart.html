@@ -1,203 +1,142 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 
-<th:block th:replace="~{/include/baseLayout :: setContent( ~{ :: .container-fluid} ) }">
+<th:block th:replace="~{include/baseLayout :: setContent( ~{ :: .container-fluid} ) }">
 	
-	
-	<div class="wrap">
-	<div class="container-fluid py-4">
-		
-		<div class="row">
-			<div class="col-12">
-				<div class="card my-4">
-					<div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
-						<div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
-							<h6 class="text-white text-capitalize ps-3">내가 담은 강의목록</h6>
+		<div class="container-fluid py-4">
+			
+			<div class="row">
+				<div class="col-12">
+					<div class="card my-4">
+						<div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
+							<div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
+								<h6 class="text-white text-capitalize ps-3">내가 담은 강의목록</h6>
+							</div>
 						</div>
-					</div>
-					<div class="card-body px-0 pb-2">
-						<div class="table-responsive p-0">
-							<table class="table align-items-center mb-0">
-								
-								
-								<thead>
-								<tr>
-									<th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">수업</th>
-									<th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">강사 이름</th>
-									<th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">금액
-									</th>
-									<th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">평점(별 마크로 변경 예정)
-									</th>
-								</tr>
-								</thead>
-								
-								
-								<tbody>
-								<tr>
-									<td>
-										<div class="d-flex px-2 py-1">
-											<div>
-												<!--  강사 사진  -->
-												<img src="../assets/img/team-2.jpg" class="avatar avatar-sm me-3 border-radius-lg" alt="user1">
+						<div class="card-body px-0 pb-2">
+							<div class="table-responsive p-0">
+								<table class="table align-items-center mb-0">
+									
+									
+									<thead>
+									<tr>
+										<th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">항목</th>
+										<th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">수업</th>
+										<th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">강사 이름</th>
+										<th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">금액</th>
+										<th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">평점(별 마크로
+											변경 예정)
+										</th>
+										<th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">삭제</th>
+									</tr>
+									</thead>
+									
+									
+									<tbody>
+									
+									<tr th:each="vo, status : ${carts}">
+										<td style="text-align: center; width: 3px">
+											<input type="checkbox" class="course-checkbox item-checkbox text-xs text-secondary mb-0"
+											       th:value="${vo.contsPrc}" checked></input>
+										</td>
+										<td>
+											<div class="d-flex px-2 py-1">
+												<div>
+													<!--  강사 사진  -->
+													<img src="../assets/img/team-2.jpg" class="avatar avatar-sm me-3 border-radius-lg"
+													     alt="user1">
+												</div>
+												<div class="d-flex flex-column justify-content-center">
+													<h6 class="mb-0 text-sm"></h6>
+													<p class="text-xs text-secondary mb-0">[[${vo.contsNm}]]</p>
+												</div>
 											</div>
-											<div class="d-flex flex-column justify-content-center">
-												<h6 class="mb-0 text-sm">초보자도 쉽게 배우는 바둑 교실</h6>
-												<p class="text-xs text-secondary mb-0">바둑 초급반</p>
-											</div>
-										</div>
-									</td>
-									<td>
-										<p class="text-xs font-weight-bold mb-0">John Michael</p>
-										<p class="text-xs text-secondary mb-0">백엔드 개발자</p>
-									</td>
-									<td class="align-middle text-center text-sm">
-										<span class="badge badge-sm bg-gradient-success">3,000,000</span>
-									</td>
-									<td class="align-middle text-center">
-										<span class="text-secondary text-xs font-weight-bold">5.0 (5점 만점)</span>
-									</td>
-								</tr>
-								<tr>
-									<td>
-										<div class="d-flex px-2 py-1">
-											<div>
-												<img src="../assets/img/team-3.jpg" class="avatar avatar-sm me-3 border-radius-lg" alt="user2">
-											</div>
-											<div class="d-flex flex-column justify-content-center">
-												<h6 class="mb-0 text-sm">Alexa Liras</h6>
-												<p class="text-xs text-secondary mb-0">alexa@creative-tim.com</p>
-											</div>
-										</div>
-									</td>
-									<td>
-										<p class="text-xs font-weight-bold mb-0">Programator</p>
-										<p class="text-xs text-secondary mb-0">Developer</p>
-									</td>
-									<td class="align-middle text-center text-sm">
-										<span class="badge badge-sm bg-gradient-secondary">Offline</span>
-									</td>
-									<td class="align-middle text-center">
-										<span class="text-secondary text-xs font-weight-bold">11/01/19</span>
-									</td>
-								</tr>
-								<tr>
-									<td>
-										<div class="d-flex px-2 py-1">
-											<div>
-												<img src="../assets/img/team-4.jpg" class="avatar avatar-sm me-3 border-radius-lg" alt="user3">
-											</div>
-											<div class="d-flex flex-column justify-content-center">
-												<h6 class="mb-0 text-sm">Laurent Perrier</h6>
-												<p class="text-xs text-secondary mb-0">laurent@creative-tim.com</p>
-											</div>
-										</div>
-									</td>
-									<td>
-										<p class="text-xs font-weight-bold mb-0">Executive</p>
-										<p class="text-xs text-secondary mb-0">Projects</p>
-									</td>
-									<td class="align-middle text-center text-sm">
-										<span class="badge badge-sm bg-gradient-success">Online</span>
-									</td>
-									<td class="align-middle text-center">
-										<span class="text-secondary text-xs font-weight-bold">19/09/17</span>
-									</td>
-								</tr>
-								<tr>
-									<td>
-										<div class="d-flex px-2 py-1">
-											<div>
-												<img src="../assets/img/team-3.jpg" class="avatar avatar-sm me-3 border-radius-lg" alt="user4">
-											</div>
-											<div class="d-flex flex-column justify-content-center">
-												<h6 class="mb-0 text-sm">Michael Levi</h6>
-												<p class="text-xs text-secondary mb-0">michael@creative-tim.com</p>
-											</div>
-										</div>
-									</td>
-									<td>
-										<p class="text-xs font-weight-bold mb-0">Programator</p>
-										<p class="text-xs text-secondary mb-0">Developer</p>
-									</td>
-									<td class="align-middle text-center text-sm">
-										<span class="badge badge-sm bg-gradient-success">Online</span>
-									</td>
-									<td class="align-middle text-center">
-										<span class="text-secondary text-xs font-weight-bold">24/12/08</span>
-									</td>
-								</tr>
-								<tr>
-									<td>
-										<div class="d-flex px-2 py-1">
-											<div>
-												<img src="../assets/img/team-2.jpg" class="avatar avatar-sm me-3 border-radius-lg" alt="user5">
-											</div>
-											<div class="d-flex flex-column justify-content-center">
-												<h6 class="mb-0 text-sm">Richard Gran</h6>
-												<p class="text-xs text-secondary mb-0">richard@creative-tim.com</p>
-											</div>
-										</div>
-									</td>
-									<td>
-										<p class="text-xs font-weight-bold mb-0">Manager</p>
-										<p class="text-xs text-secondary mb-0">Executive</p>
-									</td>
-									<td class="align-middle text-center text-sm">
-										<span class="badge badge-sm bg-gradient-secondary">Offline</span>
-									</td>
-									<td class="align-middle text-center">
-										<span class="text-secondary text-xs font-weight-bold">04/10/21</span>
-									</td>
-								</tr>
-								<tr>
-									<td>
-										<div class="d-flex px-2 py-1">
-											<div>
-												<img src="../assets/img/team-4.jpg" class="avatar avatar-sm me-3 border-radius-lg" alt="user6">
-											</div>
-											<div class="d-flex flex-column justify-content-center">
-												<h6 class="mb-0 text-sm">Miriam Eric</h6>
-												<p class="text-xs text-secondary mb-0">miriam@creative-tim.com</p>
-											</div>
-										</div>
-									</td>
-									<td>
-										<p class="text-xs font-weight-bold mb-0">Programator</p>
-										<p class="text-xs text-secondary mb-0">Developer</p>
-									</td>
-									<td class="align-middle text-center text-sm">
-										<span class="badge badge-sm bg-gradient-secondary">Offline</span>
-									</td>
-									<td class="align-middle text-center">
-										<span class="text-secondary text-xs font-weight-bold">14/09/20</span>
-									</td>
-								</tr>
-								</tbody>
-							</table>
+										</td>
+										<td>
+											<p class="text-xs font-weight-bold mb-0">[[${vo.userNm}]]</p>
+											<p class="text-xs text-secondary mb-0">[[${vo.userRating}]]</p>
+										</td>
+										<td class="text-center text-sm">
+											<span class="badge price-tag"
+											      style="width: 50%; font-weight: bold; font-size: 15px; color: #0a2127">[[${vo.contsPrc}]]원</span>
+										</td>
+										<td class="align-middle text-center">
+											<span class="text-secondary text-xs font-weight-bold">5.0 (5점 만점)</span>
+										</td>
+										<td style="text-align: center; line-height: 100%">
+											<button type="button" class="btn btn-danger delete-btn" th:data-id="${vo.groupNo}"
+											        style="margin-bottom: 0">삭제
+											</button>
+										</td>
+									</tr>
+									</tbody>
+								</table>
+							</div>
 						</div>
 					</div>
 				</div>
 			</div>
-		</div>
-		
-		
-		
-		
-		<div class="row">
-			<div class="col-12">
-				<div class="card my-4">
+			
+			
+			<div class="row " style="margin-top: 20px; justify-content: center;">
+				<div class="col-3">
+					<!--				<div class="card my-4">-->
 					<div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
-						<div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
-							<h6 class="text-white text-capitalize ps-3 addFlex" >총 금액</h6>
-							<div class="text-white text-capitalize ps-3 addFlex" >30,000,000원</div>
+						<div class="bg-gradient-primary shadow-primary border-radius-lg pt-1 pb-1">
+							<h6 class="text-white text-capitalize" style="text-align: center;">총 금액</h6>
+							<div class="text-white text-capitalize pb-1 addFlex" id="totalAmount">0원</div>
+							<div class="text-center">
+								<button type="button" class="btn btn-dark" id="purchase-btn"
+								        data-bs-toggle="modal" data-bs-target="#purchaseModal">구매하기
+								</button>
+							</div>
+						</div>
+					</div>
+					<!--				</div>-->
+				</div>
+			</div>
+			
+			<script src="https://js.tosspayments.com/v1/payment-widget"></script>
+			
+			<!-- 모달 -->
+			<div class="modal fade" id="purchaseModal" tabindex="-1" aria-labelledby="purchaseModalLabel" aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="purchaseModalLabel">구매 상세 정보</h5>
+							<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+						</div>
+						<div class="modal-body">
+							<form id="purchase-form">
+								<div class="mb-3">
+									<label for="totalAmount" class="col-form-label">총 금액:</label>
+									<input type="text" class="form-control" id="totalAmountM" readonly style="padding: 10px">
+								</div>
+								<div class="mb-3">
+									<!-- 할인 쿠폰 -->
+									<div>
+										<input type="checkbox" id="coupon-box" />
+										<label for="coupon-box"> 5,000원 쿠폰 적용 </label>
+									</div>
+									<!-- 결제 UI, 이용약관 UI 영역 -->
+									<div id="payment-method"></div>
+									<div id="agreement"></div>
+								</div>
+							</form>
+						</div>
+						<div class="modal-footer">
+							<!-- 결제하기 버튼 -->
+							<button id="payment-button" class="btn btn-secondary">결제하기</button>
+							<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
 						</div>
 					</div>
 				</div>
 			</div>
+			
 		</div>
 		
-	</div>
-</div>
 </th:block>
 
+<!-- 비동기로 JS 파일 로드 -->
+<script src="/js/cart.JS.js" async></script>
 </html>

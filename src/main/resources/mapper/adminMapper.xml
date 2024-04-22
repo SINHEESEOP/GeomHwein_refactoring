@@ -1,16 +1,122 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTO Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.geomhwein.go.service.AdminMapper">
+<mapper namespace="com.geomhwein.go.admin.service.AdminMapper">
 	
 	<insert id="mttrInsert">
 		
-    	insert into MTTR (MTTRTTL,
-                            NTCCN
+    	insert into MTTR (MTTR_TTL,
+                            MTTR_CN
                           )
    			 values(#{mttrTtl},
-            #{ntccn})
+            #{mttrCn})
+            
             
 	</insert>
+	
+	<select id="mttrList" resultType="AdminVO">
+	
+	select * from MTTR order by MTTR_SN DESC
+	
+	
+	</select>
+	
+	<select id="mttrDetail" resultType="AdminVO">
+	
+		select * from MTTR where MTTR_SN = #{mttrSn}
+		
+	</select>
+	
+	
+	
+	
+	
+	<delete id="deleteMttr">
+	
+		delete from MTTR where MTTR_SN = #{mttrSn}
+	
+	</delete>
+	
+	<select id="AllUserList" resultType="UserDetailsVO">
+	
+		select * from USER_DETAILS
+	
+	</select>
+	
+	
+	<select id="ContentList" resultType="ContentVO">
+	
+	select * from content C 
+	LEFT JOIN CONTENT_UPLOAD U 
+	ON C.CONTS_SN = U.CONTS_SN order by C.CONTS_SN desc
+	limit #{pageStart}, #{amount}
+	
+	</select>
+	
+	<select id="getContentTotal" resultType="int">
+	
+	select count(*) from content C 
+	LEFT JOIN CONTENT_UPLOAD U 
+	ON C.CONTS_SN = U.CONTS_SN;
+	
+	
+	</select>
+	
+	<insert id="contentInsert">
+	
+		insert into Content (CONTS_NM, CONTS_EXPLN, CONTS_PRC, UTZTN_NOPE,CONTS_GRD,USER_ID)
+		
+		values(#{contsNm}, #{contsExpln}, #{contsPrc}, #{utztnNope}, #{contsGrd},#{userId})
+		
+	
+	</insert>
+	
+	
+	
+	<insert id= "registFile">
+	
+	<selectKey resultType="int" keyProperty="contsSn" order="BEFORE">
+		
+	 select max(CONTS_SN) from CONTENT
+		
+	</selectKey>
+	
+	
+	insert into Content_Upload (fileName, filePath, uuId, CONTS_SN)
+	
+	values(#{fileName}, #{filePath}, #{uuId}, #{contsSn})
+		
+	
+	</insert>
+	
+	
+	<select id="contentDetail" resultType="ContentVO">
+    SELECT 
+        C.CONTS_SN,
+        C.CONTS_NM,
+        C.CONTS_EXPLN,
+        C.CONTS_PRC,
+        C.UTZTN_NOPE,
+        C.CONTS_GRD,
+        C.USER_ID,
+        U.fileName,
+        U.filePath,
+        U.uuId
+    FROM 
+        content C
+    LEFT JOIN 
+        CONTENT_UPLOAD U 
+    ON 
+        C.CONTS_SN = U.CONTS_SN
+    WHERE 
+        C.CONTS_SN = #{contsSn}
+        
+</select>
 
+<delete id="deleteContent">
+
+	delete from CONTENT where CONTS_SN= #{contsSn}
+
+</delete>
+	
 
 </mapper>

@@ -1,7 +1,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <link rel="stylesheet" href="/css/comunityList.css">
 
-<th:block th:replace="~{/include/baseLayout :: setContent( ~{ :: .wrap} ) }">
+<th:block th:replace="~{./include/baseLayout :: setContent( ~{ :: .wrap} ) }">
 	
 	<div class="wrap">
 	<div class="container-fluid py-4">
@@ -48,11 +48,11 @@
         <th:block th:each="vo,status : ${list}">
         <tr class="table-content">
           <td>[[${status.count}]]</td>
-          <td><a th:href="@{comunityDetail(pst_ttl_no = ${vo.pst_ttl_no})}">[[${vo.pst_ttl_nm}]]</a></td>
+          <td><a th:href="@{comunityDetail(pst_ttl_no = ${vo.pstTtlNo})}">[[${vo.PstTtlNm}]]</a></td>
           <td>[[${vo.userId}]]</td>
-         	<td th:text="${#strings.substring(vo.pst_regdate,0,10)}"></td>
-          <td>[[${vo.inq_cnt}]]</td>
-          <td>1</td>
+         	<td th:text="${#strings.substring(vo.PstRegdate,0,10)}"></td>
+          <td>[[${vo.InqCnt}]]</td>
+          <td>[[${vo.ReplyCnt}]]</td>
         </tr>
         </th:block>
       </table>
@@ -108,7 +108,21 @@
 		location.href="comunityList?pageNum="+pageNum+"&amount="+amount+"&searchInput="+search;
 	});
 	
-	 
+	
+	$(document).ready(function(){
+		
+	const groupId = '1'; // 그룹 ID 설정
+	
+	const eventSource = new EventSource("http://localhost:8282/notification/1/subscribe");
+
+	eventSource.onmessage = (event) => {
+	  const message = event.data;
+	  console.log(message);
+	  
+		};
+	})
+	
+
 	</script>
 	
 </html>

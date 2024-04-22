@@ -1,0 +1,118 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<link rel="stylesheet" href="/css/comunityList.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+<th:block th:replace="~{./include/baseLayout :: setContent( ~{ :: .wrap} ) }">
+<div class="wrap">
+	  <div class="container-fluid py-4">
+      <div class="container-title">그룹상세정보</div>
+      <div class="content-wrap">
+      <table class="comunity-table">
+        <tr class="table-title">
+          <th>그룹번호</th>
+          <th>콘텐츠이미지</th>
+          <th>학습콘텐츠명</th>
+          <th>최종이수일</th>
+          <th>신청가능인원</th>
+  		  <th>권장연령</th>
+        </tr>
+      	<tr class="table-content">
+          <td>[[${vo.groupNo}]]</td>
+          <td><img src="" alt="이미지"/></td>
+          <td>[[${vo.contsNm}]]</td>
+           <td th:text="${#strings.substring(vo.lastCmcrsYmd,0,10)}"></td>
+          <td>[[${vo.groupUtztnNope}]]</td>
+          <td>[[${vo.recAge}]]</td>
+        </tr>
+      </table>
+   	 </div>
+   	</div>
+   	 
+   	 <div class="container-fluid py-4">
+      <div class="container-title">숙제</div>
+      <div class="content-wrap">
+       <table class="comunity-table">
+        <tr class="table-title">
+          <th>No</th>
+          <th>숙제명</th>
+          <th>숙제내용</th>
+          <th>점수</th>
+          <th>난이도</th>
+          <th>제출자</th>
+          <th>제출</th>
+        </tr>
+       <th:block th:each="hvo,status : ${list2}">
+        <tr class="table-content">
+          <td>[[${status.count}]]</td>
+          <td>[[${hvo.asmtNm}]]</td>
+          <td>[[${hvo.asmtCn}]]</td>
+          <td>[[${hvo.asmtScr}]]</td>
+          <td>[[${hvo.asmtGrd}]]</td>
+          <td>[[${hvo.userId}]]</td>
+          <td><button type="button" class="updateBtn" th:onclick="|location.href='@{homeworkReg(asmtNo=${hvo.asmtNo})}'|">숙제제출</button></td>
+        </tr>
+        </th:block>
+      </table>
+   	 </div>
+   	 </div>
+   	 
+   	   <div class="container-fluid py-4">
+      <div class="container-title">질문내역</div>
+      <div class="content-wrap">
+      <table class="comunity-table">
+        <tr class="table-title">
+          <th>No</th>
+          <th>그룹번호</th>
+          <th>질문자</th>
+          <th>질문내용</th>
+          <th>질문날짜</th>
+          <th>상태</th>
+        </tr>
+      <th:block th:each="qvo,status : ${list}">
+        <tr class="table-content">
+          <td>[[${status.count}]]</td>
+          <td>[[${qvo.GroupNo}]]</td>
+          <td>[[${qvo.UserId}]]</td>
+          <td th:onclick="|location.href='@{questionDetail(qstnno=${qvo.QstnNo})}'|">[[${qvo.QstnCn}]]</td>
+          <td th:text="${#strings.substring(qvo.QstnYmd,0,10)}"></td>
+          <td class th:if=${qvo.QstnStatus}==N><input type="checkbox" disabled>답변대기</td>
+          <td class th:if=${qvo.QstnStatus}==Y><input type="checkbox" checked disabled><span th:value="${qvo.QstnNo}" id="successBtn">답변완료</span></td>
+        </tr>
+      </th:block>
+      </table>
+        <div class="reg">
+        <button type="button" class="makeQuestionBtn">질문하기</button>
+      </div>
+   	 </div>
+   	</div>
+   	
+</th:block>
+
+<script th:inline="javascript">
+  $(".makeQuestionBtn").click(function(){
+    var username=$(".userName").val();
+    var groupNo = /*[[${vo.groupNo}]]*/'';
+    var url="questionReg?groupNo="+groupNo
+    var name="질문작성하기";
+    var option="width=830,length=820,top=0,left=0,location=yes";
+    window.open(url,name,option);
+    
+    window.addEventListener('message', function(event) {
+        if (event.data === 'questionSubmitted') {
+            // 새 창이 닫히고 질문이 제출되었을 때 부모 창 새로고침
+            location.reload();
+        }
+    });
+  });
+  
+  
+  $("#successBtn").click(function(){
+	  	var qstnno = $(event.target).attr("value");	
+	  	var userId = /*[[${vo.userId}]]*/'';
+	    var url="showAnswer?qstnNo="+qstnno+"&userId="+userId
+	    var name="답변보기";
+	    var option="width=830,length=820,top=0,left=0,location=no";
+	    window.open(url,name,option);
+	  });
+  
+</script>
+</html>
