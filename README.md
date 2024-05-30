@@ -58,7 +58,7 @@
 
 <br>
 <h3>서비스 아키텍처</h3> 
-<img src="/imags/123.png" width="700" height="370">
+<img src="./imags/123.png" width="700" height="370">
 
 
     
