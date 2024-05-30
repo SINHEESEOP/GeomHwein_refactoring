@@ -61,6 +61,12 @@
 <img src="imgs/mainpage.png">
 
 <h3>회원가입</h3>
+- 기본값은 일반 user 권한으로 가입됩니다.
+- 관리자, 교육자는 직접 계정을 생성하여 제공합니다.
 <img src="imgs/singUp.png">
 
+<h3>로그인</h3>
+- 소셜로그인 및 자동로그인.
+- 스프링 시큐리티를 사용하여 구현.
+<img src="imgs/login.png">
 
