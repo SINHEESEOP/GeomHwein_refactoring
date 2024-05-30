@@ -61,6 +61,6 @@
 <img src="imgs/mainpage.png">
 
 <h3>회원가입</h3>
-<img src="imgs/singUp">
+<img src="imgs/singUp.png">
 
 
