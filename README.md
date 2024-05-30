@@ -57,4 +57,10 @@
 <img src="imgs/123.png" width="900" height="400">
 
 <h3>메인페이지</h3>
+- 등급 및 등록날짜에 따라 강의 추천
 <img src="imgs/mainpage.png">
+
+<h3>회원가입</h3>
+<img src="imgs/singUp">
+
+
