@@ -58,5 +58,3 @@
 
 <h3>메인페이지</h3>
 <img src="imgs/mainpage" width="900" height="400">
-
-<h3></h3>
