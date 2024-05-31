@@ -79,7 +79,9 @@
 <h2>교육자</h2>
 <h3>구매한 교육리스트</h3>
   <li>구매한 교육자료를 통해 그룹 개설을 할 수 있음</li>
-<img src="imgs/eduSelectAdd.png">
+<img src="imgs/edu/eduSelectAdd.png">
 
-<h3>숙제등록 및 질문답변</h3>
-<img src="imgs/homeworkAdd.png"/
+<h3>숙제관리 및 질문답변</h3>
+  <li>숙제 등록, 학습자 숙제조회, 숙제 상세보기, 배점처리로 학습자의 사활점수 관리</li>
+  <li>학습자 질문조회, 답변등록</li>
+<img src="imgs/edu/homeworkAdd.png">
