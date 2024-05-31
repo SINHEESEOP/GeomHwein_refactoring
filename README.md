@@ -55,6 +55,7 @@
 <br>
 <h3>서비스 아키텍처</h3> 
 <img src="imgs/123.png" width="900" height="400">
+<br>
 
 <h2>모든 유저</h2>
 <h3>메인페이지</h3>
