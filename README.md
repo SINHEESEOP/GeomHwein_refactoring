@@ -75,10 +75,11 @@
   <li>소셜로그인 및 자동로그인.</li>
   <li>스프링 시큐리티를 사용하여 구현.</li>
 <img src="imgs/login.png">
-
+<br>
 <h2>교육자</h2>
-<h3>구매 가능한 교육리스트</h3>
-  <li>관리자가 제공한 교육자료를 구매하는 페이지</li>
-<img src="imgs/eduSelectAdd">
+<h3>구매한 교육리스트</h3>
+  <li>구매한 교육자료를 통해 그룹 개설을 할 수 있음</li>
+<img src="imgs/eduSelectAdd.png">
 
-<h3></h3>
+<h3>숙제등록 및 질문답변</h3>
+<img src="imgs/homeworkAdd.png"/
