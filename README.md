@@ -56,6 +56,7 @@
 <h3>서비스 아키텍처</h3> 
 <img src="imgs/123.png" width="900" height="400">
 
+<h2>모든 유저</h2>
 <h3>메인페이지</h3>
 <ul>
   <li>등급 및 등록날짜에 따라 강의 추천</li>
@@ -74,3 +75,9 @@
   <li>스프링 시큐리티를 사용하여 구현.</li>
 <img src="imgs/login.png">
 
+<h2>교육자</h2>
+<h3>구매 가능한 교육리스트</h3>
+  <li>관리자가 제공한 교육자료를 구매하는 페이지</li>
+<img src="imgs/eduSelectAdd">
+
+<h3></h3>
